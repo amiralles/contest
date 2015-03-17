@@ -1,64 +1,68 @@
 
 namespace Contest.Test {
+    using NUnit.Framework;
     using Core;
-    using _ = System.Action<Contest.Core.Runner>;
 
-    public class IgnoreFixture{
+    [TestFixture]
+    public class IgnoreFixture {
 
-        _ ignore_all_cases = test => {
-
+        [Test]
+        public void ignore_all_cases() {
             var cases = TestCaseFinder.FindCases(typeof(TestClass), "*");
             var runner = new Runner();
             runner.Run(cases);
 
-            test.Assert(2 ==  runner.TestCount,   "Fail TestCount");
-            test.Assert(2 ==  runner.IgnoreCount, "Fail IgnoreCount");
+            Assert.AreEqual(2, runner.TestCount, "Fail TestCount");
+            Assert.AreEqual(2, runner.IgnoreCount, "Fail IgnoreCount");
+        }
 
-        };
-
-        _ ignore_cases_starting_with = test => {
-
-            var cases = TestCaseFinder.FindCases(typeof(TestClass), "This*");
-            var runner = new Runner();
-            runner.Run(cases);
-
-            test.Assert(2 ==  runner.TestCount,   "Fail TestCount");
-            test.Assert(1 ==  runner.IgnoreCount, "Fail IgnoreCount");
-
-        };
-
-        _ ignore_cases_ending_with = test => {
-
+        [Test]
+        public void ignore_cases_ending_with() {
             var cases = TestCaseFinder.FindCases(typeof(TestClass), "*AnotherTest");
             var runner = new Runner();
             runner.Run(cases);
 
-            test.Assert(2 ==  runner.TestCount,   "Fail TestCount");
-            test.Assert(1 ==  runner.IgnoreCount, "Fail IgnoreCount");
+            Assert.AreEqual(2, runner.TestCount, "Fail TestCount");
+            Assert.AreEqual(1, runner.IgnoreCount, "Fail IgnoreCount");
 
-        };
+        }
 
-        _ ignore_cases_when_contains = test => {
+
+        [Test]
+        public void ignore_cases_starting_with() {
+
+            var cases = TestCaseFinder.FindCases(typeof(TestClass),
+                "Contest.Test.TestClass.ThisIsAT*");
+
+            var runner = new Runner();
+            runner.Run(cases);
+
+            Assert.AreEqual(2, runner.TestCount, "Fail TestCount");
+            Assert.AreEqual(1, runner.IgnoreCount, "Fail IgnoreCount");
+
+        }
+        [Test]
+        public void ignore_cases_when_contains() {
 
             var cases = TestCaseFinder.FindCases(typeof(TestClass), "*Tes*");
             var runner = new Runner();
             runner.Run(cases);
 
-            test.Assert(2 ==  runner.TestCount,   "Fail TestCount");
-            test.Assert(2 ==  runner.IgnoreCount, "Fail IgnoreCount");
+            Assert.AreEqual(2, runner.TestCount, "Fail TestCount");
+            Assert.AreEqual(2, runner.IgnoreCount, "Fail IgnoreCount");
 
-        };
+        }
 
-        _ ignore_no_cases = test => {
+        [Test]
+        public void ignore_no_cases() {
 
             var cases = TestCaseFinder.FindCases(typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases);
 
-            test.Assert(2 ==  runner.TestCount,   "Fail TestCount");
-            test.Assert(0 ==  runner.IgnoreCount, "Fail IgnoreCount");
-
-        };
+            Assert.AreEqual(2, runner.TestCount, "Fail TestCount");
+            Assert.AreEqual(0, runner.IgnoreCount, "Fail IgnoreCount");
+        }
 
     }
 }

@@ -35,13 +35,8 @@
             }
         }
 
-        readonly static Action<string> PrintFixName = name => {
-            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
-            Print(name, ConsoleColor.Cyan);
-            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
-        };
-
         public void Run(List<TestCase> cases) {
+
             Print("".PadRight(40, '='), ConsoleColor.White);
 
             var watch = Stopwatch.StartNew();
@@ -81,6 +76,12 @@
             Print(string.Format("Ignored : {0}", IgnoreCount), ConsoleColor.Yellow);
             Print("".PadRight(40, '='), ConsoleColor.White);
         }
+
+        readonly static Action<string> PrintFixName = name => {
+            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
+            Print(name, ConsoleColor.Cyan);
+            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
+        };
 
         readonly static Action<string, ConsoleColor> Print = (msg, color) => {
             var fcolor = Console.ForegroundColor;

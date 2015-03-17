@@ -1,24 +1,28 @@
+
 namespace Contest.Test {
+    using NUnit.Framework;
     using Core;
-	using _ = System.Action<Contest.Core.Runner>;
 
+    [TestFixture]
+    public class DiscoverFixture {
 
-        public class DiscoverFixture {
+        [Test]
+        public void test_cases_in_assm() {
+            var cases = TestCaseFinder.FindCasesInAssm(typeof(TestClass).Assembly, null);
+            Assert.AreEqual(7, cases.Count);
+        }
 
-		_ test_cases_in_assm = test =>{
-            var cases = TestCaseFinder.FindCasesInAssm(typeof(TestClass).Assembly,null);
-            test.Assert(7 == cases.Count);
-		};
+        [Test]
+        public void test_cases_in_class() {
+            var cases = TestCaseFinder.FindCases(typeof(TestClass), null);
+            Assert.AreEqual(2, cases.Count);
+        }
 
-		_ test_cases_in_class = test=>{
-            var cases = TestCaseFinder.FindCases(typeof(TestClass),null);
-            test.Assert(2 == cases.Count);
-		};
-
-		_ test_cases_in_nested_classes = test=>{
-            var cases = TestCaseFinder.FindCases(typeof(Wrapper),null);
-            test.Assert(1 == cases.Count);
-		};
+        [Test]
+        public void test_cases_in_nested_classes() {
+            var cases = TestCaseFinder.FindCases(typeof(Wrapper), null);
+            Assert.AreEqual(1, cases.Count);
+        }
 
 
     }
