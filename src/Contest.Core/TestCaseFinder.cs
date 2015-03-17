@@ -4,12 +4,6 @@
     using System.Linq;
     using System.Reflection;
 
-    public struct TestCase {
-        public string Name;
-        public Action<Runner> Body;
-        public bool Ignored;
-    }
-
     public class TestCaseFinder {
         const BindingFlags ipub = BindingFlags.Public | BindingFlags.Instance;
         const BindingFlags ipri = BindingFlags.NonPublic | BindingFlags.Instance;
@@ -86,6 +80,7 @@
                     var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
                     result.Add(
                         new TestCase {
+                            FixName = type.FullName,
                             Name = fi.Name,
                             Body = (Action<Runner>)del,
                             Ignored = MatchIgnorePattern(tcfullname, ignorePatterns)

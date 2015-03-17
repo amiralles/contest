@@ -35,13 +35,26 @@
             }
         }
 
+        readonly static Action<string> PrintFixName = name => {
+            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
+            Print(name, ConsoleColor.Cyan);
+            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
+        };
+
         public void Run(List<TestCase> cases) {
-            Print("".PadRight(80, '='), ConsoleColor.White);
+            Print("".PadRight(40, '='), ConsoleColor.White);
 
             var watch = Stopwatch.StartNew();
+            string currfix = null;
             cases.Each(c => {
-                if(c.Ignored)
+                // TODO: fix this.
+                // if(c.FixName != currfix) 
+                // PrintFixName((currfix = c.FixName));
+
+                if(c.Ignored) {
+                    IgnoreCount++;
                     return;
+                }
                 try {
                     Console.WriteLine("\n" + c.Name);
                     c.Body(this);
@@ -59,16 +72,17 @@
         }
 
         void PrintResults(int casesCount, long elapsedMilliseconds) {
-            Print("".PadRight(80, '='), ConsoleColor.White);
-            Print(string.Format("Test Count: {0}", casesCount), ConsoleColor.White);
-            Print(string.Format("Total Assertions: {0}", AssertsCount), ConsoleColor.White);
-            Print(string.Format("Elapsed Time: {0} ms", elapsedMilliseconds), ConsoleColor.White);
-            Print(string.Format("Passing: {0}", PassCount), ConsoleColor.Green);
-            Print(string.Format("Failing: {0}", FailCount), ConsoleColor.Red);
-            Print("".PadRight(80, '='), ConsoleColor.White);
+            Print("".PadRight(40, '='), ConsoleColor.White);
+            Print(string.Format("Test    : {0}", casesCount), ConsoleColor.White);
+            Print(string.Format("Asserts : {0}", AssertsCount), ConsoleColor.White);
+            Print(string.Format("Elapsed : {0} ms", elapsedMilliseconds), ConsoleColor.White);
+            Print(string.Format("Passing : {0}", PassCount), ConsoleColor.Green);
+            Print(string.Format("Failing : {0}", FailCount), ConsoleColor.Red);
+            Print(string.Format("Ignored : {0}", IgnoreCount), ConsoleColor.Yellow);
+            Print("".PadRight(40, '='), ConsoleColor.White);
         }
 
-        readonly Action<string, ConsoleColor> Print = (msg, color) => {
+        readonly static Action<string, ConsoleColor> Print = (msg, color) => {
             var fcolor = Console.ForegroundColor;
             try {
                 Console.ForegroundColor = color;
