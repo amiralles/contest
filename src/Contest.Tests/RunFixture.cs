@@ -6,8 +6,19 @@ namespace Contest.Test {
 		//TODO: Add wildcards to run some tests, exlude others, etc...
 		//TODO: Add the option to re-run failing tests.
         
+        _ shouldnt_run_ignored_tests = test => {
+
+            var cases = TestCaseFinder.FindCases(typeof(TestClass),null);
+            var runner = new Runner();
+            runner.Run(cases);
+
+            test.Assert(2 ==  runner.TestCount,   "Fail PassCount");
+            test.Assert(2 ==  runner.IgnoreCount, "Fail PassCount");
+
+        };
+        
         _ run_test_suite = test =>{
-            var cases = TestCaseFinder.FindCases(typeof(TestClassOnePassOnFail));
+            var cases = TestCaseFinder.FindCases(typeof(TestClassOnePassOnFail),null);
             var runner = new Runner();
             runner.Run(cases);
 
@@ -17,7 +28,7 @@ namespace Contest.Test {
         };
 
         _ run_throwing_test_suite  = test => {
-            var cases = TestCaseFinder.FindCases(typeof(TestClassThrowingTests));
+            var cases = TestCaseFinder.FindCases(typeof(TestClassThrowingTests),null);
             var runner = new Runner();
             runner.Run(cases);
 

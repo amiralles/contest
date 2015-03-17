@@ -4,7 +4,7 @@
     using System.Diagnostics;
 
     public class Runner {
-        public int PassCount, FailCount, AssertsCount;
+        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
 
         public void Assert(bool cond, string errMsg=null) {
@@ -40,6 +40,8 @@
 
             var watch = Stopwatch.StartNew();
             cases.Each(c => {
+                if(c.Ignored)
+                    return;
                 try {
                     Console.WriteLine("\n" + c.Name);
                     c.Body(this);
@@ -51,6 +53,7 @@
 
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
+            TestCount = cases.Count;
             PrintResults(cases.Count, Elapsed);
             Environment.ExitCode = FailCount;
         }

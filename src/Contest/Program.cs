@@ -56,7 +56,7 @@
             if (assm == null)
                 throw new Exception(string.Format("Can't load assembly '{0}'.", assmFileName));
 
-            var cases = TestCaseFinder.FindCasesInAssm(assm);
+            var cases = TestCaseFinder.FindCasesInAssm(assm, null);
             var runner = new Runner();
             runner.Run(cases);
         }
