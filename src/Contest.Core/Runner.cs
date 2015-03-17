@@ -7,7 +7,7 @@
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
 
-        public void Assert(bool cond, string errMsg=null) {
+        public void Assert(bool cond, string errMsg = null) {
             AssertsCount++;
 
             if (!cond) {
@@ -35,21 +35,23 @@
             }
         }
 
-        public void Run(List<TestCase> cases) {
+        public void Run(List<TestCase> cases, string cpp = null /*cherry pick pattern.*/) {
 
             Print("".PadRight(40, '='), ConsoleColor.White);
 
             var watch = Stopwatch.StartNew();
-            string currfix = null;
+            var cherryPick = !string.IsNullOrEmpty(cpp);
+            // string currfix = null;\
             cases.Each(c => {
                 // TODO: fix this.
                 // if(c.FixName != currfix) 
                 // PrintFixName((currfix = c.FixName));
 
-                if(c.Ignored) {
+                if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
                     IgnoreCount++;
                     return;
                 }
+
                 try {
                     Console.WriteLine("\n" + c.Name);
                     c.Body(this);

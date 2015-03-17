@@ -42,6 +42,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runner.cs" />
+    <Compile Include="StringExt.cs" />
     <Compile Include="TestCaseFinder.cs" />
     <Compile Include="TestCase.cs" />
   </ItemGroup>
