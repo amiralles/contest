@@ -4,7 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-AddIgnorePattern	.\Contest.Core\TestCaseFinder.cs	/^        public static void AddIgnorePattern(string pattern){$/;"	m	class:Contest.Core.TestCaseFinder
 Assert	.\Contest.Core\Runner.cs	/^        public void Assert(bool cond, string errMsg=null) {$/;"	m	class:Contest.Core.Runner
 AssertsCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
 Body	.\Contest.Core\TestCaseFinder.cs	/^        public Action<Runner> Body;$/;"	f	struct:Contest.Core.TestCase
@@ -13,6 +12,7 @@ Contest.Core	.\Contest.Core\EnumerableExtensions.cs	/^﻿namespace Contest.Core 
 Contest.Core	.\Contest.Core\Runner.cs	/^﻿namespace Contest.Core {$/;"	n
 Contest.Core	.\Contest.Core\TestCaseFinder.cs	/^﻿namespace Contest.Core {$/;"	n
 Contest.Test	.\Contest.Tests\DiscoverFixture.cs	/^namespace Contest.Test {$/;"	n
+Contest.Test	.\Contest.Tests\IgnoreFixture.cs	/^namespace Contest.Test {$/;"	n
 Contest.Test	.\Contest.Tests\RunFixture.cs	/^namespace Contest.Test {$/;"	n
 Contest.Test	.\Contest.Tests\TestClass.cs	/^﻿namespace Contest.Test {$/;"	n
 Contest.Test	.\Contest.Tests\TestClassOnePassOnFail.cs	/^﻿namespace Contest.Test {$/;"	n
@@ -26,15 +26,16 @@ Exception	.\Contest.Core\Runner.cs	/^        public void ShouldThrow<T>(Action b
 ExpectedExcetion	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, string> ExpectedExcetion = extype =>$/;"	f	class:Contest.Core.Runner	file:
 Fail	.\Contest.Core\Runner.cs	/^        void Fail(string errMsg) {$/;"	m	class:Contest.Core.Runner	file:
 FailCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-FindCases	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Type, List<TestCase>> FindCases = type => {$/;"	f	class:Contest.Core.TestCaseFinder
-FindCasesInAssm	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Assembly, List<TestCase>> FindCasesInAssm = assm => {$/;"	f	class:Contest.Core.TestCaseFinder
-FindCasesNestedTypes	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Type, BindingFlags, List<TestCase>> FindCasesNestedTypes =$/;"	f	class:Contest.Core.TestCaseFinder
+FindCases	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Type, string[], List<TestCase>> FindCases = $/;"	f	class:Contest.Core.TestCaseFinder
+FindCasesInAssm	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Assembly, string[], List<TestCase>> FindCasesInAssm = $/;"	f	class:Contest.Core.TestCaseFinder
+FindCasesNestedTypes	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Type, BindingFlags, string[], List<TestCase>> FindCasesNestedTypes =$/;"	f	class:Contest.Core.TestCaseFinder
 Flags	.\Contest.Core\TestCaseFinder.cs	/^        static readonly BindingFlags[] Flags;$/;"	f	class:Contest.Core.TestCaseFinder	file:
 GetTestCases	.\Contest.Core\TestCaseFinder.cs	/^        static readonly Func<Type, BindingFlags, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.TestCaseFinder	file:
 IgnoreCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-Ignored	.\Contest.Core\TestCaseFinder.cs	/^        public Ignored;$/;"	f	struct:Contest.Core.TestCase
+IgnoreFixture	.\Contest.Tests\IgnoreFixture.cs	/^    public class IgnoreFixture{$/;"	c	namespace:Contest.Test
+Ignored	.\Contest.Core\TestCaseFinder.cs	/^        public bool Ignored;$/;"	f	struct:Contest.Core.TestCase
 Main	.\Contest\Program.cs	/^        static void Main(string[] args) {$/;"	m	class:Contest.Program	file:
-MatchIgnorePattern	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<object, bool> MatchIgnorePattern = inst => {$/;"	f	class:Contest.Core.TestCaseFinder
+MatchIgnorePattern	.\Contest.Core\TestCaseFinder.cs	/^        static Func<string, string[], bool> MatchIgnorePattern = $/;"	f	class:Contest.Core.TestCaseFinder	file:
 Name	.\Contest.Core\TestCaseFinder.cs	/^        public string Name;$/;"	f	struct:Contest.Core.TestCase
 Nested	.\Contest.Tests\Wrapper.cs	/^        class Nested {$/;"	c	class:Contest.Test.Wrapper
 Pass	.\Contest.Core\Runner.cs	/^        void Pass() {$/;"	m	class:Contest.Core.Runner	file:
@@ -68,8 +69,10 @@ ThisPass	.\Contest.Tests\TestClassOnePassOnFail.cs	/^        public Action<Runne
 ThisThrowsAndPass	.\Contest.Tests\TestClassThrowingTests.cs	/^        public Action<Runner> ThisThrowsAndPass = $/;"	f	class:Contest.Test.TestClassThrowingTests
 Wrapper	.\Contest.Tests\Wrapper.cs	/^    class Wrapper {$/;"	c	namespace:Contest.Test
 WrongKindaException	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, Type, string> WrongKindaException = (exptected, got) =>$/;"	f	class:Contest.Core.Runner	file:
-_ignorePatterns	.\Contest.Core\TestCaseFinder.cs	/^        readonly static List<string>_ignorePatterns = new List<string>();$/;"	f	class:Contest.Core.TestCaseFinder	file:
-_shouldnt_run_ignored_tests	.\Contest.Tests\RunFixture.cs	/^        _shouldnt_run_ignored_tests = test => {$/;"	f	class:Contest.Test.RunFixture	file:
+ignore_all_cases	.\Contest.Tests\IgnoreFixture.cs	/^        _ ignore_all_cases = test => {$/;"	f	class:Contest.Test.IgnoreFixture	file:
+ignore_cases_ending_with	.\Contest.Tests\IgnoreFixture.cs	/^        _ ignore_cases_ending_with = test => {$/;"	f	class:Contest.Test.IgnoreFixture	file:
+ignore_cases_starting_with	.\Contest.Tests\IgnoreFixture.cs	/^        _ ignore_cases_starting_with = test => {$/;"	f	class:Contest.Test.IgnoreFixture	file:
+ignore_no_cases	.\Contest.Tests\IgnoreFixture.cs	/^        _ ignore_no_cases = test => {$/;"	f	class:Contest.Test.IgnoreFixture	file:
 ipri	.\Contest.Core\TestCaseFinder.cs	/^        const BindingFlags ipri = BindingFlags.NonPublic | BindingFlags.Instance;$/;"	f	class:Contest.Core.TestCaseFinder	file:
 ipub	.\Contest.Core\TestCaseFinder.cs	/^        const BindingFlags ipub = BindingFlags.Public | BindingFlags.Instance;$/;"	f	class:Contest.Core.TestCaseFinder	file:
 run_test_suite	.\Contest.Tests\RunFixture.cs	/^        _ run_test_suite = test =>{$/;"	f	class:Contest.Test.RunFixture	file:

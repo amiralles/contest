@@ -22,7 +22,7 @@
             Flags = new[] { ipub, ipri, spub, spri };
         }
 
-        public static Func<Type, BindingFlags, string[], List<TestCase>> FindCasesNestedTypes =
+        public static Func<Type, BindingFlags, string, List<TestCase>> FindCasesNestedTypes =
             (type, flags, ignorePatterns) => {
                 var result = new List<TestCase>();
                 var nestedTypes = type.GetNestedTypes(flags);
@@ -32,7 +32,7 @@
                 return result;
             };
 
-        public static Func<Assembly, string[], List<TestCase>> FindCasesInAssm = 
+        public static Func<Assembly, string, List<TestCase>> FindCasesInAssm = 
             (assm, ignorePatterns) => {
                 var result = new List<TestCase>();
                 assm.GetTypes().Each(type => FindCases(type, ignorePatterns).Each(c => {
@@ -43,31 +43,34 @@
             return result;
         };
 
-        static Func<string, string[], bool> MatchIgnorePattern = 
+        static Func<string, string, bool> MatchIgnorePattern = 
             (casefullname, ignorePatterns) => {
 
-            foreach(var pattern in ignorePatterns){
-                if(pattern == "*")
-                    return true;
+                if(ignorePatterns == null)
+                    return false;
 
-                //TODO: add globbing.
-                if(pattern.EndsWith("*") && pattern.StartsWith("*"))
-                    return casefullname.Contains(pattern.Replace("*",""));
+                foreach(var pattern in ignorePatterns.Split(' ')){
+                    if(pattern == "*")
+                        return true;
 
-                if(pattern.EndsWith("*"))
-                    return casefullname.StartsWith(pattern.Replace("*",""));
+                    //TODO: add globbing.
+                    if(pattern.EndsWith("*") && pattern.StartsWith("*"))
+                        return casefullname.Contains(pattern.Replace("*",""));
 
-                if(pattern.StartsWith("*"))
-                    return casefullname.EndsWith(pattern.Replace("*",""));
+                    if(pattern.EndsWith("*"))
+                        return casefullname.StartsWith(pattern.Replace("*",""));
 
-                if(pattern == casefullname)
-                    return true;
-            }
+                    if(pattern.StartsWith("*"))
+                        return casefullname.EndsWith(pattern.Replace("*",""));
 
-            return false;
-        };
+                    if(pattern == casefullname)
+                        return true;
+                }
 
-        public static Func<Type, string[], List<TestCase>> FindCases = 
+                return false;
+            };
+
+        public static Func<Type, string, List<TestCase>> FindCases = 
             (type, ignorePatterns) => {
 
             var result = new List<TestCase>();
