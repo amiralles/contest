@@ -42,10 +42,15 @@
             if (!assmFileName.EndsWith(".dll"))
                 assmFileName = string.Format("{0}.dll", assmFileName);
 
-            if (!File.Exists(assmFileName))
-                throw new IOException(string.Format("File not found. ('{0}')", assmFileName));
-
             var fullpath = Path.GetFullPath(assmFileName);
+            if (!File.Exists(fullpath)) {
+
+				var pwd = Directory.GetCurrentDirectory();
+
+				throw new IOException(
+						string.Format("Pwd: {0}\n", pwd) + 
+						string.Format("File not found. ('{0}')", assmFileName));
+			}
 
             var assm = Assembly.LoadFile(fullpath);
             if (assm == null)

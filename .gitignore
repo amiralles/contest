@@ -3,4 +3,4 @@
 *.config
 bin
 obj
-
+*.swp

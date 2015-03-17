@@ -1,0 +1,74 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Assert	.\Contest.Core\Runner.cs	/^        public void Assert(bool cond, string errMsg) {$/;"	m	class:Contest.Core.Runner
+AssertsCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount;$/;"	f	class:Contest.Core.Runner
+Body	.\Contest.Core\TestCaseFinder.cs	/^        public Action<Runner> Body;$/;"	f	struct:Contest.Core.TestCase
+Contest	.\Contest\Program.cs	/^﻿namespace Contest {$/;"	n
+Contest.Core	.\Contest.Core\EnumerableExtensions.cs	/^﻿namespace Contest.Core {$/;"	n
+Contest.Core	.\Contest.Core\Runner.cs	/^﻿namespace Contest.Core {$/;"	n
+Contest.Core	.\Contest.Core\TestCaseFinder.cs	/^﻿namespace Contest.Core {$/;"	n
+Contest.Test	.\Contest.Tests\DiscoverFixture.cs	/^namespace Contest.Test {$/;"	n
+Contest.Test	.\Contest.Tests\RunFixture.cs	/^namespace Contest.Test {$/;"	n
+Contest.Test	.\Contest.Tests\TestClass.cs	/^﻿namespace Contest.Test {$/;"	n
+Contest.Test	.\Contest.Tests\TestClassOnePassOnFail.cs	/^﻿namespace Contest.Test {$/;"	n
+Contest.Test	.\Contest.Tests\TestClassThrowingTests.cs	/^﻿namespace Contest.Test {$/;"	n
+Contest.Test	.\Contest.Tests\Wrapper.cs	/^﻿namespace Contest.Test {$/;"	n
+DiscoverFixture	.\Contest.Tests\DiscoverFixture.cs	/^    public class DiscoverFixture {$/;"	c	namespace:Contest.Test
+Each	.\Contest.Core\EnumerableExtensions.cs	/^        public static void Each<T>(this IEnumerable<T> target, Action<T> callback) {$/;"	m	class:Contest.Core.EnumerableExtensions
+Elapsed	.\Contest.Core\Runner.cs	/^        public long Elapsed;$/;"	f	class:Contest.Core.Runner
+EnumerableExtensions	.\Contest.Core\EnumerableExtensions.cs	/^    public static class EnumerableExtensions {$/;"	c	namespace:Contest.Core
+Exception	.\Contest.Core\Runner.cs	/^        public void ShouldThrow<T>(Action body) where T : Exception {$/;"	p	class:Contest.Core.Runner
+ExpectedExcetion	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, string> ExpectedExcetion = extype =>$/;"	f	class:Contest.Core.Runner	file:
+Fail	.\Contest.Core\Runner.cs	/^        void Fail(string errMsg) {$/;"	m	class:Contest.Core.Runner	file:
+FailCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount;$/;"	f	class:Contest.Core.Runner
+FindCases	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Type, List<TestCase>> FindCases = type => {$/;"	f	class:Contest.Core.TestCaseFinder
+FindCasesInAssm	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Assembly, List<TestCase>> FindCasesInAssm = assm => {$/;"	f	class:Contest.Core.TestCaseFinder
+FindCasesNestedTypes	.\Contest.Core\TestCaseFinder.cs	/^        public static Func<Type, BindingFlags, List<TestCase>> FindCasesNestedTypes =$/;"	f	class:Contest.Core.TestCaseFinder
+Flags	.\Contest.Core\TestCaseFinder.cs	/^        static readonly BindingFlags[] Flags;$/;"	f	class:Contest.Core.TestCaseFinder	file:
+GetTestCases	.\Contest.Core\TestCaseFinder.cs	/^        static readonly Func<Type, BindingFlags, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.TestCaseFinder	file:
+Main	.\Contest\Program.cs	/^        static void Main(string[] args) {$/;"	m	class:Contest.Program	file:
+Name	.\Contest.Core\TestCaseFinder.cs	/^        public string Name;$/;"	f	struct:Contest.Core.TestCase
+Nested	.\Contest.Tests\Wrapper.cs	/^        class Nested {$/;"	c	class:Contest.Test.Wrapper
+Pass	.\Contest.Core\Runner.cs	/^        void Pass() {$/;"	m	class:Contest.Core.Runner	file:
+PassCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount;$/;"	f	class:Contest.Core.Runner
+Print	.\Contest.Core\Runner.cs	/^        readonly Action<string, ConsoleColor> Print = (msg, color) => {$/;"	f	class:Contest.Core.Runner	file:
+Print	.\Contest\Program.cs	/^        static void Print(IEnumerable<string> lines) {$/;"	m	class:Contest.Program	file:
+Print	.\Contest\Program.cs	/^        static void Print(string msg, params object[] args) {$/;"	m	class:Contest.Program	file:
+PrintHelp	.\Contest\Program.cs	/^        static void PrintHelp() {$/;"	m	class:Contest.Program	file:
+PrintResults	.\Contest.Core\Runner.cs	/^        void PrintResults(int casesCount, long elapsedMilliseconds) {$/;"	m	class:Contest.Core.Runner	file:
+Program	.\Contest\Program.cs	/^    class Program {$/;"	c	namespace:Contest
+Run	.\Contest.Core\Runner.cs	/^        public void Run(List<TestCase> cases) {$/;"	m	class:Contest.Core.Runner
+RunFixture	.\Contest.Tests\RunFixture.cs	/^    public class RunFixture {$/;"	c	namespace:Contest.Test
+RunTests	.\Contest\Program.cs	/^        static void RunTests(string assmFileName) {$/;"	m	class:Contest.Program	file:
+Runner	.\Contest.Core\Runner.cs	/^    public class Runner {$/;"	c	namespace:Contest.Core
+TestCase	.\Contest.Core\TestCaseFinder.cs	/^    public struct TestCase {$/;"	s	namespace:Contest.Core
+TestCaseFinder	.\Contest.Core\TestCaseFinder.cs	/^        static TestCaseFinder() {$/;"	m	class:Contest.Core.TestCaseFinder	file:
+TestCaseFinder	.\Contest.Core\TestCaseFinder.cs	/^    public class TestCaseFinder {$/;"	c	namespace:Contest.Core
+TestClass	.\Contest.Tests\TestClass.cs	/^    class TestClass {$/;"	c	namespace:Contest.Test
+TestClassOnePassOnFail	.\Contest.Tests\TestClassOnePassOnFail.cs	/^    class TestClassOnePassOnFail {$/;"	c	namespace:Contest.Test
+TestClassThrowingTests	.\Contest.Tests\TestClassThrowingTests.cs	/^    class TestClassThrowingTests {$/;"	c	namespace:Contest.Test
+ThisDoesntThrowSoItFails	.\Contest.Tests\TestClassThrowingTests.cs	/^        public Action<Runner> ThisDoesntThrowSoItFails = $/;"	f	class:Contest.Test.TestClassThrowingTests
+ThisFail	.\Contest.Tests\TestClassOnePassOnFail.cs	/^        Action<Runner> ThisFail = runner =>$/;"	f	class:Contest.Test.TestClassOnePassOnFail	file:
+ThisIsATest	.\Contest.Tests\TestClass.cs	/^        public Action<Runner> ThisIsATest = test =>$/;"	f	class:Contest.Test.TestClass
+ThisIsATest	.\Contest.Tests\Wrapper.cs	/^            _ ThisIsATest = runner =>$/;"	f	class:Contest.Test.Wrapper.Nested	file:
+ThisIsAnotherTest	.\Contest.Tests\TestClass.cs	/^        Action<Runner> ThisIsAnotherTest = test =>$/;"	f	class:Contest.Test.TestClass	file:
+ThisIsntATestMethod	.\Contest.Tests\TestClass.cs	/^        public void ThisIsntATestMethod() { }$/;"	m	class:Contest.Test.TestClass
+ThisIsntATestMethod	.\Contest.Tests\Wrapper.cs	/^            void ThisIsntATestMethod() { }$/;"	m	class:Contest.Test.Wrapper.Nested	file:
+ThisIsntATestMethodEither	.\Contest.Tests\TestClass.cs	/^        void ThisIsntATestMethodEither() { }$/;"	m	class:Contest.Test.TestClass	file:
+ThisPass	.\Contest.Tests\TestClassOnePassOnFail.cs	/^        public Action<Runner> ThisPass = runner =>$/;"	f	class:Contest.Test.TestClassOnePassOnFail
+ThisThrowsAndPass	.\Contest.Tests\TestClassThrowingTests.cs	/^        public Action<Runner> ThisThrowsAndPass = $/;"	f	class:Contest.Test.TestClassThrowingTests
+Wrapper	.\Contest.Tests\Wrapper.cs	/^    class Wrapper {$/;"	c	namespace:Contest.Test
+WrongKindaException	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, Type, string> WrongKindaException = (exptected, got) =>$/;"	f	class:Contest.Core.Runner	file:
+ipri	.\Contest.Core\TestCaseFinder.cs	/^        const BindingFlags ipri = BindingFlags.NonPublic | BindingFlags.Instance;$/;"	f	class:Contest.Core.TestCaseFinder	file:
+ipub	.\Contest.Core\TestCaseFinder.cs	/^        const BindingFlags ipub = BindingFlags.Public | BindingFlags.Instance;$/;"	f	class:Contest.Core.TestCaseFinder	file:
+run_test_suite	.\Contest.Tests\RunFixture.cs	/^        _ run_test_suite = test =>{$/;"	f	class:Contest.Test.RunFixture	file:
+run_throwing_test_suite	.\Contest.Tests\RunFixture.cs	/^        _ run_throwing_test_suite  = test => {$/;"	f	class:Contest.Test.RunFixture	file:
+spri	.\Contest.Core\TestCaseFinder.cs	/^        const BindingFlags spri = BindingFlags.NonPublic | BindingFlags.Static;$/;"	f	class:Contest.Core.TestCaseFinder	file:
+spub	.\Contest.Core\TestCaseFinder.cs	/^        const BindingFlags spub = BindingFlags.Public | BindingFlags.Static;$/;"	f	class:Contest.Core.TestCaseFinder	file:
+test_cases_in_assm	.\Contest.Tests\DiscoverFixture.cs	/^		_ test_cases_in_assm = test =>{$/;"	f	class:Contest.Test.DiscoverFixture	file:
+test_cases_in_class	.\Contest.Tests\DiscoverFixture.cs	/^		_ test_cases_in_class = test=>{$/;"	f	class:Contest.Test.DiscoverFixture	file:
+test_cases_in_nested_classes	.\Contest.Tests\DiscoverFixture.cs	/^		_ test_cases_in_nested_classes = test=>{$/;"	f	class:Contest.Test.DiscoverFixture	file:

@@ -7,7 +7,7 @@
         public int PassCount, FailCount, AssertsCount;
         public long Elapsed;
 
-        public void Assert(bool cond, string errMsg) {
+        public void Assert(bool cond, string errMsg=null) {
             AssertsCount++;
 
             if (!cond) {

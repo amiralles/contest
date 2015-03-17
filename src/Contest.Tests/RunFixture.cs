@@ -1,31 +1,29 @@
 namespace Contest.Test {
     using Core;
-    using NUnit.Framework;
+	using _ = System.Action<Contest.Core.Runner>;
 
-    [TestFixture]
     public class RunFixture {
 		//TODO: Add wildcards to run some tests, exlude others, etc...
 		//TODO: Add the option to re-run failing tests.
-        [Test]
-        public void RunTestSuite() {
+        
+        _ run_test_suite = test =>{
             var cases = TestCaseFinder.FindCases(typeof(TestClassOnePassOnFail));
             var runner = new Runner();
             runner.Run(cases);
 
-            Assert.AreEqual(1, runner.PassCount);
-            Assert.AreEqual(1, runner.FailCount);
-            Assert.AreEqual(2, runner.AssertsCount);
-        }
-        
-        [Test]
-        public void RunThrowingTestSuite() {
+            test.Assert(1 ==  runner.PassCount, "Fail PassCount");
+            test.Assert(1 ==  runner.FailCount, "Fail FailCount");
+            test.Assert(2 ==  runner.AssertsCount, "Fail AssertsCount");
+        };
+
+        _ run_throwing_test_suite  = test => {
             var cases = TestCaseFinder.FindCases(typeof(TestClassThrowingTests));
             var runner = new Runner();
             runner.Run(cases);
 
-            Assert.AreEqual(1, runner.PassCount);
-            Assert.AreEqual(1, runner.FailCount);
-            Assert.AreEqual(2, runner.AssertsCount);
-        }
+            test.Assert(1 == runner.PassCount, "Fail PassCount");
+            test.Assert(1 == runner.FailCount, "Fail FailCount");
+            test.Assert(2 == runner.AssertsCount, "Fail AssertsCount");
+        };
     }
 }
