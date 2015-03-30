@@ -4,11 +4,12 @@ namespace Contest.Test {
 
     [TestFixture]
     public class CherryPickingFixture {
+        readonly TestCaseFinder _finder = new TestCaseFinder();
 
         //This is the most common case into the wild.
         [Test]
         public void run_only_cases_containing() {
-            var cases = TestCaseFinder.FindCases(typeof(TestClass), null);
+            var cases = Contest.FindCases(_finder, typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases, cpp: "*ThisIsAn*");
 
@@ -18,7 +19,7 @@ namespace Contest.Test {
 
         [Test]
         public void run_only_cases_ending_with() {
-            var cases = TestCaseFinder.FindCases(typeof(TestClass), null);
+            var cases = Contest.FindCases(_finder, typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases, cpp: "*ThisIsAnotherTest");
 
@@ -28,7 +29,7 @@ namespace Contest.Test {
 
         [Test]
         public void run_only_cases_starting_with() {
-            var cases = TestCaseFinder.FindCases(typeof(TestClass), null);
+            var cases = Contest.FindCases(_finder, typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases, cpp: "Contest.Test.TestClass.ThisIsAn*");
 

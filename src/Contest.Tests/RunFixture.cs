@@ -7,10 +7,11 @@ namespace Contest.Test {
     public class RunFixture {
         //TODO: Add wildcards to run some tests, exlude others, etc...
         //TODO: Add the option to re-run failing tests.
+        readonly TestCaseFinder _finder = new TestCaseFinder();
 
         [Test]
         public void run_test_suite() {
-            var cases = TestCaseFinder.FindCases(typeof(TestClassOnePassOnFail), null);
+            var cases = Contest.FindCases(_finder, typeof(TestClassOnePassOnFail), null);
             var runner = new Runner();
             runner.Run(cases);
 
@@ -21,7 +22,7 @@ namespace Contest.Test {
 
         [Test]
         public void run_throwing_test_suite() {
-            var cases = TestCaseFinder.FindCases(typeof(TestClassThrowingTests), null);
+            var cases = Contest.FindCases(_finder, typeof(TestClassThrowingTests), null);
             var runner = new Runner();
             runner.Run(cases);
 
