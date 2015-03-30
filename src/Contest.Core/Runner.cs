@@ -4,6 +4,8 @@
     using System.Diagnostics;
 
     public class Runner {
+        static readonly Func<bool, bool> Not = cnd => !cnd;
+
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
 
@@ -50,7 +52,6 @@
             Assert(cond(), msg);
         }
 
-        static readonly Func<bool, bool> Not = cnd => !cnd;
 
         public void Assert(bool cond, string errMsg = null) {
             AssertsCount++;
