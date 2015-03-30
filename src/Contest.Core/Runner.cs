@@ -7,6 +7,51 @@
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
 
+        //All of these helpers end up calling the one and only "Assert" method.
+        public void IsNull(object value, string errMsg = null) {
+            var msg = string.IsNullOrEmpty(errMsg)
+                ? string.Format("Expected null. (Got {0}).", value)
+                : errMsg;
+
+            Assert(value == null, msg);
+        }
+
+        public void IsNotNull(object value, string errMsg = null) {
+            var msg = string.IsNullOrEmpty(errMsg)
+                ? string.Format("Expected NOT null.", value)
+                : errMsg;
+
+            Assert(value != null, msg);
+        }
+
+        public void AreEquals(object expected, object actual, string errMsg = null) {
+            var msg = string.IsNullOrEmpty(errMsg)
+                ? string.Format("Expected equal to {0} (Got {1}).", expected, actual)
+                : errMsg;
+
+            Func<bool> cond = () =>
+                expected == null ?
+                actual == null :
+                expected.Equals(actual);
+
+            Assert(cond(), msg);
+        }
+
+        public void NotEquals(object left, object right, string errMsg = null) {
+            var msg = string.IsNullOrEmpty(errMsg)
+                ? string.Format("Expected NOT equal to {0}.", right)
+                : errMsg;
+
+            Func<bool> cond = () =>
+                left == null ?
+                right != null :
+                Not(left.Equals(right));
+
+            Assert(cond(), msg);
+        }
+
+        static readonly Func<bool, bool> Not = cnd => !cnd;
+
         public void Assert(bool cond, string errMsg = null) {
             AssertsCount++;
 
@@ -35,7 +80,7 @@
             }
         }
 
-        public void Run(List<TestCase> cases, string cpp = null /*cherry pick pattern.*/) {
+        public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
 
             Print("".PadRight(40, '='), ConsoleColor.White);
 
