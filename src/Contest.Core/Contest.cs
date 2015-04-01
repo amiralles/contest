@@ -38,6 +38,56 @@ namespace Contest.Core {
                 return result;
             };
 
+        public static Func<TestCaseFinder, Type, string, List<TestCase>> FindCases = 
+            (finder, type, ignorePatterns) => {
+
+                var result = new List<TestCase>();
+
+                var inst = Activator.CreateInstance(type);
+
+                foreach (var flag in Flags) {
+                    foreach (var fi in GetTestCases(type, flag)) {
+                        var del = (Delegate)fi.GetValue(inst);
+                        if (result.Any(tc => tc.Body.Method.MetadataToken == del.Method.MetadataToken))
+                            continue;
+
+                        var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
+                        result.Add(
+                            new TestCase {
+                                FixName = type.FullName,
+                                Name = fi.Name,
+                                Body = (Action<Runner>)del,
+                                Ignored = MatchIgnorePattern(finder, tcfullname, ignorePatterns),
+                                BeforeCase = TestCase.DefaultBeforeCase
+                            });
+                    }
+                }
+
+                var findNestedPublic    = FindCasesNestedTypes(finder, type, BindingFlags.Public, ignorePatterns);
+                var findNestedNonPublic = FindCasesNestedTypes(finder, type, BindingFlags.NonPublic, ignorePatterns);
+                result.AddRange(findNestedPublic);
+                result.AddRange(findNestedNonPublic);
+
+                //find before cases, after cases ang purge the list.
+                var beforeCases = FindBeforeCases(result);
+                beforeCases.Each(c => c.BeforeCase = c.Body);
+
+                result = (from r in result
+                          where !beforeCases.Contains(r)
+                          select r).ToList();
+
+                return result;
+            };
+
+
+        public static Func<List<TestCase>,List<TestCase>> FindBeforeCases = 
+            cases => (
+                    from c in cases
+                    where c.Name.ToUpper().StartsWith("BEFORE_")
+                    select c
+                ).ToList();
+
+
         static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern = 
             (finder, casefullname, ignorePatterns) => {
 
@@ -81,38 +131,6 @@ namespace Contest.Core {
 
             Console.WriteLine("".PadRight(30, '='));
         }
-
-        public static Func<TestCaseFinder, Type, string, List<TestCase>> FindCases = 
-            (finder, type, ignorePatterns) => {
-
-                var result = new List<TestCase>();
-
-                var inst = Activator.CreateInstance(type);
-
-                foreach (var flag in Flags) {
-                    foreach (var fi in GetTestCases(type, flag)) {
-                        var del = (Delegate)fi.GetValue(inst);
-                        if (result.Any(tc => tc.Body.Method.MetadataToken == del.Method.MetadataToken))
-                            continue;
-
-                        var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
-                        result.Add(
-                            new TestCase {
-                                FixName = type.FullName,
-                                Name = fi.Name,
-                                Body = (Action<Runner>)del,
-                                Ignored = MatchIgnorePattern(finder, tcfullname, ignorePatterns)
-                            });
-                    }
-                }
-
-                var findNestedPublic    = FindCasesNestedTypes(finder, type, BindingFlags.Public, ignorePatterns);
-                var findNestedNonPublic = FindCasesNestedTypes(finder, type, BindingFlags.NonPublic, ignorePatterns);
-                result.AddRange(findNestedPublic);
-                result.AddRange(findNestedNonPublic);
-                return result;
-            };
-
 
         static readonly Func<Type, BindingFlags, List<FieldInfo>> GetTestCases =
             (type, flags) => (

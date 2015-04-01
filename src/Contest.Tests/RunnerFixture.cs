@@ -27,7 +27,7 @@ namespace Contest.Test {
         [Test]
         public void AssertEqualsMethod_NullValue_ResultIsTrue() {
             var runner = new Runner();
-            runner.AreEquals(null,null);
+            runner.Equal(null,null);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.PassCount);
@@ -36,7 +36,7 @@ namespace Contest.Test {
         [Test]
         public void AssertEqualsMethod_NullValue_ResultIsFalse() {
             var runner = new Runner();
-            runner.AreEquals(null,123);
+            runner.Equal(null,123);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.FailCount);
@@ -45,7 +45,7 @@ namespace Contest.Test {
         [Test]
         public void AssertEqualsMethod_ResultIsTrue() {
             var runner = new Runner();
-            runner.AreEquals(1,1);
+            runner.Equal(1,1);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.PassCount);
@@ -54,7 +54,7 @@ namespace Contest.Test {
         [Test]
         public void AssertEqualsMethod_ResultIsFalse() {
             var runner = new Runner();
-            runner.AreEquals(1,2);
+            runner.Equal(1,2);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.FailCount);
@@ -63,7 +63,7 @@ namespace Contest.Test {
         [Test]
         public void AssertNotEqualsMethod_ResultIsTrue() {
             var runner = new Runner();
-            runner.NotEquals(1,2);
+            runner.NotEqual(1,2);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.PassCount);
@@ -72,7 +72,7 @@ namespace Contest.Test {
         [Test]
         public void AssertNotEqualsMethod_ResultIsFalse() {
             var runner = new Runner();
-            runner.NotEquals(1,1);
+            runner.NotEqual(1,1);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.FailCount);

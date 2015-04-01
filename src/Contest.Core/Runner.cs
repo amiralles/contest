@@ -26,7 +26,7 @@
             Assert(value != null, msg);
         }
 
-        public void AreEquals(object expected, object actual, string errMsg = null) {
+        public void Equal(object expected, object actual, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
                 ? string.Format("Expected equal to {0} (Got {1}).", expected, actual)
                 : errMsg;
@@ -39,7 +39,7 @@
             Assert(cond(), msg);
         }
 
-        public void NotEquals(object left, object right, string errMsg = null) {
+        public void NotEqual(object left, object right, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
                 ? string.Format("Expected NOT equal to {0}.", right)
                 : errMsg;
