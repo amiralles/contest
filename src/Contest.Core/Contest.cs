@@ -6,13 +6,6 @@ namespace Contest.Core {
 
     public class TestSuite{
         public readonly List<TestCase> Cases = new List<TestCase>();
-        //public readonly TestStats Stats = new TestStats();
-
-        // public class TestStats  {
-            // public readonly Dictionary<string, Action<Runner>> BeforeCases = 
-                // new Dictionary<string, Action<Runner>>();
-        // }
-
     }
 
     public class Contest {
@@ -70,12 +63,8 @@ namespace Contest.Core {
             (finder, type, flags, ignorePatterns) => {
                 var result = new TestSuite();
                 var nestedTypes = type.GetNestedTypes(flags);
-                foreach (var ntype in nestedTypes){
-                    var tmpSuite = FindCases(finder, ntype, ignorePatterns);
-                    result.Cases.AddRange(tmpSuite.Cases);
-                    // tmpSuite.Stats.BeforeCases.Each(bc => 
-                        // result.Stats.BeforeCases[bc.Key]=bc.Value);
-                }
+                foreach (var ntype in nestedTypes)
+                    result.Cases.AddRange(FindCases(finder, ntype, ignorePatterns).Cases);
 
                 return result;
             };
@@ -89,7 +78,7 @@ namespace Contest.Core {
                 foreach (var flag in Flags) {
                     foreach (var fi in GetTestCases(type, flag)) {
                         var del = (Delegate)fi.GetValue(inst);
-                        if (result.Cases.Any(tc => SameMetaToken(tc.Body, del.Body))
+                        if (result.Cases.Any(tc => SameMetaToken(tc.Body, del)))
                             continue;
 
                         var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
