@@ -43,15 +43,12 @@ namespace Contest.Core {
 				var teardowns = FindTeardowns(suite);
 				WireTeardowns(suite, teardowns);
 
-				return ActualCases(suite,setups,teardowns);
+				return ActualCases(suite, setups, teardowns);
             };
 
-		static Func<TestSuite,List<TestCase>, List<TestCase>, TestSuite> ActualCases = 
+		static Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite> ActualCases = 
 			(suite, setups, teardowns) => {
-				var actualcases = from c in suite.Cases
-								  where !setups.Contains(c) && !teardowns.Contains(c)
-								  select c;
-
+				var actualcases = suite.Cases.Except(setups).Except(teardowns);
 				var result = new TestSuite();
 				result.Cases.AddRange(actualcases);
                 return result;
