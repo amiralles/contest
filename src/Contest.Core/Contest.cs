@@ -40,8 +40,11 @@ namespace Contest.Core {
 				var setups = FindSetups(suite);
 				WireSetups(suite, setups);
 
+				var teardowns = FindTeardowns(suite);
+				WireTeardowns(suite, teardowns);
+
 				var actualcases = from c in suite.Cases
-								  where !setups.Contains(c)
+								  where !setups.Contains(c) && !teardowns.Contains(c)
 								  select c;
 
 				var result = new TestSuite();
@@ -55,13 +58,30 @@ namespace Contest.Core {
 				 select c)
 				.ToList();
 
-		static Action<TestSuite, List<TestCase>> WireSetups = (suite, setups)=>{
+		static Func<TestSuite,List<TestCase>> FindTeardowns = suite =>
+				(from c in suite.Cases 
+				 where c.Name.ToUpper().StartsWith(AFTER) 
+				 select c)
+				.ToList();
+
+
+		static Action<TestSuite, List<TestCase>> WireSetups = (suite, setups) => {
 				setups.Each(bc => {
-				    var dcase = suite.Cases.FirstOrDefault(
+				    var tcase = suite.Cases.FirstOrDefault(
                         c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
 
-					if(dcase != null)
-						dcase.BeforeCase = bc.Body;
+					if(tcase != null)
+						tcase.BeforeCase = bc.Body;
+				});
+		};
+
+		static Action<TestSuite, List<TestCase>> WireTeardowns = (suite, teardowns) => {
+				teardowns.Each(ac => {
+				    var tcase = suite.Cases.FirstOrDefault(
+                        c => c.Name.ToUpper() == ac.Name.ToUpper().Replace(AFTER, ""));
+
+					if(tcase != null)
+						tcase.AfterCase = ac.Body;
 				});
 		};
 

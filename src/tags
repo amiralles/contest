@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 AFTER	.\Contest.Core\Contest.cs	/^			AFTER  = "AFTER_";$/;"	f	class:Contest.Core.Contest	file:
+AfterCase	.\Contest.Core\TestCase.cs	/^        public Action<Runner> AfterCase;$/;"	f	class:Contest.Core.TestCase
 Assert	.\Contest.Core\Runner.cs	/^        public void Assert(bool cond, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
 AssertEqualsMethod_NullValue_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertEqualsMethod_NullValue_ResultIsFalse() {$/;"	m	class:Contest.Test.RunnerFixture
 AssertEqualsMethod_NullValue_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertEqualsMethod_NullValue_ResultIsTrue() {$/;"	m	class:Contest.Test.RunnerFixture
@@ -66,6 +67,7 @@ FailCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, As
 FindCases	.\Contest.Core\Contest.cs	/^        public static Func<TestCaseFinder, Type, string, TestSuite> FindCases = $/;"	f	class:Contest.Core.Contest
 FindCasesInAssm	.\Contest.Core\Contest.cs	/^        public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = $/;"	f	class:Contest.Core.Contest
 FindCasesNestedTypes	.\Contest.Core\Contest.cs	/^        public static Func<TestCaseFinder, Type, BindingFlags, string, TestSuite> FindCasesNestedTypes =$/;"	f	class:Contest.Core.Contest
+FindSetups	.\Contest.Core\Contest.cs	/^		static Func<TestSuite,List<TestCase>> FindSetups = suite =>$/;"	f	class:Contest.Core.Contest	file:
 FixName	.\Contest.Core\TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
 Flags	.\Contest.Core\Contest.cs	/^        static readonly BindingFlags[] Flags;$/;"	f	class:Contest.Core.Contest	file:
 FooTest	.\Contest.Tests\FooTest.cs	/^    class FooTest{$/;"	c	namespace:Contest.Test
@@ -137,17 +139,19 @@ ThisPass	.\Contest.Tests\TestClassOnePassOnFail.cs	/^        public Action<Runne
 ThisThrowsAndPass	.\Contest.Tests\TestClassThrowingTests.cs	/^        public Action<Runner> ThisThrowsAndPass = $/;"	f	class:Contest.Test.TestClassThrowingTests
 ToString	.\Contest.Core\TestCase.cs	/^        public override string ToString() {$/;"	m	class:Contest.Core.TestCase
 WhenSplitTrimWhiteSpaces	.\Contest.Tests\IgnoreFixture.cs	/^            public void WhenSplitTrimWhiteSpaces() {$/;"	m	class:Contest.Test.IgnoreFixture.ReadIgnoreFile
+WireSetups	.\Contest.Core\Contest.cs	/^		static Action<TestSuite, List<TestCase>> WireSetups = (suite, setups)=>{$/;"	f	class:Contest.Core.Contest	file:
 Wrapper	.\Contest.Tests\Wrapper.cs	/^    class Wrapper {$/;"	c	namespace:Contest.Test
 WrongKindaException	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, Type, string> WrongKindaException = (exptected, got) =>$/;"	f	namespace:Contest.Core
 _finder	.\Contest.Tests\CherryPickingFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Test.CherryPickingFixture	file:
 _finder	.\Contest.Tests\DiscoverFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Test.DiscoverFixture	file:
 _finder	.\Contest.Tests\RunFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Test.RunFixture	file:
+after_bar	.\Contest.Tests\BarTest.cs	/^            _ after_bar  = runner => {};$/;"	f	class:Contest.Test.BarTest.NestedBarTest	file:
+after_foo	.\Contest.Tests\FooTest.cs	/^        _ after_foo  = runner => {};$/;"	f	class:Contest.Test.FooTest	file:
+after_test_cases_in_class	.\Contest.Tests\DiscoverFixture.cs	/^        public void after_test_cases_in_class() {$/;"	m	class:Contest.Test.DiscoverFixture
 bar	.\Contest.Tests\BarTest.cs	/^            _ bar = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Test.BarTest.NestedBarTest	file:
 before_bar	.\Contest.Tests\BarTest.cs	/^            _ before_bar = runner => {};$/;"	f	class:Contest.Test.BarTest.NestedBarTest	file:
 before_foo	.\Contest.Tests\FooTest.cs	/^        _ before_foo = runner => {};$/;"	f	class:Contest.Test.FooTest	file:
 before_test_cases_in_assm	.\Contest.Tests\DiscoverFixture.cs	/^        public void before_test_cases_in_assm() {$/;"	m	class:Contest.Test.DiscoverFixture
-before_test_cases_in_class	.\Contest.Tests\DiscoverFixture.cs	/^        public void before_test_cases_in_class() {$/;"	m	class:Contest.Test.DiscoverFixture
-before_test_cases_in_nested_class	.\Contest.Tests\DiscoverFixture.cs	/^        public void before_test_cases_in_nested_class() {$/;"	m	class:Contest.Test.DiscoverFixture
 foo	.\Contest.Tests\FooTest.cs	/^        _ foo = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Test.FooTest	file:
 ignore_all_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Test.IgnoreFixture.PatternsFromCmdLine
 ignore_all_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Test.IgnoreFixture.PatternsFromIgnoreFile
