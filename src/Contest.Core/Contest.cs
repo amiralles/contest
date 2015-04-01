@@ -37,19 +37,9 @@ namespace Contest.Core {
                     suite.Cases.Add(c);
                 }));
 
-				var setups = (from c in suite.Cases 
-							  where c.Name.ToUpper().StartsWith(BEFORE)
-							  select c).ToList();
+				var setups = FindSetups(suite);
+				WireSetups(suite, setups);
 
-				//find test method for each setup.
-				setups.Each(bc => {
-				    var dcase = suite.Cases.FirstOrDefault(
-                        c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
-
-						if(dcase != null)
-							dcase.BeforeCase = bc.Body;
-						});
-						
 				var actualcases = from c in suite.Cases
 								  where !setups.Contains(c)
 								  select c;
@@ -58,6 +48,22 @@ namespace Contest.Core {
 				result.Cases.AddRange(actualcases);
                 return result;
             };
+
+		static Func<TestSuite,List<TestCase>> FindSetups = suite =>
+				(from c in suite.Cases 
+				 where c.Name.ToUpper().StartsWith(BEFORE) 
+				 select c)
+				.ToList();
+
+		static Action<TestSuite, List<TestCase>> WireSetups = (suite, setups)=>{
+				setups.Each(bc => {
+				    var dcase = suite.Cases.FirstOrDefault(
+                        c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
+
+					if(dcase != null)
+						dcase.BeforeCase = bc.Body;
+				});
+		};
 
         public static Func<TestCaseFinder, Type, BindingFlags, string, TestSuite> FindCasesNestedTypes =
             (finder, type, flags, ignorePatterns) => {

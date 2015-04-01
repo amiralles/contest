@@ -32,21 +32,20 @@ namespace Contest.Test {
             var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
 			var casesWithSetup = (from c in suite.Cases
 								 where c.BeforeCase != null
-								 select c).ToList();
+								 select c).Count();
 
-            Assert.AreEqual(2, casesWithSetup.Count);
+            Assert.AreEqual(2, casesWithSetup);
         }
 
         [Test]
-        public void before_test_cases_in_class() {
-            // var suite = Contest.FindCases(_finder, typeof(FooTest), null);
-            // Assert.AreEqual(1, suite.Stats.BeforeCases.Count);
+        public void after_test_cases_in_class() {
+            var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
+			var casesWithTeardown = (from c in suite.Cases
+								 where c.AfterCase != null
+								 select c).Count();
+
+            Assert.AreEqual(2, casesWithTeardown);
         }
 
-        [Test]
-        public void before_test_cases_in_nested_class() {
-            // var suite = Contest.FindCases(_finder, typeof(BarTest), null);
-            // Assert.AreEqual(1, suite.Stats.BeforeCases.Count);
-        }
     }
 }
