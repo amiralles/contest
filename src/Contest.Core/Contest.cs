@@ -22,6 +22,10 @@ namespace Contest.Core {
             STA_PUB  = BindingFlags.Public | BindingFlags.Static, 
             STA_PRI  = BindingFlags.NonPublic | BindingFlags.Static;
 
+		const string 
+			BEFORE = "BEFORE_",
+			AFTER  = "AFTER_";
+
         static readonly BindingFlags[] Flags;
 
         static Contest() {
@@ -41,13 +45,13 @@ namespace Contest.Core {
                 }));
 
 				var setups = (from c in suite.Cases 
-							  where c.Name.ToUpper().StartsWith("BEFORE_")
+							  where c.Name.ToUpper().StartsWith(BEFORE)
 							  select c).ToList();
 
 				//find test method for each setup.
 				setups.Each(bc => {
 				    var dcase = suite.Cases.FirstOrDefault(
-                        c => c.Name.ToUpper() == bc.Name.ToUpper().Replace("BEFORE_", ""));
+                        c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
 
 						if(dcase != null)
 							dcase.BeforeCase = bc.Body;
@@ -104,25 +108,8 @@ namespace Contest.Core {
                 result.Cases.AddRange(findNestedPublic.Cases);
                 result.Cases.AddRange(findNestedNonPublic.Cases);
 
-                // var beforeCases = FindBeforeCases(result.Cases);
-                // beforeCases.Each(bc => result.Stats.BeforeCases[bc.Name] = bc.Body);
-
-                // var filtered = (from c in result.Cases
-                          // where !beforeCases.Contains(c)
-                          // select c).ToList();
-
-                // result.Cases.Clear();
-                // result.Cases.AddRange(filtered);
                 return result;
             };
-
-
-        public static Func<List<TestCase>,List<TestCase>> FindBeforeCases = 
-            cases => (
-                    from c in cases
-                    where c.Name.ToUpper().StartsWith("BEFORE_")
-                    select c
-                ).ToList();
 
 
         static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern = 
