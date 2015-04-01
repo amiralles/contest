@@ -6,12 +6,12 @@ namespace Contest.Core {
 
     public class TestSuite{
         public readonly List<TestCase> Cases = new List<TestCase>();
-        public readonly TestStats Stats = new TestStats();
+        //public readonly TestStats Stats = new TestStats();
 
-        public class TestStats  {
-            public readonly Dictionary<string, Action<Runner>> BeforeCases = 
-                new Dictionary<string, Action<Runner>>();
-        }
+        // public class TestStats  {
+            // public readonly Dictionary<string, Action<Runner>> BeforeCases = 
+                // new Dictionary<string, Action<Runner>>();
+        // }
 
     }
 
@@ -28,6 +28,49 @@ namespace Contest.Core {
             Flags = new[] { INST_PUB, INST_PRI, STA_PUB, STA_PRI };
         }
 
+		static Func<Delegate,Delegate, bool> SameMetaToken = (left, right) => 
+			left.Method.MetadataToken == right.Method.MetadataToken;
+
+        public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
+            (finder, assm, ignorePatterns) => {
+
+				//find cases before => case_name, delegate
+				//find cases after  => idem
+				//find cases
+				//wireup (after, cases, before)
+				//return cases.
+
+                var suite = new TestSuite();
+                assm.GetTypes().Each(type => FindCases(finder, type, ignorePatterns).Cases.Each(c => {
+                    //if (result.Cases.Any(d => d.Body.Method.MetadataToken == c.Body.Method.MetadataToken))
+                    if (suite.Cases.Any(d => SameMetaToken(d.Body, c.Body)))
+                        return;
+                    suite.Cases.Add(c);
+                }));
+
+
+				var setups = (from c in suite.Cases 
+							  where c.Name.ToUpper().StartsWith("BEFORE_")
+							  select c).ToList();
+
+				//find test method for each setup.
+				setups.Each(bc => {
+						var dcase = suite.Cases.FirstOrDefault(c => 
+								c.Name.ToUpper().Replace("BEFORE_","") == bc.Name);
+
+						if(dcase.Name != null)
+							dcase.BeforeCase = bc.Body;
+						});
+						
+				var actualcases = from c in suite.Cases
+								  where !setups.Contains(c)
+								  select c;
+
+				var result = new TestSuite();
+				result.Cases.AddRange(actualcases);
+                return result;
+            };
+
         public static Func<TestCaseFinder, Type, BindingFlags, string, TestSuite> FindCasesNestedTypes =
             (finder, type, flags, ignorePatterns) => {
                 var result = new TestSuite();
@@ -35,21 +78,10 @@ namespace Contest.Core {
                 foreach (var ntype in nestedTypes){
                     var tmpSuite = FindCases(finder, ntype, ignorePatterns);
                     result.Cases.AddRange(tmpSuite.Cases);
-                    tmpSuite.Stats.BeforeCases.Each(bc => 
-                        result.Stats.BeforeCases[bc.Key]=bc.Value);
+                    // tmpSuite.Stats.BeforeCases.Each(bc => 
+                        // result.Stats.BeforeCases[bc.Key]=bc.Value);
                 }
 
-                return result;
-            };
-
-        public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
-            (finder, assm, ignorePatterns) => {
-                var result = new TestSuite();
-                assm.GetTypes().Each(type => FindCases(finder, type, ignorePatterns).Cases.Each(c => {
-                    if (result.Cases.Any(d => d.Body.Method.MetadataToken == c.Body.Method.MetadataToken))
-                        return;
-                    result.Cases.Add(c);
-                }));
                 return result;
             };
 
@@ -72,7 +104,6 @@ namespace Contest.Core {
                                 Name = fi.Name,
                                 Body = (Action<Runner>)del,
                                 Ignored = MatchIgnorePattern(finder, tcfullname, ignorePatterns),
-                                BeforeCase = TestCase.DefaultBeforeCase
                             });
                     }
                 }
@@ -82,16 +113,15 @@ namespace Contest.Core {
                 result.Cases.AddRange(findNestedPublic.Cases);
                 result.Cases.AddRange(findNestedNonPublic.Cases);
 
-                //find before cases, after cases ang purge the list.
-                var beforeCases = FindBeforeCases(result.Cases);
-                beforeCases.Each(bc => result.Stats.BeforeCases[bc.Name] = bc.Body);
+                // var beforeCases = FindBeforeCases(result.Cases);
+                // beforeCases.Each(bc => result.Stats.BeforeCases[bc.Name] = bc.Body);
 
-                var filtered = (from c in result.Cases
-                          where !beforeCases.Contains(c)
-                          select c).ToList();
+                // var filtered = (from c in result.Cases
+                          // where !beforeCases.Contains(c)
+                          // select c).ToList();
 
-                result.Cases.Clear();
-                result.Cases.AddRange(filtered);
+                // result.Cases.Clear();
+                // result.Cases.AddRange(filtered);
                 return result;
             };
 

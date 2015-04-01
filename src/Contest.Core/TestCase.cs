@@ -7,7 +7,6 @@ namespace Contest.Core {
         public Action<Runner> Body;
         public bool Ignored;
         public Action<Runner> BeforeCase;
-        public static Action<Runner> DefaultBeforeCase = runner => { };
 
         public string GetFullName() {
             return string.Format("{0}.{1}", FixName, Name);
