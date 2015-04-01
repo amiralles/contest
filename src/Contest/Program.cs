@@ -59,7 +59,7 @@
             var finder = new TestCaseFinder();
             var suite = Contest.FindCasesInAssm(finder, assm, null);
             var runner = new Runner();
-            runner.Run(suite.Cases);
+            runner.Run(suite);
         }
 
         static void PrintHelp() {

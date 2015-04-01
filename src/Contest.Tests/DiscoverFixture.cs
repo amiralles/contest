@@ -36,13 +36,13 @@ namespace Contest.Test {
         [Test]
         public void before_test_cases_in_class() {
             var suite = Contest.FindCases(_finder, typeof(FooTest), null);
-            Assert.AreEqual(2, suite.Stats.BeforeCases.Count);
+            Assert.AreEqual(1, suite.Stats.BeforeCases.Count);
         }
 
         [Test]
         public void before_test_cases_in_nested_class() {
             var suite = Contest.FindCases(_finder, typeof(BarTest), null);
-            Assert.AreEqual(2, suite.Stats.BeforeCases.Count);
+            Assert.AreEqual(1, suite.Stats.BeforeCases.Count);
         }
     }
 }
