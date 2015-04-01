@@ -89,7 +89,7 @@ namespace Contest.Core {
                 foreach (var flag in Flags) {
                     foreach (var fi in GetTestCases(type, flag)) {
                         var del = (Delegate)fi.GetValue(inst);
-                        if (result.Cases.Any(tc => tc.Body.Method.MetadataToken == del.Method.MetadataToken))
+                        if (result.Cases.Any(tc => SameMetaToken(tc.Body, del.Body))
                             continue;
 
                         var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
