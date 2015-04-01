@@ -4,10 +4,6 @@ namespace Contest.Core {
     using System.Linq;
     using System.Reflection;
 
-    public class TestSuite{
-        public readonly List<TestCase> Cases = new List<TestCase>();
-    }
-
     public class Contest {
         const BindingFlags 
             INST_PUB = BindingFlags.Public | BindingFlags.Instance, 
