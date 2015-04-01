@@ -28,26 +28,17 @@ namespace Contest.Core {
             Flags = new[] { INST_PUB, INST_PRI, STA_PUB, STA_PRI };
         }
 
-		static Func<Delegate,Delegate, bool> SameMetaToken = (left, right) => 
+		static readonly Func<Delegate,Delegate, bool> SameMetaToken = (left, right) => 
 			left.Method.MetadataToken == right.Method.MetadataToken;
 
         public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
             (finder, assm, ignorePatterns) => {
-
-				//find cases before => case_name, delegate
-				//find cases after  => idem
-				//find cases
-				//wireup (after, cases, before)
-				//return cases.
-
                 var suite = new TestSuite();
                 assm.GetTypes().Each(type => FindCases(finder, type, ignorePatterns).Cases.Each(c => {
-                    //if (result.Cases.Any(d => d.Body.Method.MetadataToken == c.Body.Method.MetadataToken))
                     if (suite.Cases.Any(d => SameMetaToken(d.Body, c.Body)))
                         return;
                     suite.Cases.Add(c);
                 }));
-
 
 				var setups = (from c in suite.Cases 
 							  where c.Name.ToUpper().StartsWith("BEFORE_")
@@ -55,10 +46,10 @@ namespace Contest.Core {
 
 				//find test method for each setup.
 				setups.Each(bc => {
-						var dcase = suite.Cases.FirstOrDefault(c => 
-								c.Name.ToUpper().Replace("BEFORE_","") == bc.Name);
+				    var dcase = suite.Cases.FirstOrDefault(
+                        c => c.Name.ToUpper() == bc.Name.ToUpper().Replace("BEFORE_", ""));
 
-						if(dcase.Name != null)
+						if(dcase != null)
 							dcase.BeforeCase = bc.Body;
 						});
 						

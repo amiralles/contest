@@ -29,8 +29,12 @@ namespace Contest.Test {
 		//before test cases
         [Test]
         public void before_test_cases_in_assm() {
-            // var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
-            // Assert.AreEqual(2, suite.Stats.BeforeCases.Count);
+            var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
+			var casesWithSetup = (from c in suite.Cases
+								 where c.BeforeCase != null
+								 select c).ToList();
+
+            Assert.AreEqual(2, casesWithSetup.Count);
         }
 
         [Test]
