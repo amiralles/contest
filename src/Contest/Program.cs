@@ -57,9 +57,9 @@
                 throw new Exception(string.Format("Can't load assembly '{0}'.", assmFileName));
 
             var finder = new TestCaseFinder();
-            var cases = Contest.FindCasesInAssm(finder, assm, null);
+            var suite = Contest.FindCasesInAssm(finder, assm, null);
             var runner = new Runner();
-            runner.Run(cases);
+            runner.Run(suite.Cases);
         }
 
         static void PrintHelp() {

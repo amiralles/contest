@@ -4,6 +4,17 @@ namespace Contest.Core {
     using System.Linq;
     using System.Reflection;
 
+    public class TestSuite{
+        public readonly List<TestCase> Cases = new List<TestCase>();
+        public readonly TestStats Stats = new TestStats();
+
+        public class TestStats  {
+            public readonly Dictionary<string, Action<Runner>> BeforeCases = 
+                new Dictionary<string, Action<Runner>>();
+        }
+
+    }
+
     public class Contest {
         const BindingFlags 
             INST_PUB = BindingFlags.Public | BindingFlags.Instance, 
@@ -17,42 +28,45 @@ namespace Contest.Core {
             Flags = new[] { INST_PUB, INST_PRI, STA_PUB, STA_PRI };
         }
 
-        public static Func<TestCaseFinder, Type, BindingFlags, string, List<TestCase>> FindCasesNestedTypes =
+        public static Func<TestCaseFinder, Type, BindingFlags, string, TestSuite> FindCasesNestedTypes =
             (finder, type, flags, ignorePatterns) => {
-                var result = new List<TestCase>();
+                var result = new TestSuite();
                 var nestedTypes = type.GetNestedTypes(flags);
-                foreach (var ntype in nestedTypes)
-                    result.AddRange(FindCases(finder, ntype, ignorePatterns));
+                foreach (var ntype in nestedTypes){
+                    var tmpSuite = FindCases(finder, ntype, ignorePatterns);
+                    result.Cases.AddRange(tmpSuite.Cases);
+                    tmpSuite.Stats.BeforeCases.Each(bc => 
+                        result.Stats.BeforeCases[bc.Key]=bc.Value);
+                }
 
                 return result;
             };
 
-        public static Func<TestCaseFinder, Assembly, string, List<TestCase>> FindCasesInAssm = 
+        public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
             (finder, assm, ignorePatterns) => {
-                var result = new List<TestCase>();
-                assm.GetTypes().Each(type => FindCases(finder, type, ignorePatterns).Each(c => {
-                    if (result.Any(d => d.Body.Method.MetadataToken == c.Body.Method.MetadataToken))
+                var result = new TestSuite();
+                assm.GetTypes().Each(type => FindCases(finder, type, ignorePatterns).Cases.Each(c => {
+                    if (result.Cases.Any(d => d.Body.Method.MetadataToken == c.Body.Method.MetadataToken))
                         return;
-                    result.Add(c);
+                    result.Cases.Add(c);
                 }));
                 return result;
             };
 
-        public static Func<TestCaseFinder, Type, string, List<TestCase>> FindCases = 
+        public static Func<TestCaseFinder, Type, string, TestSuite> FindCases = 
             (finder, type, ignorePatterns) => {
 
-                var result = new List<TestCase>();
-
+                var result = new TestSuite();
                 var inst = Activator.CreateInstance(type);
 
                 foreach (var flag in Flags) {
                     foreach (var fi in GetTestCases(type, flag)) {
                         var del = (Delegate)fi.GetValue(inst);
-                        if (result.Any(tc => tc.Body.Method.MetadataToken == del.Method.MetadataToken))
+                        if (result.Cases.Any(tc => tc.Body.Method.MetadataToken == del.Method.MetadataToken))
                             continue;
 
                         var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
-                        result.Add(
+                        result.Cases.Add(
                             new TestCase {
                                 FixName = type.FullName,
                                 Name = fi.Name,
@@ -65,17 +79,19 @@ namespace Contest.Core {
 
                 var findNestedPublic    = FindCasesNestedTypes(finder, type, BindingFlags.Public, ignorePatterns);
                 var findNestedNonPublic = FindCasesNestedTypes(finder, type, BindingFlags.NonPublic, ignorePatterns);
-                result.AddRange(findNestedPublic);
-                result.AddRange(findNestedNonPublic);
+                result.Cases.AddRange(findNestedPublic.Cases);
+                result.Cases.AddRange(findNestedNonPublic.Cases);
 
                 //find before cases, after cases ang purge the list.
-                var beforeCases = FindBeforeCases(result);
-                beforeCases.Each(c => c.BeforeCase = c.Body);
+                var beforeCases = FindBeforeCases(result.Cases);
+                beforeCases.Each(bc => result.Stats.BeforeCases[bc.Name] = bc.Body);
 
-                result = (from r in result
-                          where !beforeCases.Contains(r)
-                          select r).ToList();
+                var filtered = (from c in result.Cases
+                          where !beforeCases.Contains(c)
+                          select c).ToList();
 
+                result.Cases.Clear();
+                result.Cases.AddRange(filtered);
                 return result;
             };
 

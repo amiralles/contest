@@ -81,6 +81,10 @@
             }
         }
 
+        public void Run(TestSuite suite, string cpp = null /*cherry picking pattern.*/) {
+            Run(suite.Cases, cpp);
+        }
+
         public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
 
             Print("".PadRight(40, '='), ConsoleColor.White);
