@@ -27,13 +27,17 @@ namespace Contest.Core {
         public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
             (finder, assm, ignorePatterns) => {
                 var suite = new TestSuite();
-                assm.GetTypes().Each(type =>
-                    FindCases(finder, type, ignorePatterns).Cases.Each(c => {
-                        if (suite.Cases.Any(d => c.Body==null || SameMetaToken(d.Body, c.Body))) {
-                            return;
-                        }
-                        suite.Cases.Add(c);
-                    }));
+                var cases =
+                    from type in assm.GetTypes()
+                    from c in FindCases(finder, type, ignorePatterns).Cases
+                    select c;
+
+                cases.Each(c => {
+                    if (suite.Cases.Any(d => c.Body == null || SameMetaToken(d.Body, c.Body))) {
+                        return;
+                    }
+                    suite.Cases.Add(c);
+                });
 
                 var setups = FindSetups(suite);
                 WireSetups(suite, setups);
