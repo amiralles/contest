@@ -54,6 +54,7 @@
     <Compile Include="RunFixture.cs" />
     <Compile Include="IgnoreFixture.cs" />
     <Compile Include="RunnerFixture.cs" />
+    <Compile Include="RunSetupsAndTeardowns.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="TestClassOnePassOnFail.cs" />
     <Compile Include="TestClassThrowingTests.cs" />

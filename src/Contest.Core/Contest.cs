@@ -11,7 +11,7 @@ namespace Contest.Core {
             STA_PUB  = BindingFlags.Public | BindingFlags.Static, 
             STA_PRI  = BindingFlags.NonPublic | BindingFlags.Static;
 
-		const string 
+        const string 
 			BEFORE = "BEFORE_",
 			AFTER  = "AFTER_";
 
@@ -21,68 +21,68 @@ namespace Contest.Core {
             Flags = new[] { INST_PUB, INST_PRI, STA_PUB, STA_PRI };
         }
 
-		static readonly Func<Delegate,Delegate, bool> SameMetaToken = (left, right) => 
-			left.Method.MetadataToken == right.Method.MetadataToken;
+        static readonly Func<Delegate,Delegate, bool> SameMetaToken = (left, right) =>
+             left.Method.MetadataToken == right.Method.MetadataToken;
 
         public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
             (finder, assm, ignorePatterns) => {
                 var suite = new TestSuite();
-                assm.GetTypes().Each(type => FindCases(finder, type, ignorePatterns).Cases.Each(c => {
-                    if (suite.Cases.Any(d => SameMetaToken(d.Body, c.Body)))
-                        return;
-                    suite.Cases.Add(c);
-                }));
+                assm.GetTypes().Each(type =>
+                    FindCases(finder, type, ignorePatterns).Cases.Each(c => {
+                        if (suite.Cases.Any(d => c.Body==null || SameMetaToken(d.Body, c.Body))) {
+                            return;
+                        }
+                        suite.Cases.Add(c);
+                    }));
 
-				var setups = FindSetups(suite);
-				WireSetups(suite, setups);
+                var setups = FindSetups(suite);
+                WireSetups(suite, setups);
 
-				var teardowns = FindTeardowns(suite);
-				WireTeardowns(suite, teardowns);
+                var teardowns = FindTeardowns(suite);
+                WireTeardowns(suite, teardowns);
 
-				return ActualCases(suite, setups, teardowns);
+                return ActualCases(suite, setups, teardowns);
             };
 
-		static Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite> ActualCases = 
+        static readonly Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite> ActualCases = 
 			(suite, setups, teardowns) => {
-				var actualcases = suite.Cases.Except(setups).Except(teardowns);
-				var result = new TestSuite();
-				result.Cases.AddRange(actualcases);
+                var actualcases = suite.Cases.Except(setups).Except(teardowns);
+                var result = new TestSuite();
+                result.Cases.AddRange(actualcases);
                 return result;
-			};
+            };
 
 
-		static Func<TestSuite,List<TestCase>> FindSetups = suite =>
-				(from c in suite.Cases 
-				 where c.Name.ToUpper().StartsWith(BEFORE) 
-				 select c)
-				.ToList();
+        static readonly Func<TestSuite,List<TestCase>> FindSetups = suite =>
+                (from c in suite.Cases
+                 where c.Name.ToUpper().StartsWith(BEFORE)
+                 select c)
+                .ToList();
 
-		static Func<TestSuite,List<TestCase>> FindTeardowns = suite =>
-				(from c in suite.Cases 
-				 where c.Name.ToUpper().StartsWith(AFTER) 
-				 select c)
-				.ToList();
+        static readonly Func<TestSuite,List<TestCase>> FindTeardowns = suite =>
+                (from c in suite.Cases
+                 where c.Name.ToUpper().StartsWith(AFTER)
+                 select c)
+                .ToList();
 
 
-		static Action<TestSuite, List<TestCase>> WireSetups = (suite, setups) => {
-				setups.Each(bc => {
-				    var tcase = suite.Cases.FirstOrDefault(
-                        c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
+        static readonly Action<TestSuite, List<TestCase>> WireSetups = (suite, setups) =>
+            setups.Each(bc => {
+                var tcase = suite.Cases.FirstOrDefault(
+                    c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
 
-					if(tcase != null)
-						tcase.BeforeCase = bc.Body;
-				});
-		};
+                if (tcase != null)
+                    tcase.BeforeCase = bc.Body;
+            });
 
-		static Action<TestSuite, List<TestCase>> WireTeardowns = (suite, teardowns) => {
-				teardowns.Each(ac => {
-				    var tcase = suite.Cases.FirstOrDefault(
-                        c => c.Name.ToUpper() == ac.Name.ToUpper().Replace(AFTER, ""));
+        static readonly Action<TestSuite, List<TestCase>> WireTeardowns = (suite, teardowns) =>
+            teardowns.Each(ac => {
+                var tcase = suite.Cases.FirstOrDefault(
+                    c => c.Name.ToUpper() == ac.Name.ToUpper().Replace(AFTER, ""));
 
-					if(tcase != null)
-						tcase.AfterCase = ac.Body;
-				});
-		};
+                if (tcase != null)
+                    tcase.AfterCase = ac.Body;
+            });
 
         public static Func<TestCaseFinder, Type, BindingFlags, string, TestSuite> FindCasesNestedTypes =
             (finder, type, flags, ignorePatterns) => {

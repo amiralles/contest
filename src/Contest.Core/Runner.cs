@@ -9,6 +9,44 @@
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
 
+        public void Run(TestSuite suite, string cpp = null /*cherry picking pattern.*/) {
+            Run(suite.Cases, cpp);
+        }
+
+        public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
+
+            Print("".PadRight(40, '='), ConsoleColor.White);
+
+            var watch = Stopwatch.StartNew();
+            var cherryPick = !string.IsNullOrEmpty(cpp);
+            // string currfix = null;\
+            cases.Each(c => {
+                // TODO: fix this.
+                // if(c.FixName != currfix) 
+                // PrintFixName((currfix = c.FixName));
+
+                if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
+                    IgnoreCount++;
+                    return;
+                }
+
+                try {
+                    Console.WriteLine("\n" + c.Name);
+                    c.Body(this);
+                }
+                catch (Exception ex) {
+                    Fail(ex.Message);
+                }
+            });
+
+            watch.Stop();
+            Elapsed = watch.ElapsedMilliseconds;
+            TestCount = cases.Count;
+            PrintResults(cases.Count, Elapsed);
+            Environment.ExitCode = FailCount;
+        }
+
+
         //All of these helpers end up calling the one and only "Assert" method.
         public void IsNull(object value, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
@@ -79,43 +117,6 @@
 
                 Pass();
             }
-        }
-
-        public void Run(TestSuite suite, string cpp = null /*cherry picking pattern.*/) {
-            Run(suite.Cases, cpp);
-        }
-
-        public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
-
-            Print("".PadRight(40, '='), ConsoleColor.White);
-
-            var watch = Stopwatch.StartNew();
-            var cherryPick = !string.IsNullOrEmpty(cpp);
-            // string currfix = null;\
-            cases.Each(c => {
-                // TODO: fix this.
-                // if(c.FixName != currfix) 
-                // PrintFixName((currfix = c.FixName));
-
-                if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
-                    IgnoreCount++;
-                    return;
-                }
-
-                try {
-                    Console.WriteLine("\n" + c.Name);
-                    c.Body(this);
-                }
-                catch (Exception ex) {
-                    Fail(ex.Message);
-                }
-            });
-
-            watch.Stop();
-            Elapsed = watch.ElapsedMilliseconds;
-            TestCount = cases.Count;
-            PrintResults(cases.Count, Elapsed);
-            Environment.ExitCode = FailCount;
         }
 
         void PrintResults(int casesCount, long elapsedMilliseconds) {
