@@ -37,6 +37,7 @@ namespace Contest.Test {
             Assert.AreEqual(2, casesWithSetup);
         }
 
+		//TODO: fix this.
         [Test]
         public void after_test_cases_in_class() {
             var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
