@@ -14,47 +14,52 @@
 		_ this_is_a_failing_test = assert =>
 			assert.Equal(5, 2 + 2);
 
-		_ this_is_a_throw_expected_passing_test = test =>
-			test.ShouldThrow(() => 1/0);
+        _ this_is_a_throw_expected_passing_test = test =>
+            test.ShouldThrow<NullReferenceException>(() => {
+                object target = null;
+                var dummy = target.ToString();
+            });
 
 		_ this_is_a_throw_expected_failing_test = test =>
-			test.ShouldThrow(() => 1/1);
+			test.ShouldThrow<NullReferenceException>(() => {
+				//it doesn't throws; So it fails.
+			});
     }
 
     class Contest201 {
 
 		_ before_each = test => {
-			Users.Create("pipe");
-			Users.Create("vilmis");
-			Users.Create("amiralles");
+			User.Create("pipe");
+			User.Create("vilmis");
+			User.Create("amiralles");
 		};
 
 		_ after_each = test =>
-			Users.Reset();
+			User.Reset();
 
 		_ find_existing_user_returns_user = assert => 
-			assert.IsNotNull(FindUsr("pipe"));
+			assert.IsNotNull(User.Find("pipe"));
 
 		_ find_non_existing_user_returns_null = assert => 
-			assert.IsNull(FindUsr("not exists"));
+			assert.IsNull(User.Find("not exists"));
 
 		_ create_user_adds_new_user = assert => {
 			User.Create("foo");
-			assert.Equal(4, User.Count);
-		}
+			assert.Equal(4, User.Count());
+		};
     }
 
-	class User {	
-		readonly static List<string> _users = new List<string>;
+	public class User {	
+		static readonly List<string> _users = new List<string>();
 
-		public Action Reset = () => _users.Clear();
+		public static Action Reset = () => _users.Clear();
 			
-		public Action<string> Create = name =>
+		public static Action<string> Create = name =>
 			_users.Add(name);
 
-		public static Func<int> Count = _users.Count;
+		public static Func<int> Count = () => _users.Count;
 
-		public static Func<string, object> FindUsr = name =>
-			Users.FirstOrDefault(u => u == name);
+		public static Func<string, object> Find = name =>
+			_users.FirstOrDefault(u => u == name);
 	}
 }
