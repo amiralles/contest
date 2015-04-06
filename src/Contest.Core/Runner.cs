@@ -32,7 +32,6 @@
 
                 try {
                     Console.WriteLine("\n" + c.Name);
-//                    c.Body(this);
                     c.Run(this);//<= ensure setups/teardowns.
                 }
                 catch (Exception ex) {
