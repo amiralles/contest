@@ -48,8 +48,62 @@ namespace Contest.Core {
                 var teardowns = FindTeardowns(suite);
                 WireTeardowns(suite, teardowns);
 
-                return ActualCases(suite, setups, teardowns);
+                var actualcases = ActualCases(suite, setups, teardowns);
+
+                WireGlobalSetups(suite, setups);
+                WireGlobalTeardowns(suite, teardowns);
+				return actualcases;
             };
+
+		static Func<List<TestCase>, TestCase> GetGlobalSetup = setups =>
+			setups.FirstOrDefault(t=>t.Name.ToUpper()=="BEFORE_EACH");
+
+		static Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>
+			teardowns.FirstOrDefault(t=>t.Name.ToUpper()=="AFTER_EACH");
+
+		static Action<TestSuite, List<TestCase>> WireGlobalSetups = (actual, setups) =>{
+			//global setups?
+			var gsup = GetGlobalSetup(setups);
+			if(gsup==null)
+				return;
+
+			(from c in actual.Cases
+			 where c.BeforeCase != null
+			 select c).Each(c=>{
+				 var tsup = c.BeforeCase;
+				 c.BeforeCase = runner => { 
+					tsup(runner); 
+					gsup.Body(runner);
+				};
+			 });
+
+			(from c in actual.Cases
+			 where c.BeforeCase == null
+			 select c).Each(c=>c.BeforeCase = gsup.Body);
+		};
+
+		static Action<TestSuite, List<TestCase>> WireGlobalTeardowns = (actual, teardowns) =>{
+			//global teardowns?
+			var gtd = GetGlobalTearDown(teardowns);
+			if(gtd==null)
+				return;
+
+			(from c in actual.Cases
+			 where c.AfterCase != null
+			 select c).Each(c=>{
+				 var td = c.AfterCase;
+				 c.AfterCase = runner => { 
+					td(runner); 
+					gtd.Body(runner);
+				};
+			 });
+
+			(from c in actual.Cases
+			 where c.AfterCase == null
+			 select c).Each(c=>c.AfterCase = gtd.Body);
+		};
+
+
 
         static readonly Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite> ActualCases = 
 			(suite, setups, teardowns) => {
@@ -73,23 +127,28 @@ namespace Contest.Core {
                 .ToList();
 
 
-        static readonly Action<TestSuite, List<TestCase>> WireSetups = (suite, setups) =>
+        static readonly Action<TestSuite, List<TestCase>> WireSetups = (suite, setups) =>{
             setups.Each(bc => {
                 var tcase = suite.Cases.FirstOrDefault(
                     c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
 
+				//Specific teardows takes precedence over generic ones.
                 if (tcase != null)
                     tcase.BeforeCase = bc.Body;
             });
+		};
 
-        static readonly Action<TestSuite, List<TestCase>> WireTeardowns = (suite, teardowns) =>
+        static readonly Action<TestSuite, List<TestCase>> WireTeardowns = (suite, teardowns) =>{
             teardowns.Each(ac => {
                 var tcase = suite.Cases.FirstOrDefault(
                     c => c.Name.ToUpper() == ac.Name.ToUpper().Replace(AFTER, ""));
 
+				//Specific teardows takes precedence over generic ones.
                 if (tcase != null)
                     tcase.AfterCase = ac.Body;
             });
+
+		};
 
         public static Func<TestCaseFinder, Type, BindingFlags, string, TestSuite> FindCasesNestedTypes =
             (finder, type, flags, ignorePatterns) => {

@@ -28,6 +28,8 @@
 
     class Contest201 {
 
+		//Seguir desde aca:
+		//before_each/after_each no esta implementado.
 		_ before_each = test => {
 			User.Create("pipe");
 			User.Create("vilmis");
@@ -54,8 +56,7 @@
 
 		public static Action Reset = () => _users.Clear();
 			
-		public static Action<string> Create = name =>
-			_users.Add(name);
+		public static Action<string> Create = name => _users.Add(name);
 
 		public static Func<int> Count = () => _users.Count;
 
