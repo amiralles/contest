@@ -21,8 +21,11 @@ namespace Contest.Core {
             Flags = new[] { INST_PUB, INST_PRI, STA_PUB, STA_PRI };
         }
 
-        static readonly Func<Delegate,Delegate, bool> SameMetaToken = (left, right) =>
-             left.Method.MetadataToken == right.Method.MetadataToken;
+        static readonly Func<Delegate,Delegate, bool> SameMetaToken = 
+            (left, right) => 
+                left != null 
+                && right != null 
+                && left.Method.MetadataToken == right.Method.MetadataToken;
 
         public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
             (finder, assm, ignorePatterns) => {
@@ -141,7 +144,9 @@ namespace Contest.Core {
                         .Union(finder.GetIgnoredPatternsFromFile() ?? new string[0]) //<= from file.
                         .ToArray();
 
+#if DEBUG
                 PrintIgnoredPatterns(patterns);
+#endif
 
                 foreach (var pattern in patterns) {
                     if (pattern == "*")
