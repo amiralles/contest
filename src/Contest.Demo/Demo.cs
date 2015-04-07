@@ -1,11 +1,9 @@
 ﻿namespace Demo { //It doesn't match naming conventions but it reads better in the console ;)
+	// ReSharper disable UnusedMember.Local
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using _  = System.Action<Contest.Core.Runner>;
-	// ReSharper disable UnusedMember.Local
 
     class Contest_101 {
 
