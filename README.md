@@ -7,6 +7,7 @@ Down below you’ll find couple of samples on how to write tests using contest.
 
 To run the demo test suite included in this project, just clone the repo, build Contest.sln and run:  contest r contest.demo.dll
 
+_Please keep in mind this is a protoype and it's not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
 	using _  = System.Action<Contest.Core.Runner>;
 
