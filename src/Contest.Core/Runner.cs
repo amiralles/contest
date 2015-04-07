@@ -109,7 +109,7 @@
             try {
                 AssertsCount++;
                 body();
-                Fail(ExpectedExcetion(typeof(T)));
+                Fail(ExpectedException(typeof(T)));
             }
             catch (Exception ex) {
                 Type expected = typeof(T), actual = ex.GetType();
@@ -137,7 +137,7 @@
 			(exptected, got) =>
                 "Wrong Kind of Exception. Exptected '{0}' got '{1}'.".Interpol(exptected, got);
 
-        static readonly Func<Type, string> ExpectedExcetion = extype =>
+        static readonly Func<Type, string> ExpectedException = extype =>
                 "Exception of type '{0}' was expected.".Interpol(extype);
 
     }
