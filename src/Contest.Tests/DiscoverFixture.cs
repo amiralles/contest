@@ -1,8 +1,8 @@
 
-namespace Contest.Test {
+namespace Contest.Tests {
     using System.Linq;
-    using NUnit.Framework;
     using Core;
+    using NUnit.Framework;
 
     [TestFixture]
     public class DiscoverFixture {
@@ -11,7 +11,7 @@ namespace Contest.Test {
         [Test]
         public void test_cases_in_assm() {
             var cases = Contest.FindCasesInAssm(_finder,typeof(TestClass).Assembly, null).Cases;
-            Assert.AreEqual(9, cases.Count);
+            Assert.AreEqual(10, cases.Count);
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Contest.Test {
 								 where c.BeforeCase != null
 								 select c).Count();
 
-            Assert.AreEqual(2, casesWithSetup);
+            Assert.AreEqual(3, casesWithSetup);
         }
 
 		//TODO: fix this.
@@ -45,7 +45,7 @@ namespace Contest.Test {
 								 where c.AfterCase != null
 								 select c).Count();
 
-            Assert.AreEqual(2, casesWithTeardown);
+            Assert.AreEqual(3, casesWithTeardown);
         }
 
     }

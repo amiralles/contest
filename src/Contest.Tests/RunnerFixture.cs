@@ -1,4 +1,4 @@
-namespace Contest.Test {
+namespace Contest.Tests {
     using Core;
     using NUnit.Framework;
 
@@ -8,7 +8,7 @@ namespace Contest.Test {
         [Test]
         public void AssertMethod_ResultIsTrue() {
             var runner = new Runner();
-            runner.Assert(1==1);
+			runner.Assert(1==1);
 
             Assert.AreEqual(1, runner.AssertsCount);
             Assert.AreEqual(1, runner.PassCount);

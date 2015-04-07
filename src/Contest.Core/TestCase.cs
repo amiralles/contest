@@ -23,14 +23,25 @@ namespace Contest.Core {
                 throw TestBodyCantBeNull();
 
             try {
-                if (BeforeCase != null)
+                if (BeforeCase != null) {
+#if DEBUG
+					Console.WriteLine("Running setup for '{0}'", Name);
+#endif
                     BeforeCase(runner);
+                }
 
+#if DEBUG
+					Console.WriteLine("Running '{0}'", Name);
+#endif
                 Body(runner);
             }
             finally {
-                if (AfterCase != null)
-                AfterCase(runner);
+                if (AfterCase != null) {
+#if DEBUG
+					Console.WriteLine("Running teardown for '{0}'", Name);
+#endif
+                    AfterCase(runner);
+                }
             }
         }
 

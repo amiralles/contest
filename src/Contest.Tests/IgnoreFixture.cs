@@ -1,8 +1,9 @@
 
-namespace Contest.Test {
+namespace Contest.Tests {
     using System.Linq;
-    using NUnit.Framework;
     using Core;
+    using NUnit.Framework;
+
     // using Unbinder;
 
     public class IgnoreFixture {
@@ -99,7 +100,7 @@ namespace Contest.Test {
 
                 var cases = Contest.FindCases(
                     new TestCaseFinder(getIgnoredFromFile: () => new[] {
-					    "Contest.Test.TestClass.ThisIsAT*"
+					    "Contest.Tests.TestClass.ThisIsAT*"
 					}),
                     typeof(TestClass),
                     null);
@@ -181,7 +182,7 @@ namespace Contest.Test {
                 var cases = Contest.FindCases(
                     new TestCaseFinder(),
                     typeof(TestClass),
-                    "Contest.Test.TestClass.ThisIsAT*");
+                    "Contest.Tests.TestClass.ThisIsAT*");
 
                 var runner = new Runner();
                 runner.Run(cases);

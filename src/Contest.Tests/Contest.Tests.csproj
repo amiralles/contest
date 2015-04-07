@@ -7,8 +7,8 @@
     <ProjectGuid>{CBA875C6-90F6-407E-A91E-2C67A805EF41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contest.Test</RootNamespace>
-    <AssemblyName>Contest.Test</AssemblyName>
+    <RootNamespace>Contest.Tests</RootNamespace>
+    <AssemblyName>Contest.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -58,6 +58,7 @@
     <Compile Include="TestClass.cs" />
     <Compile Include="TestClassOnePassOnFail.cs" />
     <Compile Include="TestClassThrowingTests.cs" />
+    <Compile Include="UsingRunnersBag.cs" />
     <Compile Include="Wrapper.cs" />
   </ItemGroup>
   <ItemGroup>

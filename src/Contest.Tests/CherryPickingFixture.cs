@@ -1,4 +1,4 @@
-namespace Contest.Test {
+namespace Contest.Tests {
     using Core;
     using NUnit.Framework;
 
@@ -31,7 +31,7 @@ namespace Contest.Test {
         public void run_only_cases_starting_with() {
             var cases = Contest.FindCases(_finder, typeof(TestClass), null);
             var runner = new Runner();
-            runner.Run(cases, cpp: "Contest.Test.TestClass.ThisIsAn*");
+            runner.Run(cases, cpp: "Contest.Tests.TestClass.ThisIsAn*");
 
             Assert.AreEqual(2, runner.TestCount, "Fail TestCount");
             Assert.AreEqual(1, runner.IgnoreCount, "Fail IgnoreCount");

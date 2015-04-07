@@ -14,22 +14,20 @@
 		_ this_is_a_failing_test = assert =>
 			assert.Equal(5, 2 + 2);
 
-        _ this_is_a_throw_expected_passing_test = test =>
+        _ this_is_a__should_throw__passing_test = test =>
             test.ShouldThrow<NullReferenceException>(() => {
                 object target = null;
                 var dummy = target.ToString();
             });
 
-		_ this_is_a_throw_expected_failing_test = test =>
+		_ this_is_a__should_throw__failing_test = test =>
 			test.ShouldThrow<NullReferenceException>(() => {
-				//it doesn't throws; So it fails.
+				//It doesn't throws; So it fails.
 			});
     }
 
     class Contest201 {
 
-		//Seguir desde aca:
-		//before_each/after_each no esta implementado.
 		_ before_each = test => {
 			User.Create("pipe");
 			User.Create("vilmis");
@@ -50,6 +48,20 @@
 			assert.Equal(4, User.Count());
 		};
     }
+
+	class Contest301 {
+		_ before_foo = test => {
+			//Specific setup for foo case.
+		};
+
+		_ after_foo = test => {
+			//Specific teardown for foo case.
+		};
+
+		_ foo = assert => {
+			assert.Equal("foo", "foo");
+		};
+	}
 
 	public class User {	
 		static readonly List<string> _users = new List<string>();

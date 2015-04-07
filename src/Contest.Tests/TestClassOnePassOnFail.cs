@@ -1,6 +1,7 @@
-﻿namespace Contest.Test {
+﻿namespace Contest.Tests {
     using System;
     using Core;
+
     // ReSharper disable UnusedMember.Local
     // ReSharper disable EqualExpressionComparison
 

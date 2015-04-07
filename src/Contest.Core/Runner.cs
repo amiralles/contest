@@ -5,6 +5,7 @@
 
     public class Runner {
         static readonly Func<bool, bool> Not = cnd => !cnd;
+        public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;

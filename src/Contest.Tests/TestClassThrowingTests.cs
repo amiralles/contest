@@ -1,4 +1,4 @@
-﻿namespace Contest.Test {
+﻿namespace Contest.Tests {
     using System;
     using System.IO;
     using Core;

@@ -1,11 +1,10 @@
-﻿namespace Contest.Test {
+﻿namespace Contest.Tests {
     using System;
     using Core;
-	using _ = System.Action<Contest.Core.Runner>;
 
     class FooTest{
-        _ before_foo = runner => {};
-        _ after_foo  = runner => {};
-        _ foo = assert => assert.Equal(1, 2);
+        Action<Runner> before_foo = runner => {};
+        Action<Runner> after_foo  = runner => {};
+        Action<Runner> foo = assert => assert.Equal(1, 2);
     }
 }
