@@ -42,10 +42,11 @@ namespace Contest.Core {
                     from c in FindCases(finder, type, ignorePatterns).Cases
                     select c;
 
-                foreach (var c in cases.Where(c => 
-                    !suite.Cases.Any(c1 => InlineCase(c) || SameMetaToken(c1.Body, c.Body)))) {
-                    suite.Cases.Add(c);
-                }
+				suite.Cases.AddRange(
+					from c in cases
+					where !suite.Cases.Any(
+						c1 => InlineCase(c) || SameMetaToken(c1.Body, c.Body))
+					select c);
 
                 return suite;
             };
