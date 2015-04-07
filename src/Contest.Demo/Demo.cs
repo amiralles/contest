@@ -1,4 +1,4 @@
-﻿namespace Contest.Demo {
+﻿namespace Demo { //It doesn't match naming conventions but looks clear in the console ;)
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
