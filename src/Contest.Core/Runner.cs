@@ -32,12 +32,15 @@
                 }
 
                 try {
-                    Console.WriteLine("\n" + c.Name);
+                    Console.WriteLine(c.Name);
                     c.Run(this);//<= ensure setups/teardowns.
                 }
                 catch (Exception ex) {
                     Fail(ex.Message);
                 }
+				finally{
+					Console.WriteLine();
+				}
             });
 
             watch.Stop();

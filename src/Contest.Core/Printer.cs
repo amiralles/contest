@@ -8,6 +8,8 @@ namespace Contest.Core {
 		public readonly static Action<int, long, int, int, int, int> PrintResults = 
 			(casesCount, elapsedms, assertsCount, passCount, failCount, ignoreCount) => {
 				Print("".PadRight(40, '='), ConsoleColor.White);
+				Print("STATS", ConsoleColor.White);
+				Print("".PadRight(40, '='), ConsoleColor.White);
 				Print("Test    : {0}".Interpol(casesCount), ConsoleColor.White);
 				Print("Asserts : {0}".Interpol(assertsCount), ConsoleColor.White);
 				Print("Elapsed : {0} ms".Interpol(elapsedms), ConsoleColor.White);
