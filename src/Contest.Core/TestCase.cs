@@ -10,7 +10,7 @@ namespace Contest.Core {
         public Action<Runner> AfterCase;
 
         public string GetFullName() {
-            return string.Format("{0}.{1}", FixName, Name);
+            return "{0}.{1}".Interpol(FixName, Name);
         }
 
 
@@ -20,7 +20,7 @@ namespace Contest.Core {
 
         public void Run(Runner runner) {
             if (Body == null)
-                throw TestBodyCantBeNull();
+                throw TestBodyCantBeNull(Name);
 
             try {
                 if (BeforeCase != null) {
@@ -45,9 +45,7 @@ namespace Contest.Core {
             }
         }
 
-        Exception TestBodyCantBeNull() {
-            return new Exception(string.Format(
-                "Test case's body can't be null. (case name: {0})", Name));
-        }
+        Func<string, Exception> TestBodyCantBeNull = name =>
+            new Exception("Test case's body can't be null. (case name: {0})".Interpol(name));
     }
 }

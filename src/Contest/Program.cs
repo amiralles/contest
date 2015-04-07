@@ -40,7 +40,7 @@
                 throw new ArgumentException("Assembly name is required.");
 
             if (!assmFileName.EndsWith(".dll"))
-                assmFileName = string.Format("{0}.dll", assmFileName);
+                assmFileName = "{0}.dll".Interpol(assmFileName);
 
             var fullpath = Path.GetFullPath(assmFileName);
             if (!File.Exists(fullpath)) {
@@ -48,13 +48,13 @@
 				var pwd = Directory.GetCurrentDirectory();
 
 				throw new IOException(
-						string.Format("Pwd: {0}\n", pwd) + 
-						string.Format("File not found. ('{0}')", assmFileName));
+						"Pwd: {0}\n".Interpol(pwd) + 
+						"File not found. ('{0}')".Interpol(assmFileName));
 			}
 
             var assm = Assembly.LoadFile(fullpath);
             if (assm == null)
-                throw new Exception(string.Format("Can't load assembly '{0}'.", assmFileName));
+                throw new Exception("Can't load assembly '{0}'.".Interpol(assmFileName));
 
             var finder = new TestCaseFinder();
             var suite = Contest.FindCasesInAssm(finder, assm, null);

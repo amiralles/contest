@@ -80,7 +80,7 @@ namespace Contest.Core {
                         if (result.Cases.Any(tc => SameMetaToken(tc.Body, del)))
                             continue;
 
-                        var tcfullname = string.Format("{0}.{1}", type.FullName, fi.Name);
+                        var tcfullname = "{0}.{1}".Interpol(type.FullName, fi.Name);
                         result.Cases.Add(
                             new TestCase {
                                 FixName = type.FullName,
