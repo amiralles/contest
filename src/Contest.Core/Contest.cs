@@ -30,7 +30,9 @@ namespace Contest.Core {
                 && right != null
                 && left.Method.MetadataToken == right.Method.MetadataToken;
 
-        public static Func<TestCaseFinder, Assembly, string, TestSuite> FindCasesInAssm = 
+		//Find all cases within the given assembly but it doesn't differentiate cases
+		//from setups nor teardowns;
+        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =
             (finder, assm, ignorePatterns) => {
                 var suite = new TestSuite();
                 var cases =
@@ -44,17 +46,22 @@ namespace Contest.Core {
                     }
                     suite.Cases.Add(c);
                 });
+                return suite;
+            };
 
-                var setups = FindSetups(suite);
-                WireSetups(suite, setups);
+        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm = 
+            (finder, assm, ignorePatterns) => {
+                var rawsuite = FindRawCasesInAssm(finder, assm, ignorePatterns);
+                var setups = FindSetups(rawsuite);
+                WireSetups(rawsuite, setups);
 
-                var teardowns = FindTeardowns(suite);
-                WireTeardowns(suite, teardowns);
+                var teardowns = FindTeardowns(rawsuite);
+                WireTeardowns(rawsuite, teardowns);
 
-                var actualcases = ActualCases(suite, setups, teardowns);
+                var actualcases = ActualCases(rawsuite, setups, teardowns);
 
-                WireGlobalSetups(suite, setups);
-                WireGlobalTeardowns(suite, teardowns);
+                WireGlobalSetups(rawsuite, setups);
+                WireGlobalTeardowns(rawsuite, teardowns);
                 return actualcases;
             };
 

@@ -10,7 +10,7 @@ namespace Contest.Tests {
 
         [Test]
         public void test_cases_in_assm() {
-            var cases = Contest.FindCasesInAssm(_finder,typeof(TestClass).Assembly, null).Cases;
+            var cases = Contest.GetCasesInAssm(_finder,typeof(TestClass).Assembly, null).Cases;
             Assert.AreEqual(10, cases.Count);
         }
 
@@ -29,7 +29,7 @@ namespace Contest.Tests {
 		//before test cases
         [Test]
         public void before_test_cases_in_assm() {
-            var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
+            var suite = Contest.GetCasesInAssm(_finder, typeof(FooTest).Assembly, null);
 			var casesWithSetup = (from c in suite.Cases
 								 where c.BeforeCase != null
 								 select c).Count();
@@ -40,7 +40,7 @@ namespace Contest.Tests {
 		//TODO: fix this.
         [Test]
         public void after_test_cases_in_class() {
-            var suite = Contest.FindCasesInAssm(_finder, typeof(FooTest).Assembly, null);
+            var suite = Contest.GetCasesInAssm(_finder, typeof(FooTest).Assembly, null);
 			var casesWithTeardown = (from c in suite.Cases
 								 where c.AfterCase != null
 								 select c).Count();

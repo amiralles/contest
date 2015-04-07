@@ -24,7 +24,7 @@ namespace Contest.Tests {
         public void ConfigureTestVariablesDuringSetup(){
             var runner = new Runner();
             var finder = new TestCaseFinder();
-            var suite = Contest.FindCasesInAssm(finder, typeof(EchoTest).Assembly, null);
+            var suite = Contest.GetCasesInAssm(finder, typeof(EchoTest).Assembly, null);
 
 			//In this particular case I only care about the echo test.
             var cases = (from c in suite.Cases

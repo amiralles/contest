@@ -57,7 +57,7 @@
                 throw new Exception("Can't load assembly '{0}'.".Interpol(assmFileName));
 
             var finder = new TestCaseFinder();
-            var suite = Contest.FindCasesInAssm(finder, assm, null);
+            var suite = Contest.GetCasesInAssm(finder, assm, null);
             var runner = new Runner();
             runner.Run(suite);
         }
