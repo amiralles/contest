@@ -7,7 +7,7 @@
 	using _  = System.Action<Contest.Core.Runner>;
 	// ReSharper disable UnusedMember.Local
 
-    class Contest101 {
+    class Contest_101 {
 
 		_ this_is_a_passing_test = assert => 
 			assert.Equal(4, 2 + 2);
@@ -27,7 +27,7 @@
 			});
     }
 
-    class Contest201 {
+    class Contest_201 {
 
 		_ before_each = test => {
 			User.Create("pipe");
@@ -50,7 +50,7 @@
 		};
     }
 
-	class Contest301 {
+	class Contest_301 {
 		// setup
 		_ before_echo = test => 
 			test.Bag["msg"] = "Hello World!";
