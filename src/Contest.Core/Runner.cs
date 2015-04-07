@@ -20,11 +20,10 @@
 
             var watch = Stopwatch.StartNew();
             var cherryPick = !string.IsNullOrEmpty(cpp);
-            // string currfix = null;\
+            string currfix = null;
             cases.Each(c => {
-                // TODO: fix this.
-                // if(c.FixName != currfix) 
-                // PrintFixName((currfix = c.FixName));
+                if(c.FixName != currfix) 
+					PrintFixName((currfix = c.FixName));
 
                 if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
                     IgnoreCount++;
@@ -132,9 +131,9 @@
         }
 
         readonly static Action<string> PrintFixName = name => {
-            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
+            Print("".PadRight(40, '='), ConsoleColor.Cyan);
             Print(name, ConsoleColor.Cyan);
-            Print("".PadRight(40, '>'), ConsoleColor.Cyan);
+            Print("".PadRight(40, '='), ConsoleColor.Cyan);
         };
 
         readonly static Action<string, ConsoleColor> Print = (msg, color) => {
