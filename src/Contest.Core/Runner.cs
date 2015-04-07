@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
 
+	
     public class Runner {
         static readonly Func<bool, bool> Not = cnd => !cnd;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
@@ -16,14 +17,14 @@
 
         public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
 
-            Print("".PadRight(40, '='), ConsoleColor.White);
+            Printer.Print("".PadRight(40, '='), ConsoleColor.White);
 
             var watch = Stopwatch.StartNew();
             var cherryPick = !string.IsNullOrEmpty(cpp);
             string currfix = null;
             cases.Each(c => {
                 if(c.FixName != currfix) 
-					PrintFixName((currfix = c.FixName));
+					Printer.PrintFixName((currfix = c.FixName));
 
                 if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
                     IgnoreCount++;
@@ -42,7 +43,9 @@
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
             TestCount = cases.Count;
-            PrintResults(cases.Count, Elapsed);
+            Printer.PrintResults(
+					cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount);
+
             Environment.ExitCode = FailCount;
         }
 
@@ -119,42 +122,15 @@
             }
         }
 
-        void PrintResults(int casesCount, long elapsedMilliseconds) {
-            Print("".PadRight(40, '='), ConsoleColor.White);
-            Print("Test    : {0}".Interpol(casesCount), ConsoleColor.White);
-            Print("Asserts : {0}".Interpol(AssertsCount), ConsoleColor.White);
-            Print("Elapsed : {0} ms".Interpol(elapsedMilliseconds), ConsoleColor.White);
-            Print("Passing : {0}".Interpol(PassCount), ConsoleColor.Green);
-            Print("Failing : {0}".Interpol(FailCount), ConsoleColor.Red);
-            Print("Ignored : {0}".Interpol(IgnoreCount), ConsoleColor.Yellow);
-            Print("".PadRight(40, '='), ConsoleColor.White);
-        }
-
-        readonly static Action<string> PrintFixName = name => {
-            Print("".PadRight(40, '='), ConsoleColor.Cyan);
-            Print(name, ConsoleColor.Cyan);
-            Print("".PadRight(40, '='), ConsoleColor.Cyan);
-        };
-
-        readonly static Action<string, ConsoleColor> Print = (msg, color) => {
-            var fcolor = Console.ForegroundColor;
-            try {
-                Console.ForegroundColor = color;
-                Console.WriteLine(msg);
-            }
-            finally {
-                Console.ForegroundColor = fcolor;
-            }
-        };
 
         void Fail(string errMsg) {
-            Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
+            Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
             FailCount++;
         }
 
         void Pass() {
             PassCount++;
-            Print("Pass!", ConsoleColor.Green);
+            Printer.Print("Pass!", ConsoleColor.Green);
         }
 
         static readonly Func<Type, Type, string> WrongKindaException = 
