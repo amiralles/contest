@@ -10,7 +10,7 @@ namespace Contest.Tests {
 
         [Test]
         public void test_cases_in_assm() {
-            var cases = Contest.GetCasesInAssm(_finder,typeof(TestClass).Assembly, null).Cases;
+            var cases = Contest.GetCasesInAssm(_finder, typeof(TestClass).Assembly, null).Cases;
             Assert.AreEqual(10, cases.Count);
         }
 

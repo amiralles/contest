@@ -24,14 +24,16 @@ namespace Contest.Core {
             Flags = new[] { INS_PUB, INS_PRI, STA_PUB, STA_PRI };
         }
 
+        static readonly Func<TestCase, bool> InlineCase = tcase =>  tcase.Body == null;
+
         static readonly Func<Delegate,Delegate, bool> SameMetaToken = 
             (left, right) =>
                 left != null
                 && right != null
                 && left.Method.MetadataToken == right.Method.MetadataToken;
 
-		//Find all cases within the given assembly but it doesn't differentiate cases
-		//from setups nor teardowns;
+		//This method finds all cases within the given assembly 
+		//but it doesn't differentiate test cases from setups nor teardowns;
         static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =
             (finder, assm, ignorePatterns) => {
                 var suite = new TestSuite();
@@ -40,12 +42,11 @@ namespace Contest.Core {
                     from c in FindCases(finder, type, ignorePatterns).Cases
                     select c;
 
-                cases.Each(c => {
-                    if (suite.Cases.Any(d => c.Body == null || SameMetaToken(d.Body, c.Body))) {
-                        return;
-                    }
+                foreach (var c in cases.Where(c => 
+                    !suite.Cases.Any(c1 => InlineCase(c) || SameMetaToken(c1.Body, c.Body)))) {
                     suite.Cases.Add(c);
-                });
+                }
+
                 return suite;
             };
 
