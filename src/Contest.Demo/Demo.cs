@@ -5,6 +5,7 @@
 	using System.Text;
 	using System.Threading.Tasks;
 	using _  = System.Action<Contest.Core.Runner>;
+	// ReSharper disable UnusedMember.Local
 
     class Contest101 {
 
@@ -50,17 +51,21 @@
     }
 
 	class Contest301 {
-		_ before_foo = test => {
-			//Specific setup for foo case.
-		};
+		// setup
+		_ before_echo = test => 
+			test.Bag["msg"] = "Hello World!";
 
-		_ after_foo = test => {
-			//Specific teardown for foo case.
-		};
+		//cleanup
+		_ after_echo = test => 
+			test.Bag["msg"] = null;
 
-		_ foo = assert => {
-			assert.Equal("foo", "foo");
-		};
+		//actual test
+		_ echo = test => 
+			test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
+	}
+
+	class Utils {
+		public static Func<object, object> Echo = msg => msg;
 	}
 
 	public class User {	
