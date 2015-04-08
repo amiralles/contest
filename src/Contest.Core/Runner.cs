@@ -5,7 +5,11 @@
 
 	
     public class Runner {
+        
         static readonly Func<bool, bool> Not = cnd => !cnd;
+
+        public Runner() {
+        }
 
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
@@ -127,8 +131,8 @@
 
 
         void Fail(string errMsg) {
-            Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
             FailCount++;
+            Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
         }
 
         void Pass() {

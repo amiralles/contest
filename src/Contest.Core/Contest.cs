@@ -7,16 +7,16 @@ namespace Contest.Core {
 
     public class Contest {
         const BF
-            INS_PUB = BF.Instance | BF.Public , 
-            INS_PRI = BF.Instance | BF.NonPublic , 
-            STA_PUB = BF.Static   | BF.Public , 
-            STA_PRI = BF.Static   | BF.NonPublic;
+            INS_PUB = BF.Instance | BF.Public,
+            INS_PRI = BF.Instance | BF.NonPublic,
+            STA_PUB = BF.Static | BF.Public,
+            STA_PRI = BF.Static | BF.NonPublic;
 
-        const string 
-			BEFORE = "BEFORE_",
-			AFTER  = "AFTER_",
-			BEFORE_EACH = "BEFORE_EACH",
-			AFTER_EACH  = "AFTER_EACH";
+        const string
+            BEFORE = "BEFORE_",
+            AFTER = "AFTER_",
+            BEFORE_EACH = "BEFORE_EACH",
+            AFTER_EACH = "AFTER_EACH";
 
         static readonly BF[] Flags;
 
@@ -24,16 +24,16 @@ namespace Contest.Core {
             Flags = new[] { INS_PUB, INS_PRI, STA_PUB, STA_PRI };
         }
 
-        static readonly Func<TestCase, bool> InlineCase = tcase =>  tcase.Body == null;
+        static readonly Func<TestCase, bool> InlineCase = tcase => tcase.Body == null;
 
-        static readonly Func<Delegate,Delegate, bool> SameMetaToken = 
+        static readonly Func<Delegate, Delegate, bool> SameMetaToken =
             (left, right) =>
                 left != null
                 && right != null
                 && left.Method.MetadataToken == right.Method.MetadataToken;
 
-		//This method finds all cases within the given assembly 
-		//but it doesn't differentiate test cases from setups nor teardowns;
+        //This method finds all cases within the given assembly 
+        //but it doesn't differentiate test cases from setups nor teardowns;
         static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =
             (finder, assm, ignorePatterns) => {
                 var suite = new TestSuite();
@@ -42,16 +42,16 @@ namespace Contest.Core {
                     from c in FindCases(finder, type, ignorePatterns).Cases
                     select c;
 
-				suite.Cases.AddRange(
-					from c in cases
-					where !suite.Cases.Any(
-						c1 => InlineCase(c) || SameMetaToken(c1.Body, c.Body))
-					select c);
+                suite.Cases.AddRange(
+                    from c in cases
+                    where !suite.Cases.Any(
+                        c1 => InlineCase(c) || SameMetaToken(c1.Body, c.Body))
+                    select c);
 
                 return suite;
             };
 
-        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm = 
+        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =
             (finder, assm, ignorePatterns) => {
                 var rawsuite = FindRawCasesInAssm(finder, assm, ignorePatterns);
                 var setups = FindSetups(rawsuite);
@@ -68,7 +68,7 @@ namespace Contest.Core {
             };
 
         internal static Func<TestCaseFinder, Type, BF, string, TestSuite>
-		   	FindCasesNestedTypes = (finder, type, flags, ignorePatterns) => {
+            FindCasesNestedTypes = (finder, type, flags, ignorePatterns) => {
                 var result = new TestSuite();
                 var nestedTypes = type.GetNestedTypes(flags);
                 foreach (var ntype in nestedTypes)
@@ -77,11 +77,23 @@ namespace Contest.Core {
                 return result;
             };
 
-        internal static Func<TestCaseFinder, Type, string, TestSuite> FindCases = 
+        internal static Func<TestCaseFinder, Type, string, TestSuite> FindCases =
             (finder, type, ignorePatterns) => {
 
                 var result = new TestSuite();
-                var inst = Activator.CreateInstance(type);
+                if (type.IsAbstract || type.ContainsGenericParameters || !type.HasDefaultCtor())
+                    return result;
+
+                object inst = null;
+                try {
+                    inst = Activator.CreateInstance(type, true);
+                }
+                catch (Exception ex) {
+                    //TODO: Log
+                    Console.WriteLine("WARN: Couldn't create instance of '{0}'.", type.Name);
+                    return result;
+                }
+
 
                 foreach (var flag in Flags) {
                     foreach (var fi in GetTestCases(type, flag)) {
@@ -100,7 +112,7 @@ namespace Contest.Core {
                     }
                 }
 
-                var findNestedPublic    = FindCasesNestedTypes(
+                var findNestedPublic = FindCasesNestedTypes(
                         finder, type, BF.Public, ignorePatterns);
 
                 var findNestedNonPublic = FindCasesNestedTypes(
@@ -146,8 +158,8 @@ namespace Contest.Core {
              select c).Each(c => c.BeforeCase = gsup.Body);
         };
 
-        static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns = 
-			(actual, teardowns) => {
+        static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns =
+            (actual, teardowns) => {
                 var gtd = GetGlobalTearDown(teardowns);
                 if (gtd == null)
                     return;
@@ -169,8 +181,8 @@ namespace Contest.Core {
 
 
 
-        static readonly Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite> 
-			ActualCases = (suite, setups, teardowns) => {
+        static readonly Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite>
+            ActualCases = (suite, setups, teardowns) => {
                 var actualcases = suite.Cases.Except(setups).Except(teardowns);
                 var result = new TestSuite();
                 result.Cases.AddRange(actualcases);
@@ -178,20 +190,20 @@ namespace Contest.Core {
             };
 
 
-        static readonly Func<TestSuite,List<TestCase>> FindSetups = suite =>
+        static readonly Func<TestSuite, List<TestCase>> FindSetups = suite =>
                 (from c in suite.Cases
                  where c.Name.ToUpper().StartsWith(BEFORE)
                  select c)
                 .ToList();
 
-        static readonly Func<TestSuite,List<TestCase>> FindTeardowns = suite =>
+        static readonly Func<TestSuite, List<TestCase>> FindTeardowns = suite =>
                 (from c in suite.Cases
                  where c.Name.ToUpper().StartsWith(AFTER)
                  select c)
                 .ToList();
 
 
-        static readonly Action<TestSuite, List<TestCase>> WireSetups = 
+        static readonly Action<TestSuite, List<TestCase>> WireSetups =
             (suite, setups) => setups.Each(bc => {
                 var tcase = suite.Cases.FirstOrDefault(
                     c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
@@ -201,7 +213,7 @@ namespace Contest.Core {
                     tcase.BeforeCase = bc.Body;
             });
 
-        static readonly Action<TestSuite, List<TestCase>> WireTeardowns = 
+        static readonly Action<TestSuite, List<TestCase>> WireTeardowns =
             (suite, teardowns) => teardowns.Each(ac => {
                 var tcase = suite.Cases.FirstOrDefault(
                     c => c.Name.ToUpper() == ac.Name.ToUpper().Replace(AFTER, ""));
@@ -211,7 +223,7 @@ namespace Contest.Core {
                     tcase.AfterCase = ac.Body;
             });
 
-        static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern = 
+        static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern =
             (finder, casefullname, ignorePatterns) => {
 
                 var cmdIgnorePatterns = //<= from cmd line.
@@ -247,6 +259,7 @@ namespace Contest.Core {
                 return false;
             };
 
+#if DEBUG
         static void PrintIgnoredPatterns(string[] patterns) {
             Console.WriteLine("".PadRight(30, '='));
             Console.WriteLine("Ignored Patterns:");
@@ -256,6 +269,6 @@ namespace Contest.Core {
 
             Console.WriteLine("".PadRight(30, '='));
         }
-
+#endif
     }
 }

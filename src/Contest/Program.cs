@@ -1,13 +1,36 @@
 ﻿namespace Contest {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using Core;
 
     class Program {
+        const string TMP = "tmp";
+
         static void Main(string[] args) {
+
+            var root = Path.GetDirectoryName(args[1]);
+
+            CopyToLocalTmp(root);
+
+            AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
+                try {
+                    var name = string.Format("{0}.dll", e.Name.Split(',')[0]);
+                    var localpath = Path.GetFullPath(Path.Combine(TMP, name));
+                    if (File.Exists(localpath)) {
+                        var assm = Assembly.LoadFile(localpath);
+                        Debug.Assert(assm != null);
+                        return assm;
+                    }
+                }
+                catch (Exception ex) {
+                    Console.WriteLine(ex);
+                }
+                return null;
+            };
 
             try {
                 Print(args);
@@ -33,9 +56,21 @@
             catch (Exception ex) {
                 Console.WriteLine(ex);
             }
+            finally {
+            }
+        }
+
+        static void CopyToLocalTmp(string root) {
+            if (!Directory.Exists(TMP))
+                Directory.CreateDirectory(TMP);
+
+            Directory.GetFiles(root, "*.dll").Each(
+                f => File.Copy(f, Path.Combine(TMP, Path.GetFileName(f)), true));
         }
 
         static void RunTests(string assmFileName) {
+            Console.WriteLine("\nConfiguring Assembies....");
+
             if (string.IsNullOrEmpty(assmFileName))
                 throw new ArgumentException("Assembly name is required.");
 
@@ -43,14 +78,13 @@
                 assmFileName = "{0}.dll".Interpol(assmFileName);
 
             var fullpath = Path.GetFullPath(assmFileName);
+
             if (!File.Exists(fullpath)) {
-
-				var pwd = Directory.GetCurrentDirectory();
-
-				throw new IOException(
-						"Pwd: {0}\n".Interpol(pwd) + 
-						"File not found. ('{0}')".Interpol(assmFileName));
-			}
+                var pwd = Directory.GetCurrentDirectory();
+                    throw new IOException(
+                        "Pwd: {0}\n".Interpol(pwd) +
+                        "File not found. ('{0}')".Interpol(assmFileName));
+            }
 
             var assm = Assembly.LoadFile(fullpath);
             if (assm == null)
@@ -59,6 +93,8 @@
             var finder = new TestCaseFinder();
             var suite = Contest.GetCasesInAssm(finder, assm, null);
             var runner = new Runner();
+
+            Console.WriteLine("\nDone!\n");
             runner.Run(suite);
         }
 
@@ -71,7 +107,6 @@
 
         static void Print(IEnumerable<string> lines) {
             lines.Each(Console.WriteLine);
-
         }
 
         static void Print(string msg, params object[] args) {

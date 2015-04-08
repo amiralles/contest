@@ -35,6 +35,9 @@ namespace Contest.Core {
 #endif
                 Body(runner);
             }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
             finally {
                 if (AfterCase != null) {
 #if DEBUG
