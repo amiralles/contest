@@ -1,11 +1,11 @@
 # contest
-Contest is blend of a console test runner and a minimalistic testing framework. In contrast with most popular testing frameworks it’s based on conventions and it doesn’t require a whole lotta of attributes to identify tests, fixtures, setups and so on and so fort, hence the syntax’s noise is pretty low.
+Contest is blend of a console test runner and a minimalist testing framework. In contrast with most popular testing frameworks, Contest it's based on conventions, so it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on and so forth. In the end, this means there are no syntax’s noise in your test code; hence it's more readable and easy to mantein.
 
 Contest it’s designed to be both lightweight and easy to use. Assuming you are comfortable writing functional C#, you will get a huge productivity boost from this library. The syntax is neat and right to the point. And a bonus feature, the test runner is freaking fast ;)
 
 Down below you’ll find couple of samples on how to write tests using contest.
 
-To run the demo test suite included in this project, just clone the repo, build Contest.sln and run:  contest r contest.demo.dll
+To run the demo test suite included in this project, just clone the repo, build Contest.sln and run:  contest r contest.demo.dll from your command prompt.
 
 _Please keep in mind this is a protoype and it's not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
