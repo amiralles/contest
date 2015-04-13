@@ -98,6 +98,12 @@ As I mentioned earlier, contest it's based on conventions so you don't have to d
 Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, per case and per fixture setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
 And remember, in all cases, **fields type must be System.Action<Contest.Core.Runner>**. Otherwise, it ain't gonna work.
 
+### Cherry picking
+#### How to use wildcards from the console to run or exclude some tests.
+**TODO:
+#### How to ignore tests using .test_ignore file.
+**TODO:
+
 ### Closing tip:
 A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above, it makes test cases more readable (and nobody cares about test cases return types anyways).
 
