@@ -1,4 +1,4 @@
-# contest
+## contest
 Contest is blend of a console test runner and a minimalist testing framework. In contrast with most popular testing frameworks, Contest it's based on conventions, so it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on and so forth. In the end, this means there are no syntax’s noise in your test code; hence it's more readable and easy to mantein.
 
 Contest it’s designed to be both lightweight and easy to use. Assuming you are comfortable writing functional C#, you will get a huge productivity boost from this library. The syntax is neat and right to the point. And a bonus feature, the test runner is freaking fast ;)
@@ -90,7 +90,7 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 ```
 
 		
-### A word about conventions
+#### A word about conventions
 As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that just to make your tests work. Contest follows a basic set of rules that _I hope_ are easy to remember.  
 **Every field of type System.Action<Contest.Core.Runner> within a given assembly is considered to be a test case**. As you can see in the samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience; I like to save as much keystrokes as I can, but if you like to mark you classes or test cases as public, it's not a problem, that will work too.
 
@@ -98,13 +98,13 @@ As I mentioned earlier, contest it's based on conventions so you don't have to d
 Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, per case and per fixture setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
 And remember, in all cases, **fields type must be System.Action<Contest.Core.Runner>**. Otherwise, it ain't gonna work.
 
-### Cherry picking
-#### How to use wildcards from the console to run or exclude some tests.
+#### Cherry picking
+##### How to use wildcards from the console to run or exclude some tests.
 **TODO:
-#### How to ignore tests using .test_ignore file.
+##### How to ignore tests using .test_ignore file.
 **TODO:
 
-### Closing tip:
+#### Closing tip:
 A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above, it makes test cases more readable (and nobody cares about test cases return types anyways).
 
 **Thanks for reading! And lemme know if you have any trouble using this library**
