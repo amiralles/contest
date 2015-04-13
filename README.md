@@ -91,14 +91,14 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 
 		
 ### A word about conventions
-As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that to make your tests work. Contest follows a basic set of rules that I hope are easy to remember.  
+As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that just to make your tests work. Contest follows a basic set of rules that _I hope_ are easy to remember.  
 **Every field of type System.Action<Contest.Core.Runner> within a given assembly is considered to be a test case**. As you can see in the samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience; I like to save as much keystrokes as I can, but if you like to mark you classes or test cases as public, it's not a problem, that will work too.
 
 #### How about setups and teardowns?
-Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon here). Contest is not an exception, it have both, per case and per fixture setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
+Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, per case and per fixture setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
 And remember, in all cases, **fields type must be System.Action<Contest.Core.Runner>**. Otherwise, it ain't gonna work.
 
 ### Closing tip:
-A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action<Contest.Core.Runner>** to **_** (or whatever you like). That's what I did in the samples above, it makes test cases more readable and nobody cares about test cases return types anyways.
+A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above, it makes test cases more readable (and nobody cares about test cases return types anyways).
 
 **Thanks for reading! And lemme know if you have any trouble using this library**
