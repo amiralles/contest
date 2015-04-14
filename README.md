@@ -30,16 +30,18 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
     }
 
     class Contest_201 {
-
+		//fixture setup.
 		_ before_each = test => {
 			User.Create("pipe");
 			User.Create("vilmis");
 			User.Create("amiralles");
 		};
 
+		//fixture teardown.
 		_ after_each = test =>
 			User.Reset();
-
+		
+		//actual test cases.
 		_ find_existing_user_returns_user = assert => 
 			assert.IsNotNull(User.Find("pipe"));
 
@@ -53,15 +55,15 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
     }
 
 	class Contest_301 {
-		// setup
+		// echo case setup.
 		_ before_echo = test => 
 			test.Bag["msg"] = "Hello World!";
 
-		//cleanup
+		// echo case teardown.
 		_ after_echo = test => 
 			test.Bag["msg"] = null;
 
-		//actual test
+		//actual echo test
 		_ echo = test => 
 			test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
 	}
@@ -91,8 +93,8 @@ As I mentioned earlier, contest it's based on conventions so you don't have to d
 **Every field of type System.Action<Contest.Core.Runner> within a given assembly is considered to be a test case**. As you can see in the samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience; I like to save as much keystrokes as I can, but if you like to mark you classes or test cases as public, it's not a problem, that will work too.
 
 #### How about setups and teardowns?
-Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, per case and per fixture setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
-And remember, in all cases, **fields type must be System.Action<Contest.Core.Runner>**. Otherwise, it ain't gonna work.
+Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, **per case** and **per fixture** setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
+And remember, in all cases, **fields type must be System.Action\<Contest.Core.Runner\>**. Otherwise, it ain't gonna work.
 
 #### Cherry picking
 ##### How to use wildcards from the console to run or exclude some tests.
