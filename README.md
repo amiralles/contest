@@ -1,14 +1,9 @@
 ## contest
-Contest is blend of a console test runner and a minimalist testing framework. In contrast with most popular testing frameworks, Contest it's based on conventions, so it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on and so forth. The bottom line is you won't have any syntax noise in your tests; hence the code will be more readable and, of course, easy to maintain.
+Contest is blend of a console test runner and a minimalist testing framework. In contrast with most popular testing frameworks, **contest** it's based on conventions and it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on. This means that you won't have any syntax noise in your test cases, hence the code will be more readable and, of course, easier to maintain.
 
-Contest it’s designed to be both lightweight and easy to use. Assuming you are comfortable writing functional C#, you will get a productivity boost from this library. The syntax is short, sweet and right to the point. And a bonus feature, the test runner is freaking fast ;)
+Contest it’s designed to be both lightweight and easy to use. Assuming you are comfortable writing functional C#, you will get a productivity boost from this library.**The syntax is short, sweet and right to the point** and as a bonus feature, the test runner is freaking fast! ;)
 
-Down below you’ll find couple of samples on how to write tests using contest.
-
-To try the whole thing by yourself:
-* Clone the repo.
-* Build Contest.sln.
-* Run =>  **contest r contest.demo.dll** from your command prompt.
+Down below you’ll find a couple of examples that will show you how to write tests using **contest**.
 
 _Please keep in mind this is a protoype and it's not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
@@ -91,7 +86,8 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 
 		
 #### A word about conventions
-As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that just to make your tests work. Contest follows a basic set of rules that _I hope_ are easy to remember.  
+As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules that _I hope_ are easy to remember.
+
 **Every field of type System.Action<Contest.Core.Runner> within a given assembly is considered to be a test case**. As you can see in the samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience; I like to save as much keystrokes as I can, but if you like to mark you classes or test cases as public, it's not a problem, that will work too.
 
 #### How about setups and teardowns?
@@ -104,7 +100,13 @@ And remember, in all cases, **fields type must be System.Action<Contest.Core.Run
 ##### How to ignore tests using .test_ignore file.
 **TODO:
 
+#### Wanna try the whole thing by yourself:
+* Clone the repo.
+* Build Contest.sln.
+* Run =>  **contest r contest.demo.dll** from your command prompt.
+
 #### Closing tip:
-A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above, it makes test cases more readable (and nobody cares about test cases return types anyways).
+A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above and it made test cases more readable (and nobody cares about test cases return types anyways).
+
 
 **Thanks for reading! And lemme know if you have any trouble using this library**
