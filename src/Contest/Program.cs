@@ -12,28 +12,8 @@
 
         static void Main(string[] args) {
 
-            var root = Path.GetDirectoryName(args[1]);
-
-            CopyToLocalTmp(root);
-
-            AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
-                try {
-                    var name = string.Format("{0}.dll", e.Name.Split(',')[0]);
-                    var localpath = Path.GetFullPath(Path.Combine(TMP, name));
-                    if (File.Exists(localpath)) {
-                        var assm = Assembly.LoadFile(localpath);
-                        Debug.Assert(assm != null);
-                        return assm;
-                    }
-                }
-                catch (Exception ex) {
-                    Console.WriteLine(ex);
-                }
-                return null;
-            };
-
             try {
-                Print(args);
+                // Print(args);
                 if (!args.Any()) {
                     PrintHelp();
                     return;
@@ -43,6 +23,28 @@
                 switch (cmd) {
                     case "run":
                     case "r":
+						if(args.Length <=1) {
+							Console.WriteLine("File name expected. (The name of the assembly that contains test cases)");
+							return;
+						}
+						var root = Path.GetDirectoryName(args[1]);
+						CopyToLocalTmp(root);
+						AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
+							try {
+								var name = string.Format("{0}.dll", e.Name.Split(',')[0]);
+								var localpath = Path.GetFullPath(Path.Combine(TMP, name));
+								if (File.Exists(localpath)) {
+									var assm = Assembly.LoadFile(localpath);
+									Debug.Assert(assm != null);
+									return assm;
+								}
+							}
+							catch (Exception ex) {
+								Console.WriteLine(ex);
+							}
+							return null;
+						};
+
                         RunTests(args.Length > 1 ? args[1] : null);
                         break;
                     case "help":
@@ -102,7 +104,7 @@
             Print("Commands");
             Print("exit | q => Quit.");
             Print("help | h => Show help.");
-            Print("(run | r) AssmFileName => Run Tests.");
+            Print("run  | r AssmFileName => Run all tests within the given file.");
         }
 
         static void Print(IEnumerable<string> lines) {
