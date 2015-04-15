@@ -102,11 +102,6 @@ And remember, in all cases, **fields type must be System.Action\<Contest.Core.Ru
 ##### How to ignore tests using .test_ignore file.
 **TODO:
 
-#### Wanna try the whole thing by yourself:
-* Clone the repo.
-* Build Contest.sln.
-* Run =>  **contest r contest.demo.dll** from your command prompt.
-
 #### Closing tip:
 A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above and it made test cases more readable (and nobody cares about test cases return types anyways).
 
