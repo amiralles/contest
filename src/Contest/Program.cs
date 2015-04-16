@@ -59,15 +59,35 @@
                 Console.WriteLine(ex);
             }
             finally {
+                //Console.ReadLine();
             }
         }
 
         static void CopyToLocalTmp(string root) {
-            if (!Directory.Exists(TMP))
+			root = string.IsNullOrEmpty(root)?".":root;
+#if DEBUG
+			Console.WriteLine("Copying to local tmp...", TMP);
+			Console.WriteLine("tmp:  '{0}'", TMP);
+			Console.WriteLine("root: '{0}'", root);
+#endif
+            if (!Directory.Exists(TMP)){
+#if DEBUG
+				Console.WriteLine("Creating tmp dir '{0}'", TMP);
+#endif
                 Directory.CreateDirectory(TMP);
+			}
 
             Directory.GetFiles(root, "*.dll").Each(
-                f => File.Copy(f, Path.Combine(TMP, Path.GetFileName(f)), true));
+                f => {
+				 var to = Path.Combine(TMP, Path.GetFileName(f));
+#if DEBUG
+					Console.WriteLine("copying '{0}' to {1}", f, to);
+#endif
+					File.Copy(f, to, true);
+				});
+#if DEBUG
+			Console.WriteLine("Done!");
+#endif
         }
 
         static void RunTests(string assmFileName) {
