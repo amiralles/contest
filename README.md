@@ -21,17 +21,17 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 		_ this_is_a_failing_test = assert =>
 			assert.Equal(5, 2 + 2);
 
-        _ this_test_should_throw_null_reference_exception = test =>
+        _ this_is_a_throw_expected_passing_test = test =>
             test.ShouldThrow<NullReferenceException>(() => {
                 object target = null;
                 var dummy = target.ToString();
                 //================^ null reference ex.
             });
 
-        _ this_test_should_throw_but_fails = test =>
-			test.ShouldThrow<NullReferenceException>(() => {
-				//It doesn't throws; So it fails.
-			});
+        _ this_is_a_throw_expected_failing_test = test =>
+		test.ShouldThrow<NullReferenceException>(() => {
+			//It doesn't throws; So it fails.
+		});
     }
 
     /// Per fixture setup/teardown.
