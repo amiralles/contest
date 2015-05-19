@@ -29,9 +29,9 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
             });
 
         _ this_is_a_throw_expected_failing_test = test =>
-		test.ShouldThrow<NullReferenceException>(() => {
-			//It doesn't throws; So it fails.
-		});
+		    test.ShouldThrow<NullReferenceException>(() => {
+			    //It doesn't throws; So it fails.
+		    });
     }
 
     /// Per fixture setup/teardown.
