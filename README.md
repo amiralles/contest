@@ -12,6 +12,7 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
     //=================================================================
 	using _  = System.Action<Contest.Core.Runner>;
 
+    /// Basic features.
     class Contest_101 {
 
 		_ this_is_a_passing_test = assert => 
@@ -20,18 +21,20 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 		_ this_is_a_failing_test = assert =>
 			assert.Equal(5, 2 + 2);
 
-        _ this_is_a__should_throw__passing_test = test =>
+        _ this_test_should_throw_null_reference_exception = test =>
             test.ShouldThrow<NullReferenceException>(() => {
                 object target = null;
                 var dummy = target.ToString();
+                //================^ null reference ex.
             });
 
-		_ this_is_a__should_throw__failing_test = test =>
+        _ this_test_should_throw_but_fails = test =>
 			test.ShouldThrow<NullReferenceException>(() => {
 				//It doesn't throws; So it fails.
 			});
     }
 
+    /// Per fixture setup/teardown.
     class Contest_201 {
 		//fixture setup.
 		_ before_each = test => {
@@ -45,28 +48,27 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 			User.Reset();
 		
 		//actual test cases.
-		_ find_existing_user_returns_user = assert => 
+		_ should_return_usr_when_finding_existing_usr = assert => 
 			assert.IsNotNull(User.Find("pipe"));
 
-		_ find_non_existing_user_returns_null = assert => 
+		_ should_return_null_when_finding_non_existing_usr = assert => 
 			assert.IsNull(User.Find("not exists"));
 
-		_ create_user_adds_new_user = assert => {
+		_ should_add_usr_when_creating_new_usr = assert => {
 			User.Create("foo");
 			assert.Equal(4, User.Count());
 		};
     }
 
+    /// Per test case setup/teardown.
 	class Contest_301 {
-		// echo case setup.
 		_ before_echo = test => 
 			test.Bag["msg"] = "Hello World!";
 
-		// echo case teardown.
 		_ after_echo = test => 
 			test.Bag["msg"] = null;
 
-		//actual echo test
+        //actual test.
 		_ echo = test => 
 			test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
 	}
@@ -75,6 +77,10 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
     // end of tests.
     //=================================================================
 
+
+    //=================================================================
+    // Dummy classes
+    //=================================================================
 	class Utils {
 		public static Func<object, object> Echo = msg => msg;
 	}
@@ -91,6 +97,7 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 		public static Func<string, object> Find = name =>
 			_users.FirstOrDefault(u => u == name);
 	}
+    //=================================================================
 ```
 
 		
