@@ -7,6 +7,9 @@ Down below you’ll find a couple of examples that will show you how to write te
 
 _Please keep in mind this is a protoype and it's not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
+    //=================================================================
+    // Test samples.
+    //=================================================================
 	using _  = System.Action<Contest.Core.Runner>;
 
     class Contest_101 {
@@ -68,6 +71,10 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 			test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
 	}
 
+    //=================================================================
+    // end of tests.
+    //=================================================================
+
 	class Utils {
 		public static Func<object, object> Echo = msg => msg;
 	}
@@ -99,7 +106,7 @@ And remember, in all cases, **fields type must be System.Action\<Contest.Core.Ru
 #### Cherry picking
 ##### How to use wildcards from the console to run or exclude some tests.
 **TODO:
-##### How to ignore tests using .test_ignore file.
+##### How to ignore tests using .test\_ignore file.
 **TODO:
 
 #### Closing tip:
