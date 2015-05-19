@@ -116,6 +116,14 @@ And remember, in all cases, **fields type must be System.Action\<Contest.Core.Ru
 ##### How to ignore tests using .test\_ignore file.
 **TODO:
 
+
+#### How to build *contest*
+Loyal to its philosophy, **contest** it's really easy to build. Just clone the repo, open your command promp (If you didn't already), then go to *~/build* and run: **make release**. (or _make debug_ if that is what you want). 
+Once the process finishes, go to *~/out* directory and you'll find a single file called _contest.exe_. And... that's it. You are done :).
+
+#### How to run *contest*
+The easiest way to use contest it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just run: **contest run test\_cases.dll**
+
 #### Closing tip:
 A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above and it made test cases more readable (and nobody cares about test cases return types anyways).
 
