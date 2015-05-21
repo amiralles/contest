@@ -23,9 +23,9 @@
 
             Printer.Print("".PadRight(40, '='), ConsoleColor.White);
 
-            var watch = Stopwatch.StartNew();
             var cherryPick = !string.IsNullOrEmpty(cpp);
             string currfix = null;
+            var watch = Stopwatch.StartNew();
             cases.Each(c => {
                 if(c.FixName != currfix) 
 					Printer.PrintFixName((currfix = c.FixName));

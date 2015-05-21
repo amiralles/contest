@@ -64,7 +64,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Printer.cs" />
-    <Compile Include="StringExt.cs" />
     <Compile Include="TestCaseFinder.cs" />
     <Compile Include="IgnoreFileReader.cs" />
     <Compile Include="TestCase.cs" />
