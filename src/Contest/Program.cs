@@ -13,6 +13,8 @@
         static void Main(string[] args) {
 
             try {
+                Trace.Listeners.Add(new ConsoleTraceListener());
+
                 // Print(args);
                 if (!args.Any()) {
                     PrintHelp();

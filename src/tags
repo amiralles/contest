@@ -43,7 +43,6 @@ Contest.Core	.\Contest.Core\EnumerableExtensions.cs	/^﻿namespace Contest.Core 
 Contest.Core	.\Contest.Core\IgnoreFileReader.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	.\Contest.Core\Printer.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	.\Contest.Core\Runner.cs	/^﻿namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\StringExt.cs	/^﻿namespace Contest.Core {$/;"	n
 Contest.Core	.\Contest.Core\StringExtensions.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	.\Contest.Core\TestCase.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	.\Contest.Core\TestCaseFinder.cs	/^﻿namespace Contest.Core {$/;"	n
@@ -98,6 +97,7 @@ GetGlobalSetup	.\Contest.Core\Contest.cs	/^        static readonly Func<List<Tes
 GetGlobalTearDown	.\Contest.Core\Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>$/;"	f	class:Contest.Core.Contest	file:
 GetIgnoredPatternsFromFile	.\Contest.Core\TestCaseFinder.cs	/^        public Func<string[]> GetIgnoredPatternsFromFile = () => {$/;"	f	class:Contest.Core.TestCaseFinder
 GetTestCases	.\Contest.Core\Contest.cs	/^        static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.Contest	file:
+HandlingExceptions	.\Contest.Demo\Demo.cs	/^    class HandlingExceptions{$/;"	c	namespace:Demo
 HasDefaultCtor	.\Contest.Core\TypeExtensions.cs	/^        public static bool HasDefaultCtor(this Type type) {$/;"	m	class:Contest.Core.TypeExtensions
 INS_PRI	.\Contest.Core\Contest.cs	/^            INS_PRI = BF.Instance | BF.NonPublic,$/;"	f	class:Contest.Core.Contest	file:
 INS_PUB	.\Contest.Core\Contest.cs	/^            INS_PUB = BF.Instance | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
@@ -110,7 +110,7 @@ Interpol	.\Contest.Core\StringExtensions.cs	/^		public static string Interpol(th
 IsNotNull	.\Contest.Core\Runner.cs	/^        public void IsNotNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
 IsNull	.\Contest.Core\Runner.cs	/^        public void IsNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
 Main	.\Contest\Program.cs	/^        static void Main(string[] args) {$/;"	m	class:Contest.Program	file:
-Match	.\Contest.Core\StringExt.cs	/^        public static bool Match(this string pattern, string str){$/;"	m	class:Contest.Core.StringExt
+Match	.\Contest.Core\StringExtensions.cs	/^        public static bool Match(this string pattern, string str){$/;"	m	class:Contest.Core.StringExtensions
 MatchCherryPickingPatterns	.\Contest.Tests\MatchCherryPickingPatterns.cs	/^    public class MatchCherryPickingPatterns{$/;"	c	namespace:Contest.Tests
 MatchIgnorePattern	.\Contest.Core\Contest.cs	/^        static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern =$/;"	f	class:Contest.Core.Contest	file:
 Name	.\Contest.Core\TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
@@ -148,7 +148,6 @@ STA_PRI	.\Contest.Core\Contest.cs	/^            STA_PRI = BF.Static | BF.NonPubl
 STA_PUB	.\Contest.Core\Contest.cs	/^            STA_PUB = BF.Static | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
 SameMetaToken	.\Contest.Core\Contest.cs	/^        static readonly Func<Delegate, Delegate, bool> SameMetaToken =$/;"	f	class:Contest.Core.Contest	file:
 SpaceSepValues	.\Contest.Tests\IgnoreFixture.cs	/^            public void SpaceSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-StringExt	.\Contest.Core\StringExt.cs	/^    public static class StringExt{$/;"	c	namespace:Contest.Core
 StringExtensions	.\Contest.Core\StringExtensions.cs	/^    public static class StringExtensions {$/;"	c	namespace:Contest.Core
 TMP	.\Contest\Program.cs	/^        const string TMP = "tmp";$/;"	f	class:Contest.Program	file:
 TestBodyCantBeNull	.\Contest.Core\TestCase.cs	/^        Func<string, Exception> TestBodyCantBeNull = name =>$/;"	f	class:Contest.Core.TestCase	file:
@@ -216,6 +215,7 @@ ignore_cases_when_contains	.\Contest.Tests\IgnoreFixture.cs	/^            public
 ignore_cases_when_contains	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_when_contains() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
 ignore_no_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_no_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
 ignore_no_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_no_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
+it_should_treat_exceptions_as_failing_tests	.\Contest.Demo\Demo.cs	/^        _ it_should_treat_exceptions_as_failing_tests = assert => {$/;"	f	class:Demo.HandlingExceptions	file:
 run_only_cases_containing	.\Contest.Tests\CherryPickingFixture.cs	/^        public void run_only_cases_containing() {$/;"	m	class:Contest.Tests.CherryPickingFixture
 run_only_cases_ending_with	.\Contest.Tests\CherryPickingFixture.cs	/^        public void run_only_cases_ending_with() {$/;"	m	class:Contest.Tests.CherryPickingFixture
 run_only_cases_starting_with	.\Contest.Tests\CherryPickingFixture.cs	/^        public void run_only_cases_starting_with() {$/;"	m	class:Contest.Tests.CherryPickingFixture

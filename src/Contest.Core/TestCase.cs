@@ -37,6 +37,7 @@ namespace Contest.Core {
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
+                throw;//<= to increase fails count.
             }
             finally {
                 if (AfterCase != null) {

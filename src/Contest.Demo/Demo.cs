@@ -5,6 +5,13 @@
 	using System.Linq;
 	using _  = System.Action<Contest.Core.Runner>;
 
+    class HandlingExceptions{
+        _ it_should_treat_exceptions_as_failing_tests = assert => {
+            throw new Exception("asd");
+        };
+    }
+
+
     class Contest_101 {
 
 		_ this_is_a_passing_test = assert => 
