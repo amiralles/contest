@@ -60,7 +60,7 @@
         //All of these helpers end up calling the one and only "Assert" method.
         public void IsNull(object value, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
-                ? "Expected null. (Got {0}).".Interpol(value)
+                ? "Expected null. (Got {0}).".Interpol(value ?? "null")
                 : errMsg;
 
             Assert(value == null, msg);
@@ -76,7 +76,7 @@
 
         public void Equal(object expected, object actual, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
-                ? "Expected equal to {0} (Got {1}).".Interpol(expected, actual)
+                ? "Expected equal to {0} (Got {1}).".Interpol(expected, actual ?? "null")
                 : errMsg;
 
             Func<bool> cond = () =>
