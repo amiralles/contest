@@ -5,8 +5,10 @@
 
 	
     public class Runner {
+        string _currCase;
         
         static readonly Func<bool, bool> Not = cnd => !cnd;
+        readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
 
         public Runner() {
         }
@@ -37,6 +39,7 @@
 
                 try {
                     Console.WriteLine(c.Name);
+                    _currCase = c.Name;
                     c.Run(this);//<= ensure setups/teardowns.
                 }
                 catch (Exception ex) {
@@ -50,12 +53,21 @@
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
             TestCount = cases.Count;
-            Printer.PrintResults(
-					cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount);
+            Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount);
+
+            if(FailCount>0)
+                DumpErrors();
 
             Environment.ExitCode = FailCount;
         }
 
+        void DumpErrors(){
+
+            Console.WriteLine("Errors List");
+            foreach(var name in _errors.Keys)
+                // Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
+                Printer.Print("{0} - {1}".Interpol(name, _errors[name]), ConsoleColor.Red);
+        }
 
         //All of these helpers end up calling the one and only "Assert" method.
         public void IsNull(object value, string errMsg = null) {
@@ -133,6 +145,7 @@
         void Fail(string errMsg) {
             FailCount++;
             Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
+            _errors[_currCase] = errMsg;
         }
 
         void Pass() {
