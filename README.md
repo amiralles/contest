@@ -1,5 +1,5 @@
 ## contest
-Contest is blend of a console test runner and a minimalist testing framework. In contrast with most popular testing frameworks, **contest** it's based on conventions and it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on, making the code looks like almost plain english.
+Contest is a console test runner bundled with a minimalist testing framework. In contrast with most popular testing frameworks, **contest** it's based on conventions and it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on, making the code looks like almost plain english.
 
 Contest it’s designed to be both lightweight and easy to use (assuming you are comfortable writing functional C#). **The syntax is short and right to the point** and for bonus points the test runner is freaking fast! ;)
 
