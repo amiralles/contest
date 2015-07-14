@@ -17,11 +17,11 @@
         public long Elapsed;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
-        public void Run(TestSuite suite, string cherryPicking = null /*cherry picking pattern.*/) {
-            Run(suite.Cases, cherryPicking);
+        public void Run(TestSuite suite, string cherryPicking = null, bool printHeaders=true) {
+            Run(suite.Cases, cherryPicking, printHeaders);
         }
 
-        public void Run(List<TestCase> cases, string cherryPicking = null /*cherry picking pattern.*/) {
+        public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders=true) {
 
             Printer.Print("".PadRight(40, '='), ConsoleColor.White);
 
@@ -29,8 +29,10 @@
             string currfix = null;
             var watch = Stopwatch.StartNew();
             cases.Each(c => {
-                if(c.FixName != currfix) 
-					Printer.PrintFixName((currfix = c.FixName));
+				if(printHeaders){
+					if(c.FixName != currfix) 
+						Printer.PrintFixName((currfix = c.FixName));
+				}
 
                 if (c.Ignored || (cherryPick && !cherryPicking.Match(c.GetFullName()))) {
                     IgnoreCount++;

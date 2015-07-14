@@ -98,6 +98,7 @@ GetGlobalSetup	Contest.Core/Contest.cs	/^        static readonly Func<List<TestC
 GetGlobalTearDown	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>$/;"	f	class:Contest.Core.Contest	file:
 GetIgnoredPatternsFromFile	Contest.Core/TestCaseFinder.cs	/^        public Func<string[]> GetIgnoredPatternsFromFile = () => {$/;"	f	class:Contest.Core.TestCaseFinder
 GetTestCases	Contest.Core/Contest.cs	/^        static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.Contest	file:
+Green	Contest.Core/Printer.cs	/^		static ConsoleColor Green  = ConsoleColor.Green;$/;"	f	class:Contest.Core.Printer	file:
 HandlingExceptions	Contest.Demo/Demo.cs	/^    class HandlingExceptions{$/;"	c	namespace:Demo
 HasDefaultCtor	Contest.Core/TypeExtensions.cs	/^        public static bool HasDefaultCtor(this Type type) {$/;"	m	class:Contest.Core.TypeExtensions
 INS_PRI	Contest.Core/Contest.cs	/^            INS_PRI = BF.Instance | BF.NonPublic,$/;"	f	class:Contest.Core.Contest	file:
@@ -130,18 +131,19 @@ Print	Contest/Program.cs	/^        static void Print(string msg, params object[]
 PrintFixName	Contest.Core/Printer.cs	/^		public readonly static Action<string> PrintFixName = name => {$/;"	f	class:Contest.Core.Printer
 PrintHelp	Contest/Program.cs	/^        static void PrintHelp() {$/;"	m	class:Contest.Program	file:
 PrintIgnoredPatterns	Contest.Core/Contest.cs	/^        static void PrintIgnoredPatterns(string[] patterns) {$/;"	m	class:Contest.Core.Contest	file:
-PrintResults	Contest.Core/Printer.cs	/^		public readonly static Action<int, long, int, int, int, int> PrintResults = $/;"	f	class:Contest.Core.Printer
+PrintResults	Contest.Core/Printer.cs	/^		public readonly static Action<int, long, int, int, int, int, string> PrintResults = $/;"	f	class:Contest.Core.Printer
 Printer	Contest.Core/Printer.cs	/^	class Printer{$/;"	c	namespace:Contest.Core
 Program	Contest/Program.cs	/^    class Program {$/;"	c	namespace:Contest
 ReadAllLines	Contest.Core/IgnoreFileReader.cs	/^        public static Func<string[]> ReadAllLines = () => {$/;"	f	class:Contest.Core.IgnoreFileReader
 ReadIgnoreFile	Contest.Tests/IgnoreFixture.cs	/^        class ReadIgnoreFile {$/;"	c	class:Contest.Tests.IgnoreFixture
+Red	Contest.Core/Printer.cs	/^		static ConsoleColor Red    = ConsoleColor.Red;$/;"	f	class:Contest.Core.Printer	file:
 Reset	Contest.Demo/Demo.cs	/^		public static Action Reset = () => _users.Clear();$/;"	f	class:Demo.User
-Run	Contest.Core/Runner.cs	/^        public void Run(List<TestCase> cases, string cpp = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
-Run	Contest.Core/Runner.cs	/^        public void Run(TestSuite suite, string cpp = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
+Run	Contest.Core/Runner.cs	/^        public void Run(List<TestCase> cases, string cherryPicking = null \/*cherry picking pattern.*\/, bool printHeaders=true) {$/;"	m	class:Contest.Core.Runner
+Run	Contest.Core/Runner.cs	/^        public void Run(TestSuite suite, string cherryPicking = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
 Run	Contest.Core/TestCase.cs	/^        public void Run(Runner runner) {$/;"	m	class:Contest.Core.TestCase
 RunFixture	Contest.Tests/RunFixture.cs	/^    public class RunFixture {$/;"	c	namespace:Contest.Tests
 RunSetupAndTeardown	Contest.Tests/RunSetupsAndTeardowns.cs	/^    public class RunSetupAndTeardown {$/;"	c	namespace:Contest.Tests
-RunTests	Contest/Program.cs	/^        static void RunTests(string assmFileName, string cp=null) {$/;"	m	class:Contest.Program	file:
+RunTests	Contest/Program.cs	/^        static void RunTests(string assmFileName, string cerryPicking=null) {$/;"	m	class:Contest.Program	file:
 Runner	Contest.Core/Runner.cs	/^        public Runner() {$/;"	m	class:Contest.Core.Runner
 Runner	Contest.Core/Runner.cs	/^    public class Runner {$/;"	c	namespace:Contest.Core
 RunnerFixture	Contest.Tests/RunnerFixture.cs	/^    public class RunnerFixture {$/;"	c	namespace:Contest.Tests
@@ -177,12 +179,14 @@ User	Contest.Demo/Demo.cs	/^	public class User {	$/;"	c	namespace:Demo
 UsingRunnersBag	Contest.Tests/UsingRunnersBag.cs	/^    public class UsingRunnersBag {$/;"	c	namespace:Contest.Tests
 Utils	Contest.Demo/Demo.cs	/^	class Utils {$/;"	c	namespace:Demo
 WhenSplitTrimWhiteSpaces	Contest.Tests/IgnoreFixture.cs	/^            public void WhenSplitTrimWhiteSpaces() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+White	Contest.Core/Printer.cs	/^		static ConsoleColor White  = ConsoleColor.White;$/;"	f	class:Contest.Core.Printer	file:
 WireGlobalSetups	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalSetups = (actual, setups) => {$/;"	f	class:Contest.Core.Contest	file:
 WireGlobalTeardowns	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns =$/;"	f	class:Contest.Core.Contest	file:
 WireSetups	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireSetups =$/;"	f	class:Contest.Core.Contest	file:
 WireTeardowns	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireTeardowns =$/;"	f	class:Contest.Core.Contest	file:
 Wrapper	Contest.Tests/Wrapper.cs	/^    class Wrapper {$/;"	c	namespace:Contest.Tests
 WrongKindaException	Contest.Core/Runner.cs	/^        static readonly Func<Type, Type, string> WrongKindaException = $/;"	f	class:Contest.Core.Runner	file:
+Yellow	Contest.Core/Printer.cs	/^		static ConsoleColor Yellow = ConsoleColor.Yellow;$/;"	f	class:Contest.Core.Printer	file:
 _currCase	Contest.Core/Runner.cs	/^        string _currCase;$/;"	f	class:Contest.Core.Runner	file:
 _errors	Contest.Core/Runner.cs	/^        readonly Dictionary<string, string> _errors = new Dictionary<string, string>();$/;"	f	class:Contest.Core.Runner	file:
 _finder	Contest.Tests/CherryPickingFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.CherryPickingFixture	file:

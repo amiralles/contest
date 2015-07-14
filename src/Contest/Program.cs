@@ -47,8 +47,12 @@
 							return null;
 						};
 
-						if(args.Length >= 3)//run assmName cerryPicking
-							RunTests(args[1], args[2]);
+						if(args.Length >= 3){//run assmName cerryPicking
+							//TODO: Refactor this. --no-head should be available for
+							//any kind of run, nos just de ones that cherrypicks.
+							var printHeaders = !(args.Length >= 4 && args[3] == "--no-head");
+							RunTests(args[1], args[2], printHeaders);
+						}
 						else 
 							RunTests(args.Length > 1 ? args[1] : null);
 
@@ -96,7 +100,7 @@
 #endif
         }
 
-        static void RunTests(string assmFileName, string cerryPicking=null) {
+        static void RunTests(string assmFileName, string cerryPicking=null, bool printHeaders=true) {
             Console.WriteLine("\nConfiguring Assembies....");
 
             if (string.IsNullOrEmpty(assmFileName))
@@ -123,7 +127,7 @@
             var runner = new Runner();
 
             Console.WriteLine("\nDone!\n");
-            runner.Run(suite, cerryPicking);
+            runner.Run(suite, cerryPicking, printHeaders );
         }
 
         static void PrintHelp() {
