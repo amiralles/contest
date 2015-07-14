@@ -5,9 +5,9 @@ namespace Contest.Core {
 
 	class Printer{
 		static ConsoleColor White  = ConsoleColor.White;
-		static ConsoleColor Red    = Red;
-		static ConsoleColor Green  = Green;
-		static ConsoleColor Yellow = Yellow;
+		static ConsoleColor Red    = ConsoleColor.Red;
+		static ConsoleColor Green  = ConsoleColor.Green;
+		static ConsoleColor Yellow = ConsoleColor.Yellow;
 
 		// void PrintResults(int casesCount, long elapsedMilliseconds) 
 		public readonly static Action<int, long, int, int, int, int, string> PrintResults = 
