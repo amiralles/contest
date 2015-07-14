@@ -8,6 +8,7 @@ namespace Contest.Core {
 			return string.Format(placeholder, args);
 		}
 
+		///This method IS case sensitive.
         public static bool Match(this string pattern, string str){
             if(string.IsNullOrEmpty(pattern))
                 return true;

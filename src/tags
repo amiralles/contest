@@ -4,229 +4,232 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-AFTER	.\Contest.Core\Contest.cs	/^            AFTER = "AFTER_",$/;"	f	class:Contest.Core.Contest	file:
-AFTER_EACH	.\Contest.Core\Contest.cs	/^            AFTER_EACH = "AFTER_EACH";$/;"	f	class:Contest.Core.Contest	file:
-ActualCases	.\Contest.Core\Contest.cs	/^            ActualCases = (suite, setups, teardowns) => {$/;"	f	class:Contest.Core.Contest	file:
-AfterCase	.\Contest.Core\TestCase.cs	/^        public Action<Runner> AfterCase;$/;"	f	class:Contest.Core.TestCase
-Assert	.\Contest.Core\Runner.cs	/^        public void Assert(bool cond, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
-AssertEqualsMethod_NullValue_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertEqualsMethod_NullValue_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertEqualsMethod_NullValue_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertEqualsMethod_NullValue_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertEqualsMethod_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertEqualsMethod_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertEqualsMethod_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertEqualsMethod_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertIsNotNull_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertIsNotNull_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertIsNotNull_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertIsNotNull_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertIsNull_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertIsNull_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertIsNull_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertIsNull_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertMethod_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertMethod_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertMethod_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertMethod_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertNotEqualsMethod_ResultIsFalse	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertNotEqualsMethod_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertNotEqualsMethod_ResultIsTrue	.\Contest.Tests\RunnerFixture.cs	/^        public void AssertNotEqualsMethod_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
-AssertsCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-BEFORE	.\Contest.Core\Contest.cs	/^            BEFORE = "BEFORE_",$/;"	f	class:Contest.Core.Contest	file:
-BEFORE_EACH	.\Contest.Core\Contest.cs	/^            BEFORE_EACH = "BEFORE_EACH",$/;"	f	class:Contest.Core.Contest	file:
-Bag	.\Contest.Core\Runner.cs	/^        public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); $/;"	f	class:Contest.Core.Runner
-BarTest	.\Contest.Tests\BarTest.cs	/^    class BarTest{$/;"	c	namespace:Contest.Tests
-BeforeCase	.\Contest.Core\TestCase.cs	/^        public Action<Runner> BeforeCase;$/;"	f	class:Contest.Core.TestCase
-Body	.\Contest.Core\TestCase.cs	/^        public Action<Runner> Body;$/;"	f	class:Contest.Core.TestCase
-CTIGNORE_PATH	.\Contest.Core\IgnoreFileReader.cs	/^        const string CTIGNORE_PATH = ".\/.test_ignore";$/;"	f	class:Contest.Core.IgnoreFileReader	file:
-Cases	.\Contest.Core\TestSuite.cs	/^        public readonly List<TestCase> Cases = new List<TestCase>();$/;"	f	class:Contest.Core.TestSuite
-CherryPickingFixture	.\Contest.Tests\CherryPickingFixture.cs	/^    public class CherryPickingFixture {$/;"	c	namespace:Contest.Tests
-ColonSepValues	.\Contest.Tests\IgnoreFixture.cs	/^            public void ColonSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-CommaSepValues	.\Contest.Tests\IgnoreFixture.cs	/^            public void CommaSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-ConfigureTestVariablesDuringSetup	.\Contest.Tests\UsingRunnersBag.cs	/^        public void ConfigureTestVariablesDuringSetup(){$/;"	m	class:Contest.Tests.UsingRunnersBag
-Contains	.\Contest.Tests\MatchCherryPickingPatterns.cs	/^        public void Contains(){$/;"	m	class:Contest.Tests.MatchCherryPickingPatterns
-Contest	.\Contest.Core\Contest.cs	/^        static Contest() {$/;"	m	class:Contest.Core.Contest	file:
-Contest	.\Contest.Core\Contest.cs	/^    public class Contest {$/;"	c	namespace:Contest.Core
-Contest	.\Contest\Program.cs	/^﻿namespace Contest {$/;"	n
-Contest.Core	.\Contest.Core\Contest.cs	/^namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\EnumerableExtensions.cs	/^﻿namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\IgnoreFileReader.cs	/^namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\Printer.cs	/^namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\Runner.cs	/^﻿namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\StringExtensions.cs	/^namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\TestCase.cs	/^namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\TestCaseFinder.cs	/^﻿namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\TestSuite.cs	/^namespace Contest.Core {$/;"	n
-Contest.Core	.\Contest.Core\TypeExtensions.cs	/^namespace Contest.Core {$/;"	n
-Contest.Tests	.\Contest.Tests\BarTest.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\CherryPickingFixture.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\DiscoverFixture.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\FooTest.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\IgnoreFixture.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\MatchCherryPickingPatterns.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\RunFixture.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\RunSetupsAndTeardowns.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\RunnerFixture.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\TestClass.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\TestClassOnePassOnFail.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\TestClassThrowingTests.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\UsingRunnersBag.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	.\Contest.Tests\Wrapper.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest_101	.\Contest.Demo\Demo.cs	/^    class Contest_101 {$/;"	c	namespace:Demo
-Contest_201	.\Contest.Demo\Demo.cs	/^    class Contest_201 {$/;"	c	namespace:Demo
-Contest_301	.\Contest.Demo\Demo.cs	/^	class Contest_301 {$/;"	c	namespace:Demo
-CopyToLocalTmp	.\Contest\Program.cs	/^        static void CopyToLocalTmp(string root) {$/;"	m	class:Contest.Program	file:
-Count	.\Contest.Demo\Demo.cs	/^		public static Func<int> Count = () => _users.Count;$/;"	f	class:Demo.User
-Create	.\Contest.Demo\Demo.cs	/^		public static Action<string> Create = name => _users.Add(name);$/;"	f	class:Demo.User
-Demo	.\Contest.Demo\Demo.cs	/^﻿namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
-DiscoverFixture	.\Contest.Tests\DiscoverFixture.cs	/^    public class DiscoverFixture {$/;"	c	namespace:Contest.Tests
-Each	.\Contest.Core\EnumerableExtensions.cs	/^        public static void Each<T>(this IEnumerable<T> target, Action<T> callback) {$/;"	m	class:Contest.Core.EnumerableExtensions
-Echo	.\Contest.Demo\Demo.cs	/^		public static Func<object, object> Echo = msg => msg;$/;"	f	class:Demo.Utils
-Echo	.\Contest.Tests\UsingRunnersBag.cs	/^        static Func<object, object> Echo = msg => msg;$/;"	f	class:Contest.Tests.UsingRunnersBag	file:
-EchoTest	.\Contest.Tests\UsingRunnersBag.cs	/^        internal class EchoTest {$/;"	c	class:Contest.Tests.UsingRunnersBag
-Elapsed	.\Contest.Core\Runner.cs	/^        public long Elapsed;$/;"	f	class:Contest.Core.Runner
-EmptyFile	.\Contest.Tests\IgnoreFixture.cs	/^            public void EmptyFile() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-EnumerableExtensions	.\Contest.Core\EnumerableExtensions.cs	/^    public static class EnumerableExtensions {$/;"	c	namespace:Contest.Core
-Equal	.\Contest.Core\Runner.cs	/^        public void Equal(object expected, object actual, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
-Exception	.\Contest.Core\Runner.cs	/^        public void ShouldThrow<T>(Action body) where T : Exception {$/;"	p	class:Contest.Core.Runner
-ExpectedException	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, string> ExpectedException = extype =>$/;"	f	class:Contest.Core.Runner	file:
-Fail	.\Contest.Core\Runner.cs	/^        void Fail(string errMsg) {$/;"	m	class:Contest.Core.Runner	file:
-FailCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-Find	.\Contest.Demo\Demo.cs	/^		public static Func<string, object> Find = name =>$/;"	f	class:Demo.User
-FindCases	.\Contest.Core\Contest.cs	/^        internal static Func<TestCaseFinder, Type, string, TestSuite> FindCases =$/;"	f	class:Contest.Core.Contest	file:
-FindCasesNestedTypes	.\Contest.Core\Contest.cs	/^            FindCasesNestedTypes = (finder, type, flags, ignorePatterns) => {$/;"	f	class:Contest.Core.Contest	file:
-FindRawCasesInAssm	.\Contest.Core\Contest.cs	/^        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =$/;"	f	class:Contest.Core.Contest	file:
-FindSetups	.\Contest.Core\Contest.cs	/^        static readonly Func<TestSuite, List<TestCase>> FindSetups = suite =>$/;"	f	class:Contest.Core.Contest	file:
-FindTeardowns	.\Contest.Core\Contest.cs	/^        static readonly Func<TestSuite, List<TestCase>> FindTeardowns = suite =>$/;"	f	class:Contest.Core.Contest	file:
-FixName	.\Contest.Core\TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
-Flags	.\Contest.Core\Contest.cs	/^        static readonly BF[] Flags;$/;"	f	class:Contest.Core.Contest	file:
-FooTest	.\Contest.Tests\FooTest.cs	/^    class FooTest{$/;"	c	namespace:Contest.Tests
-GetCasesInAssm	.\Contest.Core\Contest.cs	/^        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =$/;"	f	class:Contest.Core.Contest
-GetFullName	.\Contest.Core\TestCase.cs	/^        public string GetFullName() {$/;"	m	class:Contest.Core.TestCase
-GetGlobalSetup	.\Contest.Core\Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalSetup = setups =>$/;"	f	class:Contest.Core.Contest	file:
-GetGlobalTearDown	.\Contest.Core\Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>$/;"	f	class:Contest.Core.Contest	file:
-GetIgnoredPatternsFromFile	.\Contest.Core\TestCaseFinder.cs	/^        public Func<string[]> GetIgnoredPatternsFromFile = () => {$/;"	f	class:Contest.Core.TestCaseFinder
-GetTestCases	.\Contest.Core\Contest.cs	/^        static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.Contest	file:
-HandlingExceptions	.\Contest.Demo\Demo.cs	/^    class HandlingExceptions{$/;"	c	namespace:Demo
-HasDefaultCtor	.\Contest.Core\TypeExtensions.cs	/^        public static bool HasDefaultCtor(this Type type) {$/;"	m	class:Contest.Core.TypeExtensions
-INS_PRI	.\Contest.Core\Contest.cs	/^            INS_PRI = BF.Instance | BF.NonPublic,$/;"	f	class:Contest.Core.Contest	file:
-INS_PUB	.\Contest.Core\Contest.cs	/^            INS_PUB = BF.Instance | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
-IgnoreCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-IgnoreFileReader	.\Contest.Core\IgnoreFileReader.cs	/^    public class IgnoreFileReader {$/;"	c	namespace:Contest.Core
-IgnoreFixture	.\Contest.Tests\IgnoreFixture.cs	/^    public class IgnoreFixture {$/;"	c	namespace:Contest.Tests
-Ignored	.\Contest.Core\TestCase.cs	/^        public bool Ignored;$/;"	f	class:Contest.Core.TestCase
-InlineCase	.\Contest.Core\Contest.cs	/^        static readonly Func<TestCase, bool> InlineCase = tcase => tcase.Body == null;$/;"	f	class:Contest.Core.Contest	file:
-Interpol	.\Contest.Core\StringExtensions.cs	/^		public static string Interpol(this string placeholder, params object[] args){$/;"	m	class:Contest.Core.StringExtensions
-IsNotNull	.\Contest.Core\Runner.cs	/^        public void IsNotNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
-IsNull	.\Contest.Core\Runner.cs	/^        public void IsNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
-Main	.\Contest\Program.cs	/^        static void Main(string[] args) {$/;"	m	class:Contest.Program	file:
-Match	.\Contest.Core\StringExtensions.cs	/^        public static bool Match(this string pattern, string str){$/;"	m	class:Contest.Core.StringExtensions
-MatchCherryPickingPatterns	.\Contest.Tests\MatchCherryPickingPatterns.cs	/^    public class MatchCherryPickingPatterns{$/;"	c	namespace:Contest.Tests
-MatchIgnorePattern	.\Contest.Core\Contest.cs	/^        static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern =$/;"	f	class:Contest.Core.Contest	file:
-Name	.\Contest.Core\TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
-Nested	.\Contest.Tests\Wrapper.cs	/^        class Nested {$/;"	c	class:Contest.Tests.Wrapper
-NestedBarTest	.\Contest.Tests\BarTest.cs	/^        class NestedBarTest{$/;"	c	class:Contest.Tests.BarTest
-NewLineSepValues	.\Contest.Tests\IgnoreFixture.cs	/^            public void NewLineSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-Not	.\Contest.Core\Runner.cs	/^        static readonly Func<bool, bool> Not = cnd => !cnd;$/;"	f	class:Contest.Core.Runner	file:
-NotEqual	.\Contest.Core\Runner.cs	/^        public void NotEqual(object left, object right, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
-Pass	.\Contest.Core\Runner.cs	/^        void Pass() {$/;"	m	class:Contest.Core.Runner	file:
-PassCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-PatternsFromCmdLine	.\Contest.Tests\IgnoreFixture.cs	/^        class PatternsFromCmdLine {$/;"	c	class:Contest.Tests.IgnoreFixture
-PatternsFromIgnoreFile	.\Contest.Tests\IgnoreFixture.cs	/^        class PatternsFromIgnoreFile {$/;"	c	class:Contest.Tests.IgnoreFixture
-Print	.\Contest.Core\Printer.cs	/^		public readonly static Action<string, ConsoleColor> Print = (msg, color) => {$/;"	f	class:Contest.Core.Printer
-Print	.\Contest\Program.cs	/^        static void Print(IEnumerable<string> lines) {$/;"	m	class:Contest.Program	file:
-Print	.\Contest\Program.cs	/^        static void Print(string msg, params object[] args) {$/;"	m	class:Contest.Program	file:
-PrintFixName	.\Contest.Core\Printer.cs	/^		public readonly static Action<string> PrintFixName = name => {$/;"	f	class:Contest.Core.Printer
-PrintHelp	.\Contest\Program.cs	/^        static void PrintHelp() {$/;"	m	class:Contest.Program	file:
-PrintIgnoredPatterns	.\Contest.Core\Contest.cs	/^        static void PrintIgnoredPatterns(string[] patterns) {$/;"	m	class:Contest.Core.Contest	file:
-PrintResults	.\Contest.Core\Printer.cs	/^		public readonly static Action<int, long, int, int, int, int> PrintResults = $/;"	f	class:Contest.Core.Printer
-Printer	.\Contest.Core\Printer.cs	/^	class Printer{$/;"	c	namespace:Contest.Core
-Program	.\Contest\Program.cs	/^    class Program {$/;"	c	namespace:Contest
-ReadAllLines	.\Contest.Core\IgnoreFileReader.cs	/^        public static Func<string[]> ReadAllLines = () => {$/;"	f	class:Contest.Core.IgnoreFileReader
-ReadIgnoreFile	.\Contest.Tests\IgnoreFixture.cs	/^        class ReadIgnoreFile {$/;"	c	class:Contest.Tests.IgnoreFixture
-Reset	.\Contest.Demo\Demo.cs	/^		public static Action Reset = () => _users.Clear();$/;"	f	class:Demo.User
-Run	.\Contest.Core\Runner.cs	/^        public void Run(List<TestCase> cases, string cpp = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
-Run	.\Contest.Core\Runner.cs	/^        public void Run(TestSuite suite, string cpp = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
-Run	.\Contest.Core\TestCase.cs	/^        public void Run(Runner runner) {$/;"	m	class:Contest.Core.TestCase
-RunFixture	.\Contest.Tests\RunFixture.cs	/^    public class RunFixture {$/;"	c	namespace:Contest.Tests
-RunSetupAndTeardown	.\Contest.Tests\RunSetupsAndTeardowns.cs	/^    public class RunSetupAndTeardown {$/;"	c	namespace:Contest.Tests
-RunTests	.\Contest\Program.cs	/^        static void RunTests(string assmFileName) {$/;"	m	class:Contest.Program	file:
-Runner	.\Contest.Core\Runner.cs	/^        public Runner() {$/;"	m	class:Contest.Core.Runner
-Runner	.\Contest.Core\Runner.cs	/^    public class Runner {$/;"	c	namespace:Contest.Core
-RunnerFixture	.\Contest.Tests\RunnerFixture.cs	/^    public class RunnerFixture {$/;"	c	namespace:Contest.Tests
-STA_PRI	.\Contest.Core\Contest.cs	/^            STA_PRI = BF.Static | BF.NonPublic;$/;"	f	class:Contest.Core.Contest	file:
-STA_PUB	.\Contest.Core\Contest.cs	/^            STA_PUB = BF.Static | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
-SameMetaToken	.\Contest.Core\Contest.cs	/^        static readonly Func<Delegate, Delegate, bool> SameMetaToken =$/;"	f	class:Contest.Core.Contest	file:
-SpaceSepValues	.\Contest.Tests\IgnoreFixture.cs	/^            public void SpaceSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-StringExtensions	.\Contest.Core\StringExtensions.cs	/^    public static class StringExtensions {$/;"	c	namespace:Contest.Core
-TMP	.\Contest\Program.cs	/^        const string TMP = "tmp";$/;"	f	class:Contest.Program	file:
-TestBodyCantBeNull	.\Contest.Core\TestCase.cs	/^        Func<string, Exception> TestBodyCantBeNull = name =>$/;"	f	class:Contest.Core.TestCase	file:
-TestCase	.\Contest.Core\TestCase.cs	/^    public class TestCase {$/;"	c	namespace:Contest.Core
-TestCaseFinder	.\Contest.Core\TestCaseFinder.cs	/^        public TestCaseFinder(Func<string[]> getIgnoredFromFile = null) {$/;"	m	class:Contest.Core.TestCaseFinder
-TestCaseFinder	.\Contest.Core\TestCaseFinder.cs	/^    public class TestCaseFinder {$/;"	c	namespace:Contest.Core
-TestClass	.\Contest.Tests\TestClass.cs	/^    class TestClass {$/;"	c	namespace:Contest.Tests
-TestClassOnePassOnFail	.\Contest.Tests\TestClassOnePassOnFail.cs	/^    class TestClassOnePassOnFail {$/;"	c	namespace:Contest.Tests
-TestClassThrowingTests	.\Contest.Tests\TestClassThrowingTests.cs	/^    class TestClassThrowingTests {$/;"	c	namespace:Contest.Tests
-TestCount	.\Contest.Core\Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
-TestSuite	.\Contest.Core\TestSuite.cs	/^		public TestSuite() {$/;"	m	class:Contest.Core.TestSuite
-TestSuite	.\Contest.Core\TestSuite.cs	/^    public class TestSuite {$/;"	c	namespace:Contest.Core
-ThisDoesntThrowSoItFails	.\Contest.Tests\TestClassThrowingTests.cs	/^        public Action<Runner> ThisDoesntThrowSoItFails = $/;"	f	class:Contest.Tests.TestClassThrowingTests
-ThisFail	.\Contest.Tests\TestClassOnePassOnFail.cs	/^        Action<Runner> ThisFail = runner =>$/;"	f	class:Contest.Tests.TestClassOnePassOnFail	file:
-ThisIsATest	.\Contest.Tests\TestClass.cs	/^        public Action<Runner> ThisIsATest = test =>$/;"	f	class:Contest.Tests.TestClass
-ThisIsATest	.\Contest.Tests\Wrapper.cs	/^            Action<Runner> ThisIsATest = runner =>$/;"	f	class:Contest.Tests.Wrapper.Nested	file:
-ThisIsAnotherTest	.\Contest.Tests\TestClass.cs	/^        Action<Runner> ThisIsAnotherTest = test =>$/;"	f	class:Contest.Tests.TestClass	file:
-ThisIsntATestMethod	.\Contest.Tests\TestClass.cs	/^        public void ThisIsntATestMethod() { }$/;"	m	class:Contest.Tests.TestClass
-ThisIsntATestMethod	.\Contest.Tests\Wrapper.cs	/^            void ThisIsntATestMethod() { }$/;"	m	class:Contest.Tests.Wrapper.Nested	file:
-ThisIsntATestMethodEither	.\Contest.Tests\TestClass.cs	/^        void ThisIsntATestMethodEither() { }$/;"	m	class:Contest.Tests.TestClass	file:
-ThisPass	.\Contest.Tests\TestClassOnePassOnFail.cs	/^        public Action<Runner> ThisPass = runner =>$/;"	f	class:Contest.Tests.TestClassOnePassOnFail
-ThisThrowsAndPass	.\Contest.Tests\TestClassThrowingTests.cs	/^        public Action<Runner> ThisThrowsAndPass = $/;"	f	class:Contest.Tests.TestClassThrowingTests
-ToString	.\Contest.Core\TestCase.cs	/^        public override string ToString() {$/;"	m	class:Contest.Core.TestCase
-TypeExtensions	.\Contest.Core\TypeExtensions.cs	/^    public static class TypeExtensions {$/;"	c	namespace:Contest.Core
-User	.\Contest.Demo\Demo.cs	/^	public class User {	$/;"	c	namespace:Demo
-UsingRunnersBag	.\Contest.Tests\UsingRunnersBag.cs	/^    public class UsingRunnersBag {$/;"	c	namespace:Contest.Tests
-Utils	.\Contest.Demo\Demo.cs	/^	class Utils {$/;"	c	namespace:Demo
-WhenSplitTrimWhiteSpaces	.\Contest.Tests\IgnoreFixture.cs	/^            public void WhenSplitTrimWhiteSpaces() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
-WireGlobalSetups	.\Contest.Core\Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalSetups = (actual, setups) => {$/;"	f	class:Contest.Core.Contest	file:
-WireGlobalTeardowns	.\Contest.Core\Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns =$/;"	f	class:Contest.Core.Contest	file:
-WireSetups	.\Contest.Core\Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireSetups =$/;"	f	class:Contest.Core.Contest	file:
-WireTeardowns	.\Contest.Core\Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireTeardowns =$/;"	f	class:Contest.Core.Contest	file:
-Wrapper	.\Contest.Tests\Wrapper.cs	/^    class Wrapper {$/;"	c	namespace:Contest.Tests
-WrongKindaException	.\Contest.Core\Runner.cs	/^        static readonly Func<Type, Type, string> WrongKindaException = $/;"	f	class:Contest.Core.Runner	file:
-_finder	.\Contest.Tests\CherryPickingFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.CherryPickingFixture	file:
-_finder	.\Contest.Tests\DiscoverFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.DiscoverFixture	file:
-_finder	.\Contest.Tests\RunFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.RunFixture	file:
-_users	.\Contest.Demo\Demo.cs	/^		static readonly List<string> _users = new List<string>();$/;"	f	class:Demo.User	file:
-after_bar	.\Contest.Tests\BarTest.cs	/^            Action<Runner> after_bar  = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
-after_each	.\Contest.Demo\Demo.cs	/^		_ after_each = test =>$/;"	f	class:Demo.Contest_201	file:
-after_echo	.\Contest.Demo\Demo.cs	/^		_ after_echo = test => $/;"	f	class:Demo.Contest_301	file:
-after_echo	.\Contest.Tests\UsingRunnersBag.cs	/^            Action<Runner> after_echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
-after_foo	.\Contest.Tests\FooTest.cs	/^        Action<Runner> after_foo  = runner => {};$/;"	f	class:Contest.Tests.FooTest	file:
-after_test_cases_in_class	.\Contest.Tests\DiscoverFixture.cs	/^        public void after_test_cases_in_class() {$/;"	m	class:Contest.Tests.DiscoverFixture
-bar	.\Contest.Tests\BarTest.cs	/^            Action<Runner> bar = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
-before_bar	.\Contest.Tests\BarTest.cs	/^            Action<Runner> before_bar = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
-before_each	.\Contest.Demo\Demo.cs	/^		_ before_each = test => {$/;"	f	class:Demo.Contest_201	file:
-before_echo	.\Contest.Demo\Demo.cs	/^		_ before_echo = test => $/;"	f	class:Demo.Contest_301	file:
-before_echo	.\Contest.Tests\UsingRunnersBag.cs	/^            Action<Runner> before_echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
-before_foo	.\Contest.Tests\FooTest.cs	/^        Action<Runner> before_foo = runner => {};$/;"	f	class:Contest.Tests.FooTest	file:
-before_test_cases_in_assm	.\Contest.Tests\DiscoverFixture.cs	/^        public void before_test_cases_in_assm() {$/;"	m	class:Contest.Tests.DiscoverFixture
-create_user_adds_new_user	.\Contest.Demo\Demo.cs	/^		_ create_user_adds_new_user = assert => {$/;"	f	class:Demo.Contest_201	file:
-echo	.\Contest.Demo\Demo.cs	/^		_ echo = test => $/;"	f	class:Demo.Contest_301	file:
-echo	.\Contest.Tests\UsingRunnersBag.cs	/^            Action<Runner> echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
-find_existing_user_returns_user	.\Contest.Demo\Demo.cs	/^		_ find_existing_user_returns_user = assert => $/;"	f	class:Demo.Contest_201	file:
-find_non_existing_user_returns_null	.\Contest.Demo\Demo.cs	/^		_ find_non_existing_user_returns_null = assert => $/;"	f	class:Demo.Contest_201	file:
-foo	.\Contest.Tests\FooTest.cs	/^        Action<Runner> foo = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Tests.FooTest	file:
-ignore_all_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
-ignore_all_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
-ignore_cases_ending_with	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_ending_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
-ignore_cases_ending_with	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_ending_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
-ignore_cases_starting_with	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_starting_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
-ignore_cases_starting_with	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_starting_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
-ignore_cases_when_contains	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_when_contains() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
-ignore_cases_when_contains	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_cases_when_contains() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
-ignore_no_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_no_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
-ignore_no_cases	.\Contest.Tests\IgnoreFixture.cs	/^            public void ignore_no_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
-it_should_treat_exceptions_as_failing_tests	.\Contest.Demo\Demo.cs	/^        _ it_should_treat_exceptions_as_failing_tests = assert => {$/;"	f	class:Demo.HandlingExceptions	file:
-run_only_cases_containing	.\Contest.Tests\CherryPickingFixture.cs	/^        public void run_only_cases_containing() {$/;"	m	class:Contest.Tests.CherryPickingFixture
-run_only_cases_ending_with	.\Contest.Tests\CherryPickingFixture.cs	/^        public void run_only_cases_ending_with() {$/;"	m	class:Contest.Tests.CherryPickingFixture
-run_only_cases_starting_with	.\Contest.Tests\CherryPickingFixture.cs	/^        public void run_only_cases_starting_with() {$/;"	m	class:Contest.Tests.CherryPickingFixture
-run_test_suite	.\Contest.Tests\RunFixture.cs	/^        public void run_test_suite() {$/;"	m	class:Contest.Tests.RunFixture
-run_throwing_test_suite	.\Contest.Tests\RunFixture.cs	/^        public void run_throwing_test_suite() {$/;"	m	class:Contest.Tests.RunFixture
-should_run_setup_before_case_unless_setup_is_null	.\Contest.Tests\RunSetupsAndTeardowns.cs	/^        public void should_run_setup_before_case_unless_setup_is_null() {$/;"	m	class:Contest.Tests.RunSetupAndTeardown
-should_run_teardown_after_case_unless_teardown_is_null	.\Contest.Tests\RunSetupsAndTeardowns.cs	/^        public void should_run_teardown_after_case_unless_teardown_is_null() {$/;"	m	class:Contest.Tests.RunSetupAndTeardown
-test_cases_in_assm	.\Contest.Tests\DiscoverFixture.cs	/^        public void test_cases_in_assm() {$/;"	m	class:Contest.Tests.DiscoverFixture
-test_cases_in_class	.\Contest.Tests\DiscoverFixture.cs	/^        public void test_cases_in_class() {$/;"	m	class:Contest.Tests.DiscoverFixture
-test_cases_in_nested_classes	.\Contest.Tests\DiscoverFixture.cs	/^        public void test_cases_in_nested_classes() {$/;"	m	class:Contest.Tests.DiscoverFixture
-this_is_a__should_throw__failing_test	.\Contest.Demo\Demo.cs	/^		_ this_is_a__should_throw__failing_test = test =>$/;"	f	class:Demo.Contest_101	file:
-this_is_a__should_throw__passing_test	.\Contest.Demo\Demo.cs	/^        _ this_is_a__should_throw__passing_test = test =>$/;"	f	class:Demo.Contest_101	file:
-this_is_a_failing_test	.\Contest.Demo\Demo.cs	/^		_ this_is_a_failing_test = assert =>$/;"	f	class:Demo.Contest_101	file:
-this_is_a_passing_test	.\Contest.Demo\Demo.cs	/^		_ this_is_a_passing_test = assert => $/;"	f	class:Demo.Contest_101	file:
+AFTER	Contest.Core/Contest.cs	/^            AFTER = "AFTER_",$/;"	f	class:Contest.Core.Contest	file:
+AFTER_EACH	Contest.Core/Contest.cs	/^            AFTER_EACH = "AFTER_EACH";$/;"	f	class:Contest.Core.Contest	file:
+ActualCases	Contest.Core/Contest.cs	/^            ActualCases = (suite, setups, teardowns) => {$/;"	f	class:Contest.Core.Contest	file:
+AfterCase	Contest.Core/TestCase.cs	/^        public Action<Runner> AfterCase;$/;"	f	class:Contest.Core.TestCase
+Assert	Contest.Core/Runner.cs	/^        public void Assert(bool cond, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
+AssertEqualsMethod_NullValue_ResultIsFalse	Contest.Tests/RunnerFixture.cs	/^        public void AssertEqualsMethod_NullValue_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertEqualsMethod_NullValue_ResultIsTrue	Contest.Tests/RunnerFixture.cs	/^        public void AssertEqualsMethod_NullValue_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertEqualsMethod_ResultIsFalse	Contest.Tests/RunnerFixture.cs	/^        public void AssertEqualsMethod_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertEqualsMethod_ResultIsTrue	Contest.Tests/RunnerFixture.cs	/^        public void AssertEqualsMethod_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertIsNotNull_ResultIsFalse	Contest.Tests/RunnerFixture.cs	/^        public void AssertIsNotNull_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertIsNotNull_ResultIsTrue	Contest.Tests/RunnerFixture.cs	/^        public void AssertIsNotNull_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertIsNull_ResultIsFalse	Contest.Tests/RunnerFixture.cs	/^        public void AssertIsNull_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertIsNull_ResultIsTrue	Contest.Tests/RunnerFixture.cs	/^        public void AssertIsNull_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertMethod_ResultIsFalse	Contest.Tests/RunnerFixture.cs	/^        public void AssertMethod_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertMethod_ResultIsTrue	Contest.Tests/RunnerFixture.cs	/^        public void AssertMethod_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertNotEqualsMethod_ResultIsFalse	Contest.Tests/RunnerFixture.cs	/^        public void AssertNotEqualsMethod_ResultIsFalse() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertNotEqualsMethod_ResultIsTrue	Contest.Tests/RunnerFixture.cs	/^        public void AssertNotEqualsMethod_ResultIsTrue() {$/;"	m	class:Contest.Tests.RunnerFixture
+AssertsCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
+BEFORE	Contest.Core/Contest.cs	/^            BEFORE = "BEFORE_",$/;"	f	class:Contest.Core.Contest	file:
+BEFORE_EACH	Contest.Core/Contest.cs	/^            BEFORE_EACH = "BEFORE_EACH",$/;"	f	class:Contest.Core.Contest	file:
+Bag	Contest.Core/Runner.cs	/^        public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); $/;"	f	class:Contest.Core.Runner
+BarTest	Contest.Tests/BarTest.cs	/^    class BarTest{$/;"	c	namespace:Contest.Tests
+BeforeCase	Contest.Core/TestCase.cs	/^        public Action<Runner> BeforeCase;$/;"	f	class:Contest.Core.TestCase
+Body	Contest.Core/TestCase.cs	/^        public Action<Runner> Body;$/;"	f	class:Contest.Core.TestCase
+CTIGNORE_PATH	Contest.Core/IgnoreFileReader.cs	/^        const string CTIGNORE_PATH = ".\/.test_ignore";$/;"	f	class:Contest.Core.IgnoreFileReader	file:
+Cases	Contest.Core/TestSuite.cs	/^        public readonly List<TestCase> Cases = new List<TestCase>();$/;"	f	class:Contest.Core.TestSuite
+CherryPickingFixture	Contest.Tests/CherryPickingFixture.cs	/^    public class CherryPickingFixture {$/;"	c	namespace:Contest.Tests
+ColonSepValues	Contest.Tests/IgnoreFixture.cs	/^            public void ColonSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+CommaSepValues	Contest.Tests/IgnoreFixture.cs	/^            public void CommaSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+ConfigureTestVariablesDuringSetup	Contest.Tests/UsingRunnersBag.cs	/^        public void ConfigureTestVariablesDuringSetup(){$/;"	m	class:Contest.Tests.UsingRunnersBag
+Contains	Contest.Tests/MatchCherryPickingPatterns.cs	/^        public void Contains(){$/;"	m	class:Contest.Tests.MatchCherryPickingPatterns
+Contest	Contest.Core/Contest.cs	/^        static Contest() {$/;"	m	class:Contest.Core.Contest	file:
+Contest	Contest.Core/Contest.cs	/^    public class Contest {$/;"	c	namespace:Contest.Core
+Contest	Contest/Program.cs	/^﻿namespace Contest {$/;"	n
+Contest.Core	Contest.Core/Contest.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/EnumerableExtensions.cs	/^﻿namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/IgnoreFileReader.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/Printer.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/Runner.cs	/^﻿namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/StringExtensions.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/TestCase.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/TestCaseFinder.cs	/^﻿namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/TestSuite.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/TypeExtensions.cs	/^namespace Contest.Core {$/;"	n
+Contest.Tests	Contest.Tests/BarTest.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/CherryPickingFixture.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/DiscoverFixture.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/FooTest.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/IgnoreFixture.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/MatchCherryPickingPatterns.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/RunFixture.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/RunSetupsAndTeardowns.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/RunnerFixture.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/TestClass.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/TestClassOnePassOnFail.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/TestClassThrowingTests.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/UsingRunnersBag.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/Wrapper.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest_101	Contest.Demo/Demo.cs	/^    class Contest_101 {$/;"	c	namespace:Demo
+Contest_201	Contest.Demo/Demo.cs	/^    class Contest_201 {$/;"	c	namespace:Demo
+Contest_301	Contest.Demo/Demo.cs	/^	class Contest_301 {$/;"	c	namespace:Demo
+CopyToLocalTmp	Contest/Program.cs	/^        static void CopyToLocalTmp(string root) {$/;"	m	class:Contest.Program	file:
+Count	Contest.Demo/Demo.cs	/^		public static Func<int> Count = () => _users.Count;$/;"	f	class:Demo.User
+Create	Contest.Demo/Demo.cs	/^		public static Action<string> Create = name => _users.Add(name);$/;"	f	class:Demo.User
+Demo	Contest.Demo/Demo.cs	/^﻿namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
+DiscoverFixture	Contest.Tests/DiscoverFixture.cs	/^    public class DiscoverFixture {$/;"	c	namespace:Contest.Tests
+DumpErrors	Contest.Core/Runner.cs	/^        void DumpErrors(){$/;"	m	class:Contest.Core.Runner	file:
+Each	Contest.Core/EnumerableExtensions.cs	/^        public static void Each<T>(this IEnumerable<T> target, Action<T> callback) {$/;"	m	class:Contest.Core.EnumerableExtensions
+Echo	Contest.Demo/Demo.cs	/^		public static Func<object, object> Echo = msg => msg;$/;"	f	class:Demo.Utils
+Echo	Contest.Tests/UsingRunnersBag.cs	/^        static Func<object, object> Echo = msg => msg;$/;"	f	class:Contest.Tests.UsingRunnersBag	file:
+EchoTest	Contest.Tests/UsingRunnersBag.cs	/^        internal class EchoTest {$/;"	c	class:Contest.Tests.UsingRunnersBag
+Elapsed	Contest.Core/Runner.cs	/^        public long Elapsed;$/;"	f	class:Contest.Core.Runner
+EmptyFile	Contest.Tests/IgnoreFixture.cs	/^            public void EmptyFile() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+EnumerableExtensions	Contest.Core/EnumerableExtensions.cs	/^    public static class EnumerableExtensions {$/;"	c	namespace:Contest.Core
+Equal	Contest.Core/Runner.cs	/^        public void Equal(object expected, object actual, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
+Exception	Contest.Core/Runner.cs	/^        public void ShouldThrow<T>(Action body) where T : Exception {$/;"	p	class:Contest.Core.Runner
+ExpectedException	Contest.Core/Runner.cs	/^        static readonly Func<Type, string> ExpectedException = extype =>$/;"	f	class:Contest.Core.Runner	file:
+Fail	Contest.Core/Runner.cs	/^        void Fail(string errMsg) {$/;"	m	class:Contest.Core.Runner	file:
+FailCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
+Find	Contest.Demo/Demo.cs	/^		public static Func<string, object> Find = name =>$/;"	f	class:Demo.User
+FindCases	Contest.Core/Contest.cs	/^        internal static Func<TestCaseFinder, Type, string, TestSuite> FindCases =$/;"	f	class:Contest.Core.Contest	file:
+FindCasesNestedTypes	Contest.Core/Contest.cs	/^            FindCasesNestedTypes = (finder, type, flags, ignorePatterns) => {$/;"	f	class:Contest.Core.Contest	file:
+FindRawCasesInAssm	Contest.Core/Contest.cs	/^        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =$/;"	f	class:Contest.Core.Contest	file:
+FindSetups	Contest.Core/Contest.cs	/^        static readonly Func<TestSuite, List<TestCase>> FindSetups = suite =>$/;"	f	class:Contest.Core.Contest	file:
+FindTeardowns	Contest.Core/Contest.cs	/^        static readonly Func<TestSuite, List<TestCase>> FindTeardowns = suite =>$/;"	f	class:Contest.Core.Contest	file:
+FixName	Contest.Core/TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
+Flags	Contest.Core/Contest.cs	/^        static readonly BF[] Flags;$/;"	f	class:Contest.Core.Contest	file:
+FooTest	Contest.Tests/FooTest.cs	/^    class FooTest{$/;"	c	namespace:Contest.Tests
+GetCasesInAssm	Contest.Core/Contest.cs	/^        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =$/;"	f	class:Contest.Core.Contest
+GetFullName	Contest.Core/TestCase.cs	/^        public string GetFullName() {$/;"	m	class:Contest.Core.TestCase
+GetGlobalSetup	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalSetup = setups =>$/;"	f	class:Contest.Core.Contest	file:
+GetGlobalTearDown	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>$/;"	f	class:Contest.Core.Contest	file:
+GetIgnoredPatternsFromFile	Contest.Core/TestCaseFinder.cs	/^        public Func<string[]> GetIgnoredPatternsFromFile = () => {$/;"	f	class:Contest.Core.TestCaseFinder
+GetTestCases	Contest.Core/Contest.cs	/^        static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.Contest	file:
+HandlingExceptions	Contest.Demo/Demo.cs	/^    class HandlingExceptions{$/;"	c	namespace:Demo
+HasDefaultCtor	Contest.Core/TypeExtensions.cs	/^        public static bool HasDefaultCtor(this Type type) {$/;"	m	class:Contest.Core.TypeExtensions
+INS_PRI	Contest.Core/Contest.cs	/^            INS_PRI = BF.Instance | BF.NonPublic,$/;"	f	class:Contest.Core.Contest	file:
+INS_PUB	Contest.Core/Contest.cs	/^            INS_PUB = BF.Instance | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
+IgnoreCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
+IgnoreFileReader	Contest.Core/IgnoreFileReader.cs	/^    public class IgnoreFileReader {$/;"	c	namespace:Contest.Core
+IgnoreFixture	Contest.Tests/IgnoreFixture.cs	/^    public class IgnoreFixture {$/;"	c	namespace:Contest.Tests
+Ignored	Contest.Core/TestCase.cs	/^        public bool Ignored;$/;"	f	class:Contest.Core.TestCase
+InlineCase	Contest.Core/Contest.cs	/^        static readonly Func<TestCase, bool> InlineCase = tcase => tcase.Body == null;$/;"	f	class:Contest.Core.Contest	file:
+Interpol	Contest.Core/StringExtensions.cs	/^		public static string Interpol(this string placeholder, params object[] args){$/;"	m	class:Contest.Core.StringExtensions
+IsNotNull	Contest.Core/Runner.cs	/^        public void IsNotNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
+IsNull	Contest.Core/Runner.cs	/^        public void IsNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
+Main	Contest/Program.cs	/^        static void Main(string[] args) {$/;"	m	class:Contest.Program	file:
+Match	Contest.Core/StringExtensions.cs	/^        public static bool Match(this string pattern, string str){$/;"	m	class:Contest.Core.StringExtensions
+MatchCherryPickingPatterns	Contest.Tests/MatchCherryPickingPatterns.cs	/^    public class MatchCherryPickingPatterns{$/;"	c	namespace:Contest.Tests
+MatchIgnorePattern	Contest.Core/Contest.cs	/^        static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern =$/;"	f	class:Contest.Core.Contest	file:
+Name	Contest.Core/TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
+Nested	Contest.Tests/Wrapper.cs	/^        class Nested {$/;"	c	class:Contest.Tests.Wrapper
+NestedBarTest	Contest.Tests/BarTest.cs	/^        class NestedBarTest{$/;"	c	class:Contest.Tests.BarTest
+NewLineSepValues	Contest.Tests/IgnoreFixture.cs	/^            public void NewLineSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+Not	Contest.Core/Runner.cs	/^        static readonly Func<bool, bool> Not = cnd => !cnd;$/;"	f	class:Contest.Core.Runner	file:
+NotEqual	Contest.Core/Runner.cs	/^        public void NotEqual(object left, object right, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
+Pass	Contest.Core/Runner.cs	/^        void Pass() {$/;"	m	class:Contest.Core.Runner	file:
+PassCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
+PatternsFromCmdLine	Contest.Tests/IgnoreFixture.cs	/^        class PatternsFromCmdLine {$/;"	c	class:Contest.Tests.IgnoreFixture
+PatternsFromIgnoreFile	Contest.Tests/IgnoreFixture.cs	/^        class PatternsFromIgnoreFile {$/;"	c	class:Contest.Tests.IgnoreFixture
+Print	Contest.Core/Printer.cs	/^		public readonly static Action<string, ConsoleColor> Print = (msg, color) => {$/;"	f	class:Contest.Core.Printer
+Print	Contest/Program.cs	/^        static void Print(IEnumerable<string> lines) {$/;"	m	class:Contest.Program	file:
+Print	Contest/Program.cs	/^        static void Print(string msg, params object[] args) {$/;"	m	class:Contest.Program	file:
+PrintFixName	Contest.Core/Printer.cs	/^		public readonly static Action<string> PrintFixName = name => {$/;"	f	class:Contest.Core.Printer
+PrintHelp	Contest/Program.cs	/^        static void PrintHelp() {$/;"	m	class:Contest.Program	file:
+PrintIgnoredPatterns	Contest.Core/Contest.cs	/^        static void PrintIgnoredPatterns(string[] patterns) {$/;"	m	class:Contest.Core.Contest	file:
+PrintResults	Contest.Core/Printer.cs	/^		public readonly static Action<int, long, int, int, int, int> PrintResults = $/;"	f	class:Contest.Core.Printer
+Printer	Contest.Core/Printer.cs	/^	class Printer{$/;"	c	namespace:Contest.Core
+Program	Contest/Program.cs	/^    class Program {$/;"	c	namespace:Contest
+ReadAllLines	Contest.Core/IgnoreFileReader.cs	/^        public static Func<string[]> ReadAllLines = () => {$/;"	f	class:Contest.Core.IgnoreFileReader
+ReadIgnoreFile	Contest.Tests/IgnoreFixture.cs	/^        class ReadIgnoreFile {$/;"	c	class:Contest.Tests.IgnoreFixture
+Reset	Contest.Demo/Demo.cs	/^		public static Action Reset = () => _users.Clear();$/;"	f	class:Demo.User
+Run	Contest.Core/Runner.cs	/^        public void Run(List<TestCase> cases, string cpp = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
+Run	Contest.Core/Runner.cs	/^        public void Run(TestSuite suite, string cpp = null \/*cherry picking pattern.*\/) {$/;"	m	class:Contest.Core.Runner
+Run	Contest.Core/TestCase.cs	/^        public void Run(Runner runner) {$/;"	m	class:Contest.Core.TestCase
+RunFixture	Contest.Tests/RunFixture.cs	/^    public class RunFixture {$/;"	c	namespace:Contest.Tests
+RunSetupAndTeardown	Contest.Tests/RunSetupsAndTeardowns.cs	/^    public class RunSetupAndTeardown {$/;"	c	namespace:Contest.Tests
+RunTests	Contest/Program.cs	/^        static void RunTests(string assmFileName, string cp=null) {$/;"	m	class:Contest.Program	file:
+Runner	Contest.Core/Runner.cs	/^        public Runner() {$/;"	m	class:Contest.Core.Runner
+Runner	Contest.Core/Runner.cs	/^    public class Runner {$/;"	c	namespace:Contest.Core
+RunnerFixture	Contest.Tests/RunnerFixture.cs	/^    public class RunnerFixture {$/;"	c	namespace:Contest.Tests
+STA_PRI	Contest.Core/Contest.cs	/^            STA_PRI = BF.Static | BF.NonPublic;$/;"	f	class:Contest.Core.Contest	file:
+STA_PUB	Contest.Core/Contest.cs	/^            STA_PUB = BF.Static | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
+SameMetaToken	Contest.Core/Contest.cs	/^        static readonly Func<Delegate, Delegate, bool> SameMetaToken =$/;"	f	class:Contest.Core.Contest	file:
+SpaceSepValues	Contest.Tests/IgnoreFixture.cs	/^            public void SpaceSepValues() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+StringExtensions	Contest.Core/StringExtensions.cs	/^    public static class StringExtensions {$/;"	c	namespace:Contest.Core
+TMP	Contest/Program.cs	/^        const string TMP = "tmp";$/;"	f	class:Contest.Program	file:
+TestBodyCantBeNull	Contest.Core/TestCase.cs	/^        Func<string, Exception> TestBodyCantBeNull = name =>$/;"	f	class:Contest.Core.TestCase	file:
+TestCase	Contest.Core/TestCase.cs	/^    public class TestCase {$/;"	c	namespace:Contest.Core
+TestCaseFinder	Contest.Core/TestCaseFinder.cs	/^        public TestCaseFinder(Func<string[]> getIgnoredFromFile = null) {$/;"	m	class:Contest.Core.TestCaseFinder
+TestCaseFinder	Contest.Core/TestCaseFinder.cs	/^    public class TestCaseFinder {$/;"	c	namespace:Contest.Core
+TestClass	Contest.Tests/TestClass.cs	/^    class TestClass {$/;"	c	namespace:Contest.Tests
+TestClassOnePassOnFail	Contest.Tests/TestClassOnePassOnFail.cs	/^    class TestClassOnePassOnFail {$/;"	c	namespace:Contest.Tests
+TestClassThrowingTests	Contest.Tests/TestClassThrowingTests.cs	/^    class TestClassThrowingTests {$/;"	c	namespace:Contest.Tests
+TestCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
+TestSuite	Contest.Core/TestSuite.cs	/^		public TestSuite() {$/;"	m	class:Contest.Core.TestSuite
+TestSuite	Contest.Core/TestSuite.cs	/^    public class TestSuite {$/;"	c	namespace:Contest.Core
+ThisDoesntThrowSoItFails	Contest.Tests/TestClassThrowingTests.cs	/^        public Action<Runner> ThisDoesntThrowSoItFails = $/;"	f	class:Contest.Tests.TestClassThrowingTests
+ThisFail	Contest.Tests/TestClassOnePassOnFail.cs	/^        Action<Runner> ThisFail = runner =>$/;"	f	class:Contest.Tests.TestClassOnePassOnFail	file:
+ThisIsATest	Contest.Tests/TestClass.cs	/^        public Action<Runner> ThisIsATest = test =>$/;"	f	class:Contest.Tests.TestClass
+ThisIsATest	Contest.Tests/Wrapper.cs	/^            Action<Runner> ThisIsATest = runner =>$/;"	f	class:Contest.Tests.Wrapper.Nested	file:
+ThisIsAnotherTest	Contest.Tests/TestClass.cs	/^        Action<Runner> ThisIsAnotherTest = test =>$/;"	f	class:Contest.Tests.TestClass	file:
+ThisIsntATestMethod	Contest.Tests/TestClass.cs	/^        public void ThisIsntATestMethod() { }$/;"	m	class:Contest.Tests.TestClass
+ThisIsntATestMethod	Contest.Tests/Wrapper.cs	/^            void ThisIsntATestMethod() { }$/;"	m	class:Contest.Tests.Wrapper.Nested	file:
+ThisIsntATestMethodEither	Contest.Tests/TestClass.cs	/^        void ThisIsntATestMethodEither() { }$/;"	m	class:Contest.Tests.TestClass	file:
+ThisPass	Contest.Tests/TestClassOnePassOnFail.cs	/^        public Action<Runner> ThisPass = runner =>$/;"	f	class:Contest.Tests.TestClassOnePassOnFail
+ThisThrowsAndPass	Contest.Tests/TestClassThrowingTests.cs	/^        public Action<Runner> ThisThrowsAndPass = $/;"	f	class:Contest.Tests.TestClassThrowingTests
+ToString	Contest.Core/TestCase.cs	/^        public override string ToString() {$/;"	m	class:Contest.Core.TestCase
+TypeExtensions	Contest.Core/TypeExtensions.cs	/^    public static class TypeExtensions {$/;"	c	namespace:Contest.Core
+User	Contest.Demo/Demo.cs	/^	public class User {	$/;"	c	namespace:Demo
+UsingRunnersBag	Contest.Tests/UsingRunnersBag.cs	/^    public class UsingRunnersBag {$/;"	c	namespace:Contest.Tests
+Utils	Contest.Demo/Demo.cs	/^	class Utils {$/;"	c	namespace:Demo
+WhenSplitTrimWhiteSpaces	Contest.Tests/IgnoreFixture.cs	/^            public void WhenSplitTrimWhiteSpaces() {$/;"	m	class:Contest.Tests.IgnoreFixture.ReadIgnoreFile
+WireGlobalSetups	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalSetups = (actual, setups) => {$/;"	f	class:Contest.Core.Contest	file:
+WireGlobalTeardowns	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns =$/;"	f	class:Contest.Core.Contest	file:
+WireSetups	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireSetups =$/;"	f	class:Contest.Core.Contest	file:
+WireTeardowns	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireTeardowns =$/;"	f	class:Contest.Core.Contest	file:
+Wrapper	Contest.Tests/Wrapper.cs	/^    class Wrapper {$/;"	c	namespace:Contest.Tests
+WrongKindaException	Contest.Core/Runner.cs	/^        static readonly Func<Type, Type, string> WrongKindaException = $/;"	f	class:Contest.Core.Runner	file:
+_currCase	Contest.Core/Runner.cs	/^        string _currCase;$/;"	f	class:Contest.Core.Runner	file:
+_errors	Contest.Core/Runner.cs	/^        readonly Dictionary<string, string> _errors = new Dictionary<string, string>();$/;"	f	class:Contest.Core.Runner	file:
+_finder	Contest.Tests/CherryPickingFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.CherryPickingFixture	file:
+_finder	Contest.Tests/DiscoverFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.DiscoverFixture	file:
+_finder	Contest.Tests/RunFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.RunFixture	file:
+_users	Contest.Demo/Demo.cs	/^		static readonly List<string> _users = new List<string>();$/;"	f	class:Demo.User	file:
+after_bar	Contest.Tests/BarTest.cs	/^            Action<Runner> after_bar  = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
+after_each	Contest.Demo/Demo.cs	/^		_ after_each = test =>$/;"	f	class:Demo.Contest_201	file:
+after_echo	Contest.Demo/Demo.cs	/^		_ after_echo = test => $/;"	f	class:Demo.Contest_301	file:
+after_echo	Contest.Tests/UsingRunnersBag.cs	/^            Action<Runner> after_echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
+after_foo	Contest.Tests/FooTest.cs	/^        Action<Runner> after_foo  = runner => {};$/;"	f	class:Contest.Tests.FooTest	file:
+after_test_cases_in_class	Contest.Tests/DiscoverFixture.cs	/^        public void after_test_cases_in_class() {$/;"	m	class:Contest.Tests.DiscoverFixture
+bar	Contest.Tests/BarTest.cs	/^            Action<Runner> bar = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
+before_bar	Contest.Tests/BarTest.cs	/^            Action<Runner> before_bar = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
+before_each	Contest.Demo/Demo.cs	/^		_ before_each = test => {$/;"	f	class:Demo.Contest_201	file:
+before_echo	Contest.Demo/Demo.cs	/^		_ before_echo = test => $/;"	f	class:Demo.Contest_301	file:
+before_echo	Contest.Tests/UsingRunnersBag.cs	/^            Action<Runner> before_echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
+before_foo	Contest.Tests/FooTest.cs	/^        Action<Runner> before_foo = runner => {};$/;"	f	class:Contest.Tests.FooTest	file:
+before_test_cases_in_assm	Contest.Tests/DiscoverFixture.cs	/^        public void before_test_cases_in_assm() {$/;"	m	class:Contest.Tests.DiscoverFixture
+create_user_adds_new_user	Contest.Demo/Demo.cs	/^		_ create_user_adds_new_user = assert => {$/;"	f	class:Demo.Contest_201	file:
+echo	Contest.Demo/Demo.cs	/^		_ echo = test => $/;"	f	class:Demo.Contest_301	file:
+echo	Contest.Tests/UsingRunnersBag.cs	/^            Action<Runner> echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
+find_existing_user_returns_user	Contest.Demo/Demo.cs	/^		_ find_existing_user_returns_user = assert => $/;"	f	class:Demo.Contest_201	file:
+find_non_existing_user_returns_null	Contest.Demo/Demo.cs	/^		_ find_non_existing_user_returns_null = assert => $/;"	f	class:Demo.Contest_201	file:
+foo	Contest.Tests/FooTest.cs	/^        Action<Runner> foo = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Tests.FooTest	file:
+ignore_all_cases	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
+ignore_all_cases	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
+ignore_cases_ending_with	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_cases_ending_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
+ignore_cases_ending_with	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_cases_ending_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
+ignore_cases_starting_with	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_cases_starting_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
+ignore_cases_starting_with	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_cases_starting_with() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
+ignore_cases_when_contains	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_cases_when_contains() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
+ignore_cases_when_contains	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_cases_when_contains() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
+ignore_no_cases	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_no_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
+ignore_no_cases	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_no_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile
+it_should_treat_exceptions_as_failing_tests	Contest.Demo/Demo.cs	/^        _ it_should_treat_exceptions_as_failing_tests = assert => {$/;"	f	class:Demo.HandlingExceptions	file:
+run_only_cases_containing	Contest.Tests/CherryPickingFixture.cs	/^        public void run_only_cases_containing() {$/;"	m	class:Contest.Tests.CherryPickingFixture
+run_only_cases_ending_with	Contest.Tests/CherryPickingFixture.cs	/^        public void run_only_cases_ending_with() {$/;"	m	class:Contest.Tests.CherryPickingFixture
+run_only_cases_starting_with	Contest.Tests/CherryPickingFixture.cs	/^        public void run_only_cases_starting_with() {$/;"	m	class:Contest.Tests.CherryPickingFixture
+run_test_suite	Contest.Tests/RunFixture.cs	/^        public void run_test_suite() {$/;"	m	class:Contest.Tests.RunFixture
+run_throwing_test_suite	Contest.Tests/RunFixture.cs	/^        public void run_throwing_test_suite() {$/;"	m	class:Contest.Tests.RunFixture
+should_run_setup_before_case_unless_setup_is_null	Contest.Tests/RunSetupsAndTeardowns.cs	/^        public void should_run_setup_before_case_unless_setup_is_null() {$/;"	m	class:Contest.Tests.RunSetupAndTeardown
+should_run_teardown_after_case_unless_teardown_is_null	Contest.Tests/RunSetupsAndTeardowns.cs	/^        public void should_run_teardown_after_case_unless_teardown_is_null() {$/;"	m	class:Contest.Tests.RunSetupAndTeardown
+test_cases_in_assm	Contest.Tests/DiscoverFixture.cs	/^        public void test_cases_in_assm() {$/;"	m	class:Contest.Tests.DiscoverFixture
+test_cases_in_class	Contest.Tests/DiscoverFixture.cs	/^        public void test_cases_in_class() {$/;"	m	class:Contest.Tests.DiscoverFixture
+test_cases_in_nested_classes	Contest.Tests/DiscoverFixture.cs	/^        public void test_cases_in_nested_classes() {$/;"	m	class:Contest.Tests.DiscoverFixture
+this_is_a__should_throw__failing_test	Contest.Demo/Demo.cs	/^		_ this_is_a__should_throw__failing_test = test =>$/;"	f	class:Demo.Contest_101	file:
+this_is_a__should_throw__passing_test	Contest.Demo/Demo.cs	/^        _ this_is_a__should_throw__passing_test = test =>$/;"	f	class:Demo.Contest_101	file:
+this_is_a_failing_test	Contest.Demo/Demo.cs	/^		_ this_is_a_failing_test = assert =>$/;"	f	class:Demo.Contest_101	file:
+this_is_a_passing_test	Contest.Demo/Demo.cs	/^		_ this_is_a_passing_test = assert => $/;"	f	class:Demo.Contest_101	file:

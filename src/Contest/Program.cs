@@ -47,7 +47,11 @@
 							return null;
 						};
 
-                        RunTests(args.Length > 1 ? args[1] : null);
+						if(args.Length >= 3)//run assmName cerryPicking
+							RunTests(args[1], args[2]);
+						else 
+							RunTests(args.Length > 1 ? args[1] : null);
+
                         break;
                     case "help":
                     case "h":
@@ -92,7 +96,7 @@
 #endif
         }
 
-        static void RunTests(string assmFileName) {
+        static void RunTests(string assmFileName, string cerryPicking=null) {
             Console.WriteLine("\nConfiguring Assembies....");
 
             if (string.IsNullOrEmpty(assmFileName))
@@ -119,7 +123,7 @@
             var runner = new Runner();
 
             Console.WriteLine("\nDone!\n");
-            runner.Run(suite);
+            runner.Run(suite, cerryPicking);
         }
 
         static void PrintHelp() {

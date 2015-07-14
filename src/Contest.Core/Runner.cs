@@ -17,22 +17,22 @@
         public long Elapsed;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
-        public void Run(TestSuite suite, string cpp = null /*cherry picking pattern.*/) {
-            Run(suite.Cases, cpp);
+        public void Run(TestSuite suite, string cherryPicking = null /*cherry picking pattern.*/) {
+            Run(suite.Cases, cherryPicking);
         }
 
-        public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
+        public void Run(List<TestCase> cases, string cherryPicking = null /*cherry picking pattern.*/) {
 
             Printer.Print("".PadRight(40, '='), ConsoleColor.White);
 
-            var cherryPick = !string.IsNullOrEmpty(cpp);
+            var cherryPick = !string.IsNullOrEmpty(cherryPicking);
             string currfix = null;
             var watch = Stopwatch.StartNew();
             cases.Each(c => {
                 if(c.FixName != currfix) 
 					Printer.PrintFixName((currfix = c.FixName));
 
-                if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
+                if (c.Ignored || (cherryPick && !cherryPicking.Match(c.GetFullName()))) {
                     IgnoreCount++;
                     return;
                 }
@@ -53,7 +53,7 @@
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
             TestCount = cases.Count;
-            Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount);
+            Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount, cherryPicking);
 
             if(FailCount>0)
                 DumpErrors();
