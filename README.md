@@ -1,7 +1,7 @@
 ## contest
-Contest is blend of a console test runner and a minimalist testing framework. In contrast with most popular testing frameworks, **contest** it's based on conventions and it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on. This means that you won't have any syntax noise in your test cases, hence the code will be more readable and, of course, easier to maintain.
+Contest is a console test runner bundled with a minimalist testing framework. In contrast with most popular testing frameworks, **contest** it's based on conventions and it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on, making the code look almost like plain english.
 
-Contest it’s designed to be both lightweight and easy to use. Assuming you are comfortable writing functional C#, you will get a productivity boost from this library.**The syntax is short, sweet and right to the point** and as a bonus feature, the test runner is freaking fast! ;)
+Contest it’s designed to be both lightweight and easy to use (assuming you are comfortable writing functional C#). **The syntax is short and right to the point** and for bonus points the test runner is freaking fast! ;)
 
 Down below you’ll find a couple of examples that will show you how to write tests using **contest**.
 
@@ -35,7 +35,7 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
     }
 
     /// Per fixture setup/teardown.
-    class Contest_201 {
+    class Contest_102 {
 		//fixture setup.
 		_ before_each = test => {
 			User.Create("pipe");
@@ -61,7 +61,7 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
     }
 
     /// Per test case setup/teardown.
-	class Contest_301 {
+	class Contest_103 {
 		_ before_echo = test => 
 			test.Bag["msg"] = "Hello World!";
 
@@ -104,7 +104,7 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 #### A word about conventions
 As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules that _I hope_ are easy to remember.
 
-**Every field of type System.Action\<Contest.Core.Runner\> within a given assembly is considered to be a test case**. As you can see in the samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience; I like to save as much keystrokes as I can, but if you like to mark you classes or test cases as public, it's not a problem, that will work too.
+**Every field of type System.Action\<Contest.Core.Runner\> within a given assembly is considered to be a test case**. As you can see in the samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience. I like to save as much keystrokes as I can, but it will work with public as well.
 
 #### How about setups and teardowns?
 Well, if you been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, **per case** and **per fixture** setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
@@ -116,16 +116,11 @@ And remember, in all cases, **fields type must be System.Action\<Contest.Core.Ru
 ##### How to ignore tests using .test\_ignore file.
 **TODO:
 
-
-#### How to build *contest*
-Loyal to its philosophy, **contest** it's really easy to build. Just clone the repo, open your command promp (If you didn't already), then go to *~/build* and run: **make release**. (or _make debug_ if that is what you want). 
-Once the process finishes, go to *~/out* directory and you'll find a single file called _contest.exe_. And... that's it. You are done :).
-
 #### How to run *contest*
 The easiest way to use contest it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just run: **contest run test\_cases.dll**
 
 #### Closing tip:
-A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above and it made test cases more readable (and nobody cares about test cases return types anyways).
+A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above and it made test cases more readable (and nobody cares about test cases return types anyways, so why not).
 
 
 **Thanks for reading! And lemme know if you have any trouble using this library**
