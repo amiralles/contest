@@ -1,5 +1,6 @@
 ﻿namespace Contest.Core {
     using System;
+    using System.Reflection;
     using System.Collections.Generic;
     using System.Diagnostics;
 
@@ -132,6 +133,15 @@
                 body();
                 Fail(ExpectedException(typeof(T)));
             }
+            catch (TargetInvocationException ex) {
+                Type expected = typeof(T), actual = ex.InnerException.GetType();
+                if (expected != actual) {
+                    Fail(WrongKindaException(expected, actual));
+                    return;
+                }
+
+                Pass();
+			}
             catch (Exception ex) {
                 Type expected = typeof(T), actual = ex.GetType();
                 if (expected != actual) {
