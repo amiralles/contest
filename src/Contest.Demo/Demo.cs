@@ -11,6 +11,13 @@
         };
     }
 
+	class ErrorMsgs{
+		_ exptect_error_message_pass = expects =>
+			expects.ErrMsg("foo", ()=> {throw new Exception("foo");});
+
+		_ exptect_error_message_fails = expects =>
+			expects.ErrMsg("foo", ()=> {});
+	}
 
     class Contest_101 {
 
