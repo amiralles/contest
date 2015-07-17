@@ -127,7 +127,12 @@
             Pass();
         }
 
-        public void ErrMsg(string msg, Action body) {
+
+		static Func<string, string, bool> MsgEq = (lhs, rhs) => lhs == rhs;
+		static Func<string, string, bool> MsgContains = (msg, chunck) => 
+			msg != null && msg.Contains(chunck);
+
+        void ErrMsg(Func<string, string, bool> compStrat, string msg, Action body) {
 			Action failWithMsg = () => Fail("Expected Error Message => {0}".Interpol(msg));
             try {
                 AssertsCount++;
@@ -135,18 +140,26 @@
 				failWithMsg();
             }
             catch (TargetInvocationException ex) {
-				if(ex.InnerException.Message == msg)
+				if(ex.InnerException != null && compStrat(ex.InnerException.Message, msg))
 					Pass();
 				else
 					failWithMsg();
 
 			}
             catch (Exception ex) {
-				if(ex.Message == msg)
+				if(compStrat(ex.Message, msg))
 					Pass();
 				else
 					failWithMsg();
             }
+		}
+
+        public void ErrMsgContains(string text, Action body) {
+			ErrMsg(MsgContains, text, body);
+		}
+
+        public void ErrMsg(string msg, Action body) {
+			ErrMsg(MsgEq, msg, body);
 		}
 
         public void ShouldThrow<T>(Action body) where T : Exception {
