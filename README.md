@@ -112,7 +112,12 @@ And remember, in all cases, **fields type must be System.Action\<Contest.Core.Ru
 
 #### Cherry picking
 ##### How to use wildcards from the console to run or exclude some tests.
-**TODO:
+```bash
+contest run test.dll *test_name_contains*
+contest run test.dll test_name_starts_with*
+contest run test.dll *test_name_ends_with
+```
+
 ##### How to ignore tests using .test\_ignore file.
 **TODO:
 
