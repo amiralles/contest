@@ -11,6 +11,20 @@
         };
     }
 
+	class ErrorMsgs{
+		_ exptect_error_message_pass = expects =>
+			expects.ErrMsg("foo", ()=> {throw new Exception("foo");});
+
+		_ exptect_error_message_fails = expects =>
+			expects.ErrMsg("foo", ()=> {});
+
+		_ exptect_error_message_contains_pass = expects =>
+			expects.ErrMsgContains("foo", ()=> { throw new Exception("This is a foo error.");});
+
+		_ exptect_error_message_contains_fails = expects =>
+			expects.ErrMsgContains("foo", ()=> {});
+
+	}
 
     class Contest_101 {
 

@@ -1,5 +1,6 @@
 ﻿namespace Contest.Core {
     using System;
+    using System.Reflection;
     using System.Collections.Generic;
     using System.Diagnostics;
 
@@ -17,22 +18,24 @@
         public long Elapsed;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
-        public void Run(TestSuite suite, string cpp = null /*cherry picking pattern.*/) {
-            Run(suite.Cases, cpp);
+        public void Run(TestSuite suite, string cherryPicking = null, bool printHeaders=true) {
+            Run(suite.Cases, cherryPicking, printHeaders);
         }
 
-        public void Run(List<TestCase> cases, string cpp = null /*cherry picking pattern.*/) {
+        public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders=true) {
 
             Printer.Print("".PadRight(40, '='), ConsoleColor.White);
 
-            var cherryPick = !string.IsNullOrEmpty(cpp);
+            var cherryPick = !string.IsNullOrEmpty(cherryPicking);
             string currfix = null;
             var watch = Stopwatch.StartNew();
             cases.Each(c => {
-                if(c.FixName != currfix) 
-					Printer.PrintFixName((currfix = c.FixName));
+				if(printHeaders){
+					if(c.FixName != currfix) 
+						Printer.PrintFixName((currfix = c.FixName));
+				}
 
-                if (c.Ignored || (cherryPick && !cpp.Match(c.GetFullName()))) {
+                if (c.Ignored || (cherryPick && !cherryPicking.Match(c.GetFullName()))) {
                     IgnoreCount++;
                     return;
                 }
@@ -53,7 +56,7 @@
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
             TestCount = cases.Count;
-            Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount);
+            Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount, cherryPicking);
 
             if(FailCount>0)
                 DumpErrors();
@@ -124,12 +127,56 @@
             Pass();
         }
 
+
+		static Func<string, string, bool> MsgEq = (lhs, rhs) => lhs == rhs;
+		static Func<string, string, bool> MsgContains = (msg, chunck) => 
+			msg != null && msg.Contains(chunck);
+
+        void ErrMsg(Func<string, string, bool> compStrat, string msg, Action body) {
+			Action failWithMsg = () => Fail("Expected Error Message => {0}".Interpol(msg));
+            try {
+                AssertsCount++;
+                body();
+				failWithMsg();
+            }
+            catch (TargetInvocationException ex) {
+				if(ex.InnerException != null && compStrat(ex.InnerException.Message, msg))
+					Pass();
+				else
+					failWithMsg();
+
+			}
+            catch (Exception ex) {
+				if(compStrat(ex.Message, msg))
+					Pass();
+				else
+					failWithMsg();
+            }
+		}
+
+        public void ErrMsgContains(string text, Action body) {
+			ErrMsg(MsgContains, text, body);
+		}
+
+        public void ErrMsg(string msg, Action body) {
+			ErrMsg(MsgEq, msg, body);
+		}
+
         public void ShouldThrow<T>(Action body) where T : Exception {
             try {
                 AssertsCount++;
                 body();
                 Fail(ExpectedException(typeof(T)));
             }
+            catch (TargetInvocationException ex) {
+                Type expected = typeof(T), actual = ex.InnerException.GetType();
+                if (expected != actual) {
+                    Fail(WrongKindaException(expected, actual));
+                    return;
+                }
+
+                Pass();
+			}
             catch (Exception ex) {
                 Type expected = typeof(T), actual = ex.GetType();
                 if (expected != actual) {
