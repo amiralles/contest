@@ -82,12 +82,20 @@
         }
 
         public void IsNotNull(object value, string errMsg = null) {
-            var msg = string.IsNullOrEmpty(errMsg)
-                ? "Expected NOT null."
-                : errMsg;
+            var msg = string.IsNullOrEmpty(errMsg) ? "Expected NOT null." : errMsg;
 
             Assert(value != null, msg);
         }
+
+        public void IsTrue(object cond, string errMsg = null) {
+            var msg = string.IsNullOrEmpty(errMsg) ? "Expected true." : errMsg;
+            Assert(Convert.ToBoolean(cond), msg);
+		}
+
+        public void IsFalse(object cond, string errMsg = null) {
+            var msg = string.IsNullOrEmpty(errMsg) ? "Expected false." : errMsg;
+            Assert(!Convert.ToBoolean(cond), msg);
+		}
 
         public void Equal(object expected, object actual, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
