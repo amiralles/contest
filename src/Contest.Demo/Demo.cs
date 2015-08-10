@@ -5,13 +5,13 @@
 	using System.Linq;
 	using _  = System.Action<Contest.Core.Runner>;
 
-    class HandlingExceptions{
+    class HandlingExceptions {
         _ it_should_treat_exceptions_as_failing_tests = assert => {
             throw new Exception("asd");
         };
     }
 
-	class ErrorMsgs{
+	class ErrorMsgs {
 		_ exptect_error_message_pass = expects =>
 			expects.ErrMsg("foo", ()=> {throw new Exception("foo");});
 

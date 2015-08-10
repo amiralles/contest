@@ -197,13 +197,13 @@
         }
 
 
-        void Fail(string errMsg) {
+        public void Fail(string errMsg) {
             FailCount++;
             Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
             _errors[_currCase] = errMsg;
         }
 
-        void Pass() {
+        public void Pass() {
             PassCount++;
             Printer.Print("Pass!", ConsoleColor.Green);
         }
