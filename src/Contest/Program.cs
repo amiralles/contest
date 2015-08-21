@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using Core;
+    using static System.Console;
 
     class Program {
         const string TMP = "tmp";
@@ -20,6 +21,12 @@
                     PrintHelp();
                     return;
                 }
+
+                if (args.Any(a => a == "-dbg")) {
+                    WriteLine("Attach the debugger and press [Enter] to continue.");
+                    ReadLine();
+                }
+
 
                 var cmd = args[0];
                 switch (cmd) {
