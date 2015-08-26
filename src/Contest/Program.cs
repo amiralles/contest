@@ -29,8 +29,6 @@
 
 				var printHeaders = !args.Any(a => a == "--no-head" || a == "-nh");
 
-
-
 				//clean args list (no flags).
 				args = (from a in args where !a.StartsWith("-") select a).ToArray();
 
@@ -142,10 +140,50 @@
         }
 
         static void PrintHelp() {
-            Print("Commands");
-            Print("exit | q => Quit.");
-            Print("help | h => Show help.");
-            Print("run  | r AssmFileName => Run all tests within the given file.");
+            Print("=================================================================================");
+            Print("| Contest - Console Test Runner                                                 |");
+            Print("=================================================================================");
+
+
+            Print("=================================================================================");
+            Print("| Commands                                                                      |");
+            Print("=================================================================================");
+            Print("| name  | args              | summary                                           |");
+            Print("=================================================================================");
+            Print("| help  |                   | Shows help.                                       |");
+            Print("| run   | test.dll          | Runs all tests within the given file.             |");
+            Print("| run   | test.dll wildcard | Runs all tests within the given file where the    |");
+		    Print("|       |                   | test name matches the wildcard pattern.           |");
+            Print("=================================================================================");
+			Print("");
+			Print("-- More --");
+			Console.ReadLine();
+
+            Print("=================================================================================");
+            Print("| Flags                                                                         |");
+            Print("=================================================================================");
+            Print("| name  | summary                                                               |");
+            Print("=================================================================================");
+            Print("| -nh   | Don't print fixture names.                                            |");
+            Print("| -dbg  | Stop the runner until the user presses [Enter].                       |");
+            Print("=================================================================================");
+			Print("");
+			Print("-- More --");
+			Console.ReadLine();
+
+            Print("=================================================================================");
+            Print("| Alias                                                                         |");
+            Print("=================================================================================");
+            Print("| name      | summary                                                           |");
+            Print("=================================================================================");
+            Print("| --no-head | -nh                                                               |");
+            Print("| r         | run                                                               |");
+            Print("=================================================================================");
+			Print("");
+
+            Print("\nMore about contest at:");
+            Print("https://github.com/amiralles/contest\n");
+		   
         }
 
         static void Print(IEnumerable<string> lines) {
