@@ -27,6 +27,12 @@
                     ReadLine();
                 }
 
+				var printHeaders = !args.Any(a => a == "--no-head" || a == "-nh");
+
+
+
+				//clean args list (no flags).
+				args = (from a in args where !a.StartsWith("-") select a).ToArray();
 
                 var cmd = args[0];
                 switch (cmd) {
@@ -36,6 +42,7 @@
 							Console.WriteLine("File name expected. (The name of the assembly that contains test cases)");
 							return;
 						}
+
 						var root = Path.GetDirectoryName(args[1]);
 						CopyToLocalTmp(root);
 						AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
@@ -54,22 +61,19 @@
 							return null;
 						};
 
-						if(args.Length >= 3){//run assmName cerryPicking
-							//TODO: Refactor this. --no-head should be available for
-							//any kind of run, nos just de ones that cherrypicks.
-							var printHeaders = !(args.Length >= 4 && args[3] == "--no-head");
-							RunTests(args[1], args[2], printHeaders);
-						}
-						else 
-							RunTests(args.Length > 1 ? args[1] : null);
+						//args[0] == cmd
+						var testAssm = args[1];
+						var pattern  = args.Length >= 3 ? args[2] : null;
+
+						RunTests(testAssm, pattern, printHeaders);
 
                         break;
                     case "help":
                     case "h":
                     default: {
-                            PrintHelp();
-                            break;
-                        }
+						 PrintHelp();
+						 break;
+					}
                 }
             }
             catch (Exception ex) {
