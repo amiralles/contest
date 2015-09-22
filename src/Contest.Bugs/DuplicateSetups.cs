@@ -1,6 +1,16 @@
 using _ = System.Action<Contest.Core.Runner>;
 using static System.Console;
 
+/*
+class feature_proposal {
+    // runs only once before any test within the containing class.
+	_ before_any = test => { ; };
+
+	// runs only once per class upon fixture completion. 
+	_ after_all  = test => {; };
+}
+*/
+
 class fixure_wide_setup_teardown {
 	_ before_each = test => { WriteLine(">>>> fixture setup"); };
 	_ after_each  = test => { WriteLine(">>>> fixture teardown"); };
