@@ -1,5 +1,6 @@
 namespace Contest.Core {
     using System;
+    using System.Diagnostics;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -50,6 +51,11 @@ namespace Contest.Core {
 
                 return suite;
             };
+
+
+		static void Die(string errmsg) {
+			throw new Exception(errmsg);
+		}
 
         public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =
             (finder, assm, ignorePatterns) => {
@@ -126,17 +132,17 @@ namespace Contest.Core {
 
         static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =
             (type, flags) => (
-                from fi in type.GetFields(flags)
-                where fi.FieldType == typeof(Action<Runner>)
-                select fi
-                ).ToList();
+                from   fi in type.GetFields(flags)
+                where  fi.FieldType == typeof(Action<Runner>)
+                select fi).ToList();
 
+        static readonly Func<List<TestCase>,  TestCase> GetGlobalSetup = 
+			(setups) => 
+				setups.FirstOrDefault(t => t.Name.ToUpper() == BEFORE_EACH);
 
-        static readonly Func<List<TestCase>, TestCase> GetGlobalSetup = setups =>
-            setups.FirstOrDefault(t => t.Name.ToUpper() == BEFORE_EACH);
-
-        static readonly Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>
-            teardowns.FirstOrDefault(t => t.Name.ToUpper() == AFTER_EACH);
+        static readonly Func<List<TestCase>,  TestCase> GetGlobalTearDown =
+		   	(teardowns) => 
+				teardowns.FirstOrDefault(t => t.Name.ToUpper() == AFTER_EACH);
 
         static readonly Action<TestSuite, List<TestCase>> WireGlobalSetups = (actual, setups) => {
             var gsup = GetGlobalSetup(setups);
@@ -146,6 +152,9 @@ namespace Contest.Core {
             (from c in actual.Cases
              where c.BeforeCase != null
              select c).Each(c => {
+				 if(c.FixName != gsup.FixName)
+					return;
+
                  var tsup = c.BeforeCase;
                  c.BeforeCase = runner => {
                      tsup(runner);
@@ -153,9 +162,13 @@ namespace Contest.Core {
                  };
              });
 
-            (from c in actual.Cases
-             where c.BeforeCase == null
-             select c).Each(c => c.BeforeCase = gsup.Body);
+            (from c in actual.Cases where c.BeforeCase == null select c)
+				.Each(c => { 
+						if(c.FixName != gsup.FixName)
+							return;
+
+						c.BeforeCase = gsup.Body;
+					});
         };
 
         static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns =
@@ -167,6 +180,9 @@ namespace Contest.Core {
                 (from c in actual.Cases
                  where c.AfterCase != null
                  select c).Each(c => {
+					 if(c.FixName != gtd.FixName)
+						return;
+
                      var td = c.AfterCase;
                      c.AfterCase = runner => {
                          td(runner);
@@ -176,7 +192,12 @@ namespace Contest.Core {
 
                 (from c in actual.Cases
                  where c.AfterCase == null
-                 select c).Each(c => c.AfterCase = gtd.Body);
+                 select c).Each(c => {
+					if(c.FixName != gtd.FixName)
+						return;
+					 
+					 c.AfterCase = gtd.Body;
+				});
             };
 
 
@@ -206,7 +227,17 @@ namespace Contest.Core {
         static readonly Action<TestSuite, List<TestCase>> WireSetups =
             (suite, setups) => setups.Each(bc => {
                 var tcase = suite.Cases.FirstOrDefault(
-                    c => c.Name.ToUpper() == bc.Name.ToUpper().Replace(BEFORE, ""));
+                    c => { 
+							if(c.FixName != bc.FixName)
+								return false;
+
+							var fname   = c.GetFullName().ToUpper();
+							if(fname == BEFORE_EACH)
+							 	return false;
+
+							var bcfname = bc.GetFullName().ToUpper().Replace(BEFORE, "");
+							return fname == bcfname;
+						});
 
                 //Specific teardows takes precedence over generic ones.
                 if (tcase != null)
@@ -216,7 +247,7 @@ namespace Contest.Core {
         static readonly Action<TestSuite, List<TestCase>> WireTeardowns =
             (suite, teardowns) => teardowns.Each(ac => {
                 var tcase = suite.Cases.FirstOrDefault(
-                    c => c.Name.ToUpper() == ac.Name.ToUpper().Replace(AFTER, ""));
+                    c => c.GetFullName().ToUpper() == ac.GetFullName().ToUpper().Replace(AFTER, ""));
 
                 //Specific teardows takes precedence over generic ones.
                 if (tcase != null)
