@@ -48,7 +48,7 @@ _Please keep in mind this is a protoype and is not production ready (yet). It'll
 			assert.IsNotNull(User.Find("pipe"));
 
 		_ should_return_null_when_cant_find_the_user = assert => 
-			assert.IsNull(User.Find("not exists"));
+			assert.IsNull(User.Find("not_exists"));
 
 		_ should_add_new_users = assert => {
 			User.Create("foo");
