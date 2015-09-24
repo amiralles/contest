@@ -1,66 +1,62 @@
 ## contest
-Contest is a console test runner bundled with a minimalist testing framework. In contrast with most popular testing frameworks, **contest** it's based on conventions and it doesn't require a whole lotta of attributes to identify tests cases, fixtures, setups and so on, making the code look almost like plain english.
+Contest is minimalistic testing framework bundled with a freaking fast console test runner. In contrast with most popular testing frameworks, it's based on conventions, so it doesn't require a whole lotta of attributes to identify tests artifacts such as test methods, test fixtures, test setups and so on and so forth. So in the end the code reads almost like plain english.
 
-Contest it’s designed to be both lightweight and easy to use (assuming you are comfortable writing functional C#). **The syntax is short and right to the point** and test runner is freaking fast!
+Down below you’ll find a couple of examples on how to write tests using Contest.
 
-Down below you’ll find a couple of examples that will show you how to write tests using **contest**.
-
-_Please keep in mind this is a protoype and it's not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
+_Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
-    //=================================================================
-    // Test samples.
-    //=================================================================
 	using _  = System.Action<Contest.Core.Runner>;
 
     /// Basic features.
     class Contest_101 {
 
-		_ this_is_a_passing_test = assert => 
+		_ passing_test = assert => 
 			assert.Equal(4, 2 + 2);
 
-		_ this_is_a_failing_test = assert =>
+		_ failing_test = assert =>
 			assert.Equal(5, 2 + 2);
-
-        _ this_is_a_throw_expected_passing_test = test =>
-            test.ShouldThrow<NullReferenceException>(() => {
-                object target = null;
-                var dummy = target.ToString();
-                //================^ null reference ex.
-            });
-
-        _ this_is_a_throw_expected_failing_test = test =>
-		    test.ShouldThrow<NullReferenceException>(() => {
-			    //It doesn't throws; So it fails.
-		    });
+	
+		_ expected_exception_passing_test = test =>
+			test.ShouldThrow<NullReferenceException>(() => {
+				object target = null;
+				var dummy = target.ToString();
+				//================^ null reference ex.
+			});
+	
+		_ expected_exception_failing_test = test =>
+			test.ShouldThrow<NullReferenceException>(() => {
+				//It doesn't throws; So it fails.
+			});
     }
-
-    /// Per fixture setup/teardown.
+    
+    // Per fixture setup/teardown.
     class Contest_102 {
-		//fixture setup.
+		// Fixture setup.
 		_ before_each = test => {
 			User.Create("pipe");
 			User.Create("vilmis");
 			User.Create("amiralles");
 		};
 
-		//fixture teardown.
-		_ after_each = test =>
+		// Fixture teardown.
+		_ after_each = test => {
 			User.Reset();
+		};
 		
-		//actual test cases.
-		_ should_return_usr_when_finding_existing_usr = assert => 
+		// Actual test cases.
+		_ should_find_existing_users = assert => 
 			assert.IsNotNull(User.Find("pipe"));
 
-		_ should_return_null_when_finding_non_existing_usr = assert => 
+		_ should_return_null_when_cant_find_the_user = assert => 
 			assert.IsNull(User.Find("not exists"));
 
-		_ should_add_usr_when_creating_new_usr = assert => {
+		_ should_add_new_users = assert => {
 			User.Create("foo");
 			assert.Equal(4, User.Count());
 		};
     }
 
-    /// Per test case setup/teardown.
+	// Per test case setup/teardown.
 	class Contest_103 {
 		_ before_echo = test => 
 			test.Bag["msg"] = "Hello World!";
@@ -74,28 +70,18 @@ _Please keep in mind this is a protoype and it's not production ready (yet). It'
 	}
 
     //=================================================================
-    // end of tests.
-    //=================================================================
-
-
-    //=================================================================
-    // Dummy classes
+    // Dummies
     //=================================================================
 	class Utils {
 		public static Func<object, object> Echo = msg => msg;
 	}
-
+	
 	public class User {	
 		static readonly List<string> _users = new List<string>();
-
 		public static Action Reset = () => _users.Clear();
-			
 		public static Action<string> Create = name => _users.Add(name);
-
 		public static Func<int> Count = () => _users.Count;
-
-		public static Func<string, object> Find = name =>
-			_users.FirstOrDefault(u => u == name);
+		public static Func<string, object> Find = name => _users.FirstOrDefault(u => u == name);
 	}
     //=================================================================
 ```
@@ -111,7 +97,7 @@ Well, if you been doing unit testing for a while you surely had notice that most
 And remember, in all cases, **fields type must be System.Action\<Contest.Core.Runner\>**. Otherwise, it ain't gonna work.
 
 #### Cherry picking
-##### How to use wildcards from the console to run or exclude some tests.
+##### You can use wildcards to ask Contest to filter your fixtures and only run matching tests.
 ```bash
 contest run test.dll *test_name_contains*
 contest run test.dll test_name_starts_with*
@@ -121,11 +107,11 @@ contest run test.dll *test_name_ends_with
 ##### How to ignore tests using .test\_ignore file.
 **TODO:
 
-#### How to run *contest*
-The easiest way to use contest it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just run: **contest run test\_cases.dll**
+#### How to run *Contest*
+The easiest way to run Contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just run: **contest run test\_cases.dll**
 
-#### Closing tip:
-A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above and it made test cases more readable (and nobody cares about test cases return types anyways, so why not).
+#### What the hell is that underscore thing?
+A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above to get more readable test code (and nobody cares about test cases's return types anyways).
 
 
 **Thanks for reading! And lemme know if you have any trouble using this library**
