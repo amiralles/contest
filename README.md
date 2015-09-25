@@ -85,7 +85,18 @@ _Please keep in mind this is a protoype and is not production ready (yet). It'll
 	}
     //=================================================================
 ```
+#### Contest API
 
+```
+        //I guess this section is selfexplanatory ;)
+		IsNull(value [, errMsg])
+        IsNotNull(value [, errMsg])
+        IsTrue(cond [, errMsg = null])
+        IsFalse(cond [, errMsg = null])
+        Equal(expected, actual [, errMsg])
+        NotEqual(expected, actual [, errMsg])
+        Assert(bool cond [, string errMsg]
+```
 		
 #### A word about conventions
 As I mentioned earlier, contest it's based on conventions so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules that are easy to remember.
