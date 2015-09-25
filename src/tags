@@ -69,6 +69,7 @@ CopyToLocalTmp	Contest/Program.cs	/^        static void CopyToLocalTmp(string ro
 Count	Contest.Demo/Demo.cs	/^		public static Func<int> Count = () => _users.Count;$/;"	f	class:Demo.User
 Create	Contest.Demo/Demo.cs	/^		public static Action<string> Create = name => _users.Add(name);$/;"	f	class:Demo.User
 Demo	Contest.Demo/Demo.cs	/^﻿namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
+Die	Contest.Core/Contest.cs	/^		static void Die(string errmsg) {$/;"	m	class:Contest.Core.Contest	file:
 DiscoverFixture	Contest.Tests/DiscoverFixture.cs	/^    public class DiscoverFixture {$/;"	c	namespace:Contest.Tests
 DumpErrors	Contest.Core/Runner.cs	/^        void DumpErrors(){$/;"	m	class:Contest.Core.Runner	file:
 Each	Contest.Core/EnumerableExtensions.cs	/^        public static void Each<T>(this IEnumerable<T> target, Action<T> callback) {$/;"	m	class:Contest.Core.EnumerableExtensions
@@ -84,6 +85,7 @@ ErrMsg	Contest.Core/Runner.cs	/^        void ErrMsg(Func<string, string, bool> c
 ErrMsgContains	Contest.Core/Runner.cs	/^        public void ErrMsgContains(string text, Action body) {$/;"	m	class:Contest.Core.Runner
 ErrorMsgs	Contest.Demo/Demo.cs	/^	class ErrorMsgs {$/;"	c	namespace:Demo
 Exception	Contest.Core/Runner.cs	/^        public void ShouldThrow<T>(Action body) where T : Exception {$/;"	p	class:Contest.Core.Runner
+Exception	Contest.Core/Runner.cs	/^        public void Throws<T>(Action body) where T : Exception {$/;"	p	class:Contest.Core.Runner
 ExpectedException	Contest.Core/Runner.cs	/^        static readonly Func<Type, string> ExpectedException = extype =>$/;"	f	class:Contest.Core.Runner	file:
 Fail	Contest.Core/Runner.cs	/^        public void Fail(string errMsg) {$/;"	m	class:Contest.Core.Runner
 FailCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
@@ -98,8 +100,8 @@ Flags	Contest.Core/Contest.cs	/^        static readonly BF[] Flags;$/;"	f	class:
 FooTest	Contest.Tests/FooTest.cs	/^    class FooTest{$/;"	c	namespace:Contest.Tests
 GetCasesInAssm	Contest.Core/Contest.cs	/^        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =$/;"	f	class:Contest.Core.Contest
 GetFullName	Contest.Core/TestCase.cs	/^        public string GetFullName() {$/;"	m	class:Contest.Core.TestCase
-GetGlobalSetup	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalSetup = setups =>$/;"	f	class:Contest.Core.Contest	file:
-GetGlobalTearDown	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>, TestCase> GetGlobalTearDown = teardowns =>$/;"	f	class:Contest.Core.Contest	file:
+GetGlobalSetup	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>,  TestCase> GetGlobalSetup = $/;"	f	class:Contest.Core.Contest	file:
+GetGlobalTearDown	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>,  TestCase> GetGlobalTearDown =$/;"	f	class:Contest.Core.Contest	file:
 GetIgnoredPatternsFromFile	Contest.Core/TestCaseFinder.cs	/^        public Func<string[]> GetIgnoredPatternsFromFile = () => {$/;"	f	class:Contest.Core.TestCaseFinder
 GetTestCases	Contest.Core/Contest.cs	/^        static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.Contest	file:
 Green	Contest.Core/Printer.cs	/^		static ConsoleColor Green  = ConsoleColor.Green;$/;"	f	class:Contest.Core.Printer	file:
@@ -202,18 +204,26 @@ _finder	Contest.Tests/DiscoverFixture.cs	/^        readonly TestCaseFinder _find
 _finder	Contest.Tests/RunFixture.cs	/^        readonly TestCaseFinder _finder = new TestCaseFinder();$/;"	f	class:Contest.Tests.RunFixture	file:
 _users	Contest.Demo/Demo.cs	/^		static readonly List<string> _users = new List<string>();$/;"	f	class:Demo.User	file:
 after_bar	Contest.Tests/BarTest.cs	/^            Action<Runner> after_bar  = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
+after_each	Contest.Bugs/DuplicateSetups.cs	/^	_ after_each  = test => { WriteLine(">>>> fixture teardown"); };$/;"	f	class:fixure_wide_setup_teardown	file:
 after_each	Contest.Demo/Demo.cs	/^		_ after_each = test =>$/;"	f	class:Demo.Contest_201	file:
 after_echo	Contest.Demo/Demo.cs	/^		_ after_echo = test => $/;"	f	class:Demo.Contest_301	file:
 after_echo	Contest.Tests/UsingRunnersBag.cs	/^            Action<Runner> after_echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
+after_foo	Contest.Bugs/DuplicateSetups.cs	/^	_ after_foo  = test => { WriteLine(">>>> foo teardown"); };$/;"	f	class:case_specific_setup_teardown	file:
 after_foo	Contest.Tests/FooTest.cs	/^        Action<Runner> after_foo  = runner => {};$/;"	f	class:Contest.Tests.FooTest	file:
 after_test_cases_in_class	Contest.Tests/DiscoverFixture.cs	/^        public void after_test_cases_in_class() {$/;"	m	class:Contest.Tests.DiscoverFixture
+bar	Contest.Bugs/DuplicateSetups.cs	/^	_ bar = assert => assert.Pass();$/;"	f	class:fixure_wide_setup_teardown	file:
 bar	Contest.Tests/BarTest.cs	/^            Action<Runner> bar = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
+baz	Contest.Bugs/DuplicateSetups.cs	/^	_ baz	   = assert => assert.Pass();$/;"	f	class:case_specific_setup_teardown	file:
+bazzinga	Contest.Bugs/DuplicateSetups.cs	/^	_ bazzinga = assert => assert.Pass();$/;"	f	class:case_specific_setup_teardown	file:
 before_bar	Contest.Tests/BarTest.cs	/^            Action<Runner> before_bar = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
+before_each	Contest.Bugs/DuplicateSetups.cs	/^	_ before_each = test => { WriteLine(">>>> fixture setup"); };$/;"	f	class:fixure_wide_setup_teardown	file:
 before_each	Contest.Demo/Demo.cs	/^		_ before_each = test => {$/;"	f	class:Demo.Contest_201	file:
 before_echo	Contest.Demo/Demo.cs	/^		_ before_echo = test => $/;"	f	class:Demo.Contest_301	file:
 before_echo	Contest.Tests/UsingRunnersBag.cs	/^            Action<Runner> before_echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
+before_foo	Contest.Bugs/DuplicateSetups.cs	/^	_ before_foo = test => { WriteLine(">>>> foo setup"); };$/;"	f	class:case_specific_setup_teardown	file:
 before_foo	Contest.Tests/FooTest.cs	/^        Action<Runner> before_foo = runner => {};$/;"	f	class:Contest.Tests.FooTest	file:
 before_test_cases_in_assm	Contest.Tests/DiscoverFixture.cs	/^        public void before_test_cases_in_assm() {$/;"	m	class:Contest.Tests.DiscoverFixture
+case_specific_setup_teardown	Contest.Bugs/DuplicateSetups.cs	/^class case_specific_setup_teardown {$/;"	c
 create_user_adds_new_user	Contest.Demo/Demo.cs	/^		_ create_user_adds_new_user = assert => {$/;"	f	class:Demo.Contest_201	file:
 echo	Contest.Demo/Demo.cs	/^		_ echo = test => $/;"	f	class:Demo.Contest_301	file:
 echo	Contest.Tests/UsingRunnersBag.cs	/^            Action<Runner> echo = test =>$/;"	f	class:Contest.Tests.UsingRunnersBag.EchoTest	file:
@@ -223,6 +233,9 @@ exptect_error_message_fails	Contest.Demo/Demo.cs	/^		_ exptect_error_message_fai
 exptect_error_message_pass	Contest.Demo/Demo.cs	/^		_ exptect_error_message_pass = expects =>$/;"	f	class:Demo.ErrorMsgs	file:
 find_existing_user_returns_user	Contest.Demo/Demo.cs	/^		_ find_existing_user_returns_user = assert => $/;"	f	class:Demo.Contest_201	file:
 find_non_existing_user_returns_null	Contest.Demo/Demo.cs	/^		_ find_non_existing_user_returns_null = assert => $/;"	f	class:Demo.Contest_201	file:
+fixure_wide_setup_teardown	Contest.Bugs/DuplicateSetups.cs	/^class fixure_wide_setup_teardown {$/;"	c
+foo	Contest.Bugs/DuplicateSetups.cs	/^	_ foo      = assert => assert.Pass();$/;"	f	class:case_specific_setup_teardown	file:
+foo	Contest.Bugs/DuplicateSetups.cs	/^	_ foo = assert => assert.Pass();$/;"	f	class:fixure_wide_setup_teardown	file:
 foo	Contest.Tests/FooTest.cs	/^        Action<Runner> foo = assert => assert.Equal(1, 2);$/;"	f	class:Contest.Tests.FooTest	file:
 ignore_all_cases	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromCmdLine
 ignore_all_cases	Contest.Tests/IgnoreFixture.cs	/^            public void ignore_all_cases() {$/;"	m	class:Contest.Tests.IgnoreFixture.PatternsFromIgnoreFile

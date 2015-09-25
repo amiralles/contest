@@ -88,14 +88,29 @@ _Please keep in mind this is a protoype and is not production ready (yet). It'll
 #### Contest API
 
 ```
-        //I guess this section is selfexplanatory ;)
-		IsNull(value [, errMsg])
-        IsNotNull(value [, errMsg])
-        IsTrue(cond [, errMsg = null])
-        IsFalse(cond [, errMsg = null])
-        Equal(expected, actual [, errMsg])
-        NotEqual(expected, actual [, errMsg])
-        Assert(bool cond [, string errMsg]
+	//I guess this section is selfexplanatory ;)
+
+	//Assertions
+	IsNull(value [, errMsg])
+	IsNotNull(value [, errMsg])
+	IsTrue(cond [, errMsg = null])
+	IsFalse(cond [, errMsg = null])
+	Equal(expected, actual [, errMsg])
+	NotEqual(expected, actual [, errMsg])
+	Assert(bool cond [, string errMsg]
+
+	// Errors checking.
+	ErrMsgContains(text, callback);
+	ErrMsg(msg, callback);
+	Throws<TypeOfException>(callback);
+	ShouldThrow<TypeOfException>(callback);
+
+	// Utils.
+	// Increases the failing tests count and prints the err msg.
+	Fail(errMsg);
+
+	// Increases the passing tests count.
+	Pass();
 ```
 		
 #### A word about conventions
