@@ -27,8 +27,8 @@
             Printer.Print("".PadRight(40, '='), ConsoleColor.White);
 
             var cherryPick = !string.IsNullOrEmpty(cherryPicking);
-            string currfix = null;
-            var watch = Stopwatch.StartNew();
+            var currfix    = (string) null;
+            var watch      = Stopwatch.StartNew();
             cases.Each(c => {
 				if(printHeaders){
 					if(c.FixName != currfix) 
@@ -115,10 +115,8 @@
                ? "Expected NOT equal to {0}.".Interpol(right)
                 : errMsg;
 
-            Func<bool> cond = () =>
-                left == null ?
-                right != null :
-                Not(left.Equals(right));
+            Func<bool> cond = () => 
+				left == null ? right != null : Not(left.Equals(right));
 
             Assert(cond(), msg);
         }
@@ -152,7 +150,6 @@
 					Pass();
 				else
 					failWithMsg();
-
 			}
             catch (Exception ex) {
 				if(compStrat(ex.Message, msg))
@@ -168,6 +165,11 @@
 
         public void ErrMsg(string msg, Action body) {
 			ErrMsg(MsgEq, msg, body);
+		}
+
+		// Just for NUnit muscle memory.
+        public void Throws<T>(Action body) where T : Exception {
+			ShouldThrow<T>(body);
 		}
 
         public void ShouldThrow<T>(Action body) where T : Exception {
