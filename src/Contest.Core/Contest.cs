@@ -25,7 +25,7 @@ namespace Contest.Core {
             Flags = new[] { INS_PUB, INS_PRI, STA_PUB, STA_PRI };
         }
 
-        static readonly Func<TestCase, bool> InlineCase = tcase => tcase.Body == null;
+        static readonly Func<TestCase, bool> IsInlineCase = tcase => tcase.Body == null;
 
         static readonly Func<Delegate, Delegate, bool> SameMetaToken =
             (left, right) =>
@@ -46,7 +46,7 @@ namespace Contest.Core {
                 suite.Cases.AddRange(
                     from c in cases
                     where !suite.Cases.Any(
-                        c1 => InlineCase(c) || SameMetaToken(c1.Body, c.Body))
+                        c1 => IsInlineCase(c) || SameMetaToken(c1.Body, c.Body))
                     select c);
 
                 return suite;
