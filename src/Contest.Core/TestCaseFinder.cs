@@ -4,10 +4,14 @@
 
     // ReSharper disable InconsistentNaming
     public class TestCaseFinder {
-        public TestCaseFinder(Func<string[]> getIgnoredFromFile = null) {
+        public TestCaseFinder(Func<string[]> getIgnoredFromFile = null, Func<Type, bool> ignoreType = null) {
             GetIgnoredPatternsFromFile = 
                 getIgnoredFromFile ?? GetIgnoredPatternsFromFile;
+
+			IgnoreType = ignoreType ?? (Func<Type, bool>) (t => false);
         }
+
+		public readonly Func<Type, bool> IgnoreType;
 
         public Func<string[]> GetIgnoredPatternsFromFile = () => {
             var lines = IgnoreFileReader.ReadAllLines();

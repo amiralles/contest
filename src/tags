@@ -113,9 +113,9 @@ IgnoreCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, As
 IgnoreFileReader	Contest.Core/IgnoreFileReader.cs	/^    public class IgnoreFileReader {$/;"	c	namespace:Contest.Core
 IgnoreFixture	Contest.Tests/IgnoreFixture.cs	/^    public class IgnoreFixture {$/;"	c	namespace:Contest.Tests
 Ignored	Contest.Core/TestCase.cs	/^        public bool Ignored;$/;"	f	class:Contest.Core.TestCase
-InlineCase	Contest.Core/Contest.cs	/^        static readonly Func<TestCase, bool> InlineCase = tcase => tcase.Body == null;$/;"	f	class:Contest.Core.Contest	file:
 Interpol	Contest.Core/StringExtensions.cs	/^		public static string Interpol(this string placeholder, params object[] args){$/;"	m	class:Contest.Core.StringExtensions
 IsFalse	Contest.Core/Runner.cs	/^        public void IsFalse(object cond, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
+IsInlineCase	Contest.Core/Contest.cs	/^        static readonly Func<TestCase, bool> IsInlineCase = tcase => tcase.Body == null;$/;"	f	class:Contest.Core.Contest	file:
 IsNotNull	Contest.Core/Runner.cs	/^        public void IsNotNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
 IsNull	Contest.Core/Runner.cs	/^        public void IsNull(object value, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
 IsTrue	Contest.Core/Runner.cs	/^        public void IsTrue(object cond, string errMsg = null) {$/;"	m	class:Contest.Core.Runner

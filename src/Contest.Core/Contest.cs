@@ -87,6 +87,9 @@ namespace Contest.Core {
             (finder, type, ignorePatterns) => {
 
                 var result = new TestSuite();
+				if (finder.IgnoreType(type))
+					return result;
+
                 if (type.IsAbstract || type.ContainsGenericParameters || !type.HasDefaultCtor())
                     return result;
 
