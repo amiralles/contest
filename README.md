@@ -1,5 +1,5 @@
 ## contest
-Contest is minimalistic testing framework bundled with a freaking fast console test runner. In contrast with most popular testing frameworks, it's based on conventions, so it doesn't require a whole lotta of attributes to identify tests artifacts such as test methods, test fixtures, test setups and so on and so forth. So in the end the code reads almost like plain english.
+Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, teardowns and so on... So, in the end, the code reads almost like plain english.
 
 Down below you’ll find a couple of examples on how to write tests using Contest.
 
