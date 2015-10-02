@@ -14,6 +14,7 @@
         public Runner() {
         }
 
+		public bool Verbose = false;
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
@@ -25,14 +26,13 @@
 
         public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders=true) {
 
-            // Printer.Print("".PadRight(40, '='), ConsoleColor.White);
             Printer.Print("".PadRight(40, '='), Console.BackgroundColor);
 
             var cherryPick = !string.IsNullOrEmpty(cherryPicking);
             var currfix    = (string) null;
             var watch      = Stopwatch.StartNew();
             cases.Each(c => {
-				if(printHeaders){
+				if(Verbose && printHeaders){
 					if(c.FixName != currfix) 
 						Printer.PrintFixName((currfix = c.FixName));
 				}
@@ -58,7 +58,9 @@
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
             TestCount = cases.Count;
-            Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount, cherryPicking);
+			
+			if(Verbose)
+				Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount, cherryPicking);
 
             if(FailCount>0)
                 DumpErrors();
@@ -67,6 +69,8 @@
         }
 
         void DumpErrors(){
+			if(!Verbose)
+				return;
 
             Console.WriteLine("Errors List");
             foreach(var name in _errors.Keys)
@@ -203,7 +207,8 @@
 
         public void Fail(string errMsg) {
             FailCount++;
-			Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
+			if(Verbose)
+				Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
 
 			if(_currCase != null)
 				_errors[_currCase] = errMsg;
@@ -213,7 +218,9 @@
 
         public void Pass() {
             PassCount++;
-			Printer.Print("Pass!", ConsoleColor.Green);
+
+			if(Verbose)
+				Printer.Print("Pass!", ConsoleColor.Green);
         }
 
         static readonly Func<Type, Type, string> WrongKindaException = 

@@ -50,7 +50,6 @@ DARK_TEXT	Contest.Core/Printer.cs	/^#define DARK_TEXT$/;"	d	file:
 Default	Contest.Core/Printer.cs	/^		static ConsoleColor Default  = ConsoleColor.Black;$/;"	f	class:Contest.Core.Printer	file:
 Demo	Contest.Demo/Demo.cs	/^﻿namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
 Die	Contest.Core/Contest.cs	/^		static void Die(string errmsg) {$/;"	m	class:Contest.Core.Contest	file:
-DisableTestsOutput	Contest.Core/Runner.cs	/^		public void DisableTestsOutput() {$/;"	m	class:Contest.Core.Runner
 DumpErrors	Contest.Core/Runner.cs	/^        void DumpErrors(){$/;"	m	class:Contest.Core.Runner	file:
 Each	Contest.Core/EnumerableExtensions.cs	/^        public static void Each<T>(this IEnumerable<T> target, Action<T> callback) {$/;"	m	class:Contest.Core.EnumerableExtensions
 Echo	Contest.Demo/Demo.cs	/^		public static Func<object, object> Echo = msg => msg;$/;"	f	class:Demo.Utils
@@ -110,7 +109,6 @@ Nested	Contest.Tests/Wrapper.cs	/^        class Nested {$/;"	c	class:Contest.Tes
 NestedBarTest	Contest.Tests/BarTest.cs	/^        class NestedBarTest{$/;"	c	class:Contest.Tests.BarTest
 Not	Contest.Core/Runner.cs	/^        static readonly Func<bool, bool> Not = cnd => !cnd;$/;"	f	class:Contest.Core.Runner	file:
 NotEqual	Contest.Core/Runner.cs	/^        public void NotEqual(object left, object right, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
-OutputEnabled	Contest.Core/Runner.cs	/^        bool OutputEnabled = true;$/;"	f	class:Contest.Core.Runner	file:
 Pass	Contest.Core/Runner.cs	/^        public void Pass() {$/;"	m	class:Contest.Core.Runner
 PassCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
 Print	Contest.Core/Printer.cs	/^		public readonly static Action<string, ConsoleColor> Print = (msg, color) => {$/;"	f	class:Contest.Core.Printer
@@ -166,6 +164,7 @@ ToString	Contest.Core/TestCase.cs	/^        public override string ToString() {$
 TypeExtensions	Contest.Core/TypeExtensions.cs	/^    public static class TypeExtensions {$/;"	c	namespace:Contest.Core
 User	Contest.Demo/Demo.cs	/^	public class User {	$/;"	c	namespace:Demo
 Utils	Contest.Demo/Demo.cs	/^	class Utils {$/;"	c	namespace:Demo
+Verbose	Contest.Core/Runner.cs	/^		public bool Verbose = false;$/;"	f	class:Contest.Core.Runner
 WireGlobalSetups	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalSetups = (actual, setups) => {$/;"	f	class:Contest.Core.Contest	file:
 WireGlobalTeardowns	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireGlobalTeardowns =$/;"	f	class:Contest.Core.Contest	file:
 WireSetups	Contest.Core/Contest.cs	/^        static readonly Action<TestSuite, List<TestCase>> WireSetups =$/;"	f	class:Contest.Core.Contest	file:

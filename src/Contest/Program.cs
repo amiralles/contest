@@ -140,6 +140,7 @@ namespace Contest {
             var finder = new TestCaseFinder();
             var suite = Contest.GetCasesInAssm(finder, assm, null);
             var runner = new Runner();
+			runner.Verbose = true;
 
             Console.WriteLine("\nDone!\n");
             runner.Run(suite, cerryPicking, printHeaders );
