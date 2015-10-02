@@ -266,5 +266,123 @@ namespace Contest.Tests {
 		_ utils_match_cherry_picking_pattern = assert =>
             assert.IsTrue("*ThisIsAn*".Match("ThisIsAnotherTest"));
 
+		// Runner
+        _ run_test_suite = assert => {
+            var cases = Contest.FindCases(new TestCaseFinder(), typeof(TestClassOnePassOnFail), null);
+            var runner = new Runner();
+            runner.Run(cases);
+
+            Assert.AreEqual(1, runner.PassCount, "Fail PassCount");
+            Assert.AreEqual(1, runner.FailCount, "Fail FailCount");
+            Assert.AreEqual(2, runner.AssertsCount, "Fail AssertsCount");
+        };
+
+        _ run_throwing_test_suite = assert => {
+            var cases = Contest.FindCases(new TestCaseFinder(), typeof(TestClassThrowingTests), null);
+            var runner = new Runner();
+            runner.Run(cases);
+
+            Assert.AreEqual(1, runner.PassCount, "Fail PassCount");
+            Assert.AreEqual(1, runner.FailCount, "Fail FailCount");
+            Assert.AreEqual(2, runner.AssertsCount, "Fail AssertsCount");
+        };
+
+        _ runner_AssertMethod_ResultIsTrue => {
+            var runner = new Runner();
+			runner.Assert(1==1);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.PassCount);
+        };
+
+        _ runner_AssertMethod_ResultIsFalse = assert => {
+            var runner = new Runner();
+            runner.Assert(1==2);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.FailCount);
+        };
+
+
+        _ runner_AssertEqualsMethod_NullValue_ResultIsTrue = assert => {
+            var runner = new Runner();
+            runner.Equal(null,null);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.PassCount);
+		};
+
+        _ runner_AssertEqualsMethod_NullValue_ResultIsFalse = assert => {
+            var runner = new Runner();
+            runner.Equal(null,123);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.FailCount);
+		};
+
+        _ runner_AssertEqualsMethod_ResultIsTrue = assert => {
+            var runner = new Runner();
+            runner.Equal(1,1);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.PassCount);
+		};
+
+        _ runner_AssertEqualsMethod_ResultIsFalse = assert => {
+            var runner = new Runner();
+            runner.Equal(1,2);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.FailCount);
+        };
+
+        _ runner_AssertNotEqualsMethod_ResultIsTrue = assert => {
+            var runner = new Runner();
+            runner.NotEqual(1,2);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.PassCount);
+		};
+
+        _ runner_AssertNotEqualsMethod_ResultIsFalse = assert => {
+            var runner = new Runner();
+            runner.NotEqual(1,1);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.FailCount);
+        };
+
+        _ runner_AssertIsNull_ResultIsTrue = assert => {
+            var runner = new Runner();
+            runner.IsNull(null);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.PassCount);
+        };
+
+        _ runner_AssertIsNull_ResultIsFalse = assert => {
+            var runner = new Runner();
+            runner.IsNull(123);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.FailCount);
+        };
+
+        _ runner_AssertIsNotNull_ResultIsTrue = assert => {
+            var runner = new Runner();
+            runner.IsNotNull(123);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.PassCount);
+        };
+
+        _ runner_AssertIsNotNull_ResultIsFalse = assert => {
+            var runner = new Runner();
+            runner.IsNotNull(null);
+
+            Assert.AreEqual(1, runner.AssertsCount);
+            Assert.AreEqual(1, runner.FailCount);
+        };
+
     }
 }
