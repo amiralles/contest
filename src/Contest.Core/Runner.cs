@@ -18,6 +18,7 @@
         public long Elapsed;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
+
         public void Run(TestSuite suite, string cherryPicking = null, bool printHeaders=true) {
             Run(suite.Cases, cherryPicking, printHeaders);
         }
@@ -202,7 +203,8 @@
 
         public void Fail(string errMsg) {
             FailCount++;
-            Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
+			Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
+
 			if(_currCase != null)
 				_errors[_currCase] = errMsg;
 			else
@@ -211,7 +213,7 @@
 
         public void Pass() {
             PassCount++;
-            Printer.Print("Pass!", ConsoleColor.Green);
+			Printer.Print("Pass!", ConsoleColor.Green);
         }
 
         static readonly Func<Type, Type, string> WrongKindaException = 
