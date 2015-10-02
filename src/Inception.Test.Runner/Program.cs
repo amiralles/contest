@@ -1,11 +1,12 @@
-﻿namespace Contest {
+﻿namespace Inception.Test.Runner {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using Core;
+    using Contest;
+    using Contest.Core;
     using Contest.Tests;
     using static System.Console;
 
