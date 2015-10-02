@@ -1,4 +1,4 @@
-﻿#define DARK_TEXT
+﻿//#define DARK_TEXT
 
 namespace Contest {
     using System;

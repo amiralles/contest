@@ -1,4 +1,4 @@
-#define DARK_TEXT
+//#define DARK_TEXT
 namespace Contest.Core {
 	using System;
 	using System.Collections.Generic;

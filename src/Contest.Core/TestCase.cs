@@ -1,3 +1,4 @@
+// #define DARK_TEXT
 
 namespace Contest.Core {
     using System;
@@ -21,7 +22,10 @@ namespace Contest.Core {
                 throw TestBodyCantBeNull(Name);
 
             try {
+
+#if DARK_TEXT
 				Console.ForegroundColor = ConsoleColor.Black;
+#endif
                 if (BeforeCase != null) {
 #if DEBUG
 					Console.WriteLine("Running setup for '{0}'", Name);
