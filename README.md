@@ -1,5 +1,5 @@
 ## contest
-Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, teardowns and so on... So, in the end, the code reads almost like plain english.
+Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, teardowns and so on... So in the end the code reads almost like plain english.
 
 Down below you’ll find a couple of examples on how to write tests using Contest.
 
@@ -86,10 +86,9 @@ _Please keep in mind this is a protoype and is not production ready (yet). It'll
     //=================================================================
 ```
 #### Contest API
+I guess this section is selfexplanatory ;)
 
 ```
-	//I guess this section is selfexplanatory ;)
-
 	//Assertions
 	IsNull(value [, errMsg])
 	IsNotNull(value [, errMsg])
@@ -135,10 +134,9 @@ contest run test.dll *test_name_ends_with
 **TODO:
 
 #### How to run *Contest*
-The easiest way to run Contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just run: **contest run test\_cases.dll**
+The easiest way to run Contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory you want and just execute: **contest run test\_cases.dll**
 
 #### What the hell is that underscore thing?
 A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above to get more readable test code (and nobody cares about test cases's return types anyways).
 
 
-**Thanks for reading! And lemme know if you have any trouble using this library**
