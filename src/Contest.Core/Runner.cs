@@ -24,7 +24,8 @@
 
         public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders=true) {
 
-            Printer.Print("".PadRight(40, '='), ConsoleColor.White);
+            // Printer.Print("".PadRight(40, '='), ConsoleColor.White);
+            Printer.Print("".PadRight(40, '='), Console.BackgroundColor);
 
             var cherryPick = !string.IsNullOrEmpty(cherryPicking);
             var currfix    = (string) null;
