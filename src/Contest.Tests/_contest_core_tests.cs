@@ -1,17 +1,18 @@
 
 namespace Contest.Tests {
     using System;
-    using Core;
+    using System.Linq;
+    using Contest.Core;
     using _ = System.Action<Contest.Core.Runner>;
 
     class contest_core_tests {
 
 		// For cherry picking tests.
-        readonly TestCaseFinder _cerryPeekingFinder = new TestCaseFinder(null, 
+        static readonly TestCaseFinder _cerryPeekingFinder = new TestCaseFinder(null, 
 				t => typeof(contest_core_tests) == t);
 
 		// For discovery tests.
-        readonly TestCaseFinder _discoveryFinder = new TestCaseFinder();
+        static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder();
 
         _ discover_test_cases_in_assm = assert => {
             var cases = Contest.GetCasesInAssm(_discoveryFinder, typeof(TestClass).Assembly, null).Cases;
@@ -272,9 +273,9 @@ namespace Contest.Tests {
             var runner = new Runner();
             runner.Run(cases);
 
-            Assert.AreEqual(1, runner.PassCount, "Fail PassCount");
-            Assert.AreEqual(1, runner.FailCount, "Fail FailCount");
-            Assert.AreEqual(2, runner.AssertsCount, "Fail AssertsCount");
+            assert.Equal(1, runner.PassCount, "Fail PassCount");
+            assert.Equal(1, runner.FailCount, "Fail FailCount");
+            assert.Equal(2, runner.AssertsCount, "Fail AssertsCount");
         };
 
         _ run_throwing_test_suite = assert => {
@@ -282,107 +283,141 @@ namespace Contest.Tests {
             var runner = new Runner();
             runner.Run(cases);
 
-            Assert.AreEqual(1, runner.PassCount, "Fail PassCount");
-            Assert.AreEqual(1, runner.FailCount, "Fail FailCount");
-            Assert.AreEqual(2, runner.AssertsCount, "Fail AssertsCount");
+            assert.Equal(1, runner.PassCount, "Fail PassCount");
+            assert.Equal(1, runner.FailCount, "Fail FailCount");
+            assert.Equal(2, runner.AssertsCount, "Fail AssertsCount");
         };
 
-        _ runner_AssertMethod_ResultIsTrue => {
+        _ runner_assertMethod_ResultIsTrue = assert => {
             var runner = new Runner();
-			runner.Assert(1==1);
+			runner.Assert(1 == 1);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.PassCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
         };
 
-        _ runner_AssertMethod_ResultIsFalse = assert => {
+        _ runner_assertMethod_ResultIsFalse = assert => {
             var runner = new Runner();
-            runner.Assert(1==2);
+            runner.Assert(1 == 2);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.FailCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.FailCount);
         };
 
 
-        _ runner_AssertEqualsMethod_NullValue_ResultIsTrue = assert => {
+        _ runner_assertEqualsMethod_NullValue_ResultIsTrue = assert => {
             var runner = new Runner();
             runner.Equal(null,null);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.PassCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
 		};
 
-        _ runner_AssertEqualsMethod_NullValue_ResultIsFalse = assert => {
+        _ runner_assertEqualsMethod_NullValue_ResultIsFalse = assert => {
             var runner = new Runner();
             runner.Equal(null,123);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.FailCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.FailCount);
 		};
 
-        _ runner_AssertEqualsMethod_ResultIsTrue = assert => {
+        _ runner_assertEqualsMethod_ResultIsTrue = assert => {
             var runner = new Runner();
             runner.Equal(1,1);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.PassCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
 		};
 
-        _ runner_AssertEqualsMethod_ResultIsFalse = assert => {
+        _ runner_assertEqualsMethod_ResultIsFalse = assert => {
             var runner = new Runner();
             runner.Equal(1,2);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.FailCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.FailCount);
         };
 
-        _ runner_AssertNotEqualsMethod_ResultIsTrue = assert => {
+        _ runner_assertNotEqualsMethod_ResultIsTrue = assert => {
             var runner = new Runner();
             runner.NotEqual(1,2);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.PassCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
 		};
 
-        _ runner_AssertNotEqualsMethod_ResultIsFalse = assert => {
+        _ runner_assertNotEqualsMethod_ResultIsFalse = assert => {
             var runner = new Runner();
             runner.NotEqual(1,1);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.FailCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.FailCount);
         };
 
-        _ runner_AssertIsNull_ResultIsTrue = assert => {
+        _ runner_assertIsNull_ResultIsTrue = assert => {
             var runner = new Runner();
             runner.IsNull(null);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.PassCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
         };
 
-        _ runner_AssertIsNull_ResultIsFalse = assert => {
+        _ runner_assertIsNull_ResultIsFalse = assert => {
             var runner = new Runner();
             runner.IsNull(123);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.FailCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.FailCount);
         };
 
-        _ runner_AssertIsNotNull_ResultIsTrue = assert => {
+        _ runner_assertIsNotNull_ResultIsTrue = assert => {
             var runner = new Runner();
             runner.IsNotNull(123);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.PassCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
         };
 
-        _ runner_AssertIsNotNull_ResultIsFalse = assert => {
+        _ runner_assertIsNotNull_ResultIsFalse = assert => {
             var runner = new Runner();
             runner.IsNotNull(null);
 
-            Assert.AreEqual(1, runner.AssertsCount);
-            Assert.AreEqual(1, runner.FailCount);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.FailCount);
         };
 
-    }
+        _ should_run_setup_before_case_unless_setup_is_null = assert => {
+			var tcase = new TestCase();
+			var wasCalled = false;
+			tcase.BeforeCase = runner => { wasCalled = true; };
+			tcase.Body       = runner => { };
+			tcase.Run(new Runner());
+			assert.IsTrue(wasCalled, "It shouldn't called setup before running the case.");
+        };
+
+        _ should_run_teardown_after_case_unless_teardown_is_null = assert => {
+			var tcase = new TestCase();
+			var wasCalled = false;
+			tcase.AfterCase = runner => { wasCalled = true; };
+			tcase.Body       = runner => { };
+			tcase.Run(new Runner());
+			assert.IsTrue(wasCalled, "It shouldn't called setup before running the case.");
+        };
+
+
+        _ bag_ConfigureTestVariablesDuringSetup = assert => {
+            var runner = new Runner();
+            var finder = new TestCaseFinder();
+            var suite = Contest.GetCasesInAssm(finder, typeof(EchoTest).Assembly, null);
+
+			//In this particular case I only care about the echo test.
+            var cases = (from c in suite.Cases
+                         where c.Name == "echo"
+                         select c).ToList();
+
+            runner.Run(cases);
+            assert.Equal(1, runner.AssertsCount);
+            assert.Equal(1, runner.PassCount);
+        };
+
+	}
 }
