@@ -7,8 +7,8 @@
     <ProjectGuid>{B99FC209-2D48-46C0-8B3C-410E7A1813B6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contest.Run.Tests</RootNamespace>
-    <AssemblyName>Contest.Run.Tests</AssemblyName>
+    <RootNamespace>Inception.Test.Runner</RootNamespace>
+    <AssemblyName>Inception.Test.Runner</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
