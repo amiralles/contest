@@ -32,7 +32,7 @@
             var currfix    = (string) null;
             var watch      = Stopwatch.StartNew();
             cases.Each(c => {
-				if(Verbose && printHeaders){
+				if(Verbose && printHeaders) {
 					if(c.FixName != currfix) 
 						Printer.PrintFixName((currfix = c.FixName));
 				}
