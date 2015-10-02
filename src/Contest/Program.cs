@@ -1,4 +1,6 @@
-﻿namespace Contest {
+﻿#define DARK_TEXT
+
+namespace Contest {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -15,6 +17,10 @@
 
             try {
                 Trace.Listeners.Add(new ConsoleTraceListener());
+
+#if DARK_TEXT
+				Console.ForegroundColor = ConsoleColor.Black;
+#endif
 
                 // Print(args);
                 if (!args.Any()) {

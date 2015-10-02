@@ -3,12 +3,9 @@ namespace Contest.Core {
     using System;
 
     public class TestCase {
-        public string Name, FixName;
-        public Action<Runner> Body;
         public bool Ignored;
-        public Action<Runner> BeforeCase;
-
-        public Action<Runner> AfterCase;
+        public string Name, FixName;
+        public Action<Runner> Body, BeforeCase, AfterCase;
 
         public string GetFullName() {
             return "{0}.{1}".Interpol(FixName, Name);
@@ -24,6 +21,7 @@ namespace Contest.Core {
                 throw TestBodyCantBeNull(Name);
 
             try {
+				Console.ForegroundColor = ConsoleColor.Black;
                 if (BeforeCase != null) {
 #if DEBUG
 					Console.WriteLine("Running setup for '{0}'", Name);
@@ -47,6 +45,7 @@ namespace Contest.Core {
 #endif
                     AfterCase(runner);
                 }
+				Console.ResetColor();
             }
         }
 
