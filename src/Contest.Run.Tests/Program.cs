@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using Core;
+    using Contest.Tests;
     using static System.Console;
 
     class Program {
@@ -16,7 +17,6 @@
             try {
                 Trace.Listeners.Add(new ConsoleTraceListener());
 
-                // Print(args);
                 if (!args.Any()) {
                     PrintHelp();
                     return;
@@ -131,7 +131,14 @@
             if (assm == null)
                 throw new Exception("Can't load assembly '{0}'.".Interpol(assmFileName));
 
-            var finder = new TestCaseFinder();
+
+			// IMPORTANT!
+			// This is the _only_ difference with main program. should refator and
+			// get just one program asap!
+			Func<Type, bool> ifNonCoreTest = t => t != typeof(contest_core_tests);
+			//
+            var finder = new TestCaseFinder(getIgnoredFromFile: null, ignoreType: ifNonCoreTest);
+
             var suite = Contest.GetCasesInAssm(finder, assm, null);
             var runner = new Runner();
 

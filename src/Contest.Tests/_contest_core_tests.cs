@@ -5,7 +5,7 @@ namespace Contest.Tests {
     using Contest.Core;
     using _ = System.Action<Contest.Core.Runner>;
 
-    class contest_core_tests {
+    public class contest_core_tests {
 
 		// For cherry picking tests.
         static readonly TestCaseFinder _cerryPeekingFinder = new TestCaseFinder(null, 
