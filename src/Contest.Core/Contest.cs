@@ -98,7 +98,6 @@ namespace Contest.Core {
                     inst = Activator.CreateInstance(type, true);
                 }
                 catch (Exception ex) {
-                    //TODO: Log
                     Console.WriteLine("WARN: Couldn't create instance of '{0}'.", type.Name);
                     return result;
                 }
