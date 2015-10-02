@@ -12,7 +12,8 @@ namespace Contest.Tests {
 				t => typeof(contest_core_tests) == t);
 
 		// For discovery tests.
-        static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder();
+        static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
+				t => typeof(contest_core_tests) == t);
 
         _ discover_test_cases_in_assm = assert => {
             var cases = Contest.GetCasesInAssm(_discoveryFinder, typeof(TestClass).Assembly, null).Cases;
@@ -81,7 +82,7 @@ namespace Contest.Tests {
 
 		_ read_empty_ignore_file = assert => {
 			IgnoreFileReader.ReadAllLines = () => null;
-			assert.Equal(new string[0], new TestCaseFinder().GetIgnoredPatternsFromFile());
+			assert.Equal(0, new TestCaseFinder().GetIgnoredPatternsFromFile().Length);
 		};
 
 

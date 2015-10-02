@@ -202,7 +202,10 @@
         public void Fail(string errMsg) {
             FailCount++;
             Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
-            _errors[_currCase] = errMsg;
+			if(_currCase != null)
+				_errors[_currCase] = errMsg;
+			else
+				_errors["unknown_case"] = errMsg;
         }
 
         public void Pass() {
