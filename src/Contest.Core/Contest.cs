@@ -10,8 +10,8 @@ namespace Contest.Core {
         const BF
             INS_PUB = BF.Instance | BF.Public,
             INS_PRI = BF.Instance | BF.NonPublic,
-            STA_PUB = BF.Static | BF.Public,
-            STA_PRI = BF.Static | BF.NonPublic;
+            STA_PUB = BF.Static   | BF.Public,
+            STA_PRI = BF.Static   | BF.NonPublic;
 
         const string
             BEFORE = "BEFORE_",
@@ -25,17 +25,17 @@ namespace Contest.Core {
             Flags = new[] { INS_PUB, INS_PRI, STA_PUB, STA_PRI };
         }
 
+		/// Return true if the test case points to an anonymous method.
         static readonly Func<TestCase, bool> IsInlineCase = tcase => tcase.Body == null;
 
+		/// Returns true if both delegates points to the same method.
         static readonly Func<Delegate, Delegate, bool> SameMetaToken =
             (left, right) =>
                 left != null
                 && right != null
                 && left.Method.MetadataToken == right.Method.MetadataToken;
 
-        //This method finds all cases within the given assembly 
-        //but it doesn't differentiate test cases from setups nor teardowns;
-        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =
+        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> BuildTestSuiteFromAssm =
             (finder, assm, ignorePatterns) => {
                 var suite = new TestSuite();
                 var cases =
@@ -57,9 +57,11 @@ namespace Contest.Core {
 			throw new Exception(errmsg);
 		}
 
+		/// Returns a suite of "actual" test cases from the given assembly.
+		/// (Setups and Teardowns are NOT part of the result set).
         public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =
             (finder, assm, ignorePatterns) => {
-                var rawsuite = FindRawCasesInAssm(finder, assm, ignorePatterns);
+                var rawsuite = BuildTestSuiteFromAssm(finder, assm, ignorePatterns);
                 var setups = FindSetups(rawsuite);
                 WireSetups(rawsuite, setups);
 
@@ -74,7 +76,7 @@ namespace Contest.Core {
             };
 
         internal static Func<TestCaseFinder, Type, BF, string, TestSuite>
-            FindCasesNestedTypes = (finder, type, flags, ignorePatterns) => {
+            FindCasesInNestedTypes = (finder, type, flags, ignorePatterns) => {
                 var result = new TestSuite();
                 var nestedTypes = type.GetNestedTypes(flags);
                 foreach (var ntype in nestedTypes)
@@ -113,17 +115,17 @@ namespace Contest.Core {
                         result.Cases.Add(
                             new TestCase {
                                 FixName = type.FullName,
-                                Name = fi.Name,
-                                Body = (Action<Runner>)del,
+                                Name    = fi.Name,
+                                Body    = (Action<Runner>)del,
                                 Ignored = MatchIgnorePattern(finder, tcfullname, ignorePatterns),
                             });
                     }
                 }
 
-                var findNestedPublic = FindCasesNestedTypes(
+                var findNestedPublic = FindCasesInNestedTypes(
                         finder, type, BF.Public, ignorePatterns);
 
-                var findNestedNonPublic = FindCasesNestedTypes(
+                var findNestedNonPublic = FindCasesInNestedTypes(
                         finder, type, BF.NonPublic, ignorePatterns);
 
                 result.Cases.AddRange(findNestedPublic.Cases);
