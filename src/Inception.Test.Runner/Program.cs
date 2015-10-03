@@ -9,9 +9,9 @@
     using Contest.Core;
     using Contest.Tests;
     using static System.Console;
+	using static Contest.Core.ContestConstants;
 
     class Program {
-        const string TMP = "tmp";
 
         static void Main(string[] args) {
 

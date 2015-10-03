@@ -9,9 +9,9 @@ namespace Contest {
     using System.Reflection;
     using Core;
     using static System.Console;
+	using static Contest.Core.ContestConstants;
 
     class Program {
-        const string TMP = "tmp";
 
         static void Main(string[] args) {
 
