@@ -103,10 +103,12 @@
             Assert(!Convert.ToBoolean(cond), msg);
 		}
 
+		const string NULL = "null";
         public void Equal(object expected, object actual, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
-                ? "Expected equal to {0} (Got {1}).".Interpol(expected, actual ?? "null")
-                : errMsg;
+                ? $"Expected equal to { expected ?? NULL } ({ expected?.GetType() })" +
+			      $"	- but was =>  { actual   ?? NULL } ({ actual?.GetType() })." 
+				: errMsg;
 
             Func<bool> cond = () =>
                 expected == null ?
