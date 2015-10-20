@@ -1,5 +1,4 @@
 ﻿namespace Demo { //It doesn't match naming conventions but it reads better in the console ;)
-	// ReSharper disable UnusedMember.Local
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;

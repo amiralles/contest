@@ -2,7 +2,6 @@
     using System;
     using System.Collections.Generic;
 
-    // ReSharper disable InconsistentNaming
     public class TestCaseFinder {
         public TestCaseFinder(Func<string[]> getIgnoredFromFile = null, Func<Type, bool> ignoreType = null) {
             GetIgnoredPatternsFromFile = 

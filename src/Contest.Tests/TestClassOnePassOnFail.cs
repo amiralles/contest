@@ -2,9 +2,6 @@
     using System;
     using Core;
 
-    // ReSharper disable UnusedMember.Local
-    // ReSharper disable EqualExpressionComparison
-
     class TestClassOnePassOnFail {
         public Action<Runner> ThisPass = runner =>
             runner.Assert(1 == 1, "Something went wrong....");
