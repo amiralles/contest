@@ -3,6 +3,7 @@
     using System.Reflection;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using static System.Console;
 
 	
     public class Runner {
@@ -26,7 +27,7 @@
 
         public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders=true) {
 
-            Printer.Print("".PadRight(40, '='), Console.BackgroundColor);
+            Printer.Print("".PadRight(40, '='), BackgroundColor);
 
             var cherryPick = !string.IsNullOrEmpty(cherryPicking);
             var currfix    = (string) null;
@@ -42,16 +43,22 @@
                     return;
                 }
 
+				var innerwatch      = Stopwatch.StartNew();
                 try {
-                    Console.WriteLine(c.Name);
+                    WriteLine(c.Name);
                     _currCase = c.Name;
                     c.Run(this);//<= ensure setups/teardowns.
+
+					innerwatch.Stop();
                 }
                 catch (Exception ex) {
+
+					innerwatch.Stop();
                     Fail(ex.Message);
                 }
-				finally{
-					Console.WriteLine();
+				finally {
+					WriteLine($"{c.Name} took {innerwatch.ElapsedMilliseconds} ms.");
+					WriteLine();
 				}
             });
 
@@ -72,9 +79,8 @@
 			if(!Verbose)
 				return;
 
-            Console.WriteLine("Errors List");
+            WriteLine("Errors List");
             foreach(var name in _errors.Keys)
-                // Printer.Print("Fail\n{0}".Interpol(errMsg), ConsoleColor.Red);
                 Printer.Print("{0} - {1}".Interpol(name, _errors[name]), ConsoleColor.Red);
         }
 
