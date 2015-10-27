@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Contest</id>
+    <title>Test</title>
+    <version>1.0.0</version>
+    <authors>amiralles</authors>
+    <owners>amiralles</owners>
+    <licenseUrl>https://github.com/amiralles/contest/blob/master/license.md</licenseUrl>
+    <projectUrl>https://github.com/amiralles/contest</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+	<description>Minimalistic unit testing framework for .NET.</description>
+    <releaseNotes>Initial Release. Lets spread the word! ;)</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>UnitTesting</tags>
+	<dependencies>
+   	</dependencies>
+  </metadata>
+</package>
