@@ -1,13 +1,22 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Contest</id>
     <title>Test</title>
     <version>1.0.0</version>
+=======
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Contest</id>
+    <version>1.0.1</version>
+>>>>>>> 23fa6001691743d585ff79369114474b1f51404e
     <authors>amiralles</authors>
     <owners>amiralles</owners>
     <licenseUrl>https://github.com/amiralles/contest/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/amiralles/contest</projectUrl>
+<<<<<<< HEAD
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 	<description>Minimalistic unit testing framework for .NET.</description>
     <releaseNotes>Initial Release. Lets spread the word! ;)</releaseNotes>
@@ -15,5 +24,12 @@
     <tags>UnitTesting</tags>
 	<dependencies>
    	</dependencies>
+=======
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Minimalistic Unit Testing Framework for .NET.</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>UnitTesting </tags>
+>>>>>>> 23fa6001691743d585ff79369114474b1f51404e
   </metadata>
 </package>
