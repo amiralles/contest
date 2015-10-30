@@ -112,8 +112,8 @@
 		const string NULL = "null";
         public void Equal(object expected, object actual, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
-                ? $"Expected equal to { expected ?? NULL } ({ expected?.GetType() })" +
-			      $"	- but was =>  { actual   ?? NULL } ({ actual?.GetType() })." 
+                ? $"Expected => { expected ?? NULL } ({ expected?.GetType() })\n" +
+			      $"Actual   => { actual   ?? NULL } ({ actual?.GetType() }).\n" 
 				: errMsg;
 
             Func<bool> cond = () =>
@@ -121,7 +121,7 @@
                 actual == null :
                 expected.Equals(actual);
 
-            Assert(cond(), msg);
+            Assert(cond(), $"\n{msg}");
         }
 
         public void NotEqual(object left, object right, string errMsg = null) {
