@@ -1,3 +1,5 @@
+#pragma warning disable 414
+
 namespace Contest.Tests {
 	using System;
 	using System.Linq;

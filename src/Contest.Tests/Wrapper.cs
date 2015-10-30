@@ -1,4 +1,6 @@
-﻿namespace Contest.Tests {
+﻿#pragma warning disable 414
+
+namespace Contest.Tests {
     using System;
     using Core;
 

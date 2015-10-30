@@ -1,4 +1,6 @@
-﻿namespace Demo { //It doesn't match naming conventions but it reads better in the console ;)
+﻿#pragma warning disable 414, 219
+
+namespace Demo { //It doesn't match naming conventions but it reads better in the console ;)
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
