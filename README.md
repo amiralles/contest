@@ -47,7 +47,7 @@ _Please keep in mind this is a protoype and is not production ready (yet). It'll
 		_ should_find_existing_users = assert => 
 			assert.IsNotNull(User.Find("pipe"));
 
-		_ should_return_null_when_cant_find_the_user = assert => 
+		_ should_return_null_when_cant_find_users = assert => 
 			assert.IsNull(User.Find("not_exists"));
 
 		_ should_add_new_users = assert => {
@@ -132,6 +132,9 @@ contest run test.dll *test_name_ends_with
 
 ##### How to ignore tests using .test\_ignore file.
 **TODO:
+
+#### How to install
+Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
 
 #### How to run *Contest*
 The easiest way to run Contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory you want and just execute: **contest run test\_cases.dll**
