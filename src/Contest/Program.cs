@@ -2,6 +2,8 @@
 
 namespace Contest {
     using System;
+    using System.Globalization;
+    using System.Threading;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -14,7 +16,6 @@ namespace Contest {
     class Program {
 
         static void Main(string[] args) {
-
             try {
                 Trace.Listeners.Add(new ConsoleTraceListener());
 
@@ -22,7 +23,6 @@ namespace Contest {
 				Console.ForegroundColor = ConsoleColor.Black;
 #endif
 
-                // Print(args);
                 if (!args.Any()) {
                     PrintHelp();
                     return;
@@ -42,13 +42,22 @@ namespace Contest {
                 switch (cmd) {
                     case "run":
                     case "r":
-						if(args.Length <=1) {
-							Console.WriteLine("File name expected. (The name of the assembly that contains test cases)");
+						if(args.Length <= 1) {
+							WriteLine("File name expected. (The name of the assembly that contains test cases)");
 							return;
 						}
 
-						var root = Path.GetDirectoryName(args[1]);
-						CopyToLocalTmp(root);
+						var testAssmPath = args[1];
+						if (!ReuseTestAssm(testAssmPath)) {
+							CopyToLocalTmp(Path.GetDirectoryName(testAssmPath));
+							TryUpdateModDat(testAssmPath);
+						}
+#if DEBUG
+						else {
+							WriteLine("Reusing local copy.");
+						}
+#endif
+
 						AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
 							try {
 								var name = string.Format("{0}.dll", e.Name.Split(',')[0]);
@@ -60,16 +69,13 @@ namespace Contest {
 								}
 							}
 							catch (Exception ex) {
-								Console.WriteLine(ex);
+								WriteLine(ex);
 							}
 							return null;
 						};
 
-						//args[0] == cmd
-						var testAssm = args[1];
 						var pattern  = args.Length >= 3 ? args[2] : null;
-
-						RunTests(testAssm, pattern, printHeaders);
+						RunTests(testAssmPath, pattern, printHeaders);
 
                         break;
                     case "help":
@@ -81,42 +87,81 @@ namespace Contest {
                 }
             }
             catch (Exception ex) {
-                Console.WriteLine(ex);
+                WriteLine(ex);
             }
             finally {
-                //Console.ReadLine();
+                //ReadLine();
             }
         }
 
-        static void CopyToLocalTmp(string root) {
-			root = string.IsNullOrEmpty(root)?".":root;
+		static void TryUpdateModDat(string testAssmPath) {
+			WriteLine("Updating moddat");
+			try {
+				var moddat = new FileInfo(testAssmPath).LastWriteTime;
+				File.WriteAllText(Path.Combine(TMP, MODDAT), moddat.ToString(DATE_FORMAT));
+			}
+			catch (Exception ex) { //Not a big deal, we can update this on the next run.
 #if DEBUG
-			Console.WriteLine("Copying to local tmp...", TMP);
-			Console.WriteLine("tmp:  '{0}'", TMP);
-			Console.WriteLine("root: '{0}'", root);
+				WriteLine("WARN: Couldn't update moddat.");
+				WriteLine(ex.Message);
+#endif
+			}
+		}
+
+		/// This method will tells us if we can reuse the tmp copy
+		/// of the test assembly and its dependencies.
+		static bool ReuseTestAssm(string testAssmPath) {
+			var moddatPath = Path.Combine(TMP, MODDAT);
+			if (!File.Exists(moddatPath))
+				return false;
+
+			var tmp = File.ReadAllLines(moddatPath);
+			if (tmp.Length == 0)
+				return false;
+
+			var strdat = tmp[0].Trim();
+
+			DateTime moddat;
+			if(!DateTime.TryParseExact(strdat, DATE_FORMAT, Culture, DateTimeStyles.None, out moddat)) {
+				WriteLine("WARN: Couldn't parse moddat.");
+				return false;
+			}
+
+			return moddat == new FileInfo(testAssmPath).LastWriteTime;
+		}
+
+		/// Creates a local copy of the directory that contains the 
+		/// test assembly.
+        static void CopyToLocalTmp(string testAssmSrcDir) {
+			var srcDir = string.IsNullOrEmpty(testAssmSrcDir) ? "." : testAssmSrcDir;
+#if DEBUG
+			WriteLine("Copying to local tmp...", TMP);
+			WriteLine("tmp: '{0}'", TMP);
+			WriteLine("src: '{0}'", srcDir);
 #endif
             if (!Directory.Exists(TMP)){
 #if DEBUG
-				Console.WriteLine("Creating tmp dir '{0}'", TMP);
+				WriteLine("Creating tmp dir '{0}'", TMP);
 #endif
                 Directory.CreateDirectory(TMP);
 			}
 
-            Directory.GetFiles(root, "*.dll").Each(
+            Directory.GetFiles(srcDir, "*.dll").Each(
                 f => {
 				 var to = Path.Combine(TMP, Path.GetFileName(f));
 #if DEBUG
-					Console.WriteLine("copying '{0}' to {1}", f, to);
+					WriteLine("copying '{0}' to {1}", f, to);
 #endif
 					File.Copy(f, to, true);
 				});
 #if DEBUG
-			Console.WriteLine("Done!");
+
+			WriteLine("Done!");
 #endif
         }
 
         static void RunTests(string assmFileName, string cerryPicking=null, bool printHeaders=true) {
-            Console.WriteLine("\nConfiguring Assembies....");
+            WriteLine("\nConfiguring Assembies....");
 
             if (string.IsNullOrEmpty(assmFileName))
                 throw new ArgumentException("Assembly name is required.");
@@ -142,7 +187,7 @@ namespace Contest {
             var runner = new Runner();
 			runner.Verbose = true;
 
-            Console.WriteLine("\nDone!\n");
+            WriteLine("\nDone!\n");
             runner.Run(suite, cerryPicking, printHeaders );
         }
 
@@ -164,7 +209,7 @@ namespace Contest {
             Print("=================================================================================");
 			Print("");
 			Print("-- More --");
-			Console.ReadLine();
+			ReadLine();
 
             Print("=================================================================================");
             Print("| Flags                                                                         |");
@@ -176,7 +221,7 @@ namespace Contest {
             Print("=================================================================================");
 			Print("");
 			Print("-- More --");
-			Console.ReadLine();
+			ReadLine();
 
             Print("=================================================================================");
             Print("| Alias                                                                         |");
@@ -194,11 +239,11 @@ namespace Contest {
         }
 
         static void Print(IEnumerable<string> lines) {
-            lines.Each(Console.WriteLine);
+            lines.Each(WriteLine);
         }
 
         static void Print(string msg, params object[] args) {
-            Console.WriteLine(msg, args);
+            WriteLine(msg, args);
         }
     }
 }

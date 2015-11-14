@@ -296,6 +296,8 @@ namespace Contest.Core {
 
 #if DEBUG
         static void PrintIgnoredPatterns(string[] patterns) {
+			if (patterns == null || patterns.Length == 0)
+				return;
             Console.WriteLine("".PadRight(30, '='));
             Console.WriteLine("Ignored Patterns:");
             Console.WriteLine("".PadRight(30, '='));
