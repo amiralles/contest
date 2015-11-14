@@ -95,7 +95,9 @@ namespace Contest {
         }
 
 		static void TryUpdateModDat(string testAssmPath) {
+#if DEBUG
 			WriteLine("Updating moddat");
+#endif
 			try {
 				var moddat = new FileInfo(testAssmPath).LastWriteTime;
 				File.WriteAllText(Path.Combine(TMP, MODDAT), moddat.ToString(DATE_FORMAT));
