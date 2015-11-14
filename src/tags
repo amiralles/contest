@@ -3,7 +3,7 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 AFTER	Contest.Core/Contest.cs	/^            AFTER = "AFTER_",$/;"	f	class:Contest.Core.Contest	file:
 AFTER_EACH	Contest.Core/Contest.cs	/^            AFTER_EACH = "AFTER_EACH";$/;"	f	class:Contest.Core.Contest	file:
 ActualCases	Contest.Core/Contest.cs	/^            ActualCases = (suite, setups, teardowns) => {$/;"	f	class:Contest.Core.Contest	file:
@@ -16,12 +16,14 @@ Bag	Contest.Core/Runner.cs	/^        public readonly Dictionary<string, object> 
 BarTest	Contest.Tests/BarTest.cs	/^    class BarTest{$/;"	c	namespace:Contest.Tests
 BeforeCase	Contest.Core/TestCase.cs	/^        public Action<Runner> Body, BeforeCase, AfterCase;$/;"	f	class:Contest.Core.TestCase
 Body	Contest.Core/TestCase.cs	/^        public Action<Runner> Body, BeforeCase, AfterCase;$/;"	f	class:Contest.Core.TestCase
+BuildTestSuiteFromAssm	Contest.Core/Contest.cs	/^        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> BuildTestSuiteFromAssm =$/;"	f	class:Contest.Core.Contest	file:
 CTIGNORE_PATH	Contest.Core/IgnoreFileReader.cs	/^        const string CTIGNORE_PATH = ".\/.test_ignore";$/;"	f	class:Contest.Core.IgnoreFileReader	file:
 Cases	Contest.Core/TestSuite.cs	/^        public readonly List<TestCase> Cases = new List<TestCase>();$/;"	f	class:Contest.Core.TestSuite
 Contest	Contest.Core/Contest.cs	/^        static Contest() {$/;"	m	class:Contest.Core.Contest	file:
 Contest	Contest.Core/Contest.cs	/^    public class Contest {$/;"	c	namespace:Contest.Core
 Contest	Contest/Program.cs	/^namespace Contest {$/;"	n
 Contest.Core	Contest.Core/Contest.cs	/^namespace Contest.Core {$/;"	n
+Contest.Core	Contest.Core/ContestConstants.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	Contest.Core/EnumerableExtensions.cs	/^﻿namespace Contest.Core {$/;"	n
 Contest.Core	Contest.Core/IgnoreFileReader.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	Contest.Core/Printer.cs	/^namespace Contest.Core {$/;"	n
@@ -31,14 +33,15 @@ Contest.Core	Contest.Core/TestCase.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	Contest.Core/TestCaseFinder.cs	/^﻿namespace Contest.Core {$/;"	n
 Contest.Core	Contest.Core/TestSuite.cs	/^namespace Contest.Core {$/;"	n
 Contest.Core	Contest.Core/TypeExtensions.cs	/^namespace Contest.Core {$/;"	n
-Contest.Tests	Contest.Tests/BarTest.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/BarTest.cs	/^namespace Contest.Tests {$/;"	n
 Contest.Tests	Contest.Tests/EchoTest.cs	/^namespace Contest.Tests {$/;"	n
-Contest.Tests	Contest.Tests/FooTest.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	Contest.Tests/TestClass.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	Contest.Tests/TestClassOnePassOnFail.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/FooTest.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/TestClass.cs	/^namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/TestClassOnePassOnFail.cs	/^namespace Contest.Tests {$/;"	n
 Contest.Tests	Contest.Tests/TestClassThrowingTests.cs	/^﻿namespace Contest.Tests {$/;"	n
-Contest.Tests	Contest.Tests/Wrapper.cs	/^﻿namespace Contest.Tests {$/;"	n
+Contest.Tests	Contest.Tests/Wrapper.cs	/^namespace Contest.Tests {$/;"	n
 Contest.Tests	Contest.Tests/_contest_core_tests.cs	/^namespace Contest.Tests {$/;"	n
+ContestConstants	Contest.Core/ContestConstants.cs	/^	public class ContestConstants {$/;"	c	namespace:Contest.Core
 Contest_101	Contest.Demo/Demo.cs	/^    class Contest_101 {$/;"	c	namespace:Demo
 Contest_201	Contest.Demo/Demo.cs	/^    class Contest_201 {$/;"	c	namespace:Demo
 Contest_301	Contest.Demo/Demo.cs	/^	class Contest_301 {$/;"	c	namespace:Demo
@@ -46,9 +49,8 @@ CopyToLocalTmp	Contest/Program.cs	/^        static void CopyToLocalTmp(string ro
 CopyToLocalTmp	Inception.Test.Runner/Program.cs	/^        static void CopyToLocalTmp(string root) {$/;"	m	class:Inception.Test.Runner.Program	file:
 Count	Contest.Demo/Demo.cs	/^		public static Func<int> Count = () => _users.Count;$/;"	f	class:Demo.User
 Create	Contest.Demo/Demo.cs	/^		public static Action<string> Create = name => _users.Add(name);$/;"	f	class:Demo.User
-DARK_TEXT	Contest.Core/Printer.cs	/^#define DARK_TEXT$/;"	d	file:
 Default	Contest.Core/Printer.cs	/^		static ConsoleColor Default  = ConsoleColor.Black;$/;"	f	class:Contest.Core.Printer	file:
-Demo	Contest.Demo/Demo.cs	/^﻿namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
+Demo	Contest.Demo/Demo.cs	/^namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
 Die	Contest.Core/Contest.cs	/^		static void Die(string errmsg) {$/;"	m	class:Contest.Core.Contest	file:
 DumpErrors	Contest.Core/Runner.cs	/^        void DumpErrors(){$/;"	m	class:Contest.Core.Runner	file:
 Each	Contest.Core/EnumerableExtensions.cs	/^        public static void Each<T>(this IEnumerable<T> target, Action<T> callback) {$/;"	m	class:Contest.Core.EnumerableExtensions
@@ -69,8 +71,7 @@ Fail	Contest.Core/Runner.cs	/^        public void Fail(string errMsg) {$/;"	m	cl
 FailCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
 Find	Contest.Demo/Demo.cs	/^		public static Func<string, object> Find = name =>$/;"	f	class:Demo.User
 FindCases	Contest.Core/Contest.cs	/^        internal static Func<TestCaseFinder, Type, string, TestSuite> FindCases =$/;"	f	class:Contest.Core.Contest	file:
-FindCasesNestedTypes	Contest.Core/Contest.cs	/^            FindCasesNestedTypes = (finder, type, flags, ignorePatterns) => {$/;"	f	class:Contest.Core.Contest	file:
-FindRawCasesInAssm	Contest.Core/Contest.cs	/^        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> FindRawCasesInAssm =$/;"	f	class:Contest.Core.Contest	file:
+FindCasesInNestedTypes	Contest.Core/Contest.cs	/^            FindCasesInNestedTypes = (finder, type, flags, ignorePatterns) => {$/;"	f	class:Contest.Core.Contest	file:
 FindSetups	Contest.Core/Contest.cs	/^        static readonly Func<TestSuite, List<TestCase>> FindSetups = suite =>$/;"	f	class:Contest.Core.Contest	file:
 FindTeardowns	Contest.Core/Contest.cs	/^        static readonly Func<TestSuite, List<TestCase>> FindTeardowns = suite =>$/;"	f	class:Contest.Core.Contest	file:
 FixName	Contest.Core/TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
@@ -104,6 +105,7 @@ Match	Contest.Core/StringExtensions.cs	/^        public static bool Match(this s
 MatchIgnorePattern	Contest.Core/Contest.cs	/^        static readonly Func<TestCaseFinder, string, string, bool> MatchIgnorePattern =$/;"	f	class:Contest.Core.Contest	file:
 MsgContains	Contest.Core/Runner.cs	/^		static Func<string, string, bool> MsgContains = (msg, chunck) => $/;"	f	class:Contest.Core.Runner	file:
 MsgEq	Contest.Core/Runner.cs	/^		static Func<string, string, bool> MsgEq = (lhs, rhs) => lhs == rhs;$/;"	f	class:Contest.Core.Runner	file:
+NULL	Contest.Core/Runner.cs	/^		const string NULL = "null";$/;"	f	class:Contest.Core.Runner	file:
 Name	Contest.Core/TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
 Nested	Contest.Tests/Wrapper.cs	/^        class Nested {$/;"	c	class:Contest.Tests.Wrapper
 NestedBarTest	Contest.Tests/BarTest.cs	/^        class NestedBarTest{$/;"	c	class:Contest.Tests.BarTest
@@ -134,12 +136,11 @@ RunTests	Contest/Program.cs	/^        static void RunTests(string assmFileName, 
 RunTests	Inception.Test.Runner/Program.cs	/^        static void RunTests(string assmFileName, string cerryPicking=null, bool printHeaders=true) {$/;"	m	class:Inception.Test.Runner.Program	file:
 Runner	Contest.Core/Runner.cs	/^        public Runner() {$/;"	m	class:Contest.Core.Runner
 Runner	Contest.Core/Runner.cs	/^    public class Runner {$/;"	c	namespace:Contest.Core
-STA_PRI	Contest.Core/Contest.cs	/^            STA_PRI = BF.Static | BF.NonPublic;$/;"	f	class:Contest.Core.Contest	file:
-STA_PUB	Contest.Core/Contest.cs	/^            STA_PUB = BF.Static | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
+STA_PRI	Contest.Core/Contest.cs	/^            STA_PRI = BF.Static   | BF.NonPublic;$/;"	f	class:Contest.Core.Contest	file:
+STA_PUB	Contest.Core/Contest.cs	/^            STA_PUB = BF.Static   | BF.Public,$/;"	f	class:Contest.Core.Contest	file:
 SameMetaToken	Contest.Core/Contest.cs	/^        static readonly Func<Delegate, Delegate, bool> SameMetaToken =$/;"	f	class:Contest.Core.Contest	file:
 StringExtensions	Contest.Core/StringExtensions.cs	/^    public static class StringExtensions {$/;"	c	namespace:Contest.Core
-TMP	Contest/Program.cs	/^        const string TMP = "tmp";$/;"	f	class:Contest.Program	file:
-TMP	Inception.Test.Runner/Program.cs	/^        const string TMP = "tmp";$/;"	f	class:Inception.Test.Runner.Program	file:
+TMP	Contest.Core/ContestConstants.cs	/^        public static readonly string TMP = ".tmp";$/;"	f	class:Contest.Core.ContestConstants
 TestBodyCantBeNull	Contest.Core/TestCase.cs	/^        Func<string, Exception> TestBodyCantBeNull = name =>$/;"	f	class:Contest.Core.TestCase	file:
 TestCase	Contest.Core/TestCase.cs	/^    public class TestCase {$/;"	c	namespace:Contest.Core
 TestCaseFinder	Contest.Core/TestCaseFinder.cs	/^        public TestCaseFinder(Func<string[]> getIgnoredFromFile = null, Func<Type, bool> ignoreType = null) {$/;"	m	class:Contest.Core.TestCaseFinder
@@ -203,6 +204,7 @@ cherry_pick_cases_starting_with	Contest.Tests/_contest_core_tests.cs	/^        _
 contest_core_tests	Contest.Tests/_contest_core_tests.cs	/^    public class contest_core_tests {$/;"	c	namespace:Contest.Tests
 create_user_adds_new_user	Contest.Demo/Demo.cs	/^		_ create_user_adds_new_user = assert => {$/;"	f	class:Demo.Contest_201	file:
 dicsover_before_test_cases_in_assm	Contest.Tests/_contest_core_tests.cs	/^        _ dicsover_before_test_cases_in_assm = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
+disable	Contest.Demo/Demo.cs	/^﻿#pragma warning disable 414, 219$/;"	p
 discover_after_test_cases_in_class	Contest.Tests/_contest_core_tests.cs	/^        _ discover_after_test_cases_in_class = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_test_cases_in_assm	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_assm = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_test_cases_in_class	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_class = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
