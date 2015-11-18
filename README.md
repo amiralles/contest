@@ -1,7 +1,7 @@
 ## contest
-Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on and so forth... So in the end, the code reads almost like plain english.
+Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... In the end the code reads almost like plain english.
 
-Down below you’ll find a couple of examples on how to write tests using Contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
+Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
 
 _Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
@@ -113,7 +113,7 @@ I guess this section is selfexplanatory ;)
 ```
 		
 #### A word about conventions
-As I mentioned earlier, contest it's based on conventions, so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules that are easy to remember.
+As I mentioned earlier, contest it's based on conventions, so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules, that I hope, are easy to remember.
 
 ##### For test cases
 **Every field of type System.Action\<Contest.Core.Runner\> within a given class is considered to be a test case**. As you saw in the previous samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience. I like to save as much keystrokes as I can, but it will work with the public modifier as well.
