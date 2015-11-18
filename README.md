@@ -139,7 +139,21 @@ Obviously, you can clone the repo, build from sources and get the binaries. But 
 #### How to run *Contest*
 The easiest way to run Contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory you want and just execute: **contest run test\_cases.dll**
 
+#### How to debug test cases
+If you were using VS + ReSharper or TestDriven.NET or similar tools, chances are that when you find a failing test you wanna place a breakpoint and do some step by step debugging, right?
+Well, while contest doesn't have an integrated test runner, you still have the chance to debug your tests using a **switch** that will freeze the execution and let you attach the VS debugguer.
+Just place a breakpoint as usual, run contest using the **-dbg** switch, attach the VS's debugger and go back to the console and hit [Enter].
+
+```bash
+ **contest run test\_cases.dll -dbg **
+```
+
+I know this is far from ideal, but keep in mind that contest it's meant to be used from the console. (And I wanna keep it as lightweight as possible).
+If you are using this library is probably because you are using a plain text editor, in which case you don't have a debugger anyways, so...
+
+
+
 #### What the hell is that underscore thing?
-A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above to get more readable test code (and nobody cares about test cases's return types anyways ;)).
+A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above to get more readable test code (and nobody cares about test cases's return types ;)).
 
 
