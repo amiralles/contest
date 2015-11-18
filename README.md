@@ -136,16 +136,17 @@ contest run test.dll *test_name_ends_with
 #### How to install
 Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
 
-#### How to run *Contest*
-The easiest way to run Contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory you want and just execute: **contest run test\_cases.dll**
+#### How to run
+The easiest way to run contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just execute: **contest run test\_cases.dll**
 
 #### How to debug test cases
 If you were using VS + ReSharper or TestDriven.NET or similar tools, chances are that when you find a failing test you wanna place a breakpoint and do some step by step debugging, right?
+
 Well, while contest doesn't have an integrated test runner, you still have the chance to debug your tests using a **switch** that will freeze the execution and let you attach the VS debugguer.
-Just place a breakpoint as usual, run contest using the **-dbg** switch, attach the VS's debugger and go back to the console and hit [Enter].
+Just place a breakpoint as usual, run contest using the **-dbg** switch, attach the VS's debugger, and go back to the console and hit [Enter].
 
 ```bash
- **contest run test\_cases.dll -dbg **
+ contest run test\_cases.dll -dbg
 ```
 
 I know this is far from ideal, but keep in mind that contest it's meant to be used from the console. (And I wanna keep it as lightweight as possible).
