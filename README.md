@@ -2,7 +2,8 @@
 Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... In the end the code reads almost like plain english.
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
-i
+
+
 _Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
 	using _  = System.Action<Contest.Core.Runner>;
@@ -122,6 +123,7 @@ As I mentioned earlier, contest it's based on conventions, so you don't have to 
 If you 've been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, **per case** and **per fixture** setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
 And remember, in all cases, **fields type must be System.Action\<Contest.Core.Runner\>**. Otherwise, it ain't gonna work.
 
+
 #### How to install
 Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
 
@@ -156,7 +158,7 @@ Most tests runners comes with a handy feature that allows you to filter and run 
 ```bash
  contest run test\_cases.dll -f
 ```
-** You can also see failing tests without running them using the **-lf** flag.**
+* You can also see failing tests without running them using the **-lf** flag.
 
 ```bash
  contest run test\_cases.dll -lf
