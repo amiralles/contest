@@ -12,6 +12,7 @@ namespace Contest {
     using Core;
     using static System.Console;
 	using static Contest.Core.ContestConstants;
+	using static Contest.Core.Contest;
 
     class Program {
 
@@ -37,6 +38,7 @@ namespace Contest {
                 }
 
 				var printHeaders = !args.Any(a => a == "--no-head" || a == "-nh");
+				var failing      = args.Any(a => a == "-f");
 
 				//clean args list (no flags).
 				args = (from a in args where !a.StartsWith("-") select a).ToArray();
@@ -78,7 +80,11 @@ namespace Contest {
 						};
 
 						var pattern  = args.Length >= 3 ? args[2] : null;
-						RunTests(testAssmPath, pattern, printHeaders);
+
+						if (failing)
+							RunFailingTests(testAssmPath);
+						else
+							RunTests(testAssmPath, pattern, printHeaders);
 
                         break;
                     case "help":
@@ -165,7 +171,44 @@ namespace Contest {
 #endif
         }
 
-        static void RunTests(string assmFileName, string cerryPicking=null, bool printHeaders=true) {
+
+        static void RunFailingTests(string assmFileName) {
+			var failingFailName = $"{assmFileName}.fail";
+			List<string> failingTests = null;
+
+			// If this file does not exists or exists but it's empty,
+			// there are no failing tests.
+			if (!File.Exists(failingFailName) 
+					|| (failingTests = new List<string> (File.ReadAllLines(assmFileName))).Count == 0) {
+				WriteLine("There are no previous failing tests. Nothing to do.");
+				return;
+			}
+
+			// Assumes file name WITH extension.
+            var fullpath = Path.GetFullPath(assmFileName);
+            DieIf(!File.Exists(fullpath), $"File not found '{assmFileName}'.");
+
+			// Load all cases.
+            var assm = Assembly.LoadFile(fullpath);
+			DieIf(assm == null, "Can't load assembly '{assmFileName}'.");
+
+            var finder = new TestCaseFinder();
+            var suite  = Contest.GetCasesInAssm(finder, assm, null);
+
+			// Find failing cases.
+			var failingSuite = new TestSuite(
+									from   c in suite.Cases 
+									where  failingTests.Contains(c.GetFullName())
+									select c);
+
+            var runner = new Runner();
+			runner.Verbose = true;
+
+			// Run only failing tests.
+            runner.Run(failingSuite);
+		}
+
+        static void RunTests(string assmFileName, string cerryPicking = null, bool printHeaders = true) {
             WriteLine("\nConfiguring Assembies....");
 
             if (string.IsNullOrEmpty(assmFileName))

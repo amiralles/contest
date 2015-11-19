@@ -52,8 +52,13 @@ namespace Contest.Core {
                 return suite;
             };
 
+		public static void DieIf(bool cond, string errmsg) {
+			if (cond)
+				throw new Exception(errmsg);
+		}
 
-		static void Die(string errmsg) {
+
+		public static void Die(string errmsg) {
 			throw new Exception(errmsg);
 		}
 
