@@ -39,6 +39,7 @@ namespace Contest {
 
 				var printHeaders = !args.Any(a => a == "--no-head" || a == "-nh");
 				var failing      = args.Any(a => a == "-f");
+				var listFailing  = args.Any(a => a == "-lf");
 
 				//clean args list (no flags).
 				args = (from a in args where !a.StartsWith("-") select a).ToArray();
@@ -81,7 +82,9 @@ namespace Contest {
 
 						var pattern  = args.Length >= 3 ? args[2] : null;
 
-						if (failing)
+						if (listFailing)
+							ShowPreviousFails(testAssmPath);
+						else if (failing)
 							RunFailingTests(testAssmPath);
 						else
 							RunTests(testAssmPath, pattern, printHeaders);
@@ -98,10 +101,8 @@ namespace Contest {
             catch (Exception ex) {
                 WriteLine(ex);
             }
-            finally {
-                //ReadLine();
-            }
         }
+
 
 		static void TryUpdateModDat(string testAssmPath) {
 #if DEBUG
@@ -118,6 +119,7 @@ namespace Contest {
 #endif
 			}
 		}
+
 
 		/// This method will tells us if we can reuse the tmp copy
 		/// of the test assembly and its dependencies.
@@ -140,6 +142,7 @@ namespace Contest {
 
 			return moddat == new FileInfo(testAssmPath).LastWriteTime;
 		}
+
 
 		/// Creates a local copy of the directory that contains the 
 		/// test assembly.
@@ -172,17 +175,53 @@ namespace Contest {
         }
 
 
-        static void RunFailingTests(string assmFileName) {
-			var failingFailName = $"{assmFileName}.fail";
-			List<string> failingTests = null;
+		/// Shows failing tests from the last run.
+		static void ShowPreviousFails(string assmFileName) {
+			var failingFile = Path.Combine(TMP, GetFailFileName(assmFileName));
 
 			// If this file does not exists or exists but it's empty,
 			// there are no failing tests.
-			if (!File.Exists(failingFailName) 
-					|| (failingTests = new List<string> (File.ReadAllLines(assmFileName))).Count == 0) {
+			if (!File.Exists(failingFile)) { 
 				WriteLine("There are no previous failing tests. Nothing to do.");
 				return;
 			}
+			
+			var content = File.ReadAllLines(failingFile);
+			if (content.Length == 0) { 
+				WriteLine("There are no previous failing tests. Nothing to do.");
+				return;
+			}
+
+			WriteLine("");
+			WriteLine("".PadRight(70, '='));
+			WriteLine("Previous Failing Tests");
+			WriteLine("".PadRight(70, '='));
+
+			foreach(var line in content)
+				WriteLine(line);
+
+			WriteLine("".PadRight(70, '='));
+			WriteLine("");
+		}
+
+
+		/// Rerun failing tests from the last run.
+        static void RunFailingTests(string assmFileName) {
+			var failingFile = Path.Combine(TMP, GetFailFileName(assmFileName));
+
+			// If this file does not exists or exists but it's empty,
+			// there are no failing tests.
+			if (!File.Exists(failingFile)) { 
+				WriteLine("There are no previous failing tests. Nothing to do.");
+				return;
+			}
+			
+			var content = File.ReadAllLines(failingFile);
+			if (content.Length == 0) { 
+				WriteLine("There are no previous failing tests. Nothing to do.");
+				return;
+			}
+			var failingTests = new List<string> (content);
 
 			// Assumes file name WITH extension.
             var fullpath = Path.GetFullPath(assmFileName);
@@ -201,7 +240,7 @@ namespace Contest {
 									where  failingTests.Contains(c.GetFullName())
 									select c);
 
-            var runner = new Runner();
+            var runner = new Runner(assmFileName);
 			runner.Verbose = true;
 
 			// Run only failing tests.
@@ -232,7 +271,7 @@ namespace Contest {
 
             var finder = new TestCaseFinder();
             var suite = Contest.GetCasesInAssm(finder, assm, null);
-            var runner = new Runner();
+            var runner = new Runner(assmFileName);
 			runner.Verbose = true;
 
             WriteLine("\nDone!\n");

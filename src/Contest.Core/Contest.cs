@@ -1,5 +1,6 @@
 namespace Contest.Core {
     using System;
+    using System.IO;
     using System.Diagnostics;
     using System.Collections.Generic;
     using System.Linq;
@@ -60,6 +61,11 @@ namespace Contest.Core {
 
 		public static void Die(string errmsg) {
 			throw new Exception(errmsg);
+		}
+
+		public static string  GetFailFileName(string assmFileName) {
+			DieIf(assmFileName == null, "assmFileName can't be null.");
+			return $"{Path.GetFileNameWithoutExtension(assmFileName)}.fail";
 		}
 
 		/// Returns a suite of "actual" test cases from the given assembly.

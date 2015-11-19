@@ -1,18 +1,24 @@
 ﻿namespace Contest.Core {
     using System;
+    using System.IO;
     using System.Reflection;
     using System.Collections.Generic;
     using System.Diagnostics;
     using static System.Console;
+	using static Contest;
+	using static ContestConstants;
 
 	
     public class Runner {
-        string _currCase;
+        string _currCase, _currCaseFullName;
         
         static readonly Func<bool, bool> Not = cnd => !cnd;
         readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
+		readonly List<string> _failingCasesFullNames = new List<string>();
+		readonly string _assmName;
 
-        public Runner() {
+        public Runner(string assmName = null) {
+			_assmName = assmName;
         }
 
 		public bool Verbose = false;
@@ -44,10 +50,11 @@
                 }
 
 				var innerwatch      = Stopwatch.StartNew();
-                try {
+                try { // <= ensure setups/teardowns.
                     WriteLine(c.Name);
                     _currCase = c.Name;
-                    c.Run(this);//<= ensure setups/teardowns.
+                    _currCaseFullName = c.GetFullName();
+                    c.Run(this);
 
 					innerwatch.Stop();
                 }
@@ -67,10 +74,13 @@
             TestCount = cases.Count;
 			
 			if(Verbose)
-				Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount,FailCount, IgnoreCount, cherryPicking);
+				Printer.PrintResults(cases.Count, Elapsed, AssertsCount, PassCount, FailCount, IgnoreCount, cherryPicking);
 
-            if(FailCount>0)
-                DumpErrors();
+			if(FailCount > 0) {
+				DumpErrors();
+				if (_assmName != null)
+					SaveFailingCases(_assmName);
+			}
 
             Environment.ExitCode = FailCount;
         }
@@ -83,6 +93,13 @@
             foreach(var name in _errors.Keys)
                 Printer.Print("{0} - {1}".Interpol(name, _errors[name]), ConsoleColor.Red);
         }
+
+
+		void SaveFailingCases(string assmName) {
+			var failingFile = Path.Combine(TMP, GetFailFileName(assmName));
+			var content  = string.Join("\n", _failingCasesFullNames);
+			File.WriteAllText(path: failingFile, contents: content);
+		}
 
         //All of these helpers end up calling the one and only "Assert" method.
         public void IsNull(object value, string errMsg = null) {
@@ -222,6 +239,11 @@
 				_errors[_currCase] = errMsg;
 			else
 				_errors["unknown_case"] = errMsg;
+
+			// This allows us to rerun failing cases.
+			if(!_failingCasesFullNames.Contains(_currCaseFullName))
+				_failingCasesFullNames.Add(_currCaseFullName);
+			//
         }
 
         public void Pass() {
