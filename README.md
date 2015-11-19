@@ -2,7 +2,7 @@
 Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... In the end the code reads almost like plain english.
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
-
+i
 _Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
 ```cs
 	using _  = System.Action<Contest.Core.Runner>;
@@ -162,7 +162,7 @@ Most tests runners comes with a handy feature that allows you to filter and run 
  contest run test\_cases.dll -lf
 ```
 
-##### How to ignore tests using .test\_ignore file.
+#### How to ignore tests using .test\_ignore file.
 **TODO:
 
 
