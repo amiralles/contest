@@ -122,17 +122,6 @@ As I mentioned earlier, contest it's based on conventions, so you don't have to 
 If you 've been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, **per case** and **per fixture** setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
 And remember, in all cases, **fields type must be System.Action\<Contest.Core.Runner\>**. Otherwise, it ain't gonna work.
 
-#### Cherry picking
-##### You can use wildcards to ask Contest to filter your fixtures and only run matching tests.
-```bash
-contest run test.dll *test_name_contains*
-contest run test.dll test_name_starts_with*
-contest run test.dll *test_name_ends_with
-```
-
-##### How to ignore tests using .test\_ignore file.
-**TODO:
-
 #### How to install
 Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
 
@@ -152,6 +141,29 @@ Just place a breakpoint as usual, run contest using the **-dbg** switch, attach 
 I know this is far from ideal, but keep in mind that contest it's meant to be used from the console. (And I wanna keep it as lightweight as possible).
 If you are using this library is probably because you are using a plain text editor, in which case you don't have a debugger anyways, so...
 
+#### Cherry picking
+##### You can use wildcards to ask Contest to filter your fixtures and only run matching tests.
+```bash
+contest run test.dll *test_name_contains*
+contest run test.dll test_name_starts_with*
+contest run test.dll *test_name_ends_with
+```
+
+
+#### How to rerun failing tests
+Most tests runners comes with a handy feature that allows you to filter and run only test cases that had failed in the previous run. (I used this feature a lot with ReSharper's test runner). You can do this with contest too, just add the **-f** flag and you are all set.
+
+```bash
+ contest run test\_cases.dll -f
+```
+** You can also see failing tests without running them using the **-lf** flag.**
+
+```bash
+ contest run test\_cases.dll -lf
+```
+
+##### How to ignore tests using .test\_ignore file.
+**TODO:
 
 
 #### What the hell is that underscore thing?
