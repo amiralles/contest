@@ -3,7 +3,7 @@ namespace Contest.Core {
 	using System.Globalization;
 
 	public class ContestConstants {
-		public const string  
+		public static readonly string  
 			TMP         = ".tmp",
 			MODDAT      = "moddat", 
 			DATE_FORMAT = "yyyy/MM/dd hh:mm:ss.fff";

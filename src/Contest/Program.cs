@@ -15,6 +15,9 @@ namespace Contest {
 
     class Program {
 
+
+		public static readonly CultureInfo Culture = new CultureInfo("en-US");
+
         static void Main(string[] args) {
             try {
                 Trace.Listeners.Add(new ConsoleTraceListener());
