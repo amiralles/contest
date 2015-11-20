@@ -81,6 +81,10 @@
 				if (_assmName != null)
 					SaveFailingCases(_assmName);
 			}
+			else {
+				if (_assmName != null)
+					ClearFailingCases(_assmName);
+			}
 
             Environment.ExitCode = FailCount;
         }
@@ -99,6 +103,12 @@
 			var failingFile = Path.Combine(TMP, GetFailFileName(assmName));
 			var content  = string.Join("\n", _failingCasesFullNames);
 			File.WriteAllText(path: failingFile, contents: content);
+		}
+
+		void ClearFailingCases(string assmName) {
+			var failingFile = Path.Combine(TMP, GetFailFileName(assmName));
+			if (File.Exists(failingFile))
+				File.Delete(failingFile);
 		}
 
         //All of these helpers end up calling the one and only "Assert" method.
