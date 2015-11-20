@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>Contest</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <authors>amiralles</authors>
     <owners>amiralles</owners>
     <licenseUrl>https://github.com/amiralles/contest/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/amiralles/contest</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Minimalistic Unit Testing Framework for .NET.</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <description>Minimalistic convention based unit testing framework for .NET.</description>
+    <releaseNotes>Add rerun failing tests</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>UnitTesting </tags>
+    <tags>unit testing framework tdd console test</tags>
   </metadata>
 </package>
