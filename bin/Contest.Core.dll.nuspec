@@ -2,13 +2,16 @@
 <package >
   <metadata>
     <id>Contest</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <authors>amiralles</authors>
     <owners>amiralles</owners>
     <licenseUrl>https://github.com/amiralles/contest/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/amiralles/contest</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Minimalistic convention based unit testing framework for .NET.</description>
+	<summary>
+		Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... Point in case, the code reads almost like plain english.
+	</summary>
     <releaseNotes>Add rerun failing tests</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>unit testing framework tdd console test</tags>
