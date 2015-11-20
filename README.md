@@ -1,5 +1,5 @@
 ## contest
-Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... In the end the code reads almost like plain english.
+Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... Point in case, the code reads almost like plain english.
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
 
