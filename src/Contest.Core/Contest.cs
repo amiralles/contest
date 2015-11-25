@@ -63,6 +63,11 @@ namespace Contest.Core {
 			throw new Exception(errmsg);
 		}
 
+		public static string  GetTimeFileName(string assmFileName) {
+			DieIf(assmFileName == null, "assmFileName can't be null.");
+			return $"{Path.GetFileNameWithoutExtension(assmFileName)}.time";
+		}
+
 		public static string  GetFailFileName(string assmFileName) {
 			DieIf(assmFileName == null, "assmFileName can't be null.");
 			return $"{Path.GetFileNameWithoutExtension(assmFileName)}.fail";

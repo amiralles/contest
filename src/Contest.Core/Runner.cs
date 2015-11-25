@@ -1,5 +1,6 @@
 ﻿namespace Contest.Core {
     using System;
+    using System.Text;
     using System.IO;
     using System.Reflection;
     using System.Collections.Generic;
@@ -10,12 +11,13 @@
 
 	
     public class Runner {
-        string _currCase, _currCaseFullName;
-        
         static readonly Func<bool, bool> Not = cnd => !cnd;
-        readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
+        readonly Dictionary<string, string> _errors       = new Dictionary<string, string>();
+        readonly Dictionary<string, long>    _testExecTime = new Dictionary<string, long>();
 		readonly List<string> _failingCasesFullNames = new List<string>();
+
 		readonly string _assmName;
+        string _currCase, _currCaseFullName;
 
         public Runner(string assmName = null) {
 			_assmName = assmName;
@@ -27,11 +29,13 @@
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
 
-        public void Run(TestSuite suite, string cherryPicking = null, bool printHeaders=true) {
+        public void Run(TestSuite suite, string cherryPicking = null, bool printHeaders = true) {
             Run(suite.Cases, cherryPicking, printHeaders);
         }
 
-        public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders=true) {
+        public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders = true) {
+
+			ClearFailingCases(_assmName);
 
             Printer.Print("".PadRight(40, '='), BackgroundColor);
 
@@ -64,6 +68,7 @@
                     Fail(ex.Message);
                 }
 				finally {
+					_testExecTime[_currCaseFullName] = innerwatch.ElapsedMilliseconds;
 					WriteLine($"{c.Name} took {innerwatch.ElapsedMilliseconds} ms.");
 					WriteLine();
 				}
@@ -86,8 +91,10 @@
 					ClearFailingCases(_assmName);
 			}
 
+			SaveExecTime(_assmName);
             Environment.ExitCode = FailCount;
         }
+
 
         void DumpErrors(){
 			if(!Verbose)
@@ -98,6 +105,27 @@
                 Printer.Print("{0} - {1}".Interpol(name, _errors[name]), ConsoleColor.Red);
         }
 
+		void ClearExecTime(string assmName) {
+			if (assmName == null)
+				return;
+
+			var timeFile = Path.Combine(TMP, GetTimeFileName(assmName));
+			if (File.Exists(timeFile))
+				File.Delete(timeFile);
+		}
+
+		void SaveExecTime(string assmName) {
+			if (assmName == null || _testExecTime.Keys.Count == 0)
+				return;
+
+			var timeFile = Path.Combine(TMP, GetTimeFileName(assmName));
+
+			var content = new StringBuilder();
+			foreach(var key in _testExecTime.Keys)
+				content.AppendFormat($"{key} | {_testExecTime[key]}\n");
+
+			File.WriteAllText(path: timeFile, contents: content.ToString());
+		}
 
 		void SaveFailingCases(string assmName) {
 			var failingFile = Path.Combine(TMP, GetFailFileName(assmName));
