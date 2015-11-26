@@ -35,7 +35,7 @@
 
         public void Run(List<TestCase> cases, string cherryPicking = null, bool printHeaders = true) {
 
-			ClearFailingCases(_assmName);
+			ClearExecTime(_assmName);
 
             Printer.Print("".PadRight(40, '='), BackgroundColor);
 
@@ -121,8 +121,9 @@
 			var timeFile = Path.Combine(TMP, GetTimeFileName(assmName));
 
 			var content = new StringBuilder();
-			foreach(var key in _testExecTime.Keys)
+			foreach(var key in _testExecTime.Keys) {
 				content.AppendFormat($"{key} | {_testExecTime[key]}\n");
+			}
 
 			File.WriteAllText(path: timeFile, contents: content.ToString());
 		}

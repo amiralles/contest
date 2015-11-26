@@ -39,7 +39,13 @@ namespace Contest {
 
 				var printHeaders = !args.Any(a => a == "--no-head" || a == "-nh");
 				var failing      = args.Any(a => a == "-f");
+
+				//================================================
+				// Listing results from previous runs.
 				var listFailing  = args.Any(a => a == "-lf");
+				var listSlow     = args.Any(a => a == "-lslow");
+				var listFast     = args.Any(a => a == "-lfast");
+				//================================================
 
 				//clean args list (no flags).
 				args = (from a in args where !a.StartsWith("-") select a).ToArray();
@@ -82,12 +88,29 @@ namespace Contest {
 
 						var pattern  = args.Length >= 3 ? args[2] : null;
 
-						if (listFailing)
+						// ================================================
+						// Listing content from previous run;
+						// None of these options actually run the tests.
+						if (listFailing) {
 							ShowPreviousFails(testAssmPath);
-						else if (failing)
+							return;
+						}
+						if (listSlow) {
+							ShowSlowTests(testAssmPath);
+							return;
+						}
+						if (listFast) {
+							ShowFastTests(testAssmPath);
+							return;
+						}
+						// ================================================
+						
+						// Either of these options execute tests;
+						if (failing)
 							RunFailingTests(testAssmPath);
-						else
+						else 
 							RunTests(testAssmPath, pattern, printHeaders);
+						//
 
                         break;
                     case "help":
@@ -103,6 +126,57 @@ namespace Contest {
             }
         }
 
+		static Dictionary<string, long> GetTestsTimes(string assmFileName) {
+			var timeFile = Path.Combine(TMP, GetTimeFileName(assmFileName));
+			if (!File.Exists(timeFile))
+				return null;
+
+			var content = File.ReadAllLines(timeFile);
+
+			var testsTimes = new Dictionary<string, long>();
+			for (int i = 0; i < content.Length; i++) {
+				var tmp = content[i].Split('|');
+				if (tmp.Length != 2)
+					continue;
+
+				var test = tmp[0].Trim();
+				var time = long.Parse(tmp[1].Trim());
+				testsTimes[test] = time;
+			}
+
+			return testsTimes;
+		}
+
+		// Shows slow tests first.
+		static void ShowSlowTests(string assmFileName) {
+			var testsTimes = GetTestsTimes(assmFileName);
+			if (testsTimes == null)
+				return;
+
+			var sortedTestsTimes = (from testTime in testsTimes 
+							       orderby testTime.Value descending 
+							       select testTime).ToArray();
+
+			PrintTests(sortedTestsTimes);
+		}
+
+		// Shows fast tests first.
+		static void ShowFastTests(string assmFileName) {
+			var testsTimes = GetTestsTimes(assmFileName);
+			if (testsTimes == null)
+				return;
+
+			var sortedTestsTimes = (from testTime in testsTimes 
+							       orderby testTime.Value ascending 
+							       select testTime).ToArray();
+
+			PrintTests(sortedTestsTimes);
+		}
+
+		static void PrintTests(KeyValuePair<string, long>[] testsTimes) {
+			foreach(var tt in testsTimes)
+				WriteLine($"{tt.Key} => {tt.Value} ms");
+		}
 
 		static void TryUpdateModDat(string testAssmPath) {
 #if DEBUG
