@@ -166,6 +166,20 @@ Most tests runners comes with a handy feature that allows you to filter and run 
 #### How to ignore tests using .test\_ignore file.
 **TODO:
 
+#### How to look for slow tests
+Weather if your are fixing performance issues or just wanna speed up your tests, contest can tell you where to start. Just run:
+
+```bash
+ contest run test\_cases.dll -lslow
+```
+
+The previous command will print a list of test cases sorted by execution time. (Slow tests first).
+You can combine this command with *less* or any tool like that and get the top 10/20 cases that worth to look at.
+
+You can also list fastest tests firts. (OK, I don't see a point either, but it was just two lines away ;))
+```bash
+ contest run test\_cases.dll -lfast
+```
 
 #### What the hell is that underscore thing?
 A cool thing you can do to save even more keystrokes, is to **alias** the type **System.Action\<Contest.Core.Runner\>** to **_** (or whatever you like). That's what I did in the samples above to get more readable test code (and nobody cares about test cases's return types ;)).
