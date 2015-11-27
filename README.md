@@ -116,10 +116,10 @@ I guess this section is selfexplanatory ;)
 #### A word about conventions
 As I mentioned earlier, contest it's based on conventions, so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules, that I hope, are easy to remember.
 
-##### For test cases
+##### How does it work for test cases
 **Every field of type System.Action\<Contest.Core.Runner\> within a given class is considered to be a test case**. As you saw in the previous samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience. I like to save as much keystrokes as I can, but it will work with the public modifier as well.
 
-##### For setups and teardowns
+##### How does it work for setups and teardowns
 If you 've been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, **per case** and **per fixture** setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
 
 
@@ -141,6 +141,7 @@ Just place a breakpoint as usual, run contest using the **-dbg** switch, attach 
 
 I know this is far from ideal, but keep in mind that contest it's meant to be used from the console. (And I wanna keep it as lightweight as possible).
 If you are using this library is probably because you are using a plain text editor, in which case you don't have a debugger anyways, so...
+
 
 #### Cherry picking
 ##### You can use wildcards to ask Contest to filter your fixtures and only run matching tests.
@@ -166,11 +167,12 @@ Most tests runners comes with a handy feature that allows you to filter and run 
 #### How to ignore tests using .test\_ignore file.
 **TODO:
 
+
 #### How to look for slow tests
 Weather if your are fixing performance issues or just wanna speed up your tests, contest can tell you where to start. Just run:
 
 ```bash
- contest run test\_cases.dll -lslow
+ contest run test/_cases.dll -lslow
 ```
 
 The previous command will print a list of test cases sorted by execution time. (Slow tests first).
@@ -178,7 +180,7 @@ You can combine this command with *less* or any tool like that and get the top 1
 
 You can also list fastest tests firts. (OK, I don't see a point either, but it was just two lines away ;))
 ```bash
- contest run test\_cases.dll -lfast
+ contest run test/_cases.dll -lfast
 ```
 
 #### What the hell is that underscore thing?
