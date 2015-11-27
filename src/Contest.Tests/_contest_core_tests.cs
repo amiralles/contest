@@ -6,10 +6,7 @@ namespace Contest.Tests {
     using Contest.Core;
     using _ = System.Action<Contest.Core.Runner>;
 
-	//TODO: Add a brief description on how to write tests for contest's core features.
-	//TODO: Describe how to run the contest's core test fixture.
-	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to 
-	//      main Program.)
+	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
     public class contest_core_tests {
 
 		// For cherry picking tests.
