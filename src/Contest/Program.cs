@@ -368,9 +368,10 @@ namespace Contest {
             Print("| run   | test.dll wildcard | Runs all tests within the given file where the    |");
 		    Print("|       |                   | test name matches the wildcard pattern.           |");
             Print("=================================================================================");
-			Print("");
-			Print("-- More --");
-			ReadLine();
+
+			Write(":");
+			if (ReadLine() == "q")
+				Environment.Exit(0);
 
             Print("=================================================================================");
             Print("| Flags                                                                         |");
@@ -381,8 +382,10 @@ namespace Contest {
             Print("| -dbg  | Stop the runner until the user presses [Enter].                       |");
             Print("=================================================================================");
 			Print("");
-			Print("-- More --");
-			ReadLine();
+
+			Write(":");
+			if (ReadLine() == "q")
+				Environment.Exit(0);
 
             Print("=================================================================================");
             Print("| Alias                                                                         |");
@@ -393,6 +396,10 @@ namespace Contest {
             Print("| r         | run                                                               |");
             Print("=================================================================================");
 			Print("");
+			Write(":");
+			if (ReadLine() == "q")
+				Environment.Exit(0);
+
 
             Print("\nMore about contest at:");
             Print("https://github.com/amiralles/contest\n");
