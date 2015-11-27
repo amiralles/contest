@@ -357,7 +357,6 @@ namespace Contest {
             Print("| Contest - Console Test Runner                                                 |");
             Print("=================================================================================");
 
-
             Print("=================================================================================");
             Print("| Commands                                                                      |");
             Print("=================================================================================");
@@ -370,22 +369,24 @@ namespace Contest {
             Print("=================================================================================");
 
 			Write(":");
-			if (ReadLine() == "q")
-				Environment.Exit(0);
+			if (ReadLine() == "q") Environment.Exit(0);
 
             Print("=================================================================================");
             Print("| Flags                                                                         |");
             Print("=================================================================================");
-            Print("| name  | summary                                                               |");
+            Print("| name   | summary                                                              |");
             Print("=================================================================================");
-            Print("| -nh   | Don't print fixture names.                                            |");
-            Print("| -dbg  | Stop the runner until the user presses [Enter].                       |");
+            Print("| -nh    | Don't print fixture names.                                           |");
+            Print("| -dbg   | Stop the runner until the user presses [Enter].                      |");
+            Print("| -f     | Rerun previous failing tests.                                        |");
+            Print("| -lf    | List previous  failing tests.                                        |");
+            Print("| -lslow | List slow tests from previous run.                                   |");
+            Print("| -lfast | List fast tests from previous run.                                   |");
             Print("=================================================================================");
 			Print("");
 
 			Write(":");
-			if (ReadLine() == "q")
-				Environment.Exit(0);
+			if (ReadLine() == "q") Environment.Exit(0);
 
             Print("=================================================================================");
             Print("| Alias                                                                         |");
@@ -397,9 +398,7 @@ namespace Contest {
             Print("=================================================================================");
 			Print("");
 			Write(":");
-			if (ReadLine() == "q")
-				Environment.Exit(0);
-
+			if (ReadLine() == "q") Environment.Exit(0);
 
             Print("\nMore about contest at:");
             Print("https://github.com/amiralles/contest\n");
