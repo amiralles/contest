@@ -17,7 +17,7 @@ namespace Contest {
     class Program {
 
 
-		public static readonly CultureInfo Culture = new CultureInfo("en-US");
+		static readonly CultureInfo Culture = new CultureInfo("en-US");
 
         static void Main(string[] args) {
             try {
@@ -195,8 +195,8 @@ namespace Contest {
 		}
 
 
-		/// This method will tells us if we can reuse the tmp copy
-		/// of the test assembly and its dependencies.
+		/// This method will tell us if we can reuse the tmp copy
+		/// and its dependencies.
 		static bool ReuseTestAssm(string testAssmPath) {
 			var moddatPath = Path.Combine(TMP, MODDAT);
 			if (!File.Exists(moddatPath))
