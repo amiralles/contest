@@ -175,7 +175,7 @@ Weather if your are fixing performance issues or just wanna speed up your tests,
  contest run test/_cases.dll -lslow
 ```
 
-The previous command will print a list of test cases sorted by execution time. (Slow tests first).
+The command above will print a list of test cases sorted by execution time. (Slow tests first).
 You can combine this command with *less* or any tool like that and get the top 10/20 cases that worth to look at.
 
 You can also list fastest tests firts. (OK, I don't see a point either, but it was just two lines away ;))
