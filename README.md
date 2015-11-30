@@ -184,6 +184,4 @@ You can also list fastest tests firts. (OK, I don't see a point either, but it w
 ```
 
 
-
-
-**Thanks for reading! And of course, lemme know if you have any problem using this library.**
+**Whether if you have problems using this library, found a bug o wanna a new feature, feel free to contact me. I'll be back at you as soon as a can.**
