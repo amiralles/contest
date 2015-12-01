@@ -105,7 +105,7 @@ I guess this section is selfexplanatory ;)
 	Throws<TypeOfException>(action);
 	ShouldThrow<TypeOfException>(action);
 
-	// Utily methods.
+	// Utility methods.
 	// Increases the failing tests count and prints the err msg.
 	Fail(errMsg);
 
