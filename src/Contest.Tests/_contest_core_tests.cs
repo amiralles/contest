@@ -20,8 +20,13 @@ namespace Contest.Tests {
 		_ get_all_types = assert =>
 			assert.IsTrue(Contest.GetAllTypes(typeof(ContestInit).Assembly).Length >= 1);
 
-		_ get_init_callback = assert =>
-			assert.IsNotNull(Contest.GetInitCallbackOrNull(typeof(ContestInit).Assembly));
+		_ get_init_callback = assert => {
+			var setup = Contest.GetInitCallbackOrNull(typeof(ContestInit).Assembly);
+			assert.IsNotNull(setup);
+			setup(assert);// <= See ContestInit.Setup
+			assert.Equal("Rock or Bust!", assert.Bag["legend"]);
+
+		};
 
 		_ find_assm_level_setup = assert => {
 			assert.IsNotNull(Contest.GetSingleOrNullAssmLevelSpecialType(

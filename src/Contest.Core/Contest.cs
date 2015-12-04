@@ -160,9 +160,6 @@ namespace Contest.Core {
 			var t  = GetSingleOrNullAssmLevelSpecialType(GetAllTypes(assm), lookInit: true);
 			if (t != null) {
 
-				// At this point neither of these operations shuld fail.
-				// (That's why we don't check anything).
-				var instance = Activator.CreateInstance(t, true);
 				var argst = new [] { typeof(Runner) };
 				var mi       = t.GetMethod("Setup", argst);
 
@@ -172,6 +169,8 @@ namespace Contest.Core {
 					mi = t.GetMethod("Setup", flags, null, argst, null);
 					DieIf(mi == null, "Internal error. Can't find 'Setup' method.");
 				}
+
+				var instance = Activator.CreateInstance(t, true);
 
 				// Expressions
 				// Paramters
@@ -183,14 +182,35 @@ namespace Contest.Core {
 				var steps       = new Expression[] {
 										contestInit,
 										callSetup };
+
 				var block       = Block(new [] { runnerP }, steps);
 
+				PrintLinqTree(block);
 				res = Lambda<Action<Runner>>(block, runnerP).Compile();
 
 			}
 
 			return res;
 		}
+
+        static void PrintLinqTree(Expression tree) {
+            const BindingFlags flags =
+                  BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.GetProperty
+                | BindingFlags.DeclaredOnly;
+
+            var t  = typeof(Expression);
+            var pi = t.GetProperties(flags).First(m => m.Name == "DebugView");
+            if (pi == null) {
+                Debug.Print("Can't print the linq tree.\n (Maybe Linq's internal API has changed).");
+                return;
+            }
+
+            var dbgView = (string)pi.GetValue(tree, null);
+            Debug.Print("\nLinq Tree\n{0}\n", dbgView);
+        }
+
 
 		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {
 			return null;
