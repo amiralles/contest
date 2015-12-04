@@ -160,6 +160,7 @@ namespace Contest.Core {
 			var t  = GetSingleOrNullAssmLevelSpecialType(GetAllTypes(assm), lookInit: true);
 			if (t != null) {
 
+				// Reflection Stuff
 				var argst = new [] { typeof(Runner) };
 				var mi       = t.GetMethod("Setup", argst);
 
@@ -171,28 +172,21 @@ namespace Contest.Core {
 				}
 
 				var instance = Activator.CreateInstance(t, true);
+				//=======================================================================
 
 				// Expressions
-				// Paramters
 				var runnerP   = Parameter(typeof(Runner), "runner");
-				// Body
-				// contestInit.Setup(runner); <= Esta es la llamada que tenemos que generar.
-				var contestInit = Constant(instance, t);
-				var callSetup   = Call(contestInit, mi, new Expression[] { runnerP });
-				var steps       = new Expression[] {
-										contestInit,
-										callSetup };
+				var callSetup = Call(Constant(instance, t), mi,  runnerP);
 
-				var block       = Block(new [] { runnerP }, steps);
+				PrintLinqTree(callSetup);
 
-				PrintLinqTree(block);
-				res = Lambda<Action<Runner>>(block, runnerP).Compile();
-
+				res = Lambda<Action<Runner>>(callSetup, new [] { runnerP }).Compile();
 			}
 
 			return res;
 		}
 
+		[Conditional("DEBUG")]
         static void PrintLinqTree(Expression tree) {
             const BindingFlags flags =
                   BindingFlags.NonPublic
