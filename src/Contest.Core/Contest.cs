@@ -92,13 +92,15 @@ namespace Contest.Core {
 		
 		/// Returns all types from the given assembly.
 		/// (Including nested and private types).
-		static Type[] GetAllTypes (Assembly assm) {
+		public static Type[] GetAllTypes (Assembly assm) {
 			return GetTypesR(assm.GetTypes());
 		}
 
 		static Type[] GetTypesR (Type[] types) {
 			var res = new List<Type>();
 			foreach(var t in types) {
+				res.Add(t);
+
 				var nested = GetTypesR(t.GetNestedTypes());
 				if (nested.Length == 0)
 					continue;
@@ -161,7 +163,15 @@ namespace Contest.Core {
 				// At this point neither of these operations shuld fail.
 				// (That's why we don't check anything).
 				var instance = Activator.CreateInstance(t, true);
-				var mi       = t.GetMethod("Setup");
+				var argst = new [] { typeof(Runner) };
+				var mi       = t.GetMethod("Setup", argst);
+
+				//No public, try private.
+				if (mi == null) {
+					var flags = BF.NonPublic | BF.InvokeMethod | BF.Instance | BF.DeclaredOnly;
+					mi = t.GetMethod("Setup", flags, null, argst, null);
+					DieIf(mi == null, "Internal error. Can't find 'Setup' method.");
+				}
 
 				// Expressions
 				// Paramters
@@ -175,7 +185,7 @@ namespace Contest.Core {
 										callSetup };
 				var block       = Block(new [] { runnerP }, steps);
 
-				res = Lambda<Action<Runner>>(block).Compile();
+				res = Lambda<Action<Runner>>(block, runnerP).Compile();
 
 			}
 

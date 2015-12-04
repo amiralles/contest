@@ -46,7 +46,7 @@ Contest.Tests	Contest.Tests/TestClassThrowingTests.cs	/^﻿namespace Contest.Tes
 Contest.Tests	Contest.Tests/Wrapper.cs	/^namespace Contest.Tests {$/;"	n
 Contest.Tests	Contest.Tests/_contest_core_tests.cs	/^namespace Contest.Tests {$/;"	n
 ContestConstants	Contest.Core/ContestConstants.cs	/^	public class ContestConstants {$/;"	c	namespace:Contest.Core
-ContestSetup	Contest.Tests/ContestSetup.cs	/^public class ContestSetup {$/;"	c
+ContestInit	Contest.Tests/ContestInit.cs	/^public class ContestInit {$/;"	c
 Contest_101	Contest.Demo/Demo.cs	/^    class Contest_101 {$/;"	c	namespace:Demo
 Contest_201	Contest.Demo/Demo.cs	/^    class Contest_201 {$/;"	c	namespace:Demo
 Contest_301	Contest.Demo/Demo.cs	/^	class Contest_301 {$/;"	c	namespace:Demo
@@ -86,7 +86,7 @@ FindTeardowns	Contest.Core/Contest.cs	/^        static readonly Func<TestSuite, 
 FixName	Contest.Core/TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
 Flags	Contest.Core/Contest.cs	/^        static readonly BF[] Flags;$/;"	f	class:Contest.Core.Contest	file:
 FooTest	Contest.Tests/FooTest.cs	/^    class FooTest{$/;"	c	namespace:Contest.Tests
-GetAllTypes	Contest.Core/Contest.cs	/^		static Type[] GetAllTypes (Assembly assm) {$/;"	m	class:Contest.Core.Contest	file:
+GetAllTypes	Contest.Core/Contest.cs	/^		public static Type[] GetAllTypes (Assembly assm) {$/;"	m	class:Contest.Core.Contest
 GetCasesInAssm	Contest.Core/Contest.cs	/^        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =$/;"	f	class:Contest.Core.Contest
 GetFailFileName	Contest.Core/Contest.cs	/^		public static string  GetFailFileName(string assmFileName) {$/;"	m	class:Contest.Core.Contest
 GetFullName	Contest.Core/TestCase.cs	/^        public string GetFullName() {$/;"	m	class:Contest.Core.TestCase
@@ -162,6 +162,7 @@ STA_PUB	Contest.Core/Contest.cs	/^            STA_PUB = BF.Static   | BF.Public,
 SameMetaToken	Contest.Core/Contest.cs	/^        static readonly Func<Delegate, Delegate, bool> SameMetaToken =$/;"	f	class:Contest.Core.Contest	file:
 SaveExecTime	Contest.Core/Runner.cs	/^		void SaveExecTime(string assmName) {$/;"	m	class:Contest.Core.Runner	file:
 SaveFailingCases	Contest.Core/Runner.cs	/^		void SaveFailingCases(string assmName) {$/;"	m	class:Contest.Core.Runner	file:
+Setup	Contest.Tests/ContestInit.cs	/^	void Setup(Runner runner) {$/;"	m	class:ContestInit	file:
 ShowFastTests	Contest/Program.cs	/^		static void ShowFastTests(string assmFileName) {$/;"	m	class:Contest.Program	file:
 ShowPreviousFails	Contest/Program.cs	/^		static void ShowPreviousFails(string assmFileName) {$/;"	m	class:Contest.Program	file:
 ShowSlowTests	Contest/Program.cs	/^		static void ShowSlowTests(string assmFileName) {$/;"	m	class:Contest.Program	file:
@@ -237,6 +238,7 @@ contest_core_tests	Contest.Tests/_contest_core_tests.cs	/^    public class conte
 create_user_adds_new_user	Contest.Demo/Demo.cs	/^		_ create_user_adds_new_user = assert => {$/;"	f	class:Demo.Contest_201	file:
 dicsover_before_test_cases_in_assm	Contest.Tests/_contest_core_tests.cs	/^        _ dicsover_before_test_cases_in_assm = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_after_test_cases_in_class	Contest.Tests/_contest_core_tests.cs	/^        _ discover_after_test_cases_in_class = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
+discover_test_cases_in_assm	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_assm = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_test_cases_in_class	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_class = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_test_cases_in_nested_classes	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_nested_classes = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 echo	Contest.Demo/Demo.cs	/^		_ echo = test => $/;"	f	class:Demo.Contest_301	file:
@@ -246,6 +248,8 @@ exptect_error_message_contains_pass	Contest.Demo/Demo.cs	/^		_ exptect_error_mes
 exptect_error_message_fails	Contest.Demo/Demo.cs	/^		_ exptect_error_message_fails = expects =>$/;"	f	class:Demo.ErrorMsgs	file:
 exptect_error_message_pass	Contest.Demo/Demo.cs	/^		_ exptect_error_message_pass = expects =>$/;"	f	class:Demo.ErrorMsgs	file:
 find_assm_level_setup	Contest.Tests/_contest_core_tests.cs	/^		_ find_assm_level_setup = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
+find_assm_level_setup_returns_null_when_there_is_no_ContestInit	Contest.Tests/_contest_core_tests.cs	/^		_ find_assm_level_setup_returns_null_when_there_is_no_ContestInit = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
+find_assm_level_setup_throws_if_gets_more_than_one	Contest.Tests/_contest_core_tests.cs	/^		_ find_assm_level_setup_throws_if_gets_more_than_one = assert =>$/;"	f	class:Contest.Tests.contest_core_tests	file:
 find_existing_user_returns_user	Contest.Demo/Demo.cs	/^		_ find_existing_user_returns_user = assert => $/;"	f	class:Demo.Contest_201	file:
 find_non_existing_user_returns_null	Contest.Demo/Demo.cs	/^		_ find_non_existing_user_returns_null = assert => $/;"	f	class:Demo.Contest_201	file:
 fixure_wide_setup_teardown	Contest.Bugs/DuplicateSetups.cs	/^class fixure_wide_setup_teardown {$/;"	c
@@ -257,6 +261,8 @@ from_cmd_line_ignore_cases_ending_with	Contest.Tests/_contest_core_tests.cs	/^		
 from_cmd_line_ignore_cases_starting_with	Contest.Tests/_contest_core_tests.cs	/^		_ from_cmd_line_ignore_cases_starting_with = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 from_cmd_line_ignore_cases_when_contains	Contest.Tests/_contest_core_tests.cs	/^		_ from_cmd_line_ignore_cases_when_contains = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 from_cmd_line_ignore_no_cases	Contest.Tests/_contest_core_tests.cs	/^		_ from_cmd_line_ignore_no_cases = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
+get_all_types	Contest.Tests/_contest_core_tests.cs	/^		_ get_all_types = assert =>$/;"	f	class:Contest.Tests.contest_core_tests	file:
+get_init_callback	Contest.Tests/_contest_core_tests.cs	/^		_ get_init_callback = assert =>$/;"	f	class:Contest.Tests.contest_core_tests	file:
 ignore_file_ignore_all_cases	Contest.Tests/_contest_core_tests.cs	/^		_ ignore_file_ignore_all_cases = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 ignore_file_ignore_cases_ending_with	Contest.Tests/_contest_core_tests.cs	/^		_ ignore_file_ignore_cases_ending_with = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 ignore_file_ignore_cases_starting_with	Contest.Tests/_contest_core_tests.cs	/^		_ ignore_file_ignore_cases_starting_with = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:

@@ -17,13 +17,17 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
+		_ get_all_types = assert =>
+			assert.IsTrue(Contest.GetAllTypes(typeof(ContestInit).Assembly).Length >= 1);
+
+		_ get_init_callback = assert =>
+			assert.IsNotNull(Contest.GetInitCallbackOrNull(typeof(ContestInit).Assembly));
 
 		_ find_assm_level_setup = assert => {
 			assert.IsNotNull(Contest.GetSingleOrNullAssmLevelSpecialType(
 						new [] { typeof(ContestInit) },
 						lookInit: true));
 		};
-
 
 		_ find_assm_level_setup_returns_null_when_there_is_no_ContestInit = assert => {
 			assert.IsNull(Contest.GetSingleOrNullAssmLevelSpecialType(

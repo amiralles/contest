@@ -7,3 +7,4 @@ public class ContestInit {
 	void Setup(Runner runner) {
 	}
 }
+
