@@ -11,12 +11,13 @@
 
 	
     public class Runner {
+		const string NULL = "null";
         static readonly Func<bool, bool> Not = cnd => !cnd;
         readonly Dictionary<string, string> _errors       = new Dictionary<string, string>();
-        readonly Dictionary<string, long>    _testExecTime = new Dictionary<string, long>();
+        readonly Dictionary<string, long>   _testExecTime = new Dictionary<string, long>();
 		readonly List<string> _failingCasesFullNames = new List<string>();
-
 		readonly string _assmName;
+
         string _currCase, _currCaseFullName;
 
         public Runner(string assmName = null) {
@@ -27,6 +28,14 @@
         public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;
         public long Elapsed;
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
+
+		public Action<Runner> 
+			/// This callback runs before any test case and can be used
+			/// for assembly level initialization.
+			BeforeAny = null, 
+		    /// This callback runs when we are done executing test cases 
+			/// and can be used for assembly level cleanup.
+		    AfterAll = null;
 
 
         public void Run(TestSuite suite, string cherryPicking = null, bool printHeaders = true) {
@@ -42,6 +51,20 @@
             var cherryPick = !string.IsNullOrEmpty(cherryPicking);
             var currfix    = (string) null;
             var watch      = Stopwatch.StartNew();
+			
+			if (BeforeAny != null) {
+				try {
+					BeforeAny(this);
+				}
+				catch (Exception ex) {
+					// To avoid corrupted state, inconsitencies or false possitives, 
+					// Contest aborts the test session when gets exceptions during 
+					// assembly level initialization. 
+					// (This rule doesn't apply to class level setups).
+					WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
+				}
+			}
+
             cases.Each(c => {
 				if(Verbose && printHeaders) {
 					if(c.FixName != currfix) 
@@ -74,6 +97,16 @@
 				}
             });
 
+			if (AfterAll != null) {
+				try {
+					AfterAll(this);
+				}
+				catch (Exception ex) {
+					// This is similar to BeforeAny but in this case the only thing
+					// we can do is warn the user that the shutdown has failed.
+					WriteLine($"\nWARN: We got some errors while shuting down the test session.\nTo avoid inconsitencies check your test session finalizer (ContestClose.Shutdown).\n {ex.Message}");
+				}
+			}
             watch.Stop();
             Elapsed = watch.ElapsedMilliseconds;
             TestCount = cases.Count;
@@ -165,7 +198,6 @@
             Assert(!Convert.ToBoolean(cond), msg);
 		}
 
-		const string NULL = "null";
         public void Equal(object expected, object actual, string errMsg = null) {
             var msg = string.IsNullOrEmpty(errMsg)
                 ? $"Expected => { expected ?? NULL } ({ expected?.GetType() })\n" +

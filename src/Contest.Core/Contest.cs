@@ -73,6 +73,61 @@ namespace Contest.Core {
 			return $"{Path.GetFileNameWithoutExtension(assmFileName)}.fail";
 		}
 
+		// //Convention based.
+		// class ContestInit { //<= Assembly level initialization.
+		//     void Setup(runner) {
+		//			//Init code here	
+		//     }
+		// }
+		//
+		// class ContestClose { //<= Assembly level cleanup.
+		//     void Shutdown(runner) {
+		//          //Cleanup code here.
+		//     }
+		// }
+		//
+		
+		public static Action<Runner> GetInitCallbackOrNull (Assembly assm) {
+
+			var types = (from t in assm.GetTypes()
+						where t.Name == "ContestInit"
+						select t).ToArray();
+			
+			if (types.Length == 0)
+				return null;
+
+			if (types.Length == 1) {
+				// Has the Setup method?
+				// If not, Die("Should have Setup method");
+				Die("TODO: Create and return.");
+			}
+
+			Die("Can't have more than one assembly level initializer.\n" + 
+				$"We got {types.Length}." + 
+			    "You may wanna take a look at clases named ContestInit within your test assembly and keep just one of them.");
+			return null;
+		}
+
+		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {
+			var types = (from t in assm.GetTypes()
+						where t.Name == "ContestClose"
+						select t).ToArray();
+			
+			if (types.Length == 0)
+				return null;
+
+			if (types.Length == 1) {
+				// Has the Shutdown method?
+				// If not, Die("Should have Shutdown method");
+				Die("TODO: Create and return.");
+			}
+
+			Die("Can't have more than one assembly level cleaner.\n" + 
+				$"We got {types.Length}." + 
+			    "You may wanna take a look at classes named ContestClose within your test assembly and keep just one of them.");
+			return null;
+		}
+
 		/// Returns a suite of "actual" test cases from the given assembly.
 		/// (Setups and Teardowns are NOT part of the result set).
         public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =
