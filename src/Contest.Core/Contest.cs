@@ -186,25 +186,6 @@ namespace Contest.Core {
 			return res;
 		}
 
-		[Conditional("DEBUG")]
-        static void PrintLinqTree(Expression tree) {
-            const BindingFlags flags =
-                  BindingFlags.NonPublic
-                | BindingFlags.Instance
-                | BindingFlags.GetProperty
-                | BindingFlags.DeclaredOnly;
-
-            var t  = typeof(Expression);
-            var pi = t.GetProperties(flags).First(m => m.Name == "DebugView");
-            if (pi == null) {
-                Debug.Print("Can't print the linq tree.\n (Maybe Linq's internal API has changed).");
-                return;
-            }
-
-            var dbgView = (string)pi.GetValue(tree, null);
-            Debug.Print("\nLinq Tree\n{0}\n", dbgView);
-        }
-
 
 		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {
 			return null;
@@ -460,5 +441,25 @@ namespace Contest.Core {
             Console.WriteLine("".PadRight(30, '='));
         }
 #endif
+
+		[Conditional("DEBUG")]
+        static void PrintLinqTree(Expression tree) {
+            const BindingFlags flags =
+                  BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.GetProperty
+                | BindingFlags.DeclaredOnly;
+
+            var t  = typeof(Expression);
+            var pi = t.GetProperties(flags).First(m => m.Name == "DebugView");
+            if (pi == null) {
+                Debug.Print("Can't print the linq tree.\n (Maybe Linq's internal API has changed).");
+                return;
+            }
+
+            var dbgView = (string)pi.GetValue(tree, null);
+            Debug.Print("\nLinq Tree\n{0}\n", dbgView);
+        }
+
     }
 }

@@ -23,6 +23,10 @@ namespace Contest.Tests {
 		_ get_init_callback = assert => {
 			var setup = Contest.GetInitCallbackOrNull(typeof(ContestInit).Assembly);
 			assert.IsNotNull(setup);
+		};
+
+		_ invoke_init_callback = assert => {
+			var setup = Contest.GetInitCallbackOrNull(typeof(ContestInit).Assembly);
 			setup(assert);// <= See ContestInit.Setup
 			assert.Equal("Rock or Bust!", assert.Bag["legend"]);
 
