@@ -4,8 +4,10 @@ namespace Contest.Core {
     using System.Diagnostics;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Reflection;
     using BF = System.Reflection.BindingFlags;
+    using static System.Linq.Expressions.Expression;
 
     public class Contest {
         const BF
@@ -87,44 +89,93 @@ namespace Contest.Core {
 		// }
 		//
 		
-		public static Action<Runner> GetInitCallbackOrNull (Assembly assm) {
+		
+		/// Returns all types from the given assembly.
+		/// (Including nested and private types).
+		static Type[] GetAllTypes (Assembly assm) {
+			return GetTypesR(assm.GetTypes());
+		}
 
-			var types = (from t in assm.GetTypes()
-						where t.Name == "ContestInit"
-						select t).ToArray();
+		static Type[] GetTypesR (Type[] types) {
+			var res = new List<Type>();
+			foreach(var t in types) {
+				var nested = GetTypesR(t.GetNestedTypes());
+				if (nested.Length == 0)
+					continue;
+				res.AddRange(nested);
+			}
 			
-			if (types.Length == 0)
+			return res.ToArray();
+		}
+
+		// TODO: A really poorly named function....
+		/// Checks if the array of types contains one and only one 'special type'
+		/// that match the specified lookInit flag.
+		/// (By Special types we mean types that Contest uses for assembly level setup/shutdown
+		/// operations).
+		/// If this method succed, the result is a type that can be instanciated and 
+		/// used as is to create a global assm level init/close callback.
+		public static Type GetSingleOrNullAssmLevelSpecialType(Type[] types, bool lookInit) {
+			DieIf(types == null, $"{nameof(types)} can't be null");
+
+			//TODO: Magic strings to consts.
+			var name   = lookInit ? "ContestInit" : "ContestClose";
+			var method = lookInit ? "Setup"       : "Shutdown";
+			var res    = (from t in types
+						 where t.Name == name
+						 select t).ToArray();
+			
+			if (res.Length == 0)
 				return null;
 
-			if (types.Length == 1) {
+			if (res.Length == 1) {
 				// Has the Setup method?
 				// If not, Die("Should have Setup method");
-				Die("TODO: Create and return.");
+				var mi = res[0].GetMethod(method, new [] { typeof(Runner) });
+				if (mi != null)
+					return res[0];
+
+				Die($"The class {name} exists, but it doesn't have the '{method}' method.");
 			}
 
-			Die("Can't have more than one assembly level initializer.\n" + 
-				$"We got {types.Length}." + 
-			    "You may wanna take a look at clases named ContestInit within your test assembly and keep just one of them.");
+
+			var role = (lookInit ? "initializer" : "cleaner");
+			Die($"Can't have more than one assembly level {role} and we have {res.Length}." + 
+			    $"Please look for clases named {name} and keep just one of them.");
+
 			return null;
 		}
 
-		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {
-			var types = (from t in assm.GetTypes()
-						where t.Name == "ContestClose"
-						select t).ToArray();
-			
-			if (types.Length == 0)
-				return null;
+		public static Action<Runner> GetInitCallbackOrNull (Assembly assm) {
+			Action<Runner> res = null;
+			var t  = GetSingleOrNullAssmLevelSpecialType(GetAllTypes(assm), lookInit: true);
+			if (t != null) {
 
-			if (types.Length == 1) {
-				// Has the Shutdown method?
-				// If not, Die("Should have Shutdown method");
-				Die("TODO: Create and return.");
+				// At this point neither of these operations shuld fail.
+				// (That's why we don't check anything).
+				var instance = Activator.CreateInstance(t, true);
+				var mi       = t.GetMethod("Setup");
+
+				// Expressions
+				// Paramters
+				var runnerP   = Parameter(typeof(Runner), "runner");
+				// Body
+				// contestInit.Setup(runner); <= Esta es la llamada que tenemos que generar.
+				var contestInit = Constant(instance, t);
+				var callSetup   = Call(contestInit, mi, new Expression[] { runnerP });
+				var steps       = new Expression[] {
+										contestInit,
+										callSetup };
+				var block       = Block(new [] { runnerP }, steps);
+
+				res = Lambda<Action<Runner>>(block).Compile();
+
 			}
 
-			Die("Can't have more than one assembly level cleaner.\n" + 
-				$"We got {types.Length}." + 
-			    "You may wanna take a look at classes named ContestClose within your test assembly and keep just one of them.");
+			return res;
+		}
+
+		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {
 			return null;
 		}
 

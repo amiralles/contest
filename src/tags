@@ -7,6 +7,7 @@
 AFTER	Contest.Core/Contest.cs	/^            AFTER = "AFTER_",$/;"	f	class:Contest.Core.Contest	file:
 AFTER_EACH	Contest.Core/Contest.cs	/^            AFTER_EACH = "AFTER_EACH";$/;"	f	class:Contest.Core.Contest	file:
 ActualCases	Contest.Core/Contest.cs	/^            ActualCases = (suite, setups, teardowns) => {$/;"	f	class:Contest.Core.Contest	file:
+AfterAll	Contest.Core/Runner.cs	/^		    AfterAll = null;$/;"	f	class:Contest.Core.Runner
 AfterCase	Contest.Core/TestCase.cs	/^        public Action<Runner> Body, BeforeCase, AfterCase;$/;"	f	class:Contest.Core.TestCase
 Assert	Contest.Core/Runner.cs	/^        public void Assert(bool cond, string errMsg = null) {$/;"	m	class:Contest.Core.Runner
 AssertsCount	Contest.Core/Runner.cs	/^        public int PassCount, FailCount, AssertsCount, TestCount, IgnoreCount;$/;"	f	class:Contest.Core.Runner
@@ -14,6 +15,7 @@ BEFORE	Contest.Core/Contest.cs	/^            BEFORE = "BEFORE_",$/;"	f	class:Con
 BEFORE_EACH	Contest.Core/Contest.cs	/^            BEFORE_EACH = "BEFORE_EACH",$/;"	f	class:Contest.Core.Contest	file:
 Bag	Contest.Core/Runner.cs	/^        public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); $/;"	f	class:Contest.Core.Runner
 BarTest	Contest.Tests/BarTest.cs	/^    class BarTest{$/;"	c	namespace:Contest.Tests
+BeforeAny	Contest.Core/Runner.cs	/^			BeforeAny = null, $/;"	f	class:Contest.Core.Runner
 BeforeCase	Contest.Core/TestCase.cs	/^        public Action<Runner> Body, BeforeCase, AfterCase;$/;"	f	class:Contest.Core.TestCase
 Body	Contest.Core/TestCase.cs	/^        public Action<Runner> Body, BeforeCase, AfterCase;$/;"	f	class:Contest.Core.TestCase
 BuildTestSuiteFromAssm	Contest.Core/Contest.cs	/^        static readonly Func<TestCaseFinder, Assembly, string, TestSuite> BuildTestSuiteFromAssm =$/;"	f	class:Contest.Core.Contest	file:
@@ -44,6 +46,7 @@ Contest.Tests	Contest.Tests/TestClassThrowingTests.cs	/^﻿namespace Contest.Tes
 Contest.Tests	Contest.Tests/Wrapper.cs	/^namespace Contest.Tests {$/;"	n
 Contest.Tests	Contest.Tests/_contest_core_tests.cs	/^namespace Contest.Tests {$/;"	n
 ContestConstants	Contest.Core/ContestConstants.cs	/^	public class ContestConstants {$/;"	c	namespace:Contest.Core
+ContestSetup	Contest.Tests/ContestSetup.cs	/^public class ContestSetup {$/;"	c
 Contest_101	Contest.Demo/Demo.cs	/^    class Contest_101 {$/;"	c	namespace:Demo
 Contest_201	Contest.Demo/Demo.cs	/^    class Contest_201 {$/;"	c	namespace:Demo
 Contest_301	Contest.Demo/Demo.cs	/^	class Contest_301 {$/;"	c	namespace:Demo
@@ -52,7 +55,7 @@ CopyToLocalTmp	Inception.Test.Runner/Program.cs	/^        static void CopyToLoca
 Count	Contest.Demo/Demo.cs	/^		public static Func<int> Count = () => _users.Count;$/;"	f	class:Demo.User
 Create	Contest.Demo/Demo.cs	/^		public static Action<string> Create = name => _users.Add(name);$/;"	f	class:Demo.User
 Culture	Contest.Core/ContestConstants.cs	/^		public static readonly CultureInfo Culture = new CultureInfo("en-US");$/;"	f	class:Contest.Core.ContestConstants
-Culture	Contest/Program.cs	/^		public static readonly CultureInfo Culture = new CultureInfo("en-US");$/;"	f	class:Contest.Program
+Culture	Contest/Program.cs	/^		static readonly CultureInfo Culture = new CultureInfo("en-US");$/;"	f	class:Contest.Program	file:
 DATE_FORMAT	Contest.Core/ContestConstants.cs	/^			DATE_FORMAT = "yyyy\/MM\/dd hh:mm:ss.fff";$/;"	f	class:Contest.Core.ContestConstants
 Default	Contest.Core/Printer.cs	/^		static ConsoleColor Default  = ConsoleColor.Black;$/;"	f	class:Contest.Core.Printer	file:
 Demo	Contest.Demo/Demo.cs	/^namespace Demo { \/\/It doesn't match naming conventions but it reads better in the console ;)$/;"	n
@@ -83,14 +86,20 @@ FindTeardowns	Contest.Core/Contest.cs	/^        static readonly Func<TestSuite, 
 FixName	Contest.Core/TestCase.cs	/^        public string Name, FixName;$/;"	f	class:Contest.Core.TestCase
 Flags	Contest.Core/Contest.cs	/^        static readonly BF[] Flags;$/;"	f	class:Contest.Core.Contest	file:
 FooTest	Contest.Tests/FooTest.cs	/^    class FooTest{$/;"	c	namespace:Contest.Tests
+GetAllTypes	Contest.Core/Contest.cs	/^		static Type[] GetAllTypes (Assembly assm) {$/;"	m	class:Contest.Core.Contest	file:
 GetCasesInAssm	Contest.Core/Contest.cs	/^        public static Func<TestCaseFinder, Assembly, string, TestSuite> GetCasesInAssm =$/;"	f	class:Contest.Core.Contest
 GetFailFileName	Contest.Core/Contest.cs	/^		public static string  GetFailFileName(string assmFileName) {$/;"	m	class:Contest.Core.Contest
 GetFullName	Contest.Core/TestCase.cs	/^        public string GetFullName() {$/;"	m	class:Contest.Core.TestCase
 GetGlobalSetup	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>,  TestCase> GetGlobalSetup = $/;"	f	class:Contest.Core.Contest	file:
 GetGlobalTearDown	Contest.Core/Contest.cs	/^        static readonly Func<List<TestCase>,  TestCase> GetGlobalTearDown =$/;"	f	class:Contest.Core.Contest	file:
 GetIgnoredPatternsFromFile	Contest.Core/TestCaseFinder.cs	/^        public Func<string[]> GetIgnoredPatternsFromFile = () => {$/;"	f	class:Contest.Core.TestCaseFinder
+GetInitCallbackOrNull	Contest.Core/Contest.cs	/^		public static Action<Runner> GetInitCallbackOrNull (Assembly assm) {$/;"	m	class:Contest.Core.Contest
+GetShutdownCallbackOrNull	Contest.Core/Contest.cs	/^		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {$/;"	m	class:Contest.Core.Contest
+GetSingleOrNullAssmLevelSpecialType	Contest.Core/Contest.cs	/^		public static Type GetSingleOrNullAssmLevelSpecialType(Type[] types, bool lookInit) {$/;"	m	class:Contest.Core.Contest
 GetTestCases	Contest.Core/Contest.cs	/^        static readonly Func<Type, BF, List<FieldInfo>> GetTestCases =$/;"	f	class:Contest.Core.Contest	file:
+GetTestsTimes	Contest/Program.cs	/^		static Dictionary<string, long> GetTestsTimes(string assmFileName) {$/;"	m	class:Contest.Program	file:
 GetTimeFileName	Contest.Core/Contest.cs	/^		public static string  GetTimeFileName(string assmFileName) {$/;"	m	class:Contest.Core.Contest
+GetTypesR	Contest.Core/Contest.cs	/^		static Type[] GetTypesR (Type[] types) {$/;"	m	class:Contest.Core.Contest	file:
 Green	Contest.Core/Printer.cs	/^		static ConsoleColor Green  = ConsoleColor.Green;$/;"	f	class:Contest.Core.Printer	file:
 HandlingExceptions	Contest.Demo/Demo.cs	/^    class HandlingExceptions {$/;"	c	namespace:Demo
 HasDefaultCtor	Contest.Core/TypeExtensions.cs	/^        public static bool HasDefaultCtor(this Type type) {$/;"	m	class:Contest.Core.TypeExtensions
@@ -132,6 +141,7 @@ PrintHelp	Contest/Program.cs	/^        static void PrintHelp() {$/;"	m	class:Con
 PrintHelp	Inception.Test.Runner/Program.cs	/^        static void PrintHelp() {$/;"	m	class:Inception.Test.Runner.Program	file:
 PrintIgnoredPatterns	Contest.Core/Contest.cs	/^        static void PrintIgnoredPatterns(string[] patterns) {$/;"	m	class:Contest.Core.Contest	file:
 PrintResults	Contest.Core/Printer.cs	/^		public readonly static Action<int, long, int, int, int, int, string> PrintResults = $/;"	f	class:Contest.Core.Printer
+PrintTests	Contest/Program.cs	/^		static void PrintTests(KeyValuePair<string, long>[] testsTimes) {$/;"	m	class:Contest.Program	file:
 Printer	Contest.Core/Printer.cs	/^	class Printer{$/;"	c	namespace:Contest.Core
 Program	Contest/Program.cs	/^    class Program {$/;"	c	namespace:Contest
 Program	Inception.Test.Runner/Program.cs	/^    class Program {$/;"	c	namespace:Inception.Test.Runner
@@ -152,7 +162,9 @@ STA_PUB	Contest.Core/Contest.cs	/^            STA_PUB = BF.Static   | BF.Public,
 SameMetaToken	Contest.Core/Contest.cs	/^        static readonly Func<Delegate, Delegate, bool> SameMetaToken =$/;"	f	class:Contest.Core.Contest	file:
 SaveExecTime	Contest.Core/Runner.cs	/^		void SaveExecTime(string assmName) {$/;"	m	class:Contest.Core.Runner	file:
 SaveFailingCases	Contest.Core/Runner.cs	/^		void SaveFailingCases(string assmName) {$/;"	m	class:Contest.Core.Runner	file:
+ShowFastTests	Contest/Program.cs	/^		static void ShowFastTests(string assmFileName) {$/;"	m	class:Contest.Program	file:
 ShowPreviousFails	Contest/Program.cs	/^		static void ShowPreviousFails(string assmFileName) {$/;"	m	class:Contest.Program	file:
+ShowSlowTests	Contest/Program.cs	/^		static void ShowSlowTests(string assmFileName) {$/;"	m	class:Contest.Program	file:
 StringExtensions	Contest.Core/StringExtensions.cs	/^    public static class StringExtensions {$/;"	c	namespace:Contest.Core
 TMP	Contest.Core/ContestConstants.cs	/^			TMP         = ".tmp",$/;"	f	class:Contest.Core.ContestConstants
 TestBodyCantBeNull	Contest.Core/TestCase.cs	/^        Func<string, Exception> TestBodyCantBeNull = name =>$/;"	f	class:Contest.Core.TestCase	file:
@@ -196,7 +208,7 @@ _currCaseFullName	Contest.Core/Runner.cs	/^        string _currCase, _currCaseFu
 _discoveryFinder	Contest.Tests/_contest_core_tests.cs	/^        static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,$/;"	f	class:Contest.Tests.contest_core_tests	file:
 _errors	Contest.Core/Runner.cs	/^        readonly Dictionary<string, string> _errors       = new Dictionary<string, string>();$/;"	f	class:Contest.Core.Runner	file:
 _failingCasesFullNames	Contest.Core/Runner.cs	/^		readonly List<string> _failingCasesFullNames = new List<string>();$/;"	f	class:Contest.Core.Runner	file:
-_testExecTime	Contest.Core/Runner.cs	/^        readonly Dictionary<string, long>    _testExecTime = new Dictionary<string, long>();$/;"	f	class:Contest.Core.Runner	file:
+_testExecTime	Contest.Core/Runner.cs	/^        readonly Dictionary<string, long>   _testExecTime = new Dictionary<string, long>();$/;"	f	class:Contest.Core.Runner	file:
 _users	Contest.Demo/Demo.cs	/^		static readonly List<string> _users = new List<string>();$/;"	f	class:Demo.User	file:
 after_bar	Contest.Tests/BarTest.cs	/^            Action<Runner> after_bar  = runner => {};$/;"	f	class:Contest.Tests.BarTest.NestedBarTest	file:
 after_each	Contest.Bugs/DuplicateSetups.cs	/^	_ after_each  = test => { WriteLine(">>>> fixture teardown"); };$/;"	f	class:fixure_wide_setup_teardown	file:
@@ -225,7 +237,6 @@ contest_core_tests	Contest.Tests/_contest_core_tests.cs	/^    public class conte
 create_user_adds_new_user	Contest.Demo/Demo.cs	/^		_ create_user_adds_new_user = assert => {$/;"	f	class:Demo.Contest_201	file:
 dicsover_before_test_cases_in_assm	Contest.Tests/_contest_core_tests.cs	/^        _ dicsover_before_test_cases_in_assm = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_after_test_cases_in_class	Contest.Tests/_contest_core_tests.cs	/^        _ discover_after_test_cases_in_class = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
-discover_test_cases_in_assm	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_assm = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_test_cases_in_class	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_class = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 discover_test_cases_in_nested_classes	Contest.Tests/_contest_core_tests.cs	/^        _ discover_test_cases_in_nested_classes = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 echo	Contest.Demo/Demo.cs	/^		_ echo = test => $/;"	f	class:Demo.Contest_301	file:
@@ -234,6 +245,7 @@ exptect_error_message_contains_fails	Contest.Demo/Demo.cs	/^		_ exptect_error_me
 exptect_error_message_contains_pass	Contest.Demo/Demo.cs	/^		_ exptect_error_message_contains_pass = expects =>$/;"	f	class:Demo.ErrorMsgs	file:
 exptect_error_message_fails	Contest.Demo/Demo.cs	/^		_ exptect_error_message_fails = expects =>$/;"	f	class:Demo.ErrorMsgs	file:
 exptect_error_message_pass	Contest.Demo/Demo.cs	/^		_ exptect_error_message_pass = expects =>$/;"	f	class:Demo.ErrorMsgs	file:
+find_assm_level_setup	Contest.Tests/_contest_core_tests.cs	/^		_ find_assm_level_setup = assert => {$/;"	f	class:Contest.Tests.contest_core_tests	file:
 find_existing_user_returns_user	Contest.Demo/Demo.cs	/^		_ find_existing_user_returns_user = assert => $/;"	f	class:Demo.Contest_201	file:
 find_non_existing_user_returns_null	Contest.Demo/Demo.cs	/^		_ find_non_existing_user_returns_null = assert => $/;"	f	class:Demo.Contest_201	file:
 fixure_wide_setup_teardown	Contest.Bugs/DuplicateSetups.cs	/^class fixure_wide_setup_teardown {$/;"	c

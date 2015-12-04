@@ -17,6 +17,27 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
+		_ find_assm_level_setup = assert => {
+			assert.IsNotNull(Contest.GetSingleOrNullAssmLevelSpecialType(
+						new [] { typeof(ContestInit) },
+						lookInit: true));
+		};
+
+		_ find_assm_level_setup_returns_null_when_there_is_no_ContestInit = assert => {
+			assert.IsNull(Contest.GetSingleOrNullAssmLevelSpecialType(
+						new [] { typeof(string) },
+						lookInit: true));
+		};
+
+		_ find_assm_level_setup_throws_if_gets_more_than_one = assert =>
+				assert.ErrMsgContains("more than one", () => {
+						Contest.GetSingleOrNullAssmLevelSpecialType(
+								new [] { typeof(ContestInit), typeof(ContestInit)},
+								lookInit: true);
+						});
+			
+		
+
         _ discover_test_cases_in_assm = assert => {
             var cases = Contest.GetCasesInAssm(_discoveryFinder, typeof(TestClass).Assembly, null).Cases;
             assert.Equal(10, cases.Count);
