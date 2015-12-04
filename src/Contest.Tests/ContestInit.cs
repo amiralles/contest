@@ -2,6 +2,8 @@ using Contest.Core;
 
 public class ContestInit {
 
-	public void Setup(Runner runner) {
+	// For Shutdow use public instead. (So we check detection of
+	// both modifiers).
+	void Setup(Runner runner) {
 	}
 }

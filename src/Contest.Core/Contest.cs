@@ -137,7 +137,8 @@ namespace Contest.Core {
 					return res[0];
 
 				// Non public? try private.
-				mi = res[0].GetMethod(method, BF.NonPublic | BF.InvokeMethod | BF.Instance | BF.DeclaredOnly);
+				var flags = BF.NonPublic | BF.InvokeMethod | BF.Instance | BF.DeclaredOnly;
+				mi = res[0].GetMethod(method, flags, null, argst, null);
 				if (mi != null)
 					return res[0];
 
