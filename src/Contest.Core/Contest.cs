@@ -131,7 +131,13 @@ namespace Contest.Core {
 			if (res.Length == 1) {
 				// Has the Setup method?
 				// If not, Die("Should have Setup method");
-				var mi = res[0].GetMethod(method, new [] { typeof(Runner) });
+				var argst = new [] { typeof(Runner) };
+				var mi = res[0].GetMethod(method, argst);
+				if (mi != null)
+					return res[0];
+
+				// Non public? try private.
+				mi = res[0].GetMethod(method, BF.NonPublic | BF.InvokeMethod | BF.Instance | BF.DeclaredOnly);
 				if (mi != null)
 					return res[0];
 
