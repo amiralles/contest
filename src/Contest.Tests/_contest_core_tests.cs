@@ -17,6 +17,11 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
+
+		// TODO: Do the same for shutdown.
+		// ==============================================================================================
+		// Assm level setups.
+		// ==============================================================================================
 		_ get_all_types = assert =>
 			assert.IsTrue(Contest.GetAllTypes(typeof(ContestInit).Assembly).Length >= 1);
 
@@ -51,6 +56,7 @@ namespace Contest.Tests {
 								lookInit: true);
 						});
 			
+		// ==============================================================================================
 		
 
         _ discover_test_cases_in_assm = assert => {
