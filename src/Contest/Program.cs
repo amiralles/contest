@@ -314,11 +314,18 @@ namespace Contest {
 									where  failingTests.Contains(c.GetFullName())
 									select c);
 
-            var runner = new Runner(assmFileName);
-			runner.Verbose = true;
+            var runner = CreateRunner(assmFileName, assm);
 
 			// Run only failing tests.
             runner.Run(failingSuite);
+		}
+
+		static Runner CreateRunner(string assmFileName, Assembly assm) {
+			var runner = new Runner(assmFileName);
+			runner.BeforeAny = Contest.GetShutdownCallbackOrNull(assm);
+			runner.AfterAll  = Contest.GetInitCallbackOrNull(assm);
+			runner.Verbose   = true;
+			return runner;
 		}
 
         static void RunTests(string assmFileName, string cerryPicking = null, bool printHeaders = true) {
@@ -344,10 +351,8 @@ namespace Contest {
                 throw new Exception("Can't load assembly '{0}'.".Interpol(assmFileName));
 
             var finder = new TestCaseFinder();
-            var suite = Contest.GetCasesInAssm(finder, assm, null);
-            var runner = new Runner(assmFileName);
-			runner.Verbose = true;
-
+            var suite  = Contest.GetCasesInAssm(finder, assm, null);
+            var runner = CreateRunner(assmFileName, assm);
             WriteLine("\nDone!\n");
             runner.Run(suite, cerryPicking, printHeaders );
         }
