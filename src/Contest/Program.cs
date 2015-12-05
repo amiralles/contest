@@ -43,8 +43,8 @@ namespace Contest {
 				//================================================
 				// Listing results from previous runs.
 				var listFailing  = args.Any(a => a == "-lf");
-				var listSlow     = args.Any(a => a == "-lslow");
-				var listFast     = args.Any(a => a == "-lfast");
+				var listSlow     = args.Any(a => a == "-yslow");
+				var listFast     = args.Any(a => a == "-yfast");
 				//================================================
 
 				//clean args list (no flags).
