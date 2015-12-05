@@ -322,8 +322,8 @@ namespace Contest {
 
 		static Runner CreateRunner(string assmFileName, Assembly assm) {
 			var runner = new Runner(assmFileName);
-			runner.BeforeAny = Contest.GetShutdownCallbackOrNull(assm);
-			runner.AfterAll  = Contest.GetInitCallbackOrNull(assm);
+			runner.BeforeAny = Contest.GetInitCallbackOrNull(assm);
+			runner.AfterAll  = Contest.GetShutdownCallbackOrNull(assm);
 			runner.Verbose   = true;
 			return runner;
 		}
