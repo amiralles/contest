@@ -174,10 +174,12 @@ namespace Contest.Core {
 			//     }
 			// }
 			//
-			return null;
+			var st  = GetSingleOrNullAssmLevelSpecialType(GetAllTypes(assm), lookInit: false);
+			return  st != null ? CreateCallback(st) : null;
 		}
 
 
+		//TODO: Add summary to this method.
 		static Action<Runner> CreateCallback(SpecialType st) {
 			Debug.Assert(st != null, $"{nameof(st)} can't be null");
 			var instance = Activator.CreateInstance(st.Type, true);
