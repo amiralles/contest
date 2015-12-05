@@ -77,19 +77,6 @@ namespace Contest.Core {
 			return $"{Path.GetFileNameWithoutExtension(assmFileName)}.fail";
 		}
 
-		// //Convention based.
-		// class ContestInit { //<= Assembly level initialization.
-		//     void Setup(runner) {
-		//			//Init code here	
-		//     }
-		// }
-		//
-		// class ContestClose { //<= Assembly level cleanup.
-		//     void Shutdown(runner) {
-		//          //Cleanup code here.
-		//     }
-		// }
-		//
 		
 		
 		/// Returns all types from the given assembly.
@@ -105,6 +92,7 @@ namespace Contest.Core {
 			return res;
 		}
 
+		/// Looks for nested types in types recursively.
 		static Type[] GetTypesR (Type[] types) {
 			var res = new List<Type>();
 			foreach(var t in types) {
@@ -126,7 +114,7 @@ namespace Contest.Core {
 		/// operations).
 		/// If this method succed, the result is a type that can be instanciated and 
 		/// used as is to create a global assm level init/close callback.
-		public static Type GetSingleOrNullAssmLevelSpecialType(Type[] types, bool lookInit) {
+		public static SpecialType GetSingleOrNullAssmLevelSpecialType(Type[] types, bool lookInit) {
 			DieIf(types == null, $"{nameof(types)} can't be null");
 
 			//TODO: Magic strings to consts.
@@ -145,13 +133,13 @@ namespace Contest.Core {
 				var argst = new [] { typeof(Runner) };
 				var mi = res[0].GetMethod(method, argst);
 				if (mi != null)
-					return res[0];
+					return new SpecialType(res[0], mi);
 
 				// Non public? try private.
 				var flags = BF.NonPublic | BF.InvokeMethod | BF.Instance | BF.DeclaredOnly;
 				mi = res[0].GetMethod(method, flags, null, argst, null);
 				if (mi != null)
-					return res[0];
+					return new SpecialType(res[0], mi);
 
 				Die($"The class {name} exists, but it doesn't have the '{method}' method.");
 			}
@@ -164,41 +152,45 @@ namespace Contest.Core {
 			return null;
 		}
 
+		//TODO: Add summary to this method.
 		public static Action<Runner> GetInitCallbackOrNull (Assembly assm) {
-			Action<Runner> res = null;
-			var t  = GetSingleOrNullAssmLevelSpecialType(GetAllTypes(assm), lookInit: true);
-			if (t != null) {
-
-				// Reflection Stuff
-				var argst = new [] { typeof(Runner) };
-				var mi       = t.GetMethod("Setup", argst);
-
-				//No public, try private.
-				if (mi == null) {
-					var flags = BF.NonPublic | BF.InvokeMethod | BF.Instance | BF.DeclaredOnly;
-					mi = t.GetMethod("Setup", flags, null, argst, null);
-					DieIf(mi == null, "Internal error. Can't find 'Setup' method.");
-				}
-
-				var instance = Activator.CreateInstance(t, true);
-				//=======================================================================
-
-				// Expressions
-				var runnerP   = Parameter(typeof(Runner), "runner");
-				var callSetup = Call(Constant(instance, t), mi,  runnerP);
-
-				PrintLinqTree(callSetup);
-
-				res = Lambda<Action<Runner>>(callSetup, new [] { runnerP }).Compile();
-			}
-
-			return res;
+			// This is how the client code should look like.
+			// class ContestInit { //<= Assembly level initialization.
+			//     void Setup(runner) {
+			//			//Init code here	
+			//     }
+			// }
+			//
+			var st  = GetSingleOrNullAssmLevelSpecialType(GetAllTypes(assm), lookInit: true);
+			return  st != null ? CreateCallback(st) : null;
 		}
 
-
+		//TODO: Add summary to this method.
 		public static Action<Runner> GetShutdownCallbackOrNull (Assembly assm) {
+			// This is how the client code should look like.
+			// class ContestClose { //<= Assembly level cleanup.
+			//     void Shutdown(runner) {
+			//          //Cleanup code here.
+			//     }
+			// }
+			//
 			return null;
 		}
+
+
+		static Action<Runner> CreateCallback(SpecialType st) {
+			Debug.Assert(st != null, $"{nameof(st)} can't be null");
+			var instance = Activator.CreateInstance(st.Type, true);
+
+			// Expressions
+			var runnerP   = Parameter(typeof(Runner), "runner");
+			var callSetup = Call(Constant(instance, st.Type), st.Method,  runnerP);
+
+			PrintLinqTree(callSetup);
+
+			return Lambda<Action<Runner>>(callSetup, new [] { runnerP }).Compile();
+		}
+
 
 		/// Returns a suite of "actual" test cases from the given assembly.
 		/// (Setups and Teardowns are NOT part of the result set).
