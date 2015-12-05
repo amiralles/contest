@@ -53,6 +53,7 @@
             var watch      = Stopwatch.StartNew();
 			
 			if (BeforeAny != null) {
+				Debug.WriteLine("### Running ContestInit");
 				try {
 					BeforeAny(this);
 				}
@@ -62,6 +63,7 @@
 					// assembly level initialization. 
 					// (This rule doesn't apply to class level setups).
 					WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
+					return;
 				}
 			}
 
@@ -99,6 +101,7 @@
 
 			if (AfterAll != null) {
 				try {
+					Debug.WriteLine("### Running ContestClose");
 					AfterAll(this);
 				}
 				catch (Exception ex) {
