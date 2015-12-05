@@ -28,6 +28,8 @@ namespace Contest.Core {
             Flags = new[] { INS_PUB, INS_PRI, STA_PUB, STA_PRI };
         }
 
+		static readonly Dictionary<int, Type[]> _typesCache = new Dictionary<int, Type[]>();
+
 		/// Return true if the test case points to an anonymous method.
         static readonly Func<TestCase, bool> IsInlineCase = tcase => tcase.Body == null;
 
@@ -93,7 +95,14 @@ namespace Contest.Core {
 		/// Returns all types from the given assembly.
 		/// (Including nested and private types).
 		public static Type[] GetAllTypes (Assembly assm) {
-			return GetTypesR(assm.GetTypes());
+			var hash = assm.GetHashCode();
+			if (_typesCache.ContainsKey(hash))
+				return _typesCache[hash];
+
+
+			var res = GetTypesR(assm.GetTypes());
+			_typesCache[hash] = res;
+			return res;
 		}
 
 		static Type[] GetTypesR (Type[] types) {
