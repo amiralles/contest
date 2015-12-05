@@ -1,5 +1,5 @@
 ## contest
-Contest is minimalistic testing framework bundled with a freaking fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... Point in case, the code reads almost like plain english.
+Contest is minimalistic testing framework bundled with a fast console runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... Point in case, the code reads almost like plain english.
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
 
@@ -113,15 +113,38 @@ I guess this section is selfexplanatory ;)
 	Pass();
 ```
 		
-#### A word about conventions
-As I mentioned earlier, contest it's based on conventions, so you don't have to deal with noisy annotations and stuff like that. It follows a basic set of rules, that I hope, are easy to remember.
+#### How to add assembly level initialization code
 
-##### How does it work for test cases
-**Every field of type System.Action\<Contest.Core.Runner\> within a given class is considered to be a test case**. As you saw in the previous samples, neither the class containing the field nor the filed itself have to be public. This is just for convenience. I like to save as much keystrokes as I can, but it will work with the public modifier as well.
+Sometimes you need to execute a piece of code before running any test case. With contest you can do that by adding a *special type* to your project. Just add a new class called **ContestInit**, create a **Setup** method and put the initialization code in it.
 
-##### How does it work for setups and teardowns
-If you 've been doing unit testing for a while you surely had notice that most frameworks have some kind of **setup/teardown** mechanisms (using NUnit jargon in here). Contest is not an exception, it have both, **per case** and **per fixture** setups and teardowns. The way it works is you name the field **"before_each"** for fixture wide setups and **"after_each"** for fixture wide teardowns. If you wanna per case setup/teardown, what you do is create a field and prefix its name with: **before_[case_name]** for setups and **after_[case_name]** for teardowns.
+```
+using Contest.Core;
 
+public class ContestInit {
+	void Setup(Runner runner) {
+		runner.Bag["album"] = "Rock or Bust!";
+	}
+}
+```
+(*) To avoid false positives or corrupt state, contest will abort the execution if this method fails.
+
+
+#### How to add assembly level cleanup code
+
+Contest also allows you to run code when it finishes running test. To do this you will need to add another *special type* called **ContesClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
+
+
+```
+using Contest.Core;
+
+public class ContestClose {
+	void Shutdown(Runner runner) {
+		// Some cleanup code...
+	}
+}
+```
+
+* Keep in mind that these *special types* are meant to used for **global assmebly level** configuration. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
 
 #### How to install
 Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
@@ -150,7 +173,6 @@ contest run test.dll *test_name_contains*
 contest run test.dll test_name_starts_with*
 contest run test.dll *test_name_ends_with
 ```
-
 
 #### How to rerun failing tests
 Most tests runners comes with a handy feature that allows you to filter and run only test cases that had failed in the previous run. (I used this feature a lot with ReSharper's test runner). You can do this with contest too, just add the **-f** flag and you are all set.
