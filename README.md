@@ -194,7 +194,7 @@ Most tests runners comes with a handy feature that allows you to filter and run 
 Weather if your are fixing performance issues or just wanna speed up your tests, contest can tell you where to start. Just run:
 
 ```bash
- contest run test/_cases.dll -lslow
+ contest run test/_cases.dll -yslow
 ```
 
 The command above will print a list of test cases sorted by execution time. (Slowest tests first).
@@ -202,7 +202,7 @@ You can combine this command with *less* or any tool like that and get the top 1
 
 You can also list fastest tests firts. (OK, I don't see a point either, but it was just two lines away ;))
 ```bash
- contest run test/_cases.dll -lfast
+ contest run test/_cases.dll -yfast
 ```
 
 
