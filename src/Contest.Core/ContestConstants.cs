@@ -4,7 +4,7 @@ namespace Contest.Core {
 
 	public class ContestConstants {
 		public static readonly string  
-			TMP         = ".tmp",
+			TMP         = ".contest_tmp",
 			MODDAT      = "moddat", 
 			DATE_FORMAT = "yyyy/MM/dd hh:mm:ss.fff";
 
