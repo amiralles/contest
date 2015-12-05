@@ -18,39 +18,6 @@ namespace Contest.Tests {
 				t => typeof(contest_core_tests) == t);
 
 
-		_ get_all_types_close = assert =>
-			assert.IsTrue(Contest.GetAllTypes(typeof(ContestClose).Assembly).Length >= 1);
-
-		_ get_shutdown_callback = assert => {
-			var shutdown = Contest.GetShutdownCallbackOrNull(typeof(ContestClose).Assembly);
-			assert.IsNotNull(shutdown);
-		};
-
-		_ invoke_shutdown_callback = assert => {
-			var shutdown = Contest.GetShutdownCallbackOrNull(typeof(ContestClose).Assembly);
-			shutdown(assert);// <= See ContestClose.Shutdown
-			assert.Equal("We salute you.", assert.Bag["ClosingMsg"]);
-		};
-
-		_ find_assm_level_shutdown = assert => {
-			assert.IsNotNull(Contest.GetSingleOrNullAssmLevelSpecialType(
-						new [] { typeof(ContestClose) },
-						lookInit: false));
-		};
-
-		_ find_assm_level_shutdown_returns_null_when_there_is_no_ContestClose = assert => {
-			assert.IsNull(Contest.GetSingleOrNullAssmLevelSpecialType(
-						new [] { typeof(string) },
-						lookInit: false));
-		};
-
-		_ find_assm_level_shutdown_throws_if_gets_more_than_one = assert =>
-				assert.ErrMsgContains("more than one", () => {
-						Contest.GetSingleOrNullAssmLevelSpecialType(
-								new [] { typeof(ContestClose), typeof(ContestClose)},
-								lookInit: false);
-						});
-			
 
 		// ==============================================================================================
 		// Assm level setups.
@@ -83,14 +50,49 @@ namespace Contest.Tests {
 		};
 
 		_ find_assm_level_setup_throws_if_gets_more_than_one = assert =>
-				assert.ErrMsgContains("more than one", () => {
-						Contest.GetSingleOrNullAssmLevelSpecialType(
-								new [] { typeof(ContestInit), typeof(ContestInit)},
-								lookInit: true);
-						});
+			assert.ErrMsgContains("more than one", () => {
+					Contest.GetSingleOrNullAssmLevelSpecialType(
+							new [] { typeof(ContestInit), typeof(ContestInit)},
+							lookInit: true);
+					});
 			
 		// ==============================================================================================
-		
+		// Assm level teardown
+		// ==============================================================================================
+		_ get_all_types_close = assert =>
+			assert.IsTrue(Contest.GetAllTypes(typeof(ContestClose).Assembly).Length >= 1);
+
+		_ get_shutdown_callback = assert => {
+			var shutdown = Contest.GetShutdownCallbackOrNull(typeof(ContestClose).Assembly);
+			assert.IsNotNull(shutdown);
+		};
+
+		_ invoke_shutdown_callback = assert => {
+			var shutdown = Contest.GetShutdownCallbackOrNull(typeof(ContestClose).Assembly);
+			shutdown(assert);// <= See ContestClose.Shutdown
+			assert.Equal("We salute you.", assert.Bag["ClosingMsg"]);
+		};
+
+		_ find_assm_level_shutdown = assert => {
+			assert.IsNotNull(Contest.GetSingleOrNullAssmLevelSpecialType(
+						new [] { typeof(ContestClose) },
+						lookInit: false));
+		};
+
+		_ find_assm_level_shutdown_returns_null_when_there_is_no_ContestClose = assert => {
+			assert.IsNull(Contest.GetSingleOrNullAssmLevelSpecialType(
+						new [] { typeof(string) },
+						lookInit: false));
+		};
+
+		_ find_assm_level_shutdown_throws_if_gets_more_than_one = assert =>
+			assert.ErrMsgContains("more than one", () => {
+					Contest.GetSingleOrNullAssmLevelSpecialType(
+							new [] { typeof(ContestClose), typeof(ContestClose)},
+							lookInit: false);
+					});
+			
+		// ==============================================================================================
 
         _ discover_test_cases_in_assm = assert => {
             var cases = Contest.GetCasesInAssm(_discoveryFinder, typeof(TestClass).Assembly, null).Cases;
