@@ -131,7 +131,7 @@ public class ContestInit {
 
 #### How to add assembly level cleanup code
 
-Contest also allows you to run code when it finishes running test. To do this you will need to add another *special type* called **ContesClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
+Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContesClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
 
 
 ```
@@ -144,7 +144,7 @@ public class ContestClose {
 }
 ```
 
-* Keep in mind that these *special types* are meant to used for **global assmebly level** configuration. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
+* Keep in mind that these *special types* are meant to used for **global, assmebly level configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
 
 #### How to install
 Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
