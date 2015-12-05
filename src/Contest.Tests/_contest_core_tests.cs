@@ -38,7 +38,7 @@ namespace Contest.Tests {
 						lookInit: false));
 		};
 
-		_ find_assm_level_shutdown_returns_null_when_there_is_no_ContestInit = assert => {
+		_ find_assm_level_shutdown_returns_null_when_there_is_no_ContestClose = assert => {
 			assert.IsNull(Contest.GetSingleOrNullAssmLevelSpecialType(
 						new [] { typeof(string) },
 						lookInit: false));
