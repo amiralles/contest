@@ -63,6 +63,7 @@
 					// assembly level initialization. 
 					// (This rule doesn't apply to class level setups).
 					WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
+                    IgnoreCount = cases.Count;
 					return;
 				}
 			}
