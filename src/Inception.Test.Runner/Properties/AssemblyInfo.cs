@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Inception.Test.Runner")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Test runner for contest's core test fixtures.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Inception.Test.Runner")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright ©  2015 - amiralles")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
