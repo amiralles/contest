@@ -24,6 +24,9 @@ namespace Contest.Core {
 
         static readonly BF[] Flags;
 
+		/// A list of dispoble test classes instances.
+        internal static readonly List<IDisposable> Disposables = new List<IDisposable>();
+
         static Contest() {
             Flags = new[] { INS_PUB, INS_PRI, STA_PUB, STA_PRI };
         }
@@ -57,11 +60,16 @@ namespace Contest.Core {
                 return suite;
             };
 
+		// This method should be called before exit the program.
+		public static void Shutdown() {
+			foreach (var d in Disposables)
+				d.Dispose();
+		}
+
 		public static void DieIf(bool cond, string errmsg) {
 			if (cond)
 				throw new Exception(errmsg);
 		}
-
 
 		public static void Die(string errmsg) {
 			throw new Exception(errmsg);
@@ -107,7 +115,7 @@ namespace Contest.Core {
 			return res.ToArray();
 		}
 
-		// TODO: A really poorly named function....
+		// TODO: Rename this really poorly named function.
 		/// Checks if the array of types contains one and only one 'special type'
 		/// that match the specified lookInit flag.
 		/// (By Special types we mean types that Contest uses for assembly level setup/shutdown
@@ -235,6 +243,8 @@ namespace Contest.Core {
                 object inst = null;
                 try {
                     inst = Activator.CreateInstance(type, true);
+					if (inst as IDisposable != null)
+						Disposables.Add((IDisposable) inst);
                 }
                 catch {
                     Console.WriteLine("WARN: Couldn't create instance of '{0}'.", type.Name);

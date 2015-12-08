@@ -6,6 +6,26 @@ namespace Contest.Tests {
     using Contest.Core;
     using _ = System.Action<Contest.Core.Runner>;
 
+	/*
+	 *
+	 * tenemos que agregar algo asi:
+	 * class testfoo : IDispoable {
+	 *     testFoo() {
+	 *        //class level setup.
+	 *     }
+	 *
+	 *     _ test1,
+	 *     _ test3,
+	 *     etc....
+	 *
+	 *     void Dispose() {
+	 *        //class level cleanup.
+	 *     }
+	 * }
+	 *
+	 * */
+
+
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
     public class contest_core_tests {
 
@@ -18,6 +38,22 @@ namespace Contest.Tests {
 				t => typeof(contest_core_tests) == t);
 
 
+		class DisposableClass : IDisposable {
+			public bool Disposed = false;
+
+			public void Dispose() {
+				Disposed = true;
+			}
+		}
+
+		_ should_call_dispose_on_disposable_tests_when_shutting_down_contest =
+			assert => {
+				var disp = new DisposableClass();
+				Contest.Disposables.Add(disp);
+				Contest.Shutdown();
+
+				assert.IsTrue(disp.Disposed);
+			};
 
 		// ==============================================================================================
 		// Assm level setups.
