@@ -8,6 +8,7 @@ namespace Contest.Core {
     using System.Reflection;
     using BF = System.Reflection.BindingFlags;
     using static System.Linq.Expressions.Expression;
+    using static System.Console;
 
     public class Contest {
         const BF
@@ -23,6 +24,17 @@ namespace Contest.Core {
             AFTER_EACH = "AFTER_EACH";
 
         static readonly BF[] Flags;
+
+		public static int 
+			// How may tests have we disposed.
+			DisposedCount   = 0, 
+			// How many errors did we get while disposing test cases.
+			DisposeErrCount = 0;
+
+		internal static void ResetCounters() {
+			DisposeErrCount = 0;
+			DisposedCount   = 0;
+		}
 
 		/// A list of dispoble test classes instances.
         internal static readonly List<IDisposable> Disposables = new List<IDisposable>();
@@ -62,8 +74,17 @@ namespace Contest.Core {
 
 		// This method should be called before exit the program.
 		public static void Shutdown() {
-			foreach (var d in Disposables)
-				d.Dispose();
+			foreach (var d in Disposables) {
+				try {
+					d.Dispose();
+				}
+				catch (Exception ex) {
+					WriteLine(ex.Message);
+
+					DisposeErrCount +=1;
+				}
+				DisposedCount += 1;
+			}
 		}
 
 		public static void DieIf(bool cond, string errmsg) {

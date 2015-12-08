@@ -46,6 +46,14 @@ namespace Contest.Tests {
 			}
 		}
 
+		class DisposableClassThrows : IDisposable {
+			public bool Disposed = false;
+
+			public void Dispose() {
+				throw new Exception("Intentional exception.");
+			}
+		}
+
 		_ should_call_dispose_on_disposable_tests_when_shutting_down_contest =
 			assert => {
 				var disp = new DisposableClass();
@@ -53,6 +61,23 @@ namespace Contest.Tests {
 				Contest.Shutdown();
 
 				assert.IsTrue(disp.Disposed);
+			};
+
+		_ should_dispose_each_disposable_test =
+			assert => {
+				Contest.Disposables.Clear();
+				Contest.ResetCounters();
+
+				var disp1 = new DisposableClass();
+				var disp2 = new DisposableClassThrows();
+				var disp3 = new DisposableClass();
+				Contest.Disposables.Add(disp1);
+				Contest.Disposables.Add(disp2);
+				Contest.Disposables.Add(disp3);
+
+				Contest.Shutdown();
+				assert.Equal(3, Contest.DisposedCount);
+				assert.Equal(1, Contest.DisposeErrCount);
 			};
 
 		// ==============================================================================================
