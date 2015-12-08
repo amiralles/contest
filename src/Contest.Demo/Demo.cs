@@ -5,12 +5,27 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
 	using System.Collections.Generic;
 	using System.Linq;
 	using _  = System.Action<Contest.Core.Runner>;
+	using static System.Console;
 
     class HandlingExceptions {
         _ it_should_treat_exceptions_as_failing_tests = assert => {
             throw new Exception("asd");
         };
     }
+
+	class SetupTearDown : IDisposable {
+		public SetupTearDown() {
+			WriteLine($"### setup");
+		}
+
+
+		public void Dispose() {
+			WriteLine($"### Teardown");
+		}
+	}
+
+
+
 
 	class ErrorMsgs {
 		_ exptect_error_message_pass = expects =>
