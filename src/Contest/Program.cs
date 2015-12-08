@@ -124,6 +124,9 @@ namespace Contest {
             catch (Exception ex) {
                 WriteLine(ex);
             }
+			finally {
+				Contest.Shutdown();
+			}
         }
 
 		static Dictionary<string, long> GetTestsTimes(string assmFileName) {

@@ -146,6 +146,35 @@ public class ContestClose {
 
 * Keep in mind that these *special types* are meant to used for **global, assmebly level configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
 
+#### How to add class level initialization code
+Use this technique when you want a piece of code to run once (and only once) before any test within the class.
+*(We 've been trying different approaches for this particular feature but in the end, plain old constructors ended up being the best choice).
+
+```
+	class FooTest {
+		public FooTest () {
+			// Your init code goes in here.
+		}
+	}
+
+```
+
+#### How to add class level cleanup code
+Just modify your test class to implement the IDisposable interface and put your cleanup code inside the dispose method.
+Contest will execute this method before exiting the program.
+
+```
+	class BarTest : IDisposable {
+
+		public void Dispose() {
+			// Cleanup code in here.
+		}
+	}
+
+```
+
+
+
 #### How to install
 Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
 
