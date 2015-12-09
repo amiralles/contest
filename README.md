@@ -4,11 +4,7 @@ Contest is a minimalist, cross platform, unit testing framework for .NET. It com
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
 
-
-_Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
-```cs
-	using _  = System.Action<Contest.Core.Runner>;
-
+con
     /// Basic features.
     class Contest_101 {
 
@@ -132,7 +128,7 @@ public class ContestInit {
 
 #### How to add assembly level cleanup code
 
-Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContesClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
+Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContestClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
 
 
 ```
