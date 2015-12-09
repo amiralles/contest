@@ -132,7 +132,7 @@ public class ContestInit {
 
 #### How to add assembly level cleanup code
 
-Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContesClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
+Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContestClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
 
 
 ```
