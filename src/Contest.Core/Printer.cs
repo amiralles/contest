@@ -18,20 +18,20 @@ namespace Contest.Core {
 		// void PrintResults(int casesCount, long elapsedMilliseconds) 
 		public readonly static Action<int, long, int, int, int, int, string> PrintResults = 
 			(casesCount, elapsedms, assertsCount, passCount, failCount, ignoreCount, cherry) => {
-				Print("".PadRight(40, '='), Default);
-				Print("STATS", Default);
+				Print("".PadRight(40, '-'), Default);
+				Print("ASSERTS - STATS", Default);
 				if(!string.IsNullOrEmpty(cherry)){
-					Print("".PadRight(40, '='), Default);
-					Print("Cherry Picking => {0}".Interpol(cherry), Default);
+					Print("".PadRight(40, '-'), Default);
+					Print($"Cherry Picking => {cherry}", Default);
 				}
-				Print("".PadRight(40, '='), Default);
-				Print("Test    : {0}".Interpol(casesCount), Default);
-				Print("Asserts : {0}".Interpol(assertsCount), Default);
-				Print("Elapsed : {0} ms".Interpol(elapsedms), Default);
-				Print("Passing : {0}".Interpol(passCount), Green);
-				Print("Failing : {0}".Interpol(failCount), Red);
-				Print("Ignored : {0}".Interpol(ignoreCount), Yellow);
-				Print("".PadRight(40, '='), Default);
+				Print("".PadRight(40, '-'), Default);
+				// Print("Test    : {0}".Interpol(casesCount), Default);
+				// Print("Asserts : {0}".Interpol(assertsCount), Default);
+				Print($"Elapsed : {elapsedms} ms", Default);
+				Print($"Passing : {passCount}",    Green);
+				Print($"Failing : {failCount}",    Red);
+				Print($"Ignored : {ignoreCount}",  Yellow);
+				Print("".PadRight(40, '-'), Default);
 			};
 
 		public readonly static Action<string> PrintFixName = name => {
