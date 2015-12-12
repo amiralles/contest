@@ -4,27 +4,8 @@ namespace Contest.Tests {
     using System;
     using System.Linq;
     using Contest.Core;
+    using static Contest.Core.Contest;
     using _ = System.Action<Contest.Core.Runner>;
-
-	/*
-	 *
-	 * tenemos que agregar algo asi:
-	 * class testfoo : IDispoable {
-	 *     testFoo() {
-	 *        //class level setup.
-	 *     }
-	 *
-	 *     _ test1,
-	 *     _ test3,
-	 *     etc....
-	 *
-	 *     void Dispose() {
-	 *        //class level cleanup.
-	 *     }
-	 * }
-	 *
-	 * */
-
 
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
     public class contest_core_tests {
@@ -38,6 +19,30 @@ namespace Contest.Tests {
 				t => typeof(contest_core_tests) == t);
 
 
+
+		// Assertions syntax sugar
+		_ assert_is_null_sugar     = assert => IsNull(null);
+
+		_ assert_is_not_null_sugar = assert => IsNotNull(new {});
+
+		_ assert_is_true_sugar     = assert => IsTrue(true);
+
+		_ assert_is_false_sugar    = assert => IsFalse(false);
+
+		_ assert_equal_sugar       = assert => Equal(2, 2);
+
+		_ assert_not_equal_sugar   = assert => NotEqual(2, 3);
+
+		_ assert_sugar             = assert => Assert(true);
+
+		_ should_throw_sugar       = assert => 
+			ShouldThrow<NullReferenceException>(() => {
+				string str = null;
+				int    len = str.Length;	
+			});
+
+		
+		
 		class DisposableClass : IDisposable {
 			public bool Disposed = false;
 
