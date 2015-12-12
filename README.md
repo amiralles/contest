@@ -115,7 +115,7 @@ I guess this section is selfexplanatory ;)
 	Pass();
 ```
 
-#### Syntax Sugar (New Stuff 0.10.0)
+#### Syntax Sugar (New Stuff on v0.10.0)
 Write even shorter assertions with contest's syntax sugar.
 
 ```
@@ -135,7 +135,8 @@ Write even shorter assertions with contest's syntax sugar.
 		// You can write this:
 		_ passing_test = assert => Equal(4, 2 + 2);
 
-		* It's not just about less code. I also think that the second version reads better than the first one.
+		* It's not just about less code. I also think that the second version 
+          reads better than the first one.
 	}
 ```
 		
