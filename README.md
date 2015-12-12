@@ -6,7 +6,8 @@ Down below you’ll find a couple of examples on how to write tests using contes
 
 
 _Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
-```cs
+
+```
 	using _  = System.Action<Contest.Core.Runner>;
 
     /// Basic features.
@@ -112,6 +113,30 @@ I guess this section is selfexplanatory ;)
 
 	// Increases the passing tests count.
 	Pass();
+```
+
+#### Syntax Sugar (New Stuff 0.10.0)
+Write even shorter assertions with contest's syntax sugar.
+
+```
+	using _  = System.Action<Contest.Core.Runner>;
+
+    // Now you have access to contest's whole API 
+	// thru SyntaxSugar's helper methods.
+	// Just add this using stmt at the top of your file.
+	using static Contest.SyntaxSugar;
+
+    class TestSomeSugar {
+		
+		// Instead of writing this:
+		_ passing_test = assert => 
+			assert.Equal(4, 2 + 2);
+
+		// You can write this:
+		_ passing_test = assert => Equal(4, 2 + 2);
+
+		* It's not just about less code. I also think that the second version reads better than the first one.
+	}
 ```
 		
 #### How to add assembly level initialization code
