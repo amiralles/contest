@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contest.cs" />
+    <Compile Include="SyntaxSugar.cs" />
     <Compile Include="SpecialType.cs" />
     <Compile Include="ContestConstants.cs" />
     <Compile Include="EnumerableExtensions.cs" />

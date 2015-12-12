@@ -142,7 +142,7 @@
 
             var suite = Contest.GetCasesInAssm(finder, assm, null);
             var runner = new Runner();
-			Contest.SetRunner(runner);//To enable syntax sugar.
+			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
 
 			runner.Verbose = true;
 

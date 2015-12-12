@@ -319,6 +319,8 @@ namespace Contest {
 
             var runner = CreateRunner(assmFileName, assm);
 
+			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
+
 			// Run only failing tests.
             runner.Run(failingSuite);
 		}
