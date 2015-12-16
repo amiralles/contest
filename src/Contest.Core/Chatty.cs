@@ -40,7 +40,7 @@ namespace Contest {
 			}
 
 			public void NotToBe(object val) {
-				var emsg = $"Expected Not to be {val}.";
+				var emsg = $"Expected Not to be {val} (val?.GetType()).";
 				Fluent.NotEqual(_val, val, emsg);	
 			}
 		

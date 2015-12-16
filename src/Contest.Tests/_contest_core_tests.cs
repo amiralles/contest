@@ -5,6 +5,7 @@ namespace Contest.Tests {
     using System.Linq;
     using Contest.Core;
     using static Contest.SyntaxSugar;
+    using static Contest.Chatty;
     using _ = System.Action<Contest.Core.Runner>;
 
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
@@ -18,6 +19,14 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
+
+        // Oneliners syntax.
+        _ assert_that_is          = assert => That(123).Is(123);
+        _ assert_that_is_not      = assert => That(123).IsNot(456);
+        _ assert_that_is_null     = assert => That(null).IsNull();
+        _ assert_that_is_not_null = assert => That(123).IsNotNull();
+        _ assert_that_is_true     = assert => That(true).IsTrue();
+        _ assert_that_is_false    = assert => That(false).IsFalse();
 
 
 		// Assertions syntax sugar
