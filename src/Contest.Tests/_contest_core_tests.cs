@@ -29,6 +29,14 @@ namespace Contest.Tests {
         _ assert_that_is_false    = assert => That(false).IsFalse();
 
 
+        // BDD syntax.
+        _ expect_123_to_be_123           = assert => Expect(123).ToBe(123);
+        _ expect_123_not_to_be_456       = assert => Expect(123).NotToBe(456);
+        _ expect_null_to_be_null         = assert => Expect(null).ToBe(null);
+        _ expect_not_null_to_be_not_null = assert => Expect(123).NotToBe(null);
+        _ expect_true_to_be_true         = assert => Expect(true).ToBe(true);
+        _ expect_false_to_be_false       = assert => Expect(false).ToBe(false);
+
 		// Assertions syntax sugar
 		_ assert_is_null_sugar     = assert => IsNull(null);
 
