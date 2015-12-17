@@ -124,7 +124,7 @@ Write even shorter assertions with contest's syntax sugar.
     // Now you have access to contest's whole API 
 	// thru SyntaxSugar's helper methods.
 	// Just add this using stmt at the top of your file.
-	using static Contest.SyntaxSugar;
+	using static Contest.Core.SyntaxSugar;
 
     class TestSomeSugar {
 		
@@ -135,48 +135,68 @@ Write even shorter assertions with contest's syntax sugar.
 		// You can write this:
 		_ passing_test = assert => Equal(4, 2 + 2);
 
-		* It's not just about less code. I also think that the second version 
+		* It's not just about less code. To me, the second version 
           reads better than the first one.
 	}
 ```
 
-#### Fluent Assertions
+#### Fluent Assertions (New Stuff)
 ```
-	using static Contest.Chatty;
+	// (*) You can use the whole contest's API thru these fluent assertions.
+	using static Contest.Core.Chatty;
 	
 	// Some basic math
 	_ add_two_numbers = assert => That(2 + 2).Is(4);
 
 	// Login system
-	_ when_login_admin_users = assert => That(adminUsr.IsAdmin).IsTrue();
-	_ deny_root_access_to_regular_users = assert => That(regUsr.HasRootAccess).IsFalse();
+	_ when_an_admin_usr_logs_in = assert => That(usr.IsAdmin).IsTrue();
 
-	// \*You can use the whole contest API thru these fluent assertions.
+	_ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess).IsFalse();
+
 
 ```
 		
-#### BDD API
+#### BDD API (New Stuff)
+If you are more like a BDD kind of guy, you may wanna try contest's BDD API.
+
 ```
-	using static Contest.BDD;
+	using static Contest.Core.BDD;
 	
 	// Some basic math
 	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
+	_ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
 
 	// Login system
-	_ when_login_admin_users = expect => usr.IsAdmin.ToBe(true);
-	_ deny_root_access_to_regular_users = expect => regUsr.HasRootAccess.ToBe(false);
+	_ when_an_admin_usr_logs_in = exect => usr.IsAdmin.ToBe(true);
 
-	//Alternative syntax. 
-	_ when_login_admin_users_alt = case => Expect(adminUsr.IsAdmin).ToBe(true);
+	_ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.ToBe(false);
 
+	// Alternative syntax. (It's handy to test exceptions and stuff like that)
+	_ cant_access_members_on_null_pointers = case => {
+		object obj = null;
+
+		// this way
+		Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
+
+		// or this way
+		Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
+
+		// or another way
+		Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
+	}
+
+	// Comming soon:
+	// * ToBeGreatThan
+	// * ToBeGreatThanOrEqual
+	// * ToBeLessThanOrEqual
+	// * ToBeLessThan
+
+	// * NotToBeGreatThan
+	// * NotToBeGreatThanOrEqual
+	// * NotToBeLessThanOrEqual
+	// * NotToBeLessThan
 ```
 
-#### Comming soon
-\* GreatThan
-\* GreatThanOrEqual
-\* LessThanOrEqual
-\* LessThan
-\* Contains
 
 #### How to add assembly level initialization code
 
