@@ -115,7 +115,7 @@ I guess this section is selfexplanatory ;)
 	Pass();
 ```
 
-#### Syntax Sugar (New Stuff on v0.10.0)
+#### Syntax Sugar
 Write even shorter assertions with contest's syntax sugar.
 
 ```
@@ -151,7 +151,7 @@ Write even shorter assertions with contest's syntax sugar.
 	_ when_login_admin_users = assert => That(adminUsr.IsAdmin).IsTrue();
 	_ deny_root_access_to_regular_users = assert => That(regUsr.HasRootAccess).IsFalse();
 
-	// You can use the whole contest API thru these fluent assertions.
+	// \*You can use the whole contest API thru these fluent assertions.
 
 ```
 		
@@ -163,13 +163,20 @@ Write even shorter assertions with contest's syntax sugar.
 	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
 
 	// Login system
-	_ when_login_admin_users = expect => adminUsr.IsAdmin.ToBe(true);
+	_ when_login_admin_users = expect => usr.IsAdmin.ToBe(true);
 	_ deny_root_access_to_regular_users = expect => regUsr.HasRootAccess.ToBe(false);
 
 	//Alternative syntax. 
-	_ when_login_admin_users_alt = sould => Expect(adminUsr.IsAdmin).ToBe(true);
+	_ when_login_admin_users_alt = case => Expect(adminUsr.IsAdmin).ToBe(true);
 
 ```
+
+#### Comming soon
+\* GreatThan
+\* GreatThanOrEqual
+\* LessThanOrEqual
+\* LessThan
+\* Contains
 
 #### How to add assembly level initialization code
 
