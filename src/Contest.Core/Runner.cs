@@ -245,7 +245,7 @@
 			msg != null && msg.Contains(chunck);
 
         void ErrMsg(Func<string, string, bool> compStrat, string msg, Action body) {
-			Action failWithMsg = () => Fail("Expected Error Message => {0}".Interpol(msg));
+			Action failWithMsg = () => Fail($"Expected Error Message => {msg}");
             try {
                 AssertsCount++;
                 body();

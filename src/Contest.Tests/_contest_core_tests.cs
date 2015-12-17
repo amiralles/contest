@@ -36,19 +36,19 @@ namespace Contest.Tests {
         _ expect_not_null_to_be_not_null = assert => Expect(123).NotToBe(null);
         _ expect_true_to_be_true         = assert => Expect(true).ToBe(true);
         _ expect_false_to_be_false       = assert => Expect(false).ToBe(false);
-        _ expect_to_throw_null_reference = assert =>  { 
+        _ expect_to_throw_null_reference = assert => { 
 			object obj = null;
 			Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 		};
 
-        _ expect_err_msg =  assert => {
+        _ expect_err_msg = assert => {
 			object obj = null;
-			Expect(() => obj.ToString()).ErrMsg("Object reference no set to an instance of an object.");
+			Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
 		};
 
-        _ expect_err_msg_contains =  assert => {
+        _ expect_err_msg_contains = assert => {
 			object obj = null;
-			Expect(() => obj.ToString()).ErrMsgContains("reference no set");
+			Expect(() => obj.ToString()).ErrMsgContains("reference not set");
 		};
 
 		// Assertions syntax sugar
