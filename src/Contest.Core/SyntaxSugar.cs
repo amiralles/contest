@@ -1,7 +1,6 @@
-namespace Contest {
+namespace Contest.Core {
 	using System;
-	using Contest.Core;
-	using static Contest.Core.Contest;
+	using static Contest;
 
 	public class SyntaxSugar {
 		/// Points to the runner that is running the current session.

@@ -61,6 +61,10 @@
     <Compile Include="Contest.cs" />
     <Compile Include="SyntaxSugar.cs" />
     <Compile Include="Chatty.cs" />
+    <Compile Include="IExpect.cs" />
+    <Compile Include="IAssertion.cs" />
+    <Compile Include="BDD.cs" />
+    <Compile Include="BDDExtensions.cs" />
     <Compile Include="SpecialType.cs" />
     <Compile Include="ContestConstants.cs" />
     <Compile Include="EnumerableExtensions.cs" />

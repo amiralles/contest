@@ -4,9 +4,9 @@ namespace Contest.Tests {
     using System;
     using System.Linq;
     using Contest.Core;
-    using static Contest.SyntaxSugar;
-    using static Contest.Chatty;
-    using static Contest.BDD;
+    using static Contest.Core.SyntaxSugar;
+    using static Contest.Core.Chatty;
+    using static Contest.Core.BDD;
     using _ = System.Action<Contest.Core.Runner>;
 
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
