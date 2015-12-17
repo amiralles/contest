@@ -6,6 +6,7 @@ namespace Contest.Tests {
     using Contest.Core;
     using static Contest.SyntaxSugar;
     using static Contest.Chatty;
+    using static Contest.BDD;
     using _ = System.Action<Contest.Core.Runner>;
 
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
@@ -40,6 +41,10 @@ namespace Contest.Tests {
 			object obj = null;
 			Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 		};
+
+        // BDD (alt) syntax.
+		_ expect_2_plus_2_to_be_4     = expect => (2+2).ToBe(4);
+		_ expect_2_plus_2_not_to_be_5 = expect => (2+2).NotToBe(5);
 
         _ expect_err_msg = assert => {
 			object obj = null;

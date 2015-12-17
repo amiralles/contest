@@ -139,7 +139,38 @@ Write even shorter assertions with contest's syntax sugar.
           reads better than the first one.
 	}
 ```
+
+#### Fluent Assertions
+```
+	using static Contest.Chatty;
+	
+	// Some basic math
+	_ add_two_numbers = assert => That(2 + 2).Is(4);
+
+	// Login system
+	_ when_login_admin_users = assert => That(adminUsr.IsAdmin).IsTrue();
+	_ deny_root_access_to_regular_users = assert => That(regUsr.HasRootAccess).IsFalse();
+
+	// You can use the whole contest API thru these fluent assertions.
+
+```
 		
+#### BDD API
+```
+	using static Contest.BDD;
+	
+	// Some basic math
+	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
+
+	// Login system
+	_ when_login_admin_users = expect => adminUsr.IsAdmin.ToBe(true);
+	_ deny_root_access_to_regular_users = expect => regUsr.HasRootAccess.ToBe(false);
+
+	//Alternative syntax. 
+	_ when_login_admin_users_alt = sould => Expect(adminUsr.IsAdmin).ToBe(true);
+
+```
+
 #### How to add assembly level initialization code
 
 Sometimes you need to execute a piece of code before running any test case. With contest you can do that by adding a *special type* to your project. Just add a new class called **ContestInit**, create a **Setup** method and put the initialization code in it.

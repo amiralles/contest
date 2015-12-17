@@ -30,7 +30,24 @@ namespace Contest {
 	
 	}
 
-	public class Chatty {
+	public static class BDD {
+		public static IExpect Expect(Action val) {
+			return new Expectation(val);
+		}
+
+		public static IExpect Expect(object val) {
+			return new Expectation(val);
+		}
+
+		public static void ToBe(this object expect, object val) {
+			Die("Not impl");
+		}
+
+		public static void NotToBe(this object expect, object val) {
+			Die("Not impl");
+		}
+		
+		//TODO: Add the rest of the API.
 
 		class Expectation  : IExpect {
 			readonly object _val;
@@ -71,7 +88,11 @@ namespace Contest {
 
 				Fluent.ErrMsgContains(errMsg, cb);
 			}
+	
 		}
+	}
+
+	public class Chatty {
 
 		class Assertion : IAssertion {
 			readonly object _val;
@@ -120,12 +141,5 @@ namespace Contest {
 			return new Assertion(val);
 		}
 
-		public static IExpect Expect(Action val) {
-			return new Expectation(val);
-		}
-
-		public static IExpect Expect(object val) {
-			return new Expectation(val);
-		}
 	}
 }
