@@ -4,6 +4,7 @@ namespace Contest {
 	using Contest.Core;
 	using Fluent = Contest.SyntaxSugar;
 	using static Contest.Core.Contest;
+	using static System.Console;
 
 	public interface IAssertion {
 			void Is(object val);
@@ -14,14 +15,18 @@ namespace Contest {
 			void IsFalse();
 			// TODO: Exceptions
 			// void Throws();
+			// TODO: greateThen, lessThan, lessThanOrEq, greaterThanOrEq.
 	
 	}
 
 	public interface IExpect {
 			void ToBe(object val);
 			void NotToBe(object val);
-			// TODO: Exceptions
-			// void ToThrow(object val);
+			void ToThrow<T>() where T : Exception;
+			void ErrMsg(string errMsg);
+			void ErrMsgContains(string errMsg);
+
+			// TODO: greateThen, lessThan, lessThanOrEq, greaterThanOrEq.
 	
 	}
 
@@ -34,6 +39,10 @@ namespace Contest {
 				_val = val;
 			}
 
+			public Expectation(Action callback) {
+				_val = callback;
+			}
+
 			public void ToBe(object val) {
 				var emsg = $"Expected to be {_val}({_val?.GetType()}) but was {val} ({val?.GetType()}).";
 				Fluent.Equal(_val, val, emsg);	
@@ -43,7 +52,25 @@ namespace Contest {
 				var emsg = $"Expected Not to be {val} (val?.GetType()).";
 				Fluent.NotEqual(_val, val, emsg);	
 			}
-		
+
+			public void ToThrow<T>() where T : Exception {
+				var cb = _val as Action;
+				DieIf(cb == null, "ToThrow expects a callback. ie. Expect(()=>{/* your code */}).ToThrow..");
+				Fluent.Throws<T>(cb);
+			}
+
+			public void ErrMsg (string errMsg) {
+				var cb = _val as Action;
+				DieIf(cb == null, "ErrMsg expects a callback. ie. Expect(()=>{/* your code */}).ErrMsg..");
+				Fluent.ErrMsg(errMsg, cb);
+			}
+
+			public void ErrMsgContains (string errMsg){
+				var cb = _val as Action;
+				DieIf(cb == null, "ErrMsgContains expects a callback. ie. Expect(()=>{/* your code */}).ErrMsgContains...");
+
+				Fluent.ErrMsgContains(errMsg, cb);
+			}
 		}
 
 		class Assertion : IAssertion {
@@ -91,6 +118,10 @@ namespace Contest {
 
 		public static IAssertion That(object val) {
 			return new Assertion(val);
+		}
+
+		public static IExpect Expect(Action val) {
+			return new Expectation(val);
 		}
 
 		public static IExpect Expect(object val) {

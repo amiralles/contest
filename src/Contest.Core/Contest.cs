@@ -89,8 +89,9 @@ namespace Contest.Core {
 		}
 
 		public static void DieIf(bool cond, string errmsg) {
-			if (cond)
+			if (cond) {
 				throw new Exception(errmsg);
+			}
 		}
 
 		public static void Die(string errmsg) {
