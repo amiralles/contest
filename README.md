@@ -6,7 +6,7 @@ Down below you’ll find a couple of examples on how to write tests using contes
 
 As you will see in the examples below **contest** supports a wide range of assertions and testing styles which you can mix and match to meet your preferences. From fluent assertions to BDD (and everything in between) **contest** will help you to find a style that you enjoy while writing tests.
 
-_ *Note: While this is working code, is not production ready (yet). It'll be relased in the near future, tough. Stay tuned!_
+_*Note: While this is working code, is not production ready (yet). It'll be relased in the near future, tough. Stay tuned!_
 
 
 #### Fluent Assertions
