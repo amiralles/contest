@@ -358,6 +358,7 @@ namespace Contest {
             var finder = new TestCaseFinder();
             var suite  = Contest.GetCasesInAssm(finder, assm, null);
             var runner = CreateRunner(assmFileName, assm);
+			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
             WriteLine("\nDone!\n");
             runner.Run(suite, cerryPicking, printHeaders );
         }

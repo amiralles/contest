@@ -20,6 +20,7 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
+		// _ bug = assert => Expect(123).ToBe(456);
 
         // Oneliners syntax.
         _ assert_that_is          = assert => That(123).Is(123);

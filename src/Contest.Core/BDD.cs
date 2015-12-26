@@ -29,7 +29,7 @@ namespace Contest.Core {
 			}
 
 			public void ToBe(object val) {
-				var emsg = $"Expected to be {_val}({_val?.GetType()}) but was {val} ({val?.GetType()}).";
+				var emsg = $"Expected to be {val}({val?.GetType()}) but was {_val} ({_val?.GetType()}).";
 				Fluent.Equal(_val, val, emsg);	
 			}
 
