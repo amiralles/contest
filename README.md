@@ -4,8 +4,71 @@ Contest is a minimalist, cross platform, unit testing framework for .NET. It com
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
 
+As you will see in the examples below **contest** supports a wide range of assertions and testing styles which you can mix and match to meet your preferences. From fluent assertions to BDD (and everything in between) **contest** will help you to find a style that you enjoy while writing tests.
 
-_Please keep in mind this is a protoype and is not production ready (yet). It'll be relased in the near future tough. Stay tuned!_
+_ *Note: While this is working code, is not production ready (yet). It'll be relased in the near future, tough. Stay tuned!_
+
+
+#### Fluent Assertions
+```
+	// This using statement enables fluent assertions.
+	using static Contest.Core.Chatty;
+	
+	// Some basic math
+	_ add_two_numbers = assert => That(2 + 2).Is(4);
+
+	// Login system
+	_ when_an_admin_usr_logs_in = assert => That(usr.IsAdmin).IsTrue();
+
+	_ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess).IsFalse();
+
+
+```
+		
+#### BDD API
+For those who like the BDD approach better, you may wanna try contest's BDD API.
+
+```
+	using static Contest.Core.BDD;
+	
+	// Some basic math
+	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
+	_ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
+
+	// Login system
+	_ when_an_admin_usr_logs_in = exect => usr.IsAdmin.ToBe(true);
+
+	_ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.ToBe(false);
+
+	// Alternative syntax. (It's handy to test exceptions and stuff like that).
+	_ cant_access_members_on_null_pointers = assert => {
+		object obj = null;
+
+		// this way
+		Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
+
+		// or this way
+		Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
+
+		// or another way
+		Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
+	}
+
+	// Comming soon:
+	// * ToBeGreatThan
+	// * ToBeGreatThanOrEqual
+	// * ToBeLessThanOrEqual
+	// * ToBeLessThan
+
+	// * NotToBeGreatThan
+	// * NotToBeGreatThanOrEqual
+	// * NotToBeLessThanOrEqual
+	// * NotToBeLessThan
+```
+
+
+#### Plain old "lambda syntax"
+This is the original contest's syntax and it works the same as always did.
 
 ```
 	using _  = System.Action<Contest.Core.Runner>;
@@ -88,6 +151,32 @@ _Please keep in mind this is a protoype and is not production ready (yet). It'll
 	}
     //=================================================================
 ```
+
+#### Syntax Sugar
+If you like the lambda approach but also like to write as less code as possible, you can go with contest's syntax sugar.
+
+```
+	using _  = System.Action<Contest.Core.Runner>;
+
+	// By adding this using statement you have access
+    // to the whole constest API thru helper methods.
+	using static Contest.Core.SyntaxSugar;
+
+    class TestSomeSugar {
+		
+		// Instead of writing this:
+		_ passing_test = assert => 
+			assert.Equal(4, 2 + 2);
+
+		// You can write this:
+		_ passing_test = assert => Equal(4, 2 + 2);
+
+		//*(It is less code and also reads better without the second assert word).
+
+	}
+```
+
+
 #### Contest API
 I guess this section is selfexplanatory ;)
 
@@ -115,87 +204,6 @@ I guess this section is selfexplanatory ;)
 	Pass();
 ```
 
-#### Syntax Sugar
-Write even shorter assertions with contest's syntax sugar.
-
-```
-	using _  = System.Action<Contest.Core.Runner>;
-
-    // Now you have access to contest's whole API 
-	// thru SyntaxSugar's helper methods.
-	// Just add this using stmt at the top of your file.
-	using static Contest.Core.SyntaxSugar;
-
-    class TestSomeSugar {
-		
-		// Instead of writing this:
-		_ passing_test = assert => 
-			assert.Equal(4, 2 + 2);
-
-		// You can write this:
-		_ passing_test = assert => Equal(4, 2 + 2);
-
-		* It's not just about less code. To me, the second version 
-          reads better than the first one.
-	}
-```
-
-#### Fluent Assertions (New Stuff)
-```
-	// (*) You can use the whole contest's API thru these fluent assertions.
-	using static Contest.Core.Chatty;
-	
-	// Some basic math
-	_ add_two_numbers = assert => That(2 + 2).Is(4);
-
-	// Login system
-	_ when_an_admin_usr_logs_in = assert => That(usr.IsAdmin).IsTrue();
-
-	_ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess).IsFalse();
-
-
-```
-		
-#### BDD API (New Stuff)
-If you are more like a BDD kind of guy, you may wanna try contest's BDD API.
-
-```
-	using static Contest.Core.BDD;
-	
-	// Some basic math
-	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
-	_ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
-
-	// Login system
-	_ when_an_admin_usr_logs_in = exect => usr.IsAdmin.ToBe(true);
-
-	_ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.ToBe(false);
-
-	// Alternative syntax. (It's handy to test exceptions and stuff like that)
-	_ cant_access_members_on_null_pointers = case => {
-		object obj = null;
-
-		// this way
-		Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
-
-		// or this way
-		Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
-
-		// or another way
-		Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
-	}
-
-	// Comming soon:
-	// * ToBeGreatThan
-	// * ToBeGreatThanOrEqual
-	// * ToBeLessThanOrEqual
-	// * ToBeLessThan
-
-	// * NotToBeGreatThan
-	// * NotToBeGreatThanOrEqual
-	// * NotToBeLessThanOrEqual
-	// * NotToBeLessThan
-```
 
 
 #### How to add assembly level initialization code
