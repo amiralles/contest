@@ -4,7 +4,7 @@ Contest is a minimalist, cross platform, unit testing framework for .NET. It com
 
 Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
 
-As you will see in the examples below **contest** supports a wide range of assertions and testing styles which you can mix and match to meet your preferences. From fluent assertions to BDD (and everything in between) **contest** will help you to find a style that you enjoy while writing tests.
+As you will see in the examples below, **contest** supports a wide range of assertions and testing styles which you can mix and match to meet your preferences. From fluent assertions to BDD (and everything in between), **contest** will help you to find a style that you enjoy while writing tests.
 
 _*Note: While this is working code, is not production ready (yet). It'll be relased in the near future, tough. Stay tuned!_
 
@@ -68,7 +68,7 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 
 
 #### Plain old "lambda syntax"
-This is the original contest's syntax and it works the same as always did.
+This is the original contest's syntax and it works the same way always did.
 
 ```
 	using _  = System.Action<Contest.Core.Runner>;
