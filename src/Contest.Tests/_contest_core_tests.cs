@@ -56,6 +56,14 @@ namespace Contest.Tests {
 		_ expect_2_plus_2_to_be_4     = expect => (2+2).ToBe(4);
 		_ expect_2_plus_2_not_to_be_5 = expect => (2+2).NotToBe(5);
 
+		_ less_than_alt           =  expect => 111.ToBeLessThan(123);
+		_ less_than_or_eq_alt     =  expect => 111.ToBeLessThanOrEqual(123);
+		_ less_than_or_eq1_alt    =  expect => 111.ToBeLessThanOrEqual(111);
+
+		_ greater_than_alt        =  expect => 123.ToBeGreaterThan(111);
+		_ greater_than_or_eq_alt  =  expect => 123.ToBeGreaterThanOrEqual(111);
+		_ greater_than_or_eq1_alt =  expect => 123.ToBeGreaterThanOrEqual(123);
+
         _ expect_err_msg = assert => {
 			object obj = null;
 			Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
