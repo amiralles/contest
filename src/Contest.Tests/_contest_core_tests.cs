@@ -1,5 +1,4 @@
-#pragma warning disable 414
-
+#pragma warning disable 414 
 namespace Contest.Tests {
     using System;
     using System.Linq;
@@ -21,6 +20,10 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
+		//TODO: Does it worth to add the Not operation?
+		//      It will save us some code. Instead of implementing a
+		//      negation method per comparison, we can just do:
+		//      Not(GreaterThan), Not(LessThan) and so on....
 		_ less_than           = assert => Expect(111).ToBeLessThan(123);
 		_ less_than_or_eq     = assert => Expect(111).ToBeLessThanOrEqual(123);
 		_ less_than_or_eq1    = assert => Expect(111).ToBeLessThanOrEqual(111);
