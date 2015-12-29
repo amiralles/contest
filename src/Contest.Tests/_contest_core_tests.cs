@@ -9,6 +9,7 @@ namespace Contest.Tests {
     using static Contest.Core.BDD;
     using _ = System.Action<Contest.Core.Runner>;
 
+
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
     public class contest_core_tests {
 
@@ -20,7 +21,15 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
-		// _ bug = assert => Expect(123).ToBe(456);
+		_ less_than           = assert => Expect(111).ToBeLessThan(123);
+		_ less_than_or_eq     = assert => Expect(111).ToBeLessThanOrEqual(123);
+		_ less_than_or_eq1    = assert => Expect(111).ToBeLessThanOrEqual(111);
+
+		_ greater_than        = assert => Expect(123).ToBeGreaterThan(111);
+		_ greater_than_or_eq  = assert => Expect(123).ToBeGreaterThanOrEqual(111);
+		_ greater_than_or_eq1 = assert => Expect(123).ToBeGreaterThanOrEqual(123);
+
+
 
         // Oneliners syntax.
         _ assert_that_is          = assert => That(123).Is(123);

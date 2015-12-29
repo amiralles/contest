@@ -14,9 +14,6 @@ namespace Contest.Core {
 			return new Expectation(val);
 		}
 
-		
-		//TODO: Add the rest of the API.
-
 		class Expectation  : IExpect {
 			readonly object _val;
 
@@ -27,6 +24,37 @@ namespace Contest.Core {
 			public Expectation(Action callback) {
 				_val = callback;
 			}
+
+			static int Comp(object left, object right) {
+				if (!(left is IComparable))
+					Die($"Don't know of to compare { left?.GetType() } to { right?.GetType() }");
+
+				if (left == null)
+					return right == null ? 0 : 1;
+
+				return ((IComparable)left).CompareTo(right);
+			}
+
+			public void ToBeLessThan(object val) { 
+				var msg = $"Expected less than {val}";
+				Fluent.Assert(Comp(_val, val) < 0, msg);
+		  	}
+
+			public void ToBeLessThanOrEqual(object val) {
+				var msg = $"Expected less than or equal {val}";
+			   	Fluent.Assert(Comp(_val, val) <= 0, msg); 
+			}
+
+			public void ToBeGreaterThan(object val) { 
+				var msg = $"Expected greater than {val}";
+				Fluent.Assert(Comp(_val, val) > 0, msg);
+		  	}
+
+			public void ToBeGreaterThanOrEqual(object val) { 
+				var msg = $"Expected greater or equal than {val}";
+				Fluent.Assert(Comp(_val, val) >= 0, msg); 
+			}
+
 
 			public void ToBe(object val) {
 				var emsg = $"Expected to be {val}({val?.GetType()}) but was {_val} ({_val?.GetType()}).";
