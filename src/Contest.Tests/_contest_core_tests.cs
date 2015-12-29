@@ -20,19 +20,6 @@ namespace Contest.Tests {
         static readonly TestCaseFinder _discoveryFinder = new TestCaseFinder(null,
 				t => typeof(contest_core_tests) == t);
 
-		//TODO: Does it worth to add the Not operation?
-		//      It will save us some code. Instead of implementing a
-		//      negation method per comparison, we can just do:
-		//      Not(GreaterThan), Not(LessThan) and so on....
-		_ less_than           = assert => Expect(111).ToBeLessThan(123);
-		_ less_than_or_eq     = assert => Expect(111).ToBeLessThanOrEqual(123);
-		_ less_than_or_eq1    = assert => Expect(111).ToBeLessThanOrEqual(111);
-
-		_ greater_than        = assert => Expect(123).ToBeGreaterThan(111);
-		_ greater_than_or_eq  = assert => Expect(123).ToBeGreaterThanOrEqual(111);
-		_ greater_than_or_eq1 = assert => Expect(123).ToBeGreaterThanOrEqual(123);
-
-
 
         // Oneliners syntax.
         _ assert_that_is          = assert => That(123).Is(123);
@@ -54,6 +41,20 @@ namespace Contest.Tests {
 			object obj = null;
 			Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 		};
+
+		//TODO: Does it worth to add the Not operation?
+		//      It will save us some code. Instead of implementing a
+		//      negation method per comparison, we can just do:
+		//      Not(GreaterThan), Not(LessThan) and so on....
+		//
+		_ less_than           = assert => Expect(111).ToBeLessThan(123);
+		_ less_than_or_eq     = assert => Expect(111).ToBeLessThanOrEqual(123);
+		_ less_than_or_eq1    = assert => Expect(111).ToBeLessThanOrEqual(111);
+
+		_ greater_than        = assert => Expect(123).ToBeGreaterThan(111);
+		_ greater_than_or_eq  = assert => Expect(123).ToBeGreaterThanOrEqual(111);
+		_ greater_than_or_eq1 = assert => Expect(123).ToBeGreaterThanOrEqual(123);
+
 
         // BDD (alt) syntax.
 		_ expect_2_plus_2_to_be_4     = expect => (2+2).ToBe(4);
