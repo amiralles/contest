@@ -55,11 +55,6 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 	}
 
 	// Comming soon:
-	// * ToBeGreatThan
-	// * ToBeGreatThanOrEqual
-	// * ToBeLessThanOrEqual
-	// * ToBeLessThan
-
 	// * NotToBeGreatThan
 	// * NotToBeGreatThanOrEqual
 	// * NotToBeLessThanOrEqual
