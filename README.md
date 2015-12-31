@@ -53,6 +53,12 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 		// or another way
 		Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
 	}
+	
+	// You can also use:
+	// * ToBeGreatThan
+	// * ToBeGreatThanOrEqual
+	// * ToBeLessThanOrEqual
+	// * ToBeLessThan
 
 	// Comming soon:
 	// * NotToBeGreatThan
