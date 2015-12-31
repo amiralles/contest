@@ -153,6 +153,10 @@ This is the original contest's syntax and it works the same way always did.
     //=================================================================
 ```
 
+#### Wanna hack right away
+Just go to https://github.com/amiralles/intro_contest and take contest for a spin.
+
+
 #### Syntax Sugar
 If you like the lambda approach but also like to write as less code as possible, you can go with contest's syntax sugar.
 
@@ -178,7 +182,7 @@ If you like the lambda approach but also like to write as less code as possible,
 ```
 
 
-#### Contest API
+#### Contest Core API
 I guess this section is selfexplanatory ;)
 
 ```
@@ -238,7 +242,7 @@ public class ContestClose {
 }
 ```
 
-* Keep in mind that these *special types* are meant to used for **global, assmebly level configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
+* Keep in mind that these *special types* are meant to used for **global, assmebly level, configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
 
 #### How to add class level initialization code
 Use this technique when you want a piece of code to run once (and only once) before any test within the class.
@@ -309,9 +313,6 @@ Most tests runners comes with a handy feature that allows you to filter and run 
  contest run test\_cases.dll -lf
 ```
 
-#### How to ignore tests using .test\_ignore file.
-**TODO:
-
 
 #### How to look for slow tests
 Weather if your are fixing performance issues or just wanna speed up your tests, contest can tell you where to start. Just run:
@@ -327,6 +328,14 @@ You can also list fastest tests firts. (OK, I don't see a point either, but it w
 ```bash
  contest run test/_cases.dll -yfast
 ```
+
+
+#### How to ignore tests using .test\_ignore file.
+**TODO:
+
+
+#### How to report issues
+The best way to report an issue is by providing a failing test case. Wich is dead simple if you use https://github.com/amiralles/intro_contest
 
 
 **Whether if you have problems using this library, found a bug o wanna a new feature, feel free to contact me. I'll be back at you as soon as a can.**
