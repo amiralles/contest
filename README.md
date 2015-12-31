@@ -13,7 +13,9 @@ _*Note: While this is working code, is not production ready (yet). It'll be rela
 ```
 	// This using statement enables fluent assertions.
 	using static Contest.Core.Chatty;
+	using _  = System.Action<Contest.Core.Runner>;
 	
+
 	// Some basic math
 	_ add_two_numbers = assert => That(2 + 2).Is(4);
 
@@ -30,7 +32,9 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 
 ```
 	using static Contest.Core.BDD;
+	using _  = System.Action<Contest.Core.Runner>;
 	
+
 	// Some basic math
 	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
 	_ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
@@ -73,6 +77,7 @@ This is the original contest's syntax and it works the same way always did.
 
 ```
 	using _  = System.Action<Contest.Core.Runner>;
+
 
     /// Basic features.
     class Contest_101 {
