@@ -48,13 +48,13 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 	_ cant_access_members_on_null_pointers = assert => {
 		object obj = null;
 
-		// this way
+		// you can go this way
 		Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 
 		// or this way
 		Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
 
-		// or another way
+		// or this other way
 		Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
 	}
 	
