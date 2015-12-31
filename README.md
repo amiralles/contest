@@ -136,25 +136,13 @@ This is the original contest's syntax and it works the same way always did.
 			test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
 	}
 
-    //=================================================================
-    // Dummies
-    //=================================================================
-	class Utils {
-		public static Func<object, object> Echo = msg => msg;
-	}
-	
-	public class User {	
-		static readonly List<string> _users = new List<string>();
-		public static Action Reset = () => _users.Clear();
-		public static Action<string> Create = name => _users.Add(name);
-		public static Func<int> Count = () => _users.Count;
-		public static Func<string, object> Find = name => _users.FirstOrDefault(u => u == name);
-	}
-    //=================================================================
 ```
+
+
 
 #### Wanna hack right away
 Just go to https://github.com/amiralles/intro_contest and take contest for a spin.
+
 
 
 #### Syntax Sugar
