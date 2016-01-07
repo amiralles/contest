@@ -2,22 +2,24 @@
 <package >
   <metadata>
     <id>Contest</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <authors>amiralles</authors>
     <owners>amiralles</owners>
     <licenseUrl>https://github.com/amiralles/contest/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/amiralles/contest</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Minimalist, convention based, unit testing framework for .NET.</description>
+    <description>Minimalist and cross platform. Contest, the new testing framework for .NET.</description>
 	<summary>
-		Contest is minimalist testing framework bundled with a lightweight console test runner. In contrast with most popular testing frameworks, it's based on conventions and it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... Point in case, the code reads almost like plain english.
+        Contest is minimalist testing framework bundled with a lightweight console test runner. In contrast with most popular testing frameworks, is conventions based, so it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... 
+        Point in case, the code reads almost like plain english.
 	</summary>
     <releaseNotes>
-        Add assembly level init/cleanup.
-        Add class level init/cleanup.
-        Replace -lslow, -lfast for -yslow, -yfast.
+        Added BDD Syntax.
+        Added Fluent assertions.
     </releaseNotes>
-    <copyright>Copyright 2015</copyright>
-    <tags>unit testing framework tdd console test</tags>
+    <copyright>Copyright 2016</copyright>
+    <tags>
+        unit testing framework tdd console test crossplatform linux mac
+    </tags>
   </metadata>
 </package>
