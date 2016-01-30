@@ -52,21 +52,22 @@
             var currfix    = (string) null;
             var watch      = Stopwatch.StartNew();
 			
-			if (BeforeAny != null) {
-				Debug.WriteLine("### Running ContestInit");
-				try {
-					BeforeAny(this);
-				}
-				catch (Exception ex) {
-					// To avoid corrupted state, inconsitencies or false possitives, 
-					// Contest aborts the test session when gets exceptions during 
-					// assembly level initialization. 
-					// (This rule doesn't apply to class level setups).
-					WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
-                    IgnoreCount = cases.Count;
-					return;
-				}
-			}
+			// Now this runs before the test finder.
+			// if (BeforeAny != null) {
+			// 	Debug.WriteLine("### Running ContestInit");
+			// 	
+			// 		BeforeAny(this);
+			// 	}
+			// 	catch (Exception ex) {
+			// 		// To avoid corrupted state, inconsitencies or false possitives, 
+			// 		// Contest aborts the test session when gets exceptions during 
+			// 		// assembly level initialization. 
+			// 		// (This rule doesn't apply to class level setups).
+			// 		WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
+            //         IgnoreCount = cases.Count;
+			// 		return;
+			// 	}
+			// }
 
             cases.Each(c => {
 				if(Verbose && printHeaders) {

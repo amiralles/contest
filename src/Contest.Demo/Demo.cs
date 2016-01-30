@@ -7,6 +7,17 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
 	using _  = System.Action<Contest.Core.Runner>;
 	using static System.Console;
 
+
+	class DependsOnInit {
+		public DependsOnInit(){
+			var foo = Global.Foo.ToString();
+		}
+
+		// The whole point is to try the ctor. This is just a
+		// dummy test.
+		_ foo_is_not_null = assert => assert.Pass();
+	}
+
     class HandlingExceptions {
         _ it_should_treat_exceptions_as_failing_tests = assert => {
             throw new Exception("asd");

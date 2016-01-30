@@ -21,6 +21,13 @@ namespace Contest.Tests {
 				t => typeof(contest_core_tests) == t);
 
 
+		// _ depends_on_init = assert => {
+		// 	// If Global.Foo is not initialized, this will throw.
+		// 	var foo = Global.Foo.ToString();
+		// 	assert.Pass();
+		// };
+        //
+
         // Oneliners syntax.
         _ assert_that_is          = assert => That(123).Is(123);
         _ assert_that_is_not      = assert => That(123).IsNot(456);

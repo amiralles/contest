@@ -327,7 +327,7 @@ namespace Contest {
 
 		static Runner CreateRunner(string assmFileName, Assembly assm) {
 			var runner = new Runner(assmFileName);
-			runner.BeforeAny = Contest.GetInitCallbackOrNull(assm);
+			// runner.BeforeAny = Contest.GetInitCallbackOrNull(assm);
 			runner.AfterAll  = Contest.GetShutdownCallbackOrNull(assm);
 			runner.Verbose   = true;
 			return runner;
@@ -356,8 +356,24 @@ namespace Contest {
                 throw new Exception("Can't load assembly '{0}'.".Interpol(assmFileName));
 
             var finder = new TestCaseFinder();
-            var suite  = Contest.GetCasesInAssm(finder, assm, null);
             var runner = CreateRunner(assmFileName, assm);
+			var init   = Contest.GetInitCallbackOrNull(assm);
+			if (init != null) {
+				try {
+					Debug.WriteLine("### Running ContestInit");
+					init(runner); // test cases ctors could depend on it.
+				}
+				catch (Exception ex) {
+					// To avoid corrupted state, inconsitencies or false possitives, 
+					// Contest aborts the test session when gets exceptions during 
+					// assembly level initialization. 
+					// (This rule doesn't apply to class level setups).
+					WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
+					return;
+				}
+			}
+
+            var suite  = Contest.GetCasesInAssm(finder, assm, null);
 			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
             WriteLine("\nDone!\n");
             runner.Run(suite, cerryPicking, printHeaders );
