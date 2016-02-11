@@ -319,6 +319,9 @@ namespace Contest {
 
             var runner = CreateRunner(assmFileName, assm);
 
+            if (RunInit(assm, runner) != 0)
+                return;
+
 			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
 
 			// Run only failing tests.
@@ -357,7 +360,18 @@ namespace Contest {
 
             var finder = new TestCaseFinder();
             var runner = CreateRunner(assmFileName, assm);
-			var init   = Contest.GetInitCallbackOrNull(assm);
+            
+            if (RunInit(assm, runner) != 0)
+                return;
+
+            var suite  = Contest.GetCasesInAssm(finder, assm, null);
+			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
+            WriteLine("\nDone!\n");
+            runner.Run(suite, cerryPicking, printHeaders );
+        }
+
+        static int RunInit(Assembly assm, Runner runner) {
+			var init  = Contest.GetInitCallbackOrNull(assm);
 			if (init != null) {
 				try {
 					Debug.WriteLine("### Running ContestInit");
@@ -369,14 +383,10 @@ namespace Contest {
 					// assembly level initialization. 
 					// (This rule doesn't apply to class level setups).
 					WriteLine($"\nTest session aborted due to errors on ContestInit.Setup.\n {ex.Message}");
-					return;
+					return -1;
 				}
 			}
-
-            var suite  = Contest.GetCasesInAssm(finder, assm, null);
-			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
-            WriteLine("\nDone!\n");
-            runner.Run(suite, cerryPicking, printHeaders );
+            return 0;
         }
 
         static void PrintHelp() {
