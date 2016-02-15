@@ -298,6 +298,38 @@ contest run test.dll test_name_starts_with*
 contest run test.dll *test_name_ends_with
 ```
 
+
+#### How to test your code under different cultures.
+Often times you have to make sure that your code works under different regional settings. Some testing frameworks allow you to do that by adding data annotations to your test cases, something like this:
+
+```
+[Test]
+[SetCulture("es-AR")]
+public void FooTest() {
+    // Your culture sensitve test case.
+}
+```
+
+Although it works, it's really tedious. With contest you can achieve the same thing without touching your code. 
+
+```
+# Want to test under es-AR.
+contest run test.dll * -ci es_AR
+
+# Also, en-US. No problem!
+contest run test.dll * -ci en_US
+```
+
+The **-ci** flag allows you to override the culture that contests will use to run your test cases. So if you set that flag, the whole thing will run under that specific culture.
+
+Note: If you want to run just some test cases under a specific culture and let the rest as is, you can use wildcards to so.
+
+```
+# Just test the Foo module under es-AR
+contest run test.dll *Foo* -ci es_AR
+```
+
+
 #### How to rerun failing tests
 Most tests runners comes with a handy feature that allows you to filter and run only test cases that had failed in the previous run. (I used this feature a lot with ReSharper's test runner). You can do this with contest too, just add the **-f** flag and you are all set.
 
