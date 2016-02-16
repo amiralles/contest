@@ -2,13 +2,13 @@
 
 namespace Contest {
     using System;
-    using System.Globalization;
-    using System.Threading;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Threading;
     using Core;
     using static System.Console;
 	using static Contest.Core.ContestConstants;
@@ -31,6 +31,27 @@ namespace Contest {
                     PrintHelp();
                     return;
                 }
+
+                int ciidx = -1;
+                // =============================================================
+                // Run tests under specific culture?
+                // =============================================================
+                if (args.Any(a => a == "-ci")) {
+                    ciidx = Array.IndexOf(args, "-ci");
+                    if (args.Length > ciidx + 1) {
+                        var specci = args[ciidx + 1];
+                        var ci = GetCulture(specci);
+                        if (ci == null)    
+                            Die($"\nERR. Sorry, can't find {specci} culture.\n");
+
+                        Thread.CurrentThread.CurrentCulture = ci;
+                    }
+                    else {
+                        Die("\nERR. Must especify culture.\n" +
+                            "i.e. contest run test.dll -ci es_AR\n");
+                    }
+                }
+                // =============================================================
 
                 if (args.Any(a => a == "-dbg")) {
                     WriteLine("Attach the debugger and press [Enter] to continue.");
@@ -86,7 +107,17 @@ namespace Contest {
 							return null;
 						};
 
-						var pattern  = args.Length >= 3 ? args[2] : null;
+                        string pattern = null;
+                        if (ciidx == -1)
+						    pattern = args.Length >= 3 ? args[2] : null;
+                        else {
+                            // run test.dll *foo* -ci es_AR
+                            //  0     1       2    3   4
+                            // run test.dll -ci es_AR
+                            //  0     1       2   3
+						    if (ciidx > 2)
+                                pattern = args[2];
+                        }
 
 						// ================================================
 						// Listing content from previous run;
@@ -127,6 +158,21 @@ namespace Contest {
 			finally {
 				Contest.Shutdown();
 			}
+        }
+
+
+        static CultureInfo GetCulture(string name) {
+            var normname = name.Replace("_","-");
+            CultureInfo res = null;
+            try {
+                res = CultureInfo.GetCultureInfo(normname);
+            }
+            catch (Exception ex) {
+#if DEBUG
+                WriteLine(ex.Message);
+#endif
+            }
+            return res;
         }
 
 		static Dictionary<string, long> GetTestsTimes(string assmFileName) {

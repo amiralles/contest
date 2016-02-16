@@ -1,6 +1,7 @@
 //#define DARK_TEXT
 namespace Contest.Core {
 	using System;
+	using System.Threading;
 	using System.Collections.Generic;
 	using System.Diagnostics;
 
@@ -24,7 +25,9 @@ namespace Contest.Core {
 					Print("".PadRight(40, '-'), Default);
 					Print($"Cherry Picking => {cherry}", Default);
 				}
+				Print($"Culture {Thread.CurrentThread.CurrentCulture}", Default);
 				Print("".PadRight(40, '-'), Default);
+
 				// Print("Test    : {0}".Interpol(casesCount), Default);
 				// Print("Asserts : {0}".Interpol(assertsCount), Default);
 				Print($"Elapsed : {elapsedms} ms", Default);
