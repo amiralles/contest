@@ -246,23 +246,25 @@
 			msg != null && msg.Contains(chunck);
 
         void ErrMsg(Func<string, string, bool> compStrat, string msg, Action body) {
-			Action failWithMsg = () => Fail($"Expected Error Message => {msg}");
+			Action<string> failWithMsg = was => 
+				Fail($"Expected Error Message:\n{msg}.\n" + 
+					 $"Actual Message:\n{was}\n");
             try {
                 AssertsCount++;
                 body();
-				failWithMsg();
+				failWithMsg("No error msg.");
             }
             catch (TargetInvocationException ex) {
 				if(ex.InnerException != null && compStrat(ex.InnerException.Message, msg))
 					Pass();
 				else
-					failWithMsg();
+					failWithMsg(ex.InnerException?.Message);
 			}
             catch (Exception ex) {
 				if(compStrat(ex.Message, msg))
 					Pass();
 				else
-					failWithMsg();
+					failWithMsg(ex.Message);
             }
 		}
 
