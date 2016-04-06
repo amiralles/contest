@@ -1,57 +1,53 @@
-//#define DARK_TEXT
 namespace Contest.Core {
 	using System;
 	using System.Threading;
 	using System.Collections.Generic;
 	using System.Diagnostics;
+	using static System.ConsoleColor;
+	using static System.Console;
 
 	class Printer{
+		static readonly ConsoleColor Default;
 
-#if DARK_TEXT
-		static ConsoleColor Default  = ConsoleColor.Black;
-#else
-		static ConsoleColor Default  = ConsoleColor.White;
-#endif
-		static ConsoleColor Red    = ConsoleColor.Red;
-		static ConsoleColor Green  = ConsoleColor.Green;
-		static ConsoleColor Yellow = ConsoleColor.Yellow;
+		static Printer() {
+			// Assumin the console's forecolor is untouch.
+			Default = Console.ForegroundColor;
+		}
 
-		// void PrintResults(int casesCount, long elapsedMilliseconds) 
 		public readonly static Action<int, long, int, int, int, int, string> PrintResults = 
 			(casesCount, elapsedms, assertsCount, passCount, failCount, ignoreCount, cherry) => {
-				Print("".PadRight(40, '-'), Default);
-				Print("ASSERTS - STATS", Default);
+				WriteLine("".PadRight(40, '-'));
+				WriteLine("ASSERTS - STATS");
 				if(!string.IsNullOrEmpty(cherry)){
-					Print("".PadRight(40, '-'), Default);
-					Print($"Cherry Picking => {cherry}", Default);
+					WriteLine("".PadRight(40, '-'));
+					WriteLine($"Cherry Picking => {cherry}");
 				}
-				Print($"Culture {Thread.CurrentThread.CurrentCulture}", Default);
-				Print("".PadRight(40, '-'), Default);
+				WriteLine($"Culture {Thread.CurrentThread.CurrentCulture}");
+				WriteLine("".PadRight(40, '-'));
 
-				// Print("Test    : {0}".Interpol(casesCount), Default);
-				// Print("Asserts : {0}".Interpol(assertsCount), Default);
-				Print($"Elapsed : {elapsedms} ms", Default);
+				WriteLine($"Elapsed : {elapsedms} ms");
 				Print($"Passing : {passCount}",    Green);
 				Print($"Failing : {failCount}",    Red);
 				Print($"Ignored : {ignoreCount}",  Yellow);
-				Print("".PadRight(40, '-'), Default);
+				WriteLine("".PadRight(40, '-'));
 			};
 
 		public readonly static Action<string> PrintFixName = name => {
-			Print("".PadRight(40, '='), ConsoleColor.Cyan);
-			Print(name, ConsoleColor.Cyan);
-			Print("".PadRight(40, '='), ConsoleColor.Cyan);
+			WriteLine("".PadRight(40, '-'));
+			WriteLine(name);
+			WriteLine("".PadRight(40, '-'));
 		};
 
-		public readonly static Action<string, ConsoleColor> Print = (msg, color) => {
-			var fcolor = Console.ForegroundColor;
-			try {
-				Console.ForegroundColor = color;
-				Console.WriteLine(msg);
-			}
-			finally {
-				Console.ForegroundColor = fcolor;
-			}
+		public readonly static Action<string, ConsoleColor> Print =
+		   	(msg, color) => {
+				var bak = Console.ForegroundColor;
+				try {
+					Console.ForegroundColor = color;
+					Console.WriteLine(msg);
+				}
+				finally {
+					Console.ForegroundColor = bak;
+				}
 		};
 	}
 }
