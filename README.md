@@ -235,7 +235,7 @@ public class ContestClose {
 }
 ```
 
-* Keep in mind that these *special types* are meant to used for **global, assmebly level, configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
+* Keep in mind that these *special types* are meant to used for **global (assmebly level) configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
 
 #### How to add class level initialization code
 Use this technique when you want a piece of code to run once (and only once) before any test within the class.
@@ -367,4 +367,4 @@ You can also list fastest tests firts. (OK, I don't see a point either, but it w
 The best way to report an issue is by providing a failing test case. Wich is dead simple if you use https://github.com/amiralles/intro_contest
 
 
-**Whether if you have problems using this library, found a bug o wanna a new feature, feel free to contact me. I'll be back at you as soon as a can.**
+**Whether if you have problems using this library, found a bug o wanna a new feature, feel free to contact me. I'll be back at you as soon as a I can.**
