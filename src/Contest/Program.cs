@@ -18,28 +18,30 @@ namespace Contest {
 
 
 		static readonly CultureInfo Culture = new CultureInfo("en-US");
+		static bool Quiet = false;
 
-        static void Main(string[] args) {
+        static void Main(string[] argv) {
             try {
                 Trace.Listeners.Add(new ConsoleTraceListener());
-
 #if DARK_TEXT
 				Console.ForegroundColor = ConsoleColor.Black;
 #endif
 
-                if (!args.Any()) {
+                if (!argv.Any()) {
                     PrintHelp();
                     return;
                 }
 
+				Quiet = argv.Any((a) => a == "-q");
+				
                 int ciidx = -1;
                 // =============================================================
                 // Run tests under specific culture?
                 // =============================================================
-                if (args.Any(a => a == "-ci")) {
-                    ciidx = Array.IndexOf(args, "-ci");
-                    if (args.Length > ciidx + 1) {
-                        var specci = args[ciidx + 1];
+                if (argv.Any(a => a == "-ci")) {
+                    ciidx = Array.IndexOf(argv, "-ci");
+                    if (argv.Length > ciidx + 1) {
+                        var specci = argv[ciidx + 1];
                         var ci = GetCulture(specci);
                         if (ci == null)    
                             Die($"\nERR. Sorry, can't find {specci} culture.\n");
@@ -53,34 +55,34 @@ namespace Contest {
                 }
                 // =============================================================
 
-                if (args.Any(a => a == "-dbg")) {
+                if (argv.Any(a => a == "-dbg")) {
                     WriteLine("Attach the debugger and press [Enter] to continue.");
                     ReadLine();
                 }
 
-				var printHeaders = !args.Any(a => a == "--no-head" || a == "-nh");
-				var failing      = args.Any(a => a == "-f");
+				var printHeaders = !argv.Any(a => a == "--no-head" || a == "-nh");
+				var failing      = argv.Any(a => a == "-f");
 
 				//================================================
 				// Listing results from previous runs.
-				var listFailing  = args.Any(a => a == "-lf");
-				var listSlow     = args.Any(a => a == "-yslow");
-				var listFast     = args.Any(a => a == "-yfast");
+				var listFailing  = argv.Any(a => a == "-lf");
+				var listSlow     = argv.Any(a => a == "-yslow");
+				var listFast     = argv.Any(a => a == "-yfast");
 				//================================================
 
-				//clean args list (no flags).
-				args = (from a in args where !a.StartsWith("-") select a).ToArray();
+				//clean argv list (no flags).
+				argv = (from a in argv where !a.StartsWith("-") select a).ToArray();
 
-                var cmd = args[0];
+                var cmd = argv[0];
                 switch (cmd) {
                     case "run":
                     case "r":
-						if(args.Length <= 1) {
+						if(argv.Length <= 1) {
 							WriteLine("File name expected. (The name of the assembly that contains test cases)");
 							return;
 						}
 
-						var testAssmPath = args[1];
+						var testAssmPath = argv[1];
 						if (!ReuseTestAssm(testAssmPath)) {
 							CopyToLocalTmp(Path.GetDirectoryName(testAssmPath));
 							TryUpdateModDat(testAssmPath);
@@ -109,14 +111,14 @@ namespace Contest {
 
                         string pattern = null;
                         if (ciidx == -1)
-						    pattern = args.Length >= 3 ? args[2] : null;
+						    pattern = argv.Length >= 3 ? argv[2] : null;
                         else {
                             // run test.dll *foo* -ci es_AR
                             //  0     1       2    3   4
                             // run test.dll -ci es_AR
                             //  0     1       2   3
 						    if (ciidx > 2)
-                                pattern = args[2];
+                                pattern = argv[2];
                         }
 
 						// ================================================
@@ -378,7 +380,7 @@ namespace Contest {
 			var runner = new Runner(assmFileName);
 			// runner.BeforeAny = Contest.GetInitCallbackOrNull(assm);
 			runner.AfterAll  = Contest.GetShutdownCallbackOrNull(assm);
-			runner.Verbose   = true;
+			runner.Verbose   = !Quiet;
 			return runner;
 		}
 
@@ -443,7 +445,7 @@ namespace Contest {
             Print("=================================================================================");
             Print("| Commands                                                                      |");
             Print("=================================================================================");
-            Print("| name  | args              | summary                                           |");
+            Print("| name  | argv              | summary                                           |");
             Print("=================================================================================");
             Print("| help  |                   | Shows help.                                       |");
             Print("| run   | test.dll          | Runs all tests within the given file.             |");
@@ -492,8 +494,8 @@ namespace Contest {
             lines.Each(WriteLine);
         }
 
-        static void Print(string msg, params object[] args) {
-            WriteLine(msg, args);
+        static void Print(string msg, params object[] argv) {
+            WriteLine(msg, argv);
         }
     }
 }
