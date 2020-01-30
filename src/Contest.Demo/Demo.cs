@@ -1,4 +1,10 @@
-﻿#pragma warning disable 414, 219
+﻿// ReSharper disable ArrangeTypeModifiers
+// ReSharper disable UnusedType.Global
+// ReSharper disable FieldCanBeMadeReadOnly.Global
+// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedMember.Local
+// ReSharper disable CheckNamespace
+#pragma warning disable 414, 219
 
 namespace Demo { //It doesn't match naming conventions but it reads better in the console ;)
 	using System;
@@ -10,6 +16,7 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
 
 	class DependsOnInit {
 		public DependsOnInit(){
+			// ReSharper disable once UnusedVariable
 			var foo = Global.Foo.ToString();
 		}
 
@@ -19,9 +26,9 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
 	}
 
     class HandlingExceptions {
-        _ it_should_treat_exceptions_as_failing_tests = assert => {
-            throw new Exception("asd");
-        };
+        _ it_should_treat_exceptions_as_failing_tests = 
+	        assert => 
+		        throw new Exception("asd");
     }
 
 	class SetupTearDown : IDisposable {
@@ -35,27 +42,23 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
 		}
 	}
 
+	class ErrorMessages {
+		_ expect_error_message_pass = expects =>
+			expects.ErrMsg("foo", ()=> throw new Exception("foo"));
 
-
-
-	class ErrorMsgs {
-		_ exptect_error_message_pass = expects =>
-			expects.ErrMsg("foo", ()=> {throw new Exception("foo");});
-
-		_ exptect_error_message_fails = expects =>
+		_ expect_error_message_fails = expects =>
 			expects.ErrMsg("foo", ()=> {});
 
-		_ exptect_error_message_contains_pass = expects =>
-			expects.ErrMsgContains("foo", ()=> { throw new Exception("This is a foo error.");});
+		_ expect_error_message_contains_pass = expects =>
+			expects.ErrMsgContains("foo", ()=> throw new Exception("This is a foo error."));
 
-		_ exptect_error_message_contains_fails = expects =>
+		_ expect_error_message_contains_fails = expects =>
 			expects.ErrMsgContains("foo", ()=> {});
 
 	}
 
     class Contest_101 {
-
-		_ this_is_a_passing_test = assert => 
+	    _ this_is_a_passing_test = assert => 
 			assert.Equal(4, 2 + 2);
 
 		_ this_is_a_failing_test = assert =>
@@ -64,6 +67,7 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
         _ this_is_a__should_throw__passing_test = test =>
             test.ShouldThrow<NullReferenceException>(() => {
                 object target = null;
+                // ReSharper disable once PossibleNullReferenceException
                 var dummy = target.ToString();
             });
 
@@ -74,7 +78,7 @@ namespace Demo { //It doesn't match naming conventions but it reads better in th
     }
 
     class Contest_201 {
-
+	    
 		_ before_each = test => {
 			User.Create("pipe");
 			User.Create("vilmis");

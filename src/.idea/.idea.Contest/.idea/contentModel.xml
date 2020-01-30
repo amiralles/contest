@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="contest" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Contest.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Contest.Core" t="IncludeRecursive">
+        <e p="BDD.cs" t="Include" />
+        <e p="BDDExtensions.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Chatty.cs" t="Include" />
+        <e p="Contest.Core.csproj" t="IncludeRecursive" />
+        <e p="Contest.cs" t="Include" />
+        <e p="ContestConstants.cs" t="Include" />
+        <e p="EnumerableExtensions.cs" t="Include" />
+        <e p="IAssertion.cs" t="Include" />
+        <e p="IExpect.cs" t="Include" />
+        <e p="IgnoreFileReader.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Printer.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Runner.cs" t="Include" />
+        <e p="SpecialType.cs" t="Include" />
+        <e p="StringExtensions.cs" t="Include" />
+        <e p="SyntaxSugar.cs" t="Include" />
+        <e p="TestCase.cs" t="Include" />
+        <e p="TestCaseFinder.cs" t="Include" />
+        <e p="TestSuite.cs" t="Include" />
+        <e p="TypeExtensions.cs" t="Include" />
+      </e>
+      <e p="Contest.Demo" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Contest.Demo.csproj" t="IncludeRecursive" />
+        <e p="ContestInit.cs" t="Include" />
+        <e p="Demo.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+      </e>
+      <e p="Contest.sln" t="IncludeFlat" />
+      <e p="Contest.Tests" t="IncludeRecursive">
+        <e p="_contest_core_tests.cs" t="Include" />
+        <e p="BarTest.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Contest.Tests.csproj" t="IncludeRecursive" />
+        <e p="ContestClose.cs" t="Include" />
+        <e p="ContestInit.cs" t="Include" />
+        <e p="EchoTest.cs" t="Include" />
+        <e p="FooTest.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="TestClass.cs" t="Include" />
+        <e p="TestClassOnePassOnFail.cs" t="Include" />
+        <e p="TestClassThrowingTests.cs" t="Include" />
+        <e p="Wrapper.cs" t="Include" />
+      </e>
+      <e p="Inception.Test.Runner" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Inception.Test.Runner.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Contest.-878329789.00" t="ExcludeRecursive" />
+  </component>
+</project>

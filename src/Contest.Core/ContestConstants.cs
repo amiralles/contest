@@ -1,5 +1,4 @@
 namespace Contest.Core {
-	using System;
 	using System.Globalization;
 
 	public class ContestConstants {

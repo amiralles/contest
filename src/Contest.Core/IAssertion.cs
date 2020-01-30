@@ -10,7 +10,7 @@ namespace Contest.Core {
 			void IsTrue();
 			void IsFalse();
 			// TODO: Exceptions
-			// TODO: greateThen, lessThan, lessThanOrEq, greaterThanOrEq.
+			// TODO: greaterThan, lessThan, lessThanOrEq, greaterThanOrEq.
 	
 	}
 }

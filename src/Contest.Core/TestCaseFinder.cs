@@ -7,7 +7,7 @@
             GetIgnoredPatternsFromFile = 
                 getIgnoredFromFile ?? GetIgnoredPatternsFromFile;
 
-			IgnoreType = ignoreType ?? (Func<Type, bool>) (t => false);
+			IgnoreType = ignoreType ?? (t => false);
         }
 
 		public readonly Func<Type, bool> IgnoreType;

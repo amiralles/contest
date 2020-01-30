@@ -1,15 +1,14 @@
-﻿namespace Inception.Test.Runner {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using Contest;
-    using Contest.Core;
-    using Contest.Tests;
-    using static System.Console;
-	using static Contest.Core.ContestConstants;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using Contest.Core;
+using Contest.Tests;
+
+namespace Inception.Test.Runner {
+	using static Console;
+	using static ContestConstants;
 
     class Program {
 
@@ -38,7 +37,7 @@
                     case "run":
                     case "r":
 						if(args.Length <=1) {
-							Console.WriteLine("File name expected. (The name of the assembly that contains test cases)");
+							WriteLine("File name expected. (The name of the assembly that contains test cases)");
 							return;
 						}
 
@@ -55,7 +54,7 @@
 								}
 							}
 							catch (Exception ex) {
-								Console.WriteLine(ex);
+								WriteLine(ex);
 							}
 							return null;
 						};
@@ -67,8 +66,6 @@
 						RunTests(testAssm, pattern, printHeaders);
 
                         break;
-                    case "help":
-                    case "h":
                     default: {
 						 PrintHelp();
 						 break;
@@ -76,42 +73,41 @@
                 }
             }
             catch (Exception ex) {
-                Console.WriteLine(ex);
-            }
-            finally {
-                //Console.ReadLine();
+                WriteLine(ex);
             }
         }
 
         static void CopyToLocalTmp(string root) {
 			root = string.IsNullOrEmpty(root)?".":root;
 #if DEBUG
-			Console.WriteLine("Copying to local tmp...", TMP);
-			Console.WriteLine("tmp:  '{0}'", TMP);
-			Console.WriteLine("root: '{0}'", root);
+			WriteLine("Copying to local tmp...");
+			WriteLine("tmp:  '{0}'", TMP);
+			WriteLine("root: '{0}'", root);
 #endif
             if (!Directory.Exists(TMP)){
 #if DEBUG
-				Console.WriteLine("Creating tmp dir '{0}'", TMP);
+				WriteLine("Creating tmp dir '{0}'", TMP);
 #endif
                 Directory.CreateDirectory(TMP);
 			}
 
             Directory.GetFiles(root, "*.dll").Each(
                 f => {
-				 var to = Path.Combine(TMP, Path.GetFileName(f));
+				 var to = Path.Combine(TMP, Path.GetFileName(f) ?? "");
 #if DEBUG
-					Console.WriteLine("copying '{0}' to {1}", f, to);
+					WriteLine("copying '{0}' to {1}", f, to);
 #endif
-					File.Copy(f, to, true);
+					File.Copy(
+						f ?? throw new ArgumentNullException(nameof(f)), 
+						to, true);
 				});
 #if DEBUG
-			Console.WriteLine("Done!");
+			WriteLine("Done!");
 #endif
         }
 
         static void RunTests(string assmFileName, string cerryPicking=null, bool printHeaders=true) {
-            Console.WriteLine("\nConfiguring Assembies....");
+            WriteLine("\nConfiguring Assembies....");
 
             if (string.IsNullOrEmpty(assmFileName))
                 throw new ArgumentException("Assembly name is required.");
@@ -140,13 +136,13 @@
 			//
             var finder = new TestCaseFinder(getIgnoredFromFile: null, ignoreType: ifNonCoreTest);
 
-            var suite = Contest.GetCasesInAssm(finder, assm, null);
-            var runner = new Runner();
+            var suite = Contest.Core.Contest.GetCasesInAssm(finder, assm, null);
+            var runner = new Contest.Core.Runner();
 			SyntaxSugar.SetRunner(runner);//To enable syntax sugar.
 
 			runner.Verbose = true;
 
-            Console.WriteLine("\nDone!\n");
+            WriteLine("\nDone!\n");
             runner.Run(suite, cerryPicking, printHeaders );
         }
 
@@ -168,7 +164,7 @@
             Print("=================================================================================");
 			Print("");
 			Print("-- More --");
-			Console.ReadLine();
+			ReadLine();
 
             Print("=================================================================================");
             Print("| Flags                                                                         |");
@@ -180,7 +176,7 @@
             Print("=================================================================================");
 			Print("");
 			Print("-- More --");
-			Console.ReadLine();
+			ReadLine();
 
             Print("=================================================================================");
             Print("| Alias                                                                         |");
@@ -197,12 +193,8 @@
 		   
         }
 
-        static void Print(IEnumerable<string> lines) {
-            lines.Each(Console.WriteLine);
-        }
-
         static void Print(string msg, params object[] args) {
-            Console.WriteLine(msg, args);
+            WriteLine(msg, args);
         }
     }
 }

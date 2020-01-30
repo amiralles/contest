@@ -1,7 +1,5 @@
 
 namespace Contest.Core {
-	using System;
-
 	public static class BDDExtensions {
 		public static void ToBeLessThan(this object expected, object val) {
 			BDD.Expect(expected).ToBeLessThan(val);

@@ -3,9 +3,6 @@ namespace Contest.Core {
 	using System;
 	using Fluent = SyntaxSugar;
 	using static Contest;
-	using static System.Console;
-
-
 
 	public class Chatty {
 

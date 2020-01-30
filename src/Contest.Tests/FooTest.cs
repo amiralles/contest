@@ -1,4 +1,5 @@
-﻿#pragma warning disable 414
+﻿// ReSharper disable UnusedMember.Local
+#pragma warning disable 414
 
 namespace Contest.Tests {
     using System;

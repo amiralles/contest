@@ -28,16 +28,16 @@ namespace Contest.Core {
 
 		public static int 
 			// How may tests have we disposed.
-			DisposedCount   = 0, 
+			DisposedCount, 
 			// How many errors did we get while disposing test cases.
-			DisposeErrCount = 0;
+			DisposeErrCount;
 
 		internal static void ResetCounters() {
 			DisposeErrCount = 0;
 			DisposedCount   = 0;
 		}
 
-		/// A list of dispoble test classes instances.
+		/// A list of disposable test classes instances.
         internal static readonly List<IDisposable> Disposables = new List<IDisposable>();
 
         static Contest() {
@@ -247,8 +247,8 @@ namespace Contest.Core {
             FindCasesInNestedTypes = (finder, type, flags, ignorePatterns) => {
                 var result = new TestSuite();
                 var nestedTypes = type.GetNestedTypes(flags);
-                foreach (var ntype in nestedTypes)
-                    result.Cases.AddRange(FindCases(finder, ntype, ignorePatterns).Cases);
+                foreach (var nt in nestedTypes)
+                    result.Cases.AddRange(FindCases(finder, nt, ignorePatterns).Cases);
 
                 return result;
             };
@@ -263,31 +263,31 @@ namespace Contest.Core {
                 if (type.IsAbstract || type.ContainsGenericParameters || !type.HasDefaultCtor())
                     return result;
 
-                object inst = null;
+                object instance = null;
                 try {
-                    inst = Activator.CreateInstance(type, true);
-					if (inst as IDisposable != null)
-						Disposables.Add((IDisposable) inst);
+                    instance = Activator.CreateInstance(type, true);
+                    if (instance is IDisposable disposable)
+						Disposables.Add(disposable);
                 }
                 catch {
-                    Console.WriteLine("WARN: Couldn't create instance of '{0}'.", type.Name);
+                    WriteLine("WARN: Couldn't create instance of '{0}'.", type.Name);
                     return result;
                 }
 
 
                 foreach (var flag in Flags) {
                     foreach (var fi in GetTestCases(type, flag)) {
-                        var del = (Delegate)fi.GetValue(inst);
+                        var del = (Delegate)fi.GetValue(instance);
                         if (result.Cases.Any(tc => SameMetaToken(tc.Body, del)))
                             continue;
 
-                        var tcfullname = "{0}.{1}".Interpol(type.FullName, fi.Name);
+                        var testfullname = "{0}.{1}".Interpol(type.FullName, fi.Name);
                         result.Cases.Add(
                             new TestCase {
                                 FixName = type.FullName,
                                 Name    = fi.Name,
                                 Body    = (Action<Runner>)del,
-                                Ignored = MatchIgnorePattern(finder, tcfullname, ignorePatterns),
+                                Ignored = MatchIgnorePattern(finder, testfullname, ignorePatterns),
                             });
                     }
                 }
@@ -369,18 +369,19 @@ namespace Contest.Core {
                  select c).Each(c => {
 					if(c.FixName != gtd.FixName)
 						return;
-					 
-					 c.AfterCase = gtd.Body;
+					c.AfterCase = gtd.Body;
 				});
             };
 
-
-
+        
         static readonly Func<TestSuite, List<TestCase>, List<TestCase>, TestSuite>
             ActualCases = (suite, setups, teardowns) => {
-                var actualcases = suite.Cases.Except(setups).Except(teardowns);
+                var cases = suite.Cases
+		                .Except(setups)
+		                .Except(teardowns);
+                
                 var result = new TestSuite();
-                result.Cases.AddRange(actualcases);
+                result.Cases.AddRange(cases);
                 return result;
             };
 
@@ -400,22 +401,22 @@ namespace Contest.Core {
 
         static readonly Action<TestSuite, List<TestCase>> WireSetups =
             (suite, setups) => setups.Each(bc => {
-                var tcase = suite.Cases.FirstOrDefault(
+                var testCase = suite.Cases.FirstOrDefault(
                     c => { 
 							if(c.FixName != bc.FixName)
 								return false;
 
-							var fname   = c.GetFullName().ToUpper();
-							if(fname == BEFORE_EACH)
+							var fullname   = c.GetFullName().ToUpper();
+							if(fullname == BEFORE_EACH)
 							 	return false;
 
 							var bcfname = bc.GetFullName().ToUpper().Replace(BEFORE, "");
-							return fname == bcfname;
+							return fullname == bcfname;
 						});
 
                 //Specific teardows takes precedence over generic ones.
-                if (tcase != null)
-                    tcase.BeforeCase = bc.Body;
+                if (testCase != null)
+                    testCase.BeforeCase = bc.Body;
             });
 
         static readonly Action<TestSuite, List<TestCase>> WireTeardowns =
@@ -468,13 +469,14 @@ namespace Contest.Core {
         static void PrintIgnoredPatterns(string[] patterns) {
 			if (patterns == null || patterns.Length == 0)
 				return;
-            Console.WriteLine("".PadRight(30, '='));
-            Console.WriteLine("Ignored Patterns:");
-            Console.WriteLine("".PadRight(30, '='));
+            
+			WriteLine("".PadRight(30, '='));
+            WriteLine("Ignored Patterns:");
+            WriteLine("".PadRight(30, '='));
 
-            Console.WriteLine(string.Join(",", patterns));
+            WriteLine(string.Join(",", patterns));
 
-            Console.WriteLine("".PadRight(30, '='));
+            WriteLine("".PadRight(30, '='));
         }
 #endif
 
@@ -493,9 +495,8 @@ namespace Contest.Core {
                 return;
             }
 
-            var dbgView = (string)pi.GetValue(tree, null);
+            var dbgView = (string) pi.GetValue(tree, null);
             Debug.Print("\nLinq Tree\n{0}\n", dbgView);
         }
-
     }
 }

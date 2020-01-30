@@ -7,7 +7,7 @@ public class Global {
 
 public class ContestInit {
 
-	// For Shutdow use public instead. (So we check detection of
+	// For Shutdown, use public instead. (So we check detection of
 	// both modifiers).
 	void Setup(Runner runner) {
 #if DEBUG
@@ -15,6 +15,7 @@ public class ContestInit {
 			Die("Internal error. Runner can't be null.");
 #endif
 		Global.Foo = "Hello World!";
+		// ReSharper disable once PossibleNullReferenceException
 		runner.Bag["legend"]="Rock or Bust!";
 	}
 }

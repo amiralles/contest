@@ -1,4 +1,6 @@
-﻿#pragma warning disable 414
+﻿// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedType.Local
+#pragma warning disable 414
 
 namespace Contest.Tests {
     using System;
@@ -9,7 +11,7 @@ namespace Contest.Tests {
             Action<Runner> ThisIsATest = runner =>
                 runner.Assert(1 == 2, "Something went wrong....");
 
-            void ThisIsntATestMethod() { }
+            void ThisIsNotATestMethod() { }
         }
     }
 }

@@ -1,17 +1,13 @@
+using System;
+using System.Threading;
+
 namespace Contest.Core {
-	using System;
-	using System.Threading;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using static System.ConsoleColor;
-	using static System.Console;
+	using static ConsoleColor;
+	using static Console;
 
-	class Printer{
-		static readonly ConsoleColor Default;
-
+	static class Printer{
 		static Printer() {
 			// Assumin the console's forecolor is untouch.
-			Default = Console.ForegroundColor;
 		}
 
 		public readonly static Action<int, long, int, int, int, int, string> PrintResults = 
@@ -32,21 +28,21 @@ namespace Contest.Core {
 				WriteLine("".PadRight(40, '-'));
 			};
 
-		public readonly static Action<string> PrintFixName = name => {
+		public static readonly Action<string> PrintFixName = name => {
 			WriteLine("".PadRight(40, '-'));
 			WriteLine(name);
 			WriteLine("".PadRight(40, '-'));
 		};
 
-		public readonly static Action<string, ConsoleColor> Print =
+		public static readonly Action<string, ConsoleColor> Print =
 		   	(msg, color) => {
-				var bak = Console.ForegroundColor;
+				var bak = ForegroundColor;
 				try {
-					Console.ForegroundColor = color;
-					Console.WriteLine(msg);
+					ForegroundColor = color;
+					WriteLine(msg);
 				}
 				finally {
-					Console.ForegroundColor = bak;
+					ForegroundColor = bak;
 				}
 		};
 	}

@@ -1,19 +1,20 @@
+// ReSharper disable UnusedMember.Local
 #pragma warning disable 414 
 namespace Contest.Tests {
     using System;
     using System.Linq;
-    using Contest.Core;
-    using static Contest.Core.SyntaxSugar;
-    using static Contest.Core.Chatty;
-    using static Contest.Core.BDD;
-    using _ = System.Action<Contest.Core.Runner>;
+    using Core;
+    using static Core.SyntaxSugar;
+    using static Core.Chatty;
+    using static Core.BDD;
+    using _ = System.Action<Core.Runner>;
 
 
 	//TODO: Remove duplicate code from Contest.Run.Tests (Is almost identical to main Program.)
     public class contest_core_tests {
 
 		// For cherry picking tests.
-        static readonly TestCaseFinder _cerryPeekingFinder = new TestCaseFinder(null, 
+        static readonly TestCaseFinder _cherryPickingFinder = new TestCaseFinder(null, 
 				t => typeof(contest_core_tests) == t);
 
 		// For discovery tests.
@@ -46,6 +47,8 @@ namespace Contest.Tests {
         _ expect_false_to_be_false       = assert => Expect(false).ToBe(false);
         _ expect_to_throw_null_reference = assert => { 
 			object obj = null;
+			// ReSharper disable once PossibleNullReferenceException
+			// ReSharper disable once ReturnValueOfPureMethodIsNotUsed
 			Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 		};
 
@@ -77,11 +80,15 @@ namespace Contest.Tests {
 
         _ expect_err_msg = assert => {
 			object obj = null;
+			// ReSharper disable once PossibleNullReferenceException
+			// ReSharper disable once ReturnValueOfPureMethodIsNotUsed
 			Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
 		};
 
         _ expect_err_msg_contains = assert => {
 			object obj = null;
+			// ReSharper disable once PossibleNullReferenceException
+			// ReSharper disable once ReturnValueOfPureMethodIsNotUsed
 			Expect(() => obj.ToString()).ErrMsgContains("reference not set");
 		};
 
@@ -103,13 +110,13 @@ namespace Contest.Tests {
 		_ should_throw_sugar       = assert => 
 			ShouldThrow<NullReferenceException>(() => {
 				string str = null;
+				// ReSharper disable once PossibleNullReferenceException
+				// ReSharper disable once UnusedVariable
 				int    len = str.Length;	
 			});
-
-		
 		
 		class DisposableClass : IDisposable {
-			public bool Disposed = false;
+			public bool Disposed;
 
 			public void Dispose() {
 				Disposed = true;
@@ -261,7 +268,7 @@ namespace Contest.Tests {
 
 		// This is the common case.
         _ cherry_pick_cases_containing = assert => {
-            var cases = Contest.FindCases(_cerryPeekingFinder, typeof(TestClass), null);
+            var cases = Contest.FindCases(_cherryPickingFinder, typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases, cherryPicking: "*ThisIsAn*");
 
@@ -271,7 +278,7 @@ namespace Contest.Tests {
 
 
         _ cherry_pick_cases_ending_with = assert => {
-            var cases = Contest.FindCases(_cerryPeekingFinder, typeof(TestClass), null);
+            var cases = Contest.FindCases(_cherryPickingFinder, typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases, cherryPicking: "*ThisIsAnotherTest");
 
@@ -281,7 +288,7 @@ namespace Contest.Tests {
 
 
         _ cherry_pick_cases_starting_with = assert => {
-            var cases = Contest.FindCases(_cerryPeekingFinder, typeof(TestClass), null);
+            var cases = Contest.FindCases(_cherryPickingFinder, typeof(TestClass), null);
             var runner = new Runner();
             runner.Run(cases, cherryPicking: "Contest.Tests.TestClass.ThisIsAn*");
 
@@ -501,7 +508,8 @@ namespace Contest.Tests {
 
         _ runner_assertMethod_ResultIsTrue = assert => {
             var runner = new Runner();
-			runner.Assert(1 == 1);
+            // ReSharper disable once EqualExpressionComparison
+            runner.Assert(1 == 1);
 
             assert.Equal(1, runner.AssertsCount);
             assert.Equal(1, runner.PassCount);

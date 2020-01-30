@@ -30,11 +30,11 @@
         public readonly Dictionary<string, object> Bag = new Dictionary<string, object>(); 
 
 		public Action<Runner> 
-			/// This callback runs before any test case and can be used
-			/// for assembly level initialization.
+			// This callback runs before any test case and can be used
+			// for assembly level initialization.
 			BeforeAny = null, 
-		    /// This callback runs when we are done executing test cases 
-			/// and can be used for assembly level cleanup.
+		    // This callback runs when we are done executing test cases 
+			// and can be used for assembly level cleanup.
 		    AfterAll = null;
 
 
@@ -288,13 +288,15 @@
                 Fail(ExpectedException(typeof(T)));
             }
             catch (TargetInvocationException ex) {
-                Type expected = typeof(T), actual = ex.InnerException.GetType();
-                if (expected != actual) {
-                    Fail(WrongKindaException(expected, actual));
-                    return;
-                }
+	            if (ex.InnerException != null) {
+		            Type expected = typeof(T), actual = ex.InnerException.GetType();
+		            if (expected != actual) {
+			            Fail(WrongKindaException(expected, actual));
+			            return;
+		            }
+	            }
 
-                Pass();
+	            Pass();
 			}
             catch (Exception ex) {
                 Type expected = typeof(T), actual = ex.GetType();

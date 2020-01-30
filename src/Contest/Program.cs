@@ -1,6 +1,4 @@
-﻿//#define DARK_TEXT
-
-namespace Contest {
+﻿namespace Contest {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -11,14 +9,12 @@ namespace Contest {
     using System.Threading;
     using Core;
     using static System.Console;
-	using static Contest.Core.ContestConstants;
+	using static Core.ContestConstants;
 	using static Contest.Core.Contest;
-
-    class Program {
-
-
-		static readonly CultureInfo Culture = new CultureInfo("en-US");
-		static bool Quiet = false;
+    
+    public static class Program {
+	    static readonly CultureInfo Culture = new CultureInfo("en-US");
+		static bool _quiet;
 
         static void Main(string[] argv) {
             try {
@@ -32,7 +28,7 @@ namespace Contest {
                     return;
                 }
 
-				Quiet = argv.Any((a) => a == "-q");
+				_quiet = argv.Any((a) => a == "-q");
 				
                 int ciidx = -1;
                 // =============================================================
@@ -46,10 +42,11 @@ namespace Contest {
                         if (ci == null)    
                             Die($"\nERR. Sorry, can't find {specci} culture.\n");
 
+                        // ReSharper disable once AssignNullToNotNullAttribute
                         Thread.CurrentThread.CurrentCulture = ci;
                     }
                     else {
-                        Die("\nERR. Must especify culture.\n" +
+                        Die("\nERR. Must specify culture.\n" +
                             "i.e. contest run test.dll -ci es_AR\n");
                     }
                 }
@@ -95,7 +92,7 @@ namespace Contest {
 
 						AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
 							try {
-								var name = string.Format("{0}.dll", e.Name.Split(',')[0]);
+								var name = $"{e.Name.Split(',')[0]}.dll";
 								var localpath = Path.GetFullPath(Path.Combine(TMP, name));
 								if (File.Exists(localpath)) {
 									var assm = Assembly.LoadFile(localpath);
@@ -146,8 +143,6 @@ namespace Contest {
 						//
 
                         break;
-                    case "help":
-                    case "h":
                     default: {
 						 PrintHelp();
 						 break;
@@ -274,7 +269,7 @@ namespace Contest {
         static void CopyToLocalTmp(string testAssmSrcDir) {
 			var srcDir = string.IsNullOrEmpty(testAssmSrcDir) ? "." : testAssmSrcDir;
 #if DEBUG
-			WriteLine("Copying to local tmp...", TMP);
+			WriteLine("Copying to local tmp.");
 			WriteLine("tmp: '{0}'", TMP);
 			WriteLine("src: '{0}'", srcDir);
 #endif
@@ -287,12 +282,13 @@ namespace Contest {
 
             Directory.GetFiles(srcDir, "*.dll").Each(
                 f => {
-				 var to = Path.Combine(TMP, Path.GetFileName(f));
+				 var to = Path.Combine(TMP, Path.GetFileName(f) ?? "");
 #if DEBUG
 					WriteLine("copying '{0}' to {1}", f, to);
 #endif
-					File.Copy(f, to, true);
-				});
+	                if (f != null) 
+		                File.Copy(f, to, true);
+                });
 #if DEBUG
 
 			WriteLine("Done!");
@@ -354,7 +350,6 @@ namespace Contest {
 
 			// Load all cases.
             var assm = Assembly.LoadFile(fullpath);
-			DieIf(assm == null, "Can't load assembly '{assmFileName}'.");
 
             var finder = new TestCaseFinder();
             var suite  = Contest.GetCasesInAssm(finder, assm, null);
@@ -380,12 +375,12 @@ namespace Contest {
 			var runner = new Runner(assmFileName);
 			// runner.BeforeAny = Contest.GetInitCallbackOrNull(assm);
 			runner.AfterAll  = Contest.GetShutdownCallbackOrNull(assm);
-			runner.Verbose   = !Quiet;
+			runner.Verbose   = !_quiet;
 			return runner;
 		}
 
         static void RunTests(string assmFileName, string cerryPicking = null, bool printHeaders = true) {
-            WriteLine("\nConfiguring Assembies....");
+            WriteLine("\nConfiguring Assemblies....");
 
             if (string.IsNullOrEmpty(assmFileName))
                 throw new ArgumentException("Assembly name is required.");
@@ -393,16 +388,16 @@ namespace Contest {
             if (!assmFileName.EndsWith(".dll"))
                 assmFileName = "{0}.dll".Interpol(assmFileName);
 
-            var fullpath = Path.GetFullPath(assmFileName);
+            var filepath = Path.GetFullPath(assmFileName);
 
-            if (!File.Exists(fullpath)) {
+            if (!File.Exists(filepath)) {
                 var pwd = Directory.GetCurrentDirectory();
                     throw new IOException(
                         "Pwd: {0}\n".Interpol(pwd) +
                         "File not found. ('{0}')".Interpol(assmFileName));
             }
 
-            var assm = Assembly.LoadFile(fullpath);
+            var assm = Assembly.LoadFile(filepath);
             if (assm == null)
                 throw new Exception("Can't load assembly '{0}'.".Interpol(assmFileName));
 
@@ -423,10 +418,10 @@ namespace Contest {
 			if (init != null) {
 				try {
 					Debug.WriteLine("### Running ContestInit");
-					init(runner); // test cases ctors could depend on it.
+					init(runner); // test cases constructors could depend on it.
 				}
 				catch (Exception ex) {
-					// To avoid corrupted state, inconsitencies or false possitives, 
+					// To avoid corrupted state, inconsistencies or false positives, 
 					// Contest aborts the test session when gets exceptions during 
 					// assembly level initialization. 
 					// (This rule doesn't apply to class level setups).
@@ -487,11 +482,6 @@ namespace Contest {
 
             Print("\nMore about contest at:");
             Print("https://github.com/amiralles/contest\n");
-		   
-        }
-
-        static void Print(IEnumerable<string> lines) {
-            lines.Each(WriteLine);
         }
 
         static void Print(string msg, params object[] argv) {
