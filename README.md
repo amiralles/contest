@@ -11,64 +11,64 @@ _*Note: While this is working code, is not production ready (yet). It'll be rela
 
 #### Fluent Assertions
 ```
-	// This using statement enables fluent assertions.
-	using static Contest.Core.Chatty;
-	using _  = System.Action<Contest.Core.Runner>;
-	
+    // This using statement enables fluent assertions.
+    using static Contest.Core.Chatty;
+    using _  = System.Action<Contest.Core.Runner>;
+    
 
-	// Some basic math
-	_ add_two_numbers = assert => That(2 + 2).Is(4);
+    // Some basic math
+    _ add_two_numbers = assert => That(2 + 2).Is(4);
 
-	// Login system
-	_ when_an_admin_usr_logs_in = assert => That(usr.IsAdmin).IsTrue();
+    // Login system
+    _ when_an_admin_usr_logs_in = assert => That(usr.IsAdmin).IsTrue();
 
-	_ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess).IsFalse();
+    _ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess).IsFalse();
 
 
 ```
-		
+        
 #### BDD API
 For those who like the BDD approach better, you may wanna try contest's BDD API.
 
 ```
-	using static Contest.Core.BDD;
-	using _  = System.Action<Contest.Core.Runner>;
-	
+    using static Contest.Core.BDD;
+    using _  = System.Action<Contest.Core.Runner>;
+    
 
-	// Some basic math
-	_ add_two_numbers   = expect => (2 + 2).ToBe(4);
-	_ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
+    // Some basic math
+    _ add_two_numbers   = expect => (2 + 2).ToBe(4);
+    _ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
 
-	// Login system
-	_ when_an_admin_usr_logs_in = exect => usr.IsAdmin.ToBe(true);
+    // Login system
+    _ when_an_admin_usr_logs_in = exect => usr.IsAdmin.ToBe(true);
 
-	_ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.ToBe(false);
+    _ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.ToBe(false);
 
-	// Alternative syntax. (It's handy to test exceptions and stuff like that).
-	_ cant_access_members_on_null_pointers = assert => {
-		object obj = null;
+    // Alternative syntax. (It's handy to test exceptions and stuff like that).
+    _ cant_access_members_on_null_pointers = assert => {
+        object obj = null;
 
-		// you can go this way
-		Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
+        // you can go this way
+        Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 
-		// or this way
-		Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
+        // or this way
+        Expect(() => obj.ToString()).ErrMsg("Object reference not set to an instance of an object");
 
-		// or this other way
-		Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
-	}
-	
-	// You can also use:
-	// * ToBeGreatThan
-	// * ToBeGreatThanOrEqual
-	// * ToBeLessThanOrEqual
-	// * ToBeLessThan
+        // or this other way
+        Expect(() => obj.ToString()).ErrMsgContains("reference not set to an instance");
+    }
+    
+    // You can also use:
+    // * ToBeGreatThan
+    // * ToBeGreatThanOrEqual
+    // * ToBeLessThanOrEqual
+    // * ToBeLessThan
 
-	// Comming soon:
-	// * NotToBeGreatThan
-	// * NotToBeGreatThanOrEqual
-	// * NotToBeLessThanOrEqual
-	// * NotToBeLessThan
+    // Comming soon:
+    // * NotToBeGreatThan
+    // * NotToBeGreatThanOrEqual
+    // * NotToBeLessThanOrEqual
+    // * NotToBeLessThan
 ```
 
 
@@ -76,70 +76,70 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 This is the original contest's syntax and it works the same way always did.
 
 ```
-	using _  = System.Action<Contest.Core.Runner>;
+    using _  = System.Action<Contest.Core.Runner>;
 
 
     /// Basic features.
     class Contest_101 {
 
-		_ passing_test = assert => 
-			assert.Equal(4, 2 + 2);
+        _ passing_test = assert => 
+            assert.Equal(4, 2 + 2);
 
-		_ failing_test = assert =>
-			assert.Equal(5, 2 + 2);
-	
-		_ expected_exception_passing_test = test =>
-			test.ShouldThrow<NullReferenceException>(() => {
-				object target = null;
-				var dummy = target.ToString();
-				//================^ null reference ex.
-			});
-	
-		_ expected_exception_failing_test = test =>
-			test.ShouldThrow<NullReferenceException>(() => {
-				//It doesn't throws; So it fails.
-			});
+        _ failing_test = assert =>
+            assert.Equal(5, 2 + 2);
+    
+        _ expected_exception_passing_test = test =>
+            test.ShouldThrow<NullReferenceException>(() => {
+                object target = null;
+                var dummy = target.ToString();
+                //================^ null reference ex.
+            });
+    
+        _ expected_exception_failing_test = test =>
+            test.ShouldThrow<NullReferenceException>(() => {
+                //It doesn't throws; So it fails.
+            });
     }
     
     // Per fixture setup/teardown.
     class Contest_102 {
-		// Fixture setup.
-		_ before_each = test => {
-			User.Create("pipe");
-			User.Create("vilmis");
-			User.Create("amiralles");
-		};
+        // Fixture setup.
+        _ before_each = test => {
+            User.Create("pipe");
+            User.Create("vilmis");
+            User.Create("amiralles");
+        };
 
-		// Fixture teardown.
-		_ after_each = test => {
-			User.Reset();
-		};
-		
-		// Actual test cases.
-		_ should_find_existing_users = assert => 
-			assert.IsNotNull(User.Find("pipe"));
+        // Fixture teardown.
+        _ after_each = test => {
+            User.Reset();
+        };
+        
+        // Actual test cases.
+        _ should_find_existing_users = assert => 
+            assert.IsNotNull(User.Find("pipe"));
 
-		_ should_return_null_when_cant_find_users = assert => 
-			assert.IsNull(User.Find("not_exists"));
+        _ should_return_null_when_cant_find_users = assert => 
+            assert.IsNull(User.Find("not_exists"));
 
-		_ should_add_new_users = assert => {
-			User.Create("foo");
-			assert.Equal(4, User.Count());
-		};
+        _ should_add_new_users = assert => {
+            User.Create("foo");
+            assert.Equal(4, User.Count());
+        };
     }
 
-	// Per test case setup/teardown.
-	class Contest_103 {
-		_ before_echo = test => 
-			test.Bag["msg"] = "Hello World!";
+    // Per test case setup/teardown.
+    class Contest_103 {
+        _ before_echo = test => 
+            test.Bag["msg"] = "Hello World!";
 
-		_ after_echo = test => 
-			test.Bag["msg"] = null;
+        _ after_echo = test => 
+            test.Bag["msg"] = null;
 
         //actual test.
-		_ echo = test => 
-			test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
-	}
+        _ echo = test => 
+            test.Equal("Hello World!", Utils.Echo(test.Bag["msg"]));
+    }
 
 ```
 
@@ -154,24 +154,24 @@ Just go to https://github.com/amiralles/intro_contest and take contest for a spi
 If you like the lambda approach but also like to write as less code as possible, you can go with contest's syntax sugar.
 
 ```
-	using _  = System.Action<Contest.Core.Runner>;
+    using _  = System.Action<Contest.Core.Runner>;
 
-	// By adding this using statement you have access
+    // By adding this using statement you have access
     // to the whole constest API thru helper methods.
-	using static Contest.Core.SyntaxSugar;
+    using static Contest.Core.SyntaxSugar;
 
     class TestSomeSugar {
-		
-		// Instead of writing this:
-		_ passing_test = assert => 
-			assert.Equal(4, 2 + 2);
+        
+        // Instead of writing this:
+        _ passing_test = assert => 
+            assert.Equal(4, 2 + 2);
 
-		// You can write this:
-		_ passing_test = assert => Equal(4, 2 + 2);
+        // You can write this:
+        _ passing_test = assert => Equal(4, 2 + 2);
 
-		//*(It is less code and also reads better without the second assert word).
+        //*(It is less code and also reads better without the second assert word).
 
-	}
+    }
 ```
 
 
@@ -179,27 +179,27 @@ If you like the lambda approach but also like to write as less code as possible,
 I guess this section is selfexplanatory ;)
 
 ```
-	//Assertions
-	IsNull(value [, errMsg])
-	IsNotNull(value [, errMsg])
-	IsTrue(cond [, errMsg = null])
-	IsFalse(cond [, errMsg = null])
-	Equal(expected, actual [, errMsg])
-	NotEqual(expected, actual [, errMsg])
-	Assert(bool cond [, string errMsg]
+    //Assertions
+    IsNull(value [, errMsg])
+    IsNotNull(value [, errMsg])
+    IsTrue(cond [, errMsg = null])
+    IsFalse(cond [, errMsg = null])
+    Equal(expected, actual [, errMsg])
+    NotEqual(expected, actual [, errMsg])
+    Assert(bool cond [, string errMsg]
 
-	// Errors checking.
-	ErrMsgContains(text, action);
-	ErrMsg(msg, action);
-	Throws<TypeOfException>(action);
-	ShouldThrow<TypeOfException>(action);
+    // Errors checking.
+    ErrMsgContains(text, action);
+    ErrMsg(msg, action);
+    Throws<TypeOfException>(action);
+    ShouldThrow<TypeOfException>(action);
 
-	// Utility methods.
-	// Increases the failing tests count and prints the err msg.
-	Fail(errMsg);
+    // Utility methods.
+    // Increases the failing tests count and prints the err msg.
+    Fail(errMsg);
 
-	// Increases the passing tests count.
-	Pass();
+    // Increases the passing tests count.
+    Pass();
 ```
 
 
@@ -212,9 +212,9 @@ Sometimes you need to execute a piece of code before running any test case. With
 using Contest.Core;
 
 public class ContestInit {
-	void Setup(Runner runner) {
-		runner.Bag["album"] = "Rock or Bust!";
-	}
+    void Setup(Runner runner) {
+        runner.Bag["album"] = "Rock or Bust!";
+    }
 }
 ```
 (*) To avoid false positives or corrupt state, contest will abort the execution if this method fails.
@@ -229,9 +229,9 @@ Contest also allows you to run code when it finishes running tests. To do this y
 using Contest.Core;
 
 public class ContestClose {
-	void Shutdown(Runner runner) {
-		// Some cleanup code...
-	}
+    void Shutdown(Runner runner) {
+        // Some cleanup code...
+    }
 }
 ```
 
@@ -242,11 +242,11 @@ Use this technique when you want a piece of code to run once (and only once) bef
 *(We 've been trying different approaches for this particular feature but in the end, plain old constructors ended up being the best choice).
 
 ```
-	class FooTest {
-		public FooTest () {
-			// Your init code goes in here.
-		}
-	}
+    class FooTest {
+        public FooTest () {
+            // Your init code goes in here.
+        }
+    }
 
 ```
 
@@ -255,12 +255,12 @@ Just modify your test class to implement the IDisposable interface and put your 
 Contest will execute this method before exiting the program.
 
 ```
-	class BarTest : IDisposable {
+    class BarTest : IDisposable {
 
-		public void Dispose() {
-			// Cleanup code in here.
-		}
-	}
+        public void Dispose() {
+            // Cleanup code in here.
+        }
+    }
 
 ```
 
