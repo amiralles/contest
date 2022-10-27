@@ -10,7 +10,7 @@ _*Note: While this is working code, is not production ready (yet). It'll be rela
 
 
 #### Fluent Assertions
-```
+```cs
     // This using statement enables fluent assertions.
     using static Contest.Core.Chatty;
     using _  = System.Action<Contest.Core.Runner>;
@@ -30,7 +30,7 @@ _*Note: While this is working code, is not production ready (yet). It'll be rela
 #### BDD API
 For those who like the BDD approach better, you may wanna try contest's BDD API.
 
-```
+```cs
     using static Contest.Core.BDD;
     using _  = System.Action<Contest.Core.Runner>;
     
@@ -75,7 +75,7 @@ For those who like the BDD approach better, you may wanna try contest's BDD API.
 #### Plain old "lambda syntax"
 This is the original contest's syntax and it works the same way always did.
 
-```
+```cs
     using _  = System.Action<Contest.Core.Runner>;
 
 
@@ -153,7 +153,7 @@ Just go to https://github.com/amiralles/intro_contest and take contest for a spi
 #### Syntax Sugar
 If you like the lambda approach but also like to write as less code as possible, you can go with contest's syntax sugar.
 
-```
+```cs
     using _  = System.Action<Contest.Core.Runner>;
 
     // By adding this using statement you have access
@@ -178,7 +178,7 @@ If you like the lambda approach but also like to write as less code as possible,
 #### Contest Core API
 I guess this section is selfexplanatory ;)
 
-```
+```cs
     //Assertions
     IsNull(value [, errMsg])
     IsNotNull(value [, errMsg])
@@ -208,7 +208,7 @@ I guess this section is selfexplanatory ;)
 
 Sometimes you need to execute a piece of code before running any test case. With contest you can do that by adding a *special type* to your project. Just add a new class called **ContestInit**, create a **Setup** method and put the initialization code in it.
 
-```
+```cs
 using Contest.Core;
 
 public class ContestInit {
@@ -225,7 +225,7 @@ public class ContestInit {
 Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContestClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
 
 
-```
+```cs
 using Contest.Core;
 
 public class ContestClose {
@@ -241,7 +241,7 @@ public class ContestClose {
 Use this technique when you want a piece of code to run once (and only once) before any test within the class.
 *(We 've been trying different approaches for this particular feature but in the end, plain old constructors ended up being the best choice).
 
-```
+```cs
     class FooTest {
         public FooTest () {
             // Your init code goes in here.
@@ -254,7 +254,7 @@ Use this technique when you want a piece of code to run once (and only once) bef
 Just modify your test class to implement the IDisposable interface and put your cleanup code inside the dispose method.
 Contest will execute this method before exiting the program.
 
-```
+```cs
     class BarTest : IDisposable {
 
         public void Dispose() {
@@ -272,7 +272,7 @@ Obviously, you can clone the repo, build from sources and get the binaries. But 
 #### How to run
 The easiest way to run contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just execute:
 
-```
+```sh
 contest run test\_cases.dll
 ```
 
@@ -302,7 +302,7 @@ contest run test.dll *test_name_ends_with
 #### How to test your code under different cultures.
 Often times you have to make sure that your code works under different regional settings. Some testing frameworks allow you to do that by adding data annotations to your test cases, something like this:
 
-```
+```cs
 [Test]
 [SetCulture("es-AR")]
 public void FooTest() {
