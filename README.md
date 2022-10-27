@@ -28,7 +28,7 @@ _ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess)
 ```
         
 #### BDD API
-For those who like the BDD approach better, you may wanna try contest's BDD API.
+For those who like the BDD approach better, you may wanna try contest's BDD inspired API.
 
 ```cs
 using static Contest.Core.BDD;
@@ -40,7 +40,7 @@ _ add_two_numbers   = expect => (2 + 2).ToBe(4);
 _ mul_two_numbers   = expect => (2 * 3).NotToBe(5);
 
 // Login system
-_ when_an_admin_usr_logs_in = exect => usr.IsAdmin.ToBe(true);
+_ when_an_admin_usr_logs_in = expect => usr.IsAdmin.ToBe(true);
 
 _ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.ToBe(false);
 
