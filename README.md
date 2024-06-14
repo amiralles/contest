@@ -1,4 +1,4 @@
-## contest
+# Contest
 Contest is a minimalist, cross-platform, unit testing framework for .NET. 
 
 Contest comes bundled with a lightweight console test runner, 
