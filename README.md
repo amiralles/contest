@@ -1,12 +1,19 @@
 ## contest
-Contest is a minimalist, cross platform, unit testing framework for .NET. It comes bundled with a lightweight console test runner and  in contrast with most popular testing frameworks, it's based on conventions, so it doesn't require a whole lotta of attributes to identify test cases, setups, and so on... Point in case, the code reads almost like plain english.
-(And of course, it runs on linux and mac as well!)
+Contest is a minimalist, cross-platform, unit testing framework for .NET. 
 
-Down below you’ll find a couple of examples on how to write tests using contest. Just add a reference to **Contest.Core.dll** and you are pretty much ready to go.
+Contest comes bundled with a lightweight console test runner, 
+and in contrast with most popular testing frameworks in the .NET space, it's based on conventions, 
+so it doesn't require a whole lot of attributes to identify test cases, setups, and so on. Point in case the testing code 
+reads almost like plain English. (And, of course, it runs on Linux and Mac as well!)
 
-As you will see in the examples below, **contest** supports a wide range of assertions and testing styles which you can mix and match to meet your preferences. From fluent assertions to BDD (and everything in between), **contest** will help you to find a style that you enjoy while writing tests.
+Down below, you’ll find a couple of examples of how to write tests using a contest. Just add 
+a reference to **Contest.Core.dll**, and you will be pretty much ready to go.
 
-_*Note: While this is working code, is not production ready (yet). It'll be relased in the near future, tough. Stay tuned!_
+As you will see in the examples below, **contest** supports a wide range of assertions and testing styles, 
+which you can mix and match to meet your preferences. From fluent assertions to BDD (and everything in between), 
+**contest** will help you find a style you enjoy while writing tests.
+
+_*Note: While this is working code, it is not production-ready. It might get released in the near future, tough._
 
 
 #### Fluent Assertions
@@ -28,7 +35,7 @@ _ regular_users_shouldnt_have_root_access = assert => That(regUsr.HasRootAccess)
 ```
         
 #### BDD API
-For those who like the BDD approach better, you may wanna try contest's BDD inspired API.
+For those who like the BDD approach better, you may want to try the contest's BDD-inspired API.
 
 ```cs
 using static Contest.Core.BDD;
@@ -48,7 +55,7 @@ _ regular_users_shouldnt_have_root_access = expect => regularUsr.HasRootAccess.T
 _ cant_access_members_on_null_pointers = assert => {
     object obj = null;
 
-    // you can go this way
+    // You can go this way
     Expect(() => obj.ToString()).ToThrow<NullReferenceException>();
 
     // or this way
@@ -73,7 +80,7 @@ _ cant_access_members_on_null_pointers = assert => {
 
 
 #### Plain old "lambda syntax"
-This is the original contest's syntax and it works the same way always did.
+This is the original contest's syntax, and it works the same way it always did.
 
 ```cs
 using _  = System.Action<Contest.Core.Runner>;
@@ -146,12 +153,13 @@ class Contest_103 {
 
 
 #### Wanna hack right away
-Just go to https://github.com/amiralles/intro_contest and take contest for a spin.
+Just go to https://github.com/amiralles/intro_contest and take Contest for a spin.
 
 
 
 #### Syntax Sugar
-If you like the lambda approach but also like to write as less code as possible, you can go with contest's syntax sugar.
+If you like the lambda approach but also like to write as little code as possible, 
+you can go with the contest's syntax sugar.
 
 ```cs
 using _  = System.Action<Contest.Core.Runner>;
@@ -173,39 +181,11 @@ class TestSomeSugar {
 }
 ```
 
+#### How to add assembly-level initialization code
 
-#### Contest Core API
-I guess this section is selfexplanatory ;)
-
-```cs
-//Assertions
-IsNull(value [, errMsg])
-IsNotNull(value [, errMsg])
-IsTrue(cond [, errMsg = null])
-IsFalse(cond [, errMsg = null])
-Equal(expected, actual [, errMsg])
-NotEqual(expected, actual [, errMsg])
-Assert(bool cond [, string errMsg]
-
-// Errors checking.
-ErrMsgContains(text, action);
-ErrMsg(msg, action);
-Throws<TypeOfException>(action);
-ShouldThrow<TypeOfException>(action);
-
-// Utility methods.
-// Increases the failing tests count and prints the err msg.
-Fail(errMsg);
-
-// Increases the passing tests count.
-Pass();
-```
-
-
-
-#### How to add assembly level initialization code
-
-Sometimes you need to execute a piece of code before running any test case. With contest you can do that by adding a *special type* to your project. Just add a new class called **ContestInit**, create a **Setup** method and put the initialization code in it.
+Sometimes, you need to execute some initialization code before running any test case. With Contest, 
+you can do that by adding a special type to your project. Add a new class called `ContestInit`, 
+create a `Setup` method, and put the initialization code in it.
 
 ```cs
 using Contest.Core;
@@ -216,12 +196,14 @@ public class ContestInit {
     }
 }
 ```
-(*) To avoid false positives or corrupt state, contest will abort the execution if this method fails.
+(*) To avoid false positives or a corrupt state, the Contest will abort the execution if this method fails.
 
 
-#### How to add assembly level cleanup code
+#### How to add assembly-level cleanup code
 
-Contest also allows you to run code when it finishes running tests. To do this you will need to add another *special type* called **ContestClose**. In this case you'll have to create a **Shutdown** method and put the cleanup code in there.
+Contest also allows you to run code when it finishes running tests. To do this, 
+you must add another *special type* called **ContestClose**. In this case, you'll have to create 
+a **Shutdown** method and put the cleanup code there.
 
 
 ```cs
@@ -234,11 +216,12 @@ public class ContestClose {
 }
 ```
 
-* Keep in mind that these *special types* are meant to used for **global (assmebly level) configuration**. If you need _test level_ or _class level_ configuration, use the before/after callbacks instead. (As shown in the samples above).
+\* Keep in mind that these special types are meant for **global (assembly-level) configuration**. If you need _test level_ or _class level_ configuration,
+  use the before/after callbacks instead (as shown in the samples above).
 
-#### How to add class level initialization code
+#### How to add class-level initialization code
 Use this technique when you want a piece of code to run once (and only once) before any test within the class.
-*(We 've been trying different approaches for this particular feature but in the end, plain old constructors ended up being the best choice).
+*(We've been trying different approaches for this particular feature, but plain old constructors ended up being the best choice.)
 
 ```cs
 class FooTest {
@@ -249,7 +232,7 @@ class FooTest {
 
 ```
 
-#### How to add class level cleanup code
+#### How to add class-level cleanup code
 Just modify your test class to implement the IDisposable interface and put your cleanup code inside the dispose method.
 Contest will execute this method before exiting the program.
 
@@ -265,27 +248,29 @@ class BarTest : IDisposable {
 
 
 #### How to install
-Obviously, you can clone the repo, build from sources and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
+Obviously, you can clone the repo, build from sources, and get the binaries. But you can also get [contest from nuget](https://www.nuget.org/packages/Contest/)
 
 #### How to run
-The easiest way to run contest, it's by adding _contest.exe_ to your path. Once you 've done that, you can go to whatever directory and just execute:
+The easiest way to run Contest is by adding _contest.exe_ to your path. Once you've done that, you can go to whatever directory and just execute:
 
 ```sh
-contest run test\_cases.dll
+contest run test_cases.dll
 ```
 
 #### How to debug test cases
-If you were using VS + ReSharper or TestDriven.NET or similar tools, chances are that when you find a failing test you wanna place a breakpoint and do some step by step debugging, right?
+If you were using VS + ReSharper or TestDriven.NET or similar tools, 
+you would likely want to set a breakpoint and do some step-by-step debugging when you find a failing test, right?
 
-Well, while contest doesn't have an integrated "VS experience", you still have the chance to debug your tests using a **switch** that will freeze the execution and let you attach the VS debugguer.
-Just place a breakpoint as usual, run contest using the **-dbg** switch, attach the VS's debugger, and go back to the console and hit [Enter].
+Well, while contest doesn't have an integrated "VS experience", 
+you still have the chance to debug your tests using a **switch** that will freeze the execution and let you attach the VS debugger.
+
+Set a breakpoint as usual, run `contest` using the **-dbg** flag, attach the VS debugger, go back to the console, and hit [Enter].
 
 ```bash
- contest run test\_cases.dll -dbg
+ contest run test_cases.dll -dbg
 ```
 
-I know, this is far from ideal... but keep in mind that contest it's meant to be used from the console. (And I wanna keep it as lightweight as possible).
-If you are using this library is probably because you are doing TDD on a plain text editor, which in such case, you don't have a debugger anyways, so...
+I know, this is far from ideal, but if you are used to step-by-step debugger, this is "a" way to do it :)
 
 
 #### Cherry picking
@@ -297,8 +282,9 @@ contest run test.dll *test_name_ends_with
 ```
 
 
-#### How to test your code under different cultures.
-Often times you have to make sure that your code works under different regional settings. Some testing frameworks allow you to do that by adding data annotations to your test cases, something like this:
+#### How to test your code under different culture settings
+Often times you have to make sure that your code works under different regional settings. Some testing 
+frameworks allow you to do that by adding data annotations to your test cases, something like this:
 
 ```cs
 [Test]
@@ -308,28 +294,31 @@ public void FooTest() {
 }
 ```
 
-Although it works, it's really tedious. With contest you can achieve the same thing without touching your code. 
+Although it works, it's really tedious. With Contest you can achieve the same thing without touching your code. 
 
 ```
-# Want to test under es-AR.
+# To test under es-AR.
 contest run test.dll * -ci es_AR
 
-# Also, en-US. No problem!
+# To test under en-US
 contest run test.dll * -ci en_US
 ```
 
-The **-ci** flag allows you to override the culture that contests will use to run your test cases. So if you set that flag, the whole thing will run under that specific culture.
+The **-ci** flag allows you to override the culture that contests will use to run your test cases. So, 
+if you set that flag, the whole thing will run under that specific culture.
 
-Note: If you want to run just some test cases under a specific culture and let the rest as is, you can use wildcards to so.
+_Note: You can use wildcards to run just some test cases under a specific culture and leave the rest as is._
 
 ```
-# Just test the Foo module under es-AR
+# Let's run just the tests defined in the Foo module under es-AR culture settings
 contest run test.dll *Foo* -ci es_AR
 ```
 
 
 #### How to rerun failing tests
-Most tests runners comes with a handy feature that allows you to filter and run only test cases that had failed in the previous run. (I used this feature a lot with ReSharper's test runner). You can do this with contest too, just add the **-f** flag and you are all set.
+Most test runners come with a handy feature that allows you to filter 
+and run only test cases that failed in the previous run. (I used this feature a lot with ReSharper's test runner.) 
+You can do this with contests, too; just add the **-f** flag, and you are all set.
 
 ```bash
  contest run test\_cases.dll -f
@@ -342,16 +331,16 @@ Most tests runners comes with a handy feature that allows you to filter and run 
 
 
 #### How to look for slow tests
-Weather if your are fixing performance issues or just wanna speed up your tests, contest can tell you where to start. Just run:
+Whether you are fixing performance issues or just wanna speed up your tests, Contest can tell you where to start. Just run:
 
 ```bash
  contest run test/_cases.dll -yslow
 ```
 
 The command above will print a list of test cases sorted by execution time. (Slowest tests first).
-You can combine this command with *less* or any tool like that and get the top 10/20 cases that worth to look at.
+You can combine this command with less or any similar tool to get the top 10/20 cases that are worth investigating.
 
-You can also list fastest tests firts. (OK, I don't see a point either, but it was just two lines away ;))
+You can also list the fastest tests first. (OK, I don't see a point either, but still...)
 ```bash
  contest run test/_cases.dll -yfast
 ```
@@ -362,7 +351,7 @@ You can also list fastest tests firts. (OK, I don't see a point either, but it w
 
 
 #### How to report issues
-The best way to report an issue is by providing a failing test case. Wich is dead simple if you use https://github.com/amiralles/intro_contest
+The best way to report an issue is by providing a failing test case. Which is dead simple if you use https://github.com/amiralles/intro_contest
 
 
-**Whether if you have problems using this library, found a bug o wanna a new feature, feel free to contact me. I'll be back at you as soon as a I can.**
+**Whether if you have problems using this library, found a bug o wanna a new feature, feel free to contact me. I'll get back to you as soon as I can.**
